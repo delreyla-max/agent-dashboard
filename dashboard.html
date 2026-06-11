@@ -298,4 +298,209 @@
         "items": [
           {"rank": 1, "score": 69, "title": "ACD, Ring Retail & Marketing", "company": "Amazon (Ring) — Hawthorne, CA — $141K-$191K — Tier 1", "link": "https://to.indeed.com/aamm48c89kl7"},
           {"rank": 2, "score": 55, "title": "ACD, Art", "company": "Princeton10 — Montclair, NJ — Tier 2", "link": "https://to.indeed.com/aacz2rw4p9xl"},
-          {"rank": 
+          {"rank": 3, "score": 37, "title": "Lead Product Designer, Arc Platform", "company": "Circle — Remote — Tier 3", "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353131375"}
+        ]
+      }
+    }
+  ],
+  "totals": {"fableTokensEstimate": 16000, "sonnetTokensEstimate": 96900, "haikuTokensEstimate": 0}
+}
+</script>
+
+<div id="disabled-overlay"><span class="off-icon">⏸</span><p>Dashboard is disabled</p></div>
+<div id="save-banner">💾 Toggle state changed — ask the manager to persist to dashboard-data.json</div>
+
+<div class="page" id="main-page">
+
+  <!-- Header -->
+  <header>
+    <h1>Agent Manager Dashboard</h1>
+    <span class="plan-badge" id="plan-badge"></span>
+    <span class="updated" id="dash-updated"></span>
+    <div class="pill-wrap">
+      <button class="pill" id="toggle-pill" onclick="toggleDashboard()">
+        <span class="pill-dot"></span><span class="pill-label"></span>
+      </button>
+      <span class="pill-hint">click to toggle</span>
+    </div>
+  </header>
+
+  <!-- Token Budget -->
+  <div class="token-budget-section" id="token-section"></div>
+
+  <!-- Summary Cards -->
+  <div class="cards" id="summary-cards"></div>
+
+  <!-- One-Off Tasks -->
+  <div class="section-header">📋 One-Off Tasks</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Task</th><th>Status</th><th>Model</th><th>Tokens (in / out)</th><th>Started</th><th>Finished</th><th>Result</th>
+      </tr></thead>
+      <tbody id="tasks-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Scheduled Pipelines -->
+  <div class="section-header">⚙️ Scheduled Pipelines</div>
+  <div class="pipeline-cards" id="pipeline-cards"></div>
+
+  <footer>Agent Manager Dashboard · Fable orchestrates, Sonnet/Haiku execute · Token figures are estimates</footer>
+</div>
+
+<script>
+(function () {
+  const raw = document.getElementById('dashboard-data').textContent;
+  const d = JSON.parse(raw);
+
+  // ── Disabled overlay ──
+  let enabled = d.enabled !== false;
+  function applyEnabled(e) {
+    document.getElementById('disabled-overlay').classList.toggle('visible', !e);
+  }
+  applyEnabled(enabled);
+
+  window.toggleDashboard = function () {
+    enabled = !enabled;
+    applyEnabled(enabled);
+    updatePill();
+    document.getElementById('save-banner').classList.add('visible');
+  };
+
+  function updatePill() {
+    const btn = document.getElementById('toggle-pill');
+    btn.className = 'pill ' + (enabled ? 'on' : 'off');
+    btn.querySelector('.pill-label').textContent = enabled ? 'ON' : 'OFF';
+  }
+
+  // ── Header ──
+  document.getElementById('plan-badge').textContent = (d.plan || 'Pro') + ' Plan';
+  document.getElementById('dash-updated').textContent = 'Updated ' + fmtDate(d.updated);
+  updatePill();
+
+  // ── Token Budget ──
+  const tb = d.tokenBudget;
+  if (tb) {
+    const rows = [
+      { row: tb.session, reset: 'Resets every 5h' },
+      { row: tb.week,    reset: 'Resets ' + fmtDate(tb.week && tb.week.resetsOn) },
+      { row: tb.month,   reset: 'Resets ' + fmtDate(tb.month && tb.month.resetsOn) },
+    ];
+    const pct = (u, l) => Math.min(100, Math.round((u / l) * 100));
+    const fillClass = p => p >= 85 ? 'red' : p >= 60 ? 'amber' : 'green';
+    let html = '<div class="token-budget-title">Token Budget (estimated)</div>';
+    if (tb.note) html += '<div class="token-budget-disclaimer">' + tb.note + '</div>';
+    rows.forEach(function(item) {
+      const row = item.row, reset = item.reset;
+      if (!row) return;
+      const p = pct(row.usedEstimate, row.limitEstimate);
+      html += '<div class="meter-row">' +
+        '<span class="meter-label">' + row.label + '</span>' +
+        '<div class="meter-track"><div class="meter-fill ' + fillClass(p) + '" style="width:' + p + '%"></div></div>' +
+        '<span class="meter-numbers">' + fmt(row.usedEstimate) + ' / ' + fmt(row.limitEstimate) + '</span>' +
+        '<span class="meter-reset">' + reset + '</span>' +
+        '</div>';
+    });
+    document.getElementById('token-section').innerHTML = html;
+  }
+
+  // ── Summary Cards ──
+  const tasks = d.oneOffTasks || [];
+  const pipes = d.scheduledPipelines || [];
+  const tot = d.totals || {};
+  const done = tasks.filter(function(t){ return t.status === 'done'; }).length;
+  const inProg = tasks.filter(function(t){ return t.status === 'in_progress'; }).length;
+  const blocked = tasks.filter(function(t){ return t.status === 'blocked'; }).length;
+  const totalTok = (tot.fableTokensEstimate || 0) + (tot.sonnetTokensEstimate || 0) + (tot.haikuTokensEstimate || 0);
+  const cardsData = [
+    { label: 'Total Tasks', value: tasks.length, sub: '' },
+    { label: 'Done', value: done, sub: '' },
+    { label: 'In Progress', value: inProg, sub: '' },
+    { label: 'Blocked', value: blocked, sub: '' },
+    { label: 'Pipelines', value: pipes.length, sub: 'scheduled' },
+    { label: 'Total Tokens', value: fmtK(totalTok), sub: 'estimated' },
+  ];
+  document.getElementById('summary-cards').innerHTML = cardsData.map(function(c) {
+    return '<div class="card"><div class="card-label">' + c.label + '</div><div class="card-value">' + c.value + '</div>' + (c.sub ? '<div class="card-sub">' + c.sub + '</div>' : '') + '</div>';
+  }).join('');
+
+  // ── Tasks Table ──
+  const tbody = document.getElementById('tasks-tbody');
+  if (tasks.length === 0) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">No tasks yet</td></tr>';
+  } else {
+    tbody.innerHTML = tasks.map(function(t) {
+      const tok = t.tokensEstimate ? fmt(t.tokensEstimate.input) + ' / ' + fmt(t.tokensEstimate.output) : '—';
+      const result = t.resultFile
+        ? '<a href="' + t.resultFile + '" target="_blank">' + t.resultFile + '</a>'
+        : '<span class="none">—</span>';
+      return '<tr>' +
+        '<td class="col-title">' + t.title + '</td>' +
+        '<td>' + badge(t.status) + '</td>' +
+        '<td>' + mbadge(t.model) + '</td>' +
+        '<td class="col-tokens">' + tok + '</td>' +
+        '<td class="col-date">' + (t.started || '—') + '</td>' +
+        '<td class="col-date">' + (t.finished || '—') + '</td>' +
+        '<td class="col-result">' + result + '</td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  // ── Pipeline Cards ──
+  const pipeEl = document.getElementById('pipeline-cards');
+  if (pipes.length === 0) {
+    pipeEl.innerHTML = '<p style="color:var(--muted);font-size:13px">No scheduled pipelines configured.</p>';
+  } else {
+    pipeEl.innerHTML = pipes.map(function(p) {
+      const dotClass = p.enabled ? 'on' : 'off';
+      const statusLabel = p.lastRunStatus ? badge(p.lastRunStatus) : '';
+      const docs = (p.documents || []).map(function(doc) {
+        return '<li><a href="' + doc.path + '" target="_blank">' + doc.file + '</a>' +
+          '<span class="doc-meta">Tier 1: ' + (doc.tier1 != null ? doc.tier1 : '?') + ' · Total: ' + (doc.total != null ? doc.total : '?') + '</span></li>';
+      }).join('');
+      const latestMatches = (p.latestSummary && p.latestSummary.items) ? p.latestSummary.items.map(function(m) {
+        return '<tr><td>' + m.rank + '</td><td class="score-cell">' + m.score + '</td>' +
+          '<td><a href="' + m.link + '" target="_blank">' + m.title + '</a></td>' +
+          '<td>' + m.company + '</td></tr>';
+      }).join('') : '';
+      return '<div class="pipeline-card">' +
+        '<div class="pipeline-card-header">' +
+          '<span class="pipeline-enabled-dot ' + dotClass + '"></span>' +
+          '<span class="pipeline-title">' + p.title + '</span>' +
+          '<span class="pipeline-meta">' + p.schedule + '</span>' +
+          statusLabel +
+        '</div>' +
+        (p.lastRunNote ? '<div class="pipeline-run-note">' + p.lastRunNote + '</div>' : '') +
+        (docs ? '<div class="pipeline-section-label">Output files</div><ul class="pipeline-docs">' + docs + '</ul>' : '') +
+        (latestMatches ? '<div class="pipeline-section-label">Latest matches (' + (p.latestSummary.date || '') + ')</div>' +
+          '<div class="matches-table-wrap"><table class="matches-table">' +
+          '<thead><tr><th>#</th><th>Score</th><th>Role</th><th>Company</th></tr></thead>' +
+          '<tbody>' + latestMatches + '</tbody></table></div>' : '') +
+        '</div>';
+    }).join('');
+  }
+
+  // ── Helpers ──
+  function badge(s) {
+    var map = { pending:'badge-pending', in_progress:'badge-in_progress', done:'badge-done', blocked:'badge-blocked', ok:'badge-ok', failed:'badge-failed' };
+    var cls = map[s] || 'badge-pending';
+    return '<span class="badge ' + cls + '">' + s.replace('_',' ') + '</span>';
+  }
+  function mbadge(m) {
+    var map = { fable:'mbadge-fable', sonnet:'mbadge-sonnet', haiku:'mbadge-haiku' };
+    var cls = map[(m||'').toLowerCase()] || 'mbadge-other';
+    return '<span class="mbadge ' + cls + '">' + (m || '—') + '</span>';
+  }
+  function fmt(n) { return n == null ? '—' : Number(n).toLocaleString(); }
+  function fmtK(n) { return n >= 1000 ? Math.round(n/1000)+'k' : String(n); }
+  function fmtDate(s) {
+    if (!s) return '—';
+    var dt = new Date(s);
+    if (isNaN(dt)) return s;
+    return dt.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+  }
+})();
+</script>
+</body>
+</html>
