@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!-- MANAGER: regenerate the JSON inside #dashboard-data from dashboard-data.json after each task event -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Manager Dashboard</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0f1117;
+    --surface:   #1a1d27;
+    --surface2:  #222635;
+    --border:    #2e3248;
+    --text:      #e2e8f0;
+    --muted:     #8892a4;
+    --amber:     #f59e0b;
+    --green:     #22c55e;
+    --red:       #ef4444;
+    --gray:      #6b7280;
+    --purple:    #a855f7;
+    --blue:      #3b82f6;
+    --teal:      #14b8a6;
+    --overlay-z: 10;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── Layout ── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  /* ── Header ── */
+  header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; flex: 1 1 auto; }
+  .updated { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .plan-badge {
+    display: inline-block; padding: 2px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    background: #312e81; color: #a5b4fc; border: 1px solid #4338ca;
+  }
+
+  /* ── ON/OFF pill ── */
+  .pill-wrap { display: flex; align-items: center; gap: 10px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    cursor: pointer; border: none; transition: background 0.2s, color 0.2s;
+    user-select: none;
+  }
+  .pill.on  { background: #15803d; color: #bbf7d0; }
+  .pill.off { background: #374151; color: #9ca3af; }
+  .pill-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .pill.on  .pill-dot { background: #86efac; }
+  .pill.off .pill-dot { background: #6b7280; }
+  .pill-hint { font-size: 11px; color: var(--muted); }
+
+  /* ── Save banner ── */
+  #save-banner {
+    display: none;
+    background: #1e293b; border: 1px solid #334155;
+    color: #94a3b8; font-size: 12px;
+    padding: 7px 14px; border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  #save-banner.visible { display: block; }
+
+  /* ── Disabled overlay ── */
+  #disabled-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: var(--overlay-z);
+    background: rgba(10, 11, 18, 0.88);
+    justify-content: center; align-items: center;
+    flex-direction: column; gap: 12px;
+  }
+  #disabled-overlay.visible { display: flex; }
+  #disabled-overlay .off-icon { font-size: 48px; opacity: 0.5; }
+  #disabled-overlay p { font-size: 18px; color: var(--muted); }
+
+  /* ── Section headers ── */
+  .section-header {
+    font-size: 15px; font-weight: 700;
+    margin: 28px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ── Token Budget ── */
+  .token-budget-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+  }
+  .token-budget-title {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .token-budget-disclaimer {
+    font-size: 11px; color: var(--muted);
+    margin-bottom: 16px; line-height: 1.4;
+  }
+  .meter-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 90px 130px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .meter-row:last-child { margin-bottom: 0; }
+  .meter-label { font-size: 12px; font-weight: 600; color: var(--text); }
+  .meter-track {
+    height: 10px; border-radius: 999px; background: var(--surface2);
+    overflow: hidden; border: 1px solid var(--border);
+    min-width: 0;
+  }
+  .meter-fill { height: 100%; border-radius: 999px; transition: width 0.4s ease; }
+  .meter-fill.green { background: #22c55e; }
+  .meter-fill.amber { background: #f59e0b; }
+  .meter-fill.red   { background: #ef4444; }
+  .meter-numbers { font-size: 11px; color: var(--muted); font-family: monospace; white-space: nowrap; text-align: right; }
+  .meter-reset { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+  @media (max-width: 600px) {
+    .meter-row { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 6px 10px; }
+    .meter-track { grid-column: 1 / -1; }
+    .meter-reset { text-align: right; }
+  }
+
+  /* ── Summary cards ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 6px; }
+  .card-value { font-size: 26px; font-weight: 700; }
+  .card-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── Table ── */
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); }
+  thead th {
+    background: var(--surface2);
+    text-align: left; padding: 11px 14px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+  tbody td { padding: 11px 14px; vertical-align: middle; }
+  .col-title { font-weight: 500; }
+  .col-tokens { font-family: monospace; font-size: 12px; color: var(--muted); }
+  .col-date  { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .col-result a { color: var(--blue); text-decoration: none; font-size: 12px; }
+  .col-result a:hover { text-decoration: underline; }
+  .col-result .none { color: var(--muted); font-size: 12px; }
+
+  /* ── Status badges ── */
+  .badge {
+    display: inline-block; padding: 2px 9px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .badge-pending     { background: #374151; color: #9ca3af; }
+  .badge-in_progress { background: #451a03; color: #fcd34d; border: 1px solid #92400e; }
+  .badge-done        { background: #052e16; color: #86efac; border: 1px solid #166534; }
+  .badge-blocked     { background: #450a0a; color: #fca5a5; border: 1px solid #991b1b; }
+  .badge-ok          { background: #052e16; color: #86efac; border: 1px solid #166534; }
+  .badge-failed      { background: #450a0a; color: #fca5a5; border: 1px solid #991b1b; }
+
+  /* ── Model badges ── */
+  .mbadge {
+    display: inline-block; padding: 2px 9px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .mbadge-fable  { background: #3b0764; color: #d8b4fe; border: 1px solid #6b21a8; }
+  .mbadge-sonnet { background: #1e3a8a; color: #93c5fd; border: 1px solid #1d4ed8; }
+  .mbadge-haiku  { background: #042f2e; color: #5eead4; border: 1px solid #0f766e; }
+  .mbadge-other  { background: #1f2937; color: #9ca3af; }
+
+  /* ── Pipeline cards ── */
+  .pipeline-cards { display: flex; flex-direction: column; gap: 16px; }
+  .pipeline-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .pipeline-card-header {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .pipeline-title { font-size: 15px; font-weight: 700; flex: 1 1 auto; }
+  .pipeline-meta { font-size: 12px; color: var(--muted); }
+  .pipeline-enabled-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    display: inline-block; margin-right: 3px;
+  }
+  .pipeline-enabled-dot.on  { background: #22c55e; box-shadow: 0 0 4px #22c55e80; }
+  .pipeline-enabled-dot.off { background: #6b7280; }
+  .pipeline-run-note {
+    font-size: 12px; color: var(--muted);
+    margin-top: 6px; line-height: 1.4;
+  }
+  .pipeline-section-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); margin-top: 14px; margin-bottom: 6px; font-weight: 600;
+  }
+  .pipeline-docs { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .pipeline-docs li { font-size: 12px; }
+  .pipeline-docs a { color: var(--blue); text-decoration: none; }
+  .pipeline-docs a:hover { text-decoration: underline; }
+  .pipeline-docs .doc-meta { color: var(--muted); margin-left: 6px; }
+  .pipeline-empty { font-size: 12px; color: var(--muted); font-style: italic; }
+
+  /* ── Latest matches table ── */
+  .matches-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); margin-top: 6px; }
+  .matches-table { width: 100%; border-collapse: collapse; background: var(--surface2); font-size: 12px; }
+  .matches-table th {
+    text-align: left; padding: 7px 12px;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .matches-table td { padding: 7px 12px; border-bottom: 1px solid var(--border); }
+  .matches-table tr:last-child td { border-bottom: none; }
+  .matches-table a { color: var(--blue); text-decoration: none; }
+  .matches-table a:hover { text-decoration: underline; }
+  .score-cell { font-family: monospace; color: var(--amber); }
+
+  /* ── Footnote ── */
+  footer { margin-top: 36px; font-size: 11px; color: var(--muted); text-align: center; line-height: 1.6; }
+
+  /* ── Empty state ── */
+  .empty-row td { text-align: center; padding: 32px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- Embedded data — MANAGER: keep this in sync with dashboard-data.json -->
+<script id="dashboard-data" type="application/json">
+{
+  "enabled": true,
+  "updated": "2026-06-11T15:30:00",
+  "plan": "Pro",
+  "tokenBudget": {
+    "note": "All figures are manager estimates — Anthropic does not expose real quota. Limits are editable guesses; usage resets every 5h (session) and weekly.",
+    "session": {"label": "5-hour window", "limitEstimate": 200000, "usedEstimate": 65000, "windowStarted": "2026-06-11T10:30:00"},
+    "week": {"label": "Week", "limitEstimate": 1400000, "usedEstimate": 96900, "resetsOn": "2026-06-15"},
+    "month": {"label": "Month", "limitEstimate": 5600000, "usedEstimate": 96900, "resetsOn": "2026-07-01"}
+  },
+  "oneOffTasks": [
+    {"id": "2026-06-11_dashboard", "title": "Manager dashboard v1", "status": "done", "model": "sonnet", "tokensEstimate": {"input": 18000, "output": 3600}, "started": "2026-06-11", "finished": "2026-06-11", "resultFile": "dashboard.html"},
+    {"id": "2026-06-11_dashboard-v2", "title": "Dashboard v2 (pipelines + token budget)", "status": "done", "model": "sonnet", "tokensEstimate": {"input": 30000, "output": 6300}, "started": "2026-06-11", "finished": "2026-06-11", "resultFile": "dashboard.html"},
+    {"id": "2026-06-11_job-search-manual-rerun", "title": "Manual re-run: daily job search (4am failed)", "status": "done", "model": "sonnet", "tokensEstimate": {"input": 35000, "output": 4000}, "started": "2026-06-11", "finished": "2026-06-11", "resultFile": "jobs_2026-06-11.txt"}
+  ],
+  "scheduledPipelines": [
+    {
+      "id": "daily-job-search",
+      "title": "Daily job search",
+      "schedule": "4:08am daily",
+      "enabled": true,
+      "lastRun": "2026-06-11T15:30:00",
+      "lastRunStatus": "ok",
+      "lastRunNote": "4am scheduled run FAILED (likely LinkedIn rate-limit/CAPTCHA on unattended run). Manual re-run completed 3:30pm: 52 raw → 1 job scoring 60+. Thin day; Indeed connector returns only 1-2 results per query.",
+      "outputFolder": "C:/Users/gyipl/OneDrive/Documents/Claude/Job Search/Job Searches/",
+      "documents": [
+        {"date": "2026-06-11", "file": "jobs_2026-06-11.txt", "path": "C:/Users/gyipl/OneDrive/Documents/Claude/Job Search/Job Searches/jobs_2026-06-11.txt", "tier1": 1, "total": 1}
+      ],
+      "latestSummary": {
+        "date": "2026-06-11",
+        "items": [
+          {"rank": 1, "score": 69, "title": "ACD, Ring Retail & Marketing", "company": "Amazon (Ring) — Hawthorne, CA — $141K-$191K — Tier 1", "link": "https://to.indeed.com/aamm48c89kl7"},
+          {"rank": 2, "score": 55, "title": "ACD, Art", "company": "Princeton10 — Montclair, NJ — Tier 2", "link": "https://to.indeed.com/aacz2rw4p9xl"},
+          {"rank":
