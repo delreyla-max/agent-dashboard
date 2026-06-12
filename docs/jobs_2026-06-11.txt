@@ -1,0 +1,69 @@
+========================================
+GARMAN YIP — DAILY JOB MATCHES
+Wednesday, June 11, 2026
+========================================
+
+1 job found today scoring 60 or above.
+
+----------------------------------------
+#1 — SCORE: 69/100  |  SOURCE: Indeed
+TITLE:    Associate Creative Director, Ring Retail & Marketing
+COMPANY:  Amazon.com (Ring)
+LOCATION: Hawthorne, CA
+TYPE:     Full-time
+PAY:      $141,000 - $190,700 a year
+POSTED:   February 28, 2026
+LINK:     https://to.indeed.com/aamm48c89kl7
+TIER:     Tier 1 — Apply with confidence
+LEAD WITH: Toyota AI Pipeline (ACD), Nissan North American Brand System, Toyota/Lexus Owners CRM
+WHY:      Direct ACD title match at a major consumer tech brand (Amazon/Ring) with strong retail campaign and brand-system scope. Garman's Toyota/Nissan brand-system work and CRM production pipeline translate directly to Ring's retail and digital marketing creative needs. Risk: Hawthorne location and Amazon's structured recruiting process may slow screening; posting date of Feb 28 means the role may already be filled — apply promptly and check for freshness.
+----------------------------------------
+
+BELOW THRESHOLD (scored but did not reach 60)
+----------------------------------------------
+ACD, Art | Princeton10 | Montclair, NJ | Score: 55/100
+  Tier 2 match: ACD title and salary ($140K–$180K) are right, but Princeton10 is an unrecognized agency, NJ location with unclear remote policy, and generic domain weakens differentiator leverage.
+
+Lead Product Designer, Arc Platform | Circle (NYSE: CRCL) | Remote | Score: 37/100
+  Tier 3: High pay ($172K–$225K) and strong product design scope, but role requires meaningful blockchain/crypto exposure — a real gap. Mr. Cooper fintech work provides partial credibility only.
+
+Global Social Content & Creative Lead | Cooler Master | City of Industry, CA | Score: 27/100
+  Below threshold: Social/content lead role, not creative director level. Avoid category (content strategist adjacent).
+
+SEARCH NOTES
+------------
+LinkedIn (LA, last 24hrs):     25 raw → 3 passed filter (1 scored 60+: 0 from LI-LA; none on-target ACD/CD)
+LinkedIn (Remote, last 24hrs): 25 raw → 1 passed filter (0 scored 60+)
+Indeed (LA searches):          1 raw → 1 passed filter (1 scored 60+ — Ring ACD)
+Indeed (Remote searches):      1 raw → 1 passed filter (0 scored 60+ — Princeton10 ACD at 55)
+Cross-source duplicates:       0 removed
+Previously seen (deduped):     0 removed (seen_job_ids.txt created fresh today)
+Final list:                    1 job scoring 60+
+
+FILTER SUMMARY: 52 raw → 23 filtered (payroll director, logistics, attorney, copywriter,
+staffing/AI-labeling, below-level designers, ops coordinators, 14x DEMAND.com B2B
+performance marketing spam) → 4 scored → 1 passes 60-point threshold.
+
+QUALITY NOTE — LOW YIELD TODAY:
+LinkedIn's 24-hour filter (f_TPR=r86400) returned very few on-target creative director
+postings today. The LA search (25 results) was dominated by non-creative roles that
+LinkedIn matched on keyword overlap (Fox Corporation payroll director, Silvus logistics,
+Jobot attorney). The Remote search (25 results) was overwhelmed by DEMAND.com flooding
+14 identical "Marketing Director" postings across different cities — a spam pattern that
+pollutes remote searches. Indeed returned only 2 usable results total (1-per-query limit
+appears to be a connector constraint, not a true search result count).
+
+LIKELY REASON THE 4AM UNATTENDED RUN FAILED:
+The scheduled task likely hit a LinkedIn rate-limit or CAPTCHA wall when running
+unattended without a browser session. The Apify curious_coder/linkedin-jobs-scraper
+actor accesses public LinkedIn pages; overnight unattended runs are more likely to
+trigger bot-detection than daytime runs. Additionally, if the Apify API key or task
+token expired/rotated, the actor call would silently fail with no output file written.
+Recommend: (1) verify Apify API key is current, (2) check if the scheduled task logs
+show an actor error vs. a timeout, (3) consider adding a fallback that writes a
+"0 results / failed run" file even on error so the manager can detect it.
+
+Note: Glassdoor blocked (403). To add it: rent bebity/glassdoor-jobs-scraper on
+console.apify.com.
+
+========================================
