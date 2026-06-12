@@ -1,0 +1,40 @@
+========================================
+GARMAN YIP — DAILY JOB MATCHES
+Friday, June 12, 2026
+========================================
+
+1 job found today scoring 60 or above.
+
+----------------------------------------
+#1 — SCORE: 65/100  |  SOURCE: Indeed
+TITLE:    Associate Creative Director, Ring Retail & Marketing
+COMPANY:  Amazon.com (Ring)
+LOCATION: Hawthorne, CA
+TYPE:     Full-time
+PAY:      $141,000 – $190,700/yr
+POSTED:   February 28, 2026
+LINK:     https://to.indeed.com/aaqwmf7x2nxg
+TIER:     Tier 1 — Apply with confidence
+LEAD WITH: Nissan North American Brand System (retail + launch ecosystem); Toyota AI Pipeline (scalable production at brand volume); Toyota/Lexus Owners (CRM + digital customer experience)
+WHY:      Ring is Amazon's design-led smart home hardware brand — exactly the consumer-tech brand environment where Garman's combination of brand-system thinking, retail creative leadership, and AI production pipeline provides real leverage. ACD level is a direct title match, and the $141–$190.7K range is a meaningful step above current. Main risk: this posting is 3.5 months old and may already be filled — apply immediately and verify it's still active before investing time in cover letter customization.
+----------------------------------------
+
+SEARCH NOTES
+------------
+LinkedIn (LA, last 24hrs):     26 raw → 0 after filter (no director/lead creative postings in past 24hrs)
+LinkedIn (Remote, last 24hrs): 25 raw → 3 after filter → scored 0 above 60
+Indeed (LA searches):          7 raw → 2 after filter → scored 1 above 60
+Indeed (Remote searches):      8 raw → 0 after filter
+Cross-source duplicates:       0 removed
+Previously seen (deduped):     0 removed (first run — seen_job_ids.txt created today)
+Final list:                    1 job
+
+FILTERED CANDIDATES BELOW THRESHOLD (for reference):
+- Creative Director, colourpop (Indeed, LA, Jun 12) — Score 56. Fresh posting, CD-level title match, but $150K salary cap is minimal upside from $140K current, and beauty/cosmetics is a new vertical with no portfolio overlap.
+- Lead Product Designer, Arc Platform, Circle (LinkedIn Remote, Jun 12) — Score 49. FinTech/blockchain platform design; Storyfire and Xome give product credibility but crypto domain is a stretch.
+- Sr Director DM Creative & Insights, Quad (LinkedIn Remote, Jun 12) — Score 45. CRM/direct mail creative direction is relevant, but Quad is a print production company and direct mail focus is a narrow, traditional medium.
+- Director, Motion Design, DEPT® (LinkedIn Remote, Jun 12) — Score 39. DEPT® is a strong agency but motion design direction is a specialty Garman is adjacent to, not expert in.
+
+Note: Glassdoor blocked (403). To add it: rent bebity/glassdoor-jobs-scraper on console.apify.com.
+
+========================================
