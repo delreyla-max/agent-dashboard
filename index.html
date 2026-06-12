@@ -257,17 +257,76 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 }
 </script>
 
-<script id="dashboard-data" type="application/json">
-{
+<script id="dashboard-data" type="application/json">{
   "enabled": true,
-  "updated": "2026-06-12T15:50:00",
+  "updated": "2026-06-12T17:00:00",
   "plan": "Pro",
   "oneOffTasks": [
-    {"id":"2026-06-12_job-board-v4","title":"Dashboard v4 — job board 2-col, no API key, auto-refresh","status":"done","model":"sonnet","tokensEstimate":{"input":55000,"output":11000},"started":"2026-06-12","finished":"2026-06-12","resultFile":"index.html"},
-    {"id":"2026-06-11_dashboard-v3","title":"Dashboard v3 (mobile-first, LinkedIn, workouts, email digest)","status":"done","model":"sonnet","tokensEstimate":{"input":45000,"output":9000},"started":"2026-06-11","finished":"2026-06-11","resultFile":"index.html"},
-    {"id":"2026-06-11_job-search-manual-rerun","title":"Manual re-run: daily job search (4am failed)","status":"done","model":"sonnet","tokensEstimate":{"input":35000,"output":4000},"started":"2026-06-11","finished":"2026-06-11","resultFile":"docs/jobs_2026-06-11.txt"},
-    {"id":"2026-06-11_dashboard-v2","title":"Dashboard v2 (pipelines + token budget)","status":"done","model":"sonnet","tokensEstimate":{"input":30000,"output":6300},"started":"2026-06-11","finished":"2026-06-11","resultFile":"index.html"},
-    {"id":"2026-06-11_dashboard","title":"Manager dashboard v1","status":"done","model":"sonnet","tokensEstimate":{"input":18000,"output":3600},"started":"2026-06-11","finished":"2026-06-11","resultFile":"index.html"}
+    {
+      "id": "2026-06-12_job-board-v4",
+      "title": "Dashboard v4 \u2014 job board 2-col, no API key, auto-refresh",
+      "status": "done",
+      "model": "sonnet",
+      "tokensEstimate": {
+        "input": 55000,
+        "output": 11000
+      },
+      "started": "2026-06-12",
+      "finished": "2026-06-12",
+      "resultFile": "index.html"
+    },
+    {
+      "id": "2026-06-11_dashboard-v3",
+      "title": "Dashboard v3 (mobile-first, LinkedIn, workouts, email digest)",
+      "status": "done",
+      "model": "sonnet",
+      "tokensEstimate": {
+        "input": 45000,
+        "output": 9000
+      },
+      "started": "2026-06-11",
+      "finished": "2026-06-11",
+      "resultFile": "index.html"
+    },
+    {
+      "id": "2026-06-11_job-search-manual-rerun",
+      "title": "Manual re-run: daily job search (4am failed)",
+      "status": "done",
+      "model": "sonnet",
+      "tokensEstimate": {
+        "input": 35000,
+        "output": 4000
+      },
+      "started": "2026-06-11",
+      "finished": "2026-06-11",
+      "resultFile": "docs/jobs_2026-06-11.txt"
+    },
+    {
+      "id": "2026-06-11_dashboard-v2",
+      "title": "Dashboard v2 (pipelines + token budget)",
+      "status": "done",
+      "model": "sonnet",
+      "tokensEstimate": {
+        "input": 30000,
+        "output": 6300
+      },
+      "started": "2026-06-11",
+      "finished": "2026-06-11",
+      "resultFile": "index.html"
+    },
+    {
+      "id": "2026-06-11_dashboard",
+      "title": "Manager dashboard v1",
+      "status": "done",
+      "model": "sonnet",
+      "tokensEstimate": {
+        "input": 18000,
+        "output": 3600
+      },
+      "started": "2026-06-11",
+      "finished": "2026-06-11",
+      "resultFile": "index.html"
+    }
   ],
   "scheduledPipelines": [
     {
@@ -275,20 +334,50 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-12T15:50:00",
+      "lastRun": "2026-06-12T17:00:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "51 raw → 1 job scoring 60+. LinkedIn 24hr window returned mostly off-target results. Indeed surfaced Amazon ACD Ring (Tier 1, $141–$191K).",
-      "outputFolder": "C:/Users/gyipl/OneDrive/Documents/Claude/Job Search/Job Searches/",
+      "lastRunNote": "37 raw \u2192 2 jobs scoring 60+. Gantri Director of Design ($190K\u2013$220K, Tier 2, fresh today). Amazon ACD Ring (Tier 1, $141\u2013$191K) reappeared with new ID. LA search 0/14 on-target. Migration to Documents\\\\Claude verified working.",
+      "outputFolder": "C:/Users/gyipl/Documents/Claude/Job Search/Job Searches/",
       "documents": [
-        {"date":"2026-06-12","file":"jobs_2026-06-12.txt","relPath":"docs/jobs_2026-06-12.txt","tier1":1,"total":1},
-        {"date":"2026-06-11","file":"jobs_2026-06-11.txt","relPath":"docs/jobs_2026-06-11.txt","tier1":1,"total":1}
+        {
+          "date": "2026-06-12",
+          "file": "jobs_2026-06-12.txt",
+          "relPath": "docs/jobs_2026-06-12.txt",
+          "tier1": 1,
+          "total": 2
+        },
+        {
+          "date": "2026-06-11",
+          "file": "jobs_2026-06-11.txt",
+          "relPath": "docs/jobs_2026-06-11.txt",
+          "tier1": 1,
+          "total": 1
+        }
       ],
       "latestSummary": {
         "date": "2026-06-12",
         "items": [
-          {"rank":1,"score":65,"title":"ACD, Ring Retail & Marketing","company":"Amazon (Ring) — Hawthorne, CA — $141K–$191K — Tier 1","link":"https://to.indeed.com/aaqwmf7x2nxg"},
-          {"rank":2,"score":56,"title":"Creative Director","company":"colourpop — Sherman Oaks, CA — up to $150K","link":"https://to.indeed.com/aa6lry9fxgsq"},
-          {"rank":3,"score":49,"title":"Lead Product Designer, Arc Platform","company":"Circle — Remote","link":"https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353001488"}
+          {
+            "rank": 1,
+            "score": 65,
+            "title": "ACD, Ring Retail & Marketing",
+            "company": "Amazon (Ring) \u2014 Hawthorne, CA \u2014 $141K\u2013$191K \u2014 Tier 1",
+            "link": "https://to.indeed.com/aaqwmf7x2nxg"
+          },
+          {
+            "rank": 2,
+            "score": 56,
+            "title": "Creative Director",
+            "company": "colourpop \u2014 Sherman Oaks, CA \u2014 up to $150K",
+            "link": "https://to.indeed.com/aa6lry9fxgsq"
+          },
+          {
+            "rank": 3,
+            "score": 49,
+            "title": "Lead Product Designer, Arc Platform",
+            "company": "Circle \u2014 Remote",
+            "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353001488"
+          }
         ]
       }
     }
@@ -301,8 +390,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   "totals": {
     "sonnetTokensEstimate": 183000
   }
-}
-</script>
+}</script>
 
 <div id="disabled-overlay">
   <div class="off-icon">&#9899;</div>
