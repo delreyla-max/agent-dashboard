@@ -933,4 +933,64 @@ function renderWorkouts(){
   if(statsEl){
     statsEl.innerHTML =
       '<div class="workout-stat"><div class="workout-stat-val">'+streak+'</div><div class="workout-stat-lab">Day streak</div></div>'
-      +'<div class="workout-stat"><div class="wor
+      +'<div class="workout-stat"><div class="workout-stat-val">'+active7+'</div><div class="workout-stat-lab">Active / 7d</div></div>'
+      +'<div class="workout-stat"><div class="workout-stat-val">'+arr.length+'</div><div class="workout-stat-lab">Total logged</div></div>';
+  }
+
+  /* recent log (14 max) */
+  var logEl = document.getElementById('workout-log');
+  if(logEl){
+    var recent = arr.slice(0,14);
+    if(!recent.length){
+      logEl.innerHTML = '<div class="empty-state">No workouts logged yet.</div>';
+    } else {
+      logEl.innerHTML = '<div class="pipeline-section-label">Recent log</div>'
+        +'<div class="workout-log-list">'
+        +recent.map(function(w){
+          return '<div class="workout-log-item">'
+            +'<div class="workout-log-left">'
+            +'<div class="workout-log-type">'+esc(w.type)+'</div>'
+            +'<div class="workout-log-date">'+esc(w.date)+'</div>'
+            +'</div>'
+            +'<button class="btn-danger-sm" onclick="removeWorkout(\''+esc(w.date)+'\')">Remove</button>'
+            +'</div>';
+        }).join('')
+        +'</div>';
+    }
+  }
+}
+
+renderWorkouts();
+
+/* ── EMAIL DIGEST ── */
+(function(){
+  var ed = d.emailDigest||{};
+  var el = document.getElementById('email-digest-card');
+  if(!el) return;
+  if(!ed.items || !ed.items.length){
+    el.innerHTML = '<div class="email-digest-empty">No digest yet — Claude will bake the daily email summary here.</div>';
+    return;
+  }
+  var h = '';
+  if(ed.date){
+    h += '<div class="pipeline-section-label">Digest for '+esc(fmtDate(ed.date))+'</div>';
+  }
+  if(ed.summary){
+    h += '<p style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5;">'+esc(ed.summary)+'</p>';
+  }
+  ed.items.forEach(function(item){
+    h += '<div class="digest-item">'
+      +'<div class="digest-label">'+esc(item.label||'')+'</div>'
+      +'<div class="digest-text">'+esc(item.text||'')+'</div>';
+    if(item.mailto){
+      h += '<div class="digest-reply"><a class="btn-reply" href="'+esc(item.mailto)+'">&#128394; Reply</a></div>';
+    }
+    h += '</div>';
+  });
+  el.innerHTML = h;
+})();
+
+})();
+</script>
+</body>
+</html>
