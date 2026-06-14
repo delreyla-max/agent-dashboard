@@ -244,6 +244,16 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
   .main-col-right { flex:1; position:sticky; top:16px; }
 }
 
+/* ── BOARD LAYOUT ── */
+.board-layout { display:flex; flex-direction:column; gap:24px; margin-top:16px; }
+.board-col-left  { flex:0 0 100%; min-width:0; }
+.board-col-right { flex:1; min-width:0; }
+@media (min-width:760px) {
+  .board-layout { flex-direction:row; align-items:start; }
+  .board-col-left  { flex:0 0 30%; }
+  .board-col-right { flex:1; }
+}
+
 /* ── MISC ── */
 footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center; line-height:1.6; }
 .empty-state { font-size:12px; color:var(--muted); padding:12px 0; font-style:italic; }
@@ -416,6 +426,13 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       "outputFolder": "C:/Users/gyipl/Documents/Claude/Job Search/Job Searches/",
       "documents": [
         {
+          "date": "2026-06-14",
+          "file": "jobs_2026-06-14.txt",
+          "relPath": "docs/jobs_2026-06-14.txt",
+          "tier1": 1,
+          "total": 1
+        },
+        {
           "date": "2026-06-13",
           "file": "jobs_2026-06-13.txt",
           "relPath": "docs/jobs_2026-06-13.txt",
@@ -488,36 +505,41 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
     <div class="saved-empty">Loading…</div>
   </div>
 
-  <!-- Job Board -->
-  <div class="job-board-header">
-    <span class="job-board-title">&#128269; Job Board</span>
-    <span class="job-board-meta" id="board-synced"></span>
-    <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
-  </div>
-  <div class="job-board-grid">
-    <div class="job-panel" id="panel-li">
-      <div class="job-panel-head">
-        <div class="job-panel-label"><span class="src-dot li"></span>LinkedIn</div>
-        <span class="job-panel-count" id="li-count"></span>
-      </div>
-      <div id="li-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
-    </div>
-    <div class="job-panel" id="panel-in">
-      <div class="job-panel-head">
-        <div class="job-panel-label"><span class="src-dot indeed"></span>Indeed</div>
-        <span class="job-panel-count" id="in-count"></span>
-      </div>
-      <div id="in-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
-    </div>
-  </div>
+  <div class="board-layout">
+    <div class="board-col-left">
+      <!-- Scheduled Pipelines -->
+      <div class="section-header" style="margin-top:0;">Scheduled Pipelines</div>
+      <div class="pipeline-cards" id="pipeline-cards"></div>
 
-  <!-- Scheduled Pipelines -->
-  <div class="section-header" style="margin-top:24px;">Scheduled Pipelines</div>
-  <div class="pipeline-cards" id="pipeline-cards"></div>
-
-  <!-- Email Digest -->
-  <div class="section-header" style="margin-top:22px;">Email Digest</div>
-  <div class="email-digest-card" id="email-digest-card"></div>
+      <!-- Email Digest -->
+      <div class="section-header" style="margin-top:22px;">Email Digest</div>
+      <div class="email-digest-card" id="email-digest-card"></div>
+    </div>
+    <div class="board-col-right">
+      <!-- Job Board -->
+      <div class="job-board-header" style="margin-top:0;">
+        <span class="job-board-title">&#128269; Job Board</span>
+        <span class="job-board-meta" id="board-synced"></span>
+        <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
+      </div>
+      <div class="job-board-grid">
+        <div class="job-panel" id="panel-li">
+          <div class="job-panel-head">
+            <div class="job-panel-label"><span class="src-dot li"></span>LinkedIn</div>
+            <span class="job-panel-count" id="li-count"></span>
+          </div>
+          <div id="li-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
+        </div>
+        <div class="job-panel" id="panel-in">
+          <div class="job-panel-head">
+            <div class="job-panel-label"><span class="src-dot indeed"></span>Indeed</div>
+            <span class="job-panel-count" id="in-count"></span>
+          </div>
+          <div id="in-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer>Agent Manager Dashboard v4 &middot; Job board auto-refreshes from <code>docs/</code> JSON &middot; GitHub Pages ready</footer>
 </div>
@@ -564,8 +586,9 @@ var pips = d.scheduledPipelines||[];
     if(p.documents && p.documents.length){
       h+='<div class="pipeline-section-label">Output files</div><ul class="pipeline-docs">';
       p.documents.forEach(function(doc){
-        var href = doc.relPath||doc.path||doc.file;
-        h+='<li><a href="'+esc(href)+'" target="_blank">'+esc(doc.file)+'</a>';
+        var relPath = doc.relPath||doc.path||doc.file;
+        var label = doc.date || doc.file;
+        h+='<li><a href="#" onclick="loadHistoricalJobs(\''+relPath+'\',\''+label+'\');return false;">'+esc(doc.file)+'</a>';
         var m=[];
         if(doc.date) m.push(fmtDate(doc.date));
         if(doc.total!==undefined) m.push(doc.total+' jobs');
@@ -670,6 +693,65 @@ function fetchJobFile(path){
 }
 
 var _syncTimes = [];
+function parseTxtJobs(text){
+  var SEP = /\n-{38,}\n/;
+  var blocks = text.split(SEP);
+  var liJobs=[], inJobs=[];
+  blocks.forEach(function(block){
+    if(!block.trim()) return;
+    if(!/^TITLE:/m.test(block)) return; // skip header block
+    var job={};
+    var sm = block.match(/#\d+[\s\S]*?SCORE:\s*(\d+)/);
+    if(sm) job.score = parseInt(sm[1]);
+    var srcm = block.match(/SOURCE:\s*(.+)/);
+    if(srcm) job.source = srcm[1].trim();
+    ['TITLE','COMPANY','LOCATION','TYPE','PAY','POSTED','LINK','TIER'].forEach(function(f){
+      var m = block.match(new RegExp('^'+f+':\\s*(.+)','m'));
+      if(m) job[f.toLowerCase()] = m[1].trim();
+    });
+    var wm = block.match(/^WHY:\s*(.+)/m);
+    if(wm) job.why = wm[1].trim();
+    if(!job.title) return;
+    var jobj={title:job.title,company:job.company||'',link:job.link||'',
+      score:job.score||null,tier:job.tier||'',location:job.location||'',
+      pay:job.pay||'',why:job.why||''};
+    if((job.source||'').toLowerCase().indexOf('indeed')>=0){
+      inJobs.push(jobj);
+    } else {
+      liJobs.push(jobj);
+    }
+  });
+  return {li:liJobs, in:inJobs};
+}
+
+function loadHistoricalJobs(relPath, label){
+  var synced = document.getElementById('board-synced');
+  var btn = document.getElementById('refresh-btn');
+  if(synced) synced.innerHTML = '<span style="color:var(--accent)">Viewing: '+label+'</span>'
+    +'&nbsp;&nbsp;<a href="#" onclick="exitHistoricalMode();return false;" '
+    +'style="font-size:12px;opacity:0.7;text-decoration:underline">&#8592; Back to latest</a>';
+  if(btn) btn.style.display='none';
+  document.getElementById('li-list').innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
+  document.getElementById('in-list').innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
+  fetch(relPath+'?nocache='+Date.now())
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+    .then(function(text){
+      var parsed = parseTxtJobs(text);
+      renderJobList(parsed.li, 'li-list', 'li-count');
+      renderJobList(parsed.in, 'in-list', 'in-count');
+    })
+    .catch(function(e){
+      document.getElementById('li-list').innerHTML='<div class="panel-state">Failed to load: '+e.message+'</div>';
+      document.getElementById('in-list').innerHTML='<div class="panel-state"></div>';
+    });
+}
+
+function exitHistoricalMode(){
+  var btn = document.getElementById('refresh-btn');
+  if(btn) btn.style.display='';
+  loadBoard(true);
+}
+
 function updateSyncLabel(){
   var el=document.getElementById('board-synced');
   if(!el) return;
