@@ -584,7 +584,7 @@ var pips = d.scheduledPipelines||[];
     if(p.lastRun) h+='<span class="pipeline-meta">Last: '+fmtDate(p.lastRun)+'</span>';
     if(p.lastRunStatus) h+=badge(p.lastRunStatus);
     h+='</div>';
-    if(p.lastRunNote) h+='<div class="pipeline-run-note">'+esc(p.lastRunNote)+'</div>';
+
     if(p.documents && p.documents.length){
       h+='<div class="pipeline-section-label">Output files</div><ul class="pipeline-docs">';
       p.documents.forEach(function(doc){
@@ -595,7 +595,6 @@ var pips = d.scheduledPipelines||[];
         if(doc.date) m.push(fmtDate(doc.date));
         if(doc.total!==undefined) m.push(doc.total+' jobs');
         if(doc.tier1!==undefined) m.push(doc.tier1+' Tier 1');
-        if(m.length) h+='<span class="doc-meta">'+esc(m.join(' · '))+'</span>';
         h+='</li>';
       });
       h+='</ul>';
