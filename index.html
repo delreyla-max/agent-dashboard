@@ -485,34 +485,34 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   <!-- Summary Cards -->
   <div class="cards-scroll"><div class="cards" id="summary-cards"></div></div>
 
-  <!-- Job Board -->
-  <div class="job-board-header">
-    <span class="job-board-title">&#128269; Job Board</span>
-    <span class="job-board-meta" id="board-synced"></span>
-    <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
-  </div>
-  <div class="job-board-grid">
-    <div class="job-panel" id="panel-li">
-      <div class="job-panel-head">
-        <div class="job-panel-label"><span class="src-dot li"></span>LinkedIn</div>
-        <span class="job-panel-count" id="li-count"></span>
-      </div>
-      <div id="li-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
-    </div>
-    <div class="job-panel" id="panel-in">
-      <div class="job-panel-head">
-        <div class="job-panel-label"><span class="src-dot indeed"></span>Indeed</div>
-        <span class="job-panel-count" id="in-count"></span>
-      </div>
-      <div id="in-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
-    </div>
-  </div>
-
-  <div class="main-2col" style="margin-top:24px;">
+  <div class="main-2col" style="margin-top:0;">
     <div class="main-col-left">
 
+      <!-- Job Board -->
+      <div class="job-board-header">
+        <span class="job-board-title">&#128269; Job Board</span>
+        <span class="job-board-meta" id="board-synced"></span>
+        <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
+      </div>
+      <div class="job-board-grid">
+        <div class="job-panel" id="panel-li">
+          <div class="job-panel-head">
+            <div class="job-panel-label"><span class="src-dot li"></span>LinkedIn</div>
+            <span class="job-panel-count" id="li-count"></span>
+          </div>
+          <div id="li-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
+        </div>
+        <div class="job-panel" id="panel-in">
+          <div class="job-panel-head">
+            <div class="job-panel-label"><span class="src-dot indeed"></span>Indeed</div>
+            <span class="job-panel-count" id="in-count"></span>
+          </div>
+          <div id="in-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
+        </div>
+      </div>
+
       <!-- Scheduled Pipelines -->
-      <div class="section-header">Scheduled Pipelines</div>
+      <div class="section-header" style="margin-top:24px;">Scheduled Pipelines</div>
       <div class="pipeline-cards" id="pipeline-cards"></div>
 
       <!-- Email Digest -->
