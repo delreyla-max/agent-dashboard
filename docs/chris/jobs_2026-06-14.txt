@@ -9,7 +9,7 @@ No new matches today.
 
 SEARCH NOTES
 ------------
-LinkedIn (VP/Head Remote, last 24hrs):     25 raw → 0 after filter
+LinkedIn (VP/Head Remote, last 7 days):    12 raw → 0 after filter
 LinkedIn (Director US, last 24hrs):         25 raw → 0 after filter
 Indeed (VP Remote):                        0 raw → 0 after filter
 Indeed (VP LA):                            0 raw → 0 after filter
@@ -19,8 +19,9 @@ Cross-source duplicates:                   0 removed
 Previously seen (deduped):                 0 removed
 Final list:                                0 jobs
 
-Note: LinkedIn returned mostly DataAnnotation AI Trainer gig roles, clinical/pharma research,
-business development, and product design roles — none qualifying as UX/product research leadership.
-Indeed returned no results matching VP/Head/Director UX Research keywords.
+Note: LinkedIn returned VP-level roles in pricing, sales, hardware, finance, and medical science —
+LinkedIn's algorithm matches "VP" and "Research" as separate terms across the full job body rather
+than the title. Search keyword approach needs refinement to target UX/product research leadership
+roles specifically.
 
 ========================================
