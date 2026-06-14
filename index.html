@@ -653,8 +653,9 @@ function renderJobList(jobs, listId, countId){
           +(saved?'&#9733;':'&#9734;')+'</button>';
         return '<div class="job-item">'
           +'<div class="job-item-title" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">'+
-            '<span style="flex:1 1 200px;">'+titleHtml+(j.company?'<span class="job-item-company-inline"> — '+esc(j.company)+'</span>':'')+'</span>'+scoreHtml+starBtn+
+            '<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+starBtn+
           '</div>'
+          +(j.company?'<div class="job-item-company">'+esc(j.company)+'</div>':'')
           +'<div class="job-item-meta">'+(j.location?'<span>📍 '+esc(j.location)+'</span>':'')+(j.type?'<span>'+esc(j.type)+'</span>':'')+'</div>'
           +(j.pay?'<div class="job-item-pay">💰 '+esc(j.pay)+'</div>':'')
           +(j.posted?'<div class="job-item-posted">Posted: '+esc(j.posted)+'</div>':'')
