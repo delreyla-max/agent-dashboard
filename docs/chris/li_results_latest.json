@@ -1,11 +1,38 @@
 {
-  "generated": "2026-06-14T11:30:43-07:00",
+  "generated": "2026-06-14T11:45:26-07:00",
   "source": "LinkedIn",
   "searches": [
-    "VP Research OR VP UX Research OR Head of Research \u2014 US Remote 7d",
-    "Director UX Research OR Senior Director Research \u2014 US 7d",
-    "VP/Head/Director Consumer Insights OR Customer Insights \u2014 US 7d"
+    "\"VP UX Research\" OR \"Head of UX Research\" \u2014 US Remote 7d (exact phrases)",
+    "\"Director UX Research\" OR \"Director of User Research\" \u2014 US 7d (exact phrases)",
+    "\"VP Consumer Insights\" OR \"Head of Consumer Insights\" \u2014 US 7d (exact phrases)"
   ],
-  "count": 0,
-  "jobs": []
+  "count": 2,
+  "jobs": [
+    {
+      "id": "4426642829",
+      "title": "Director of UX Research, Dating Outcomes & Platform",
+      "company": "Hinge",
+      "location": "New York, NY",
+      "posted": "2026-06-11",
+      "type": "Full-time",
+      "pay": "$235,000 - $287,000/yr",
+      "link": "https://www.linkedin.com/jobs/view/director-of-ux-research-dating-outcomes-platform-at-hinge-4426642829",
+      "score": 70,
+      "tier": "Tier 2",
+      "why": "Dating Outcomes & Platform at Hinge is almost identical to Chris's 12-year focus at Match Group. VP-level comp ($235-287K), manage-managers scope, strategic ownership of core product research. Gaps: NYC (not LA), Director title below prior VP level."
+    },
+    {
+      "id": "4425268802",
+      "title": "Director, UX Research, Search Verticals",
+      "company": "Google",
+      "location": "Mountain View, CA / New York, NY / San Francisco, CA",
+      "posted": "2026-06-08",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-ux-research-search-verticals-at-google-4425268802",
+      "score": 62,
+      "tier": "Tier 2",
+      "why": "Search Verticals = information-seeking/discovery = Chris's deepest research domain. Requires 15 years managing research teams (Chris has 15+). Gaps: PhD preferred, content design team management required, relocation to MTV/NY/SF."
+    }
+  ]
 }
