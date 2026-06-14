@@ -139,21 +139,7 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .badge-blocked     { background:#450a0a; color:#fca5a5; border:1px solid #991b1b; }
 .badge-ok          { background:#052e16; color:#86efac; border:1px solid #166534; }
 .badge-failed      { background:#450a0a; color:#fca5a5; border:1px solid #991b1b; }
-.mbadge { display:inline-block; padding:2px 9px; border-radius:999px; font-size:11px; font-weight:600; white-space:nowrap; }
-.mbadge-fable  { background:#3b0764; color:#d8b4fe; border:1px solid #6b21a8; }
-.mbadge-sonnet { background:#1e3a8a; color:#93c5fd; border:1px solid #1d4ed8; }
-.mbadge-haiku  { background:#042f2e; color:#5eead4; border:1px solid #0f766e; }
-.mbadge-other  { background:#1f2937; color:#9ca3af; }
 
-/* ── ONE-OFF TASKS ── */
-.tasks-card-list { display:flex; flex-direction:column; gap:8px; }
-.task-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 14px; }
-.task-card-top  { display:flex; align-items:flex-start; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
-.task-card-title { font-weight:500; flex:1 1 200px; font-size:13px; }
-.task-card-meta { display:flex; gap:8px; flex-wrap:wrap; align-items:center; font-size:11px; color:var(--muted); }
-.task-card-meta a { color:var(--blue); text-decoration:none; }
-.task-card-meta a:hover { text-decoration:underline; }
-.col-tokens { font-family:monospace; font-size:11px; color:var(--muted); }
 
 /* ── PIPELINE CARD ── */
 .pipeline-cards { display:flex; flex-direction:column; gap:14px; }
@@ -172,14 +158,6 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .pipeline-docs a:hover { text-decoration:underline; }
 .pipeline-docs .doc-meta { color:var(--muted); margin-left:6px; }
 .pipeline-empty { font-size:12px; color:var(--muted); font-style:italic; }
-.matches-table-wrap { overflow-x:auto; border-radius:var(--radius-sm); border:1px solid var(--border); margin-top:6px; }
-.matches-table { width:100%; border-collapse:collapse; background:var(--surface2); font-size:12px; }
-.matches-table th { text-align:left; padding:7px 10px; font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); border-bottom:1px solid var(--border); }
-.matches-table td { padding:7px 10px; border-bottom:1px solid var(--border); }
-.matches-table tr:last-child td { border-bottom:none; }
-.matches-table a { color:var(--blue); text-decoration:none; }
-.matches-table a:hover { text-decoration:underline; }
-.score-cell { font-family:monospace; color:var(--amber); }
 
 /* ── EMAIL DIGEST ── */
 .email-digest-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); padding:16px; }
@@ -191,6 +169,70 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .digest-reply { margin-top:8px; }
 .btn-reply { display:inline-flex; align-items:center; gap:5px; background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:5px; padding:5px 12px; font-size:12px; text-decoration:none; transition:background .2s; }
 .btn-reply:hover { background:var(--border); }
+
+/* ── SAVED JOBS ── */
+.star-btn {
+  background:none; border:none; cursor:pointer; font-size:17px;
+  color:var(--muted); padding:0 3px; line-height:1; transition:color .15s; flex-shrink:0;
+}
+.star-btn:hover  { color:var(--amber); }
+.star-btn.starred { color:var(--amber); }
+.saved-jobs-panel {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-card); overflow:hidden;
+}
+.saved-job-item {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 14px; border-bottom:1px solid var(--border);
+}
+.saved-job-item:last-child { border-bottom:none; }
+.saved-job-info { flex:1; min-width:0; }
+.saved-job-title {
+  font-size:13px; font-weight:600; color:var(--blue); text-decoration:none;
+  display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.saved-job-title:hover { text-decoration:underline; }
+.saved-job-company { font-size:11px; color:var(--muted); display:block; margin-top:2px; }
+.saved-job-date { font-size:10px; color:var(--gray); margin-left:auto; flex-shrink:0; }
+.saved-remove-btn {
+  background:none; border:none; color:var(--muted); cursor:pointer;
+  font-size:14px; padding:4px 6px; border-radius:4px; transition:color .15s,background .15s; flex-shrink:0;
+}
+.saved-remove-btn:hover { color:var(--red); background:#450a0a44; }
+.saved-empty { font-size:12px; color:var(--muted); font-style:italic; padding:16px 14px; }
+.saved-saving { font-size:11px; color:var(--muted); padding:6px 14px; }
+
+/* ── PAT MODAL ── */
+.pat-modal {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:rgba(10,11,18,0.88); justify-content:center; align-items:center;
+}
+.pat-modal.visible { display:flex; }
+.pat-modal-box {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-card); padding:24px; max-width:440px; width:92%;
+}
+.pat-modal-title { font-size:15px; font-weight:700; margin-bottom:10px; }
+.pat-modal-desc { font-size:12px; color:var(--muted); margin-bottom:16px; line-height:1.6; }
+.pat-modal-desc a { color:var(--blue); }
+.pat-modal-desc code { font-family:monospace; background:var(--surface2); padding:1px 4px; border-radius:3px; font-size:11px; }
+.pat-input {
+  width:100%; background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text);
+  margin-bottom:14px; font-family:monospace; box-sizing:border-box;
+}
+.pat-input:focus { outline:none; border-color:var(--blue); }
+.pat-modal-btns { display:flex; gap:8px; justify-content:flex-end; }
+.btn-primary {
+  background:var(--blue); color:#fff; border:none; border-radius:6px;
+  padding:7px 18px; font-size:13px; font-weight:600; cursor:pointer; transition:opacity .15s;
+}
+.btn-primary:hover { opacity:.85; }
+.btn-ghost {
+  background:none; color:var(--muted); border:1px solid var(--border);
+  border-radius:6px; padding:7px 14px; font-size:13px; cursor:pointer;
+}
+.btn-ghost:hover { background:var(--surface2); color:var(--text); }
 
 /* ── MISC ── */
 footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center; line-height:1.6; }
@@ -222,87 +264,193 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
      Used as fallback when running locally (file:// can't fetch). -->
 <script id="li-data" type="application/json">
 {
-  "generated": "2026-06-12T15:50:00",
+  "generated": "2026-06-14T00:51:34-07:00",
   "source": "LinkedIn",
-  "count": 10,
+  "searches": [
+    "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead \u2014 Los Angeles 24h",
+    "Creative Director OR ACD OR Product Design Lead OR AI Creative Lead OR CRM Creative Director \u2014 US Remote 24h"
+  ],
+  "count": 6,
   "jobs": [
-    {"id":"4353001488","title":"Lead Product Designer, Arc Platform","company":"Circle","location":"United States (Remote)","posted":"2026-06-12","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353001488","score":49,"tier":"","why":"FinTech/blockchain platform design. Storyfire (100+ screens) and Xome give product credibility, but crypto domain is a stretch with no portfolio overlap. IC lead title is a step below ACD."},
-    {"id":"4395436494","title":"Sr Director DM Creative & Insights","company":"Quad","location":"United States (Remote)","posted":"2026-06-12","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/sr-director-dm-creative-insights-at-quad-4395436494","score":45,"tier":"","why":"CRM/direct mail creative direction is adjacent, but Quad is a print production company. Traditional direct mail focus is well outside Garman's brand systems + digital portfolio."},
-    {"id":"4408566751","title":"Director, Motion Design","company":"DEPT®","location":"New York, United States","posted":"2026-06-11","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/director-motion-design-at-dept%C2%AE-4408566751","score":39,"tier":"","why":"DEPT® is a strong agency but this is a motion-specialist director role. Garman is adjacent to motion but not a dedicated motion director — wrong specialty fit."},
-    {"id":"4426629896","title":"TikTok Shop — Brand Strategy & Marketing Manager","company":"TikTok","location":"Los Angeles, CA","posted":"2026-06-11","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/tiktok-shop-brand-strategy-marketing-manager-at-tiktok-4426629896","score":38,"tier":"","why":"Interesting platform but this is a marketing strategy manager role, not creative direction. Manager title is a step down from ACD/CD, and focus is commerce strategy rather than brand creative."},
-    {"id":"4427661138","title":"Director, Integrated Marketing — Advanced Hydration","company":"The Coca-Cola Company","location":"New York, NY","posted":"2026-06-11","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/director-integrated-marketing-advanced-hydration-at-the-coca-cola-company-4427661138","score":38,"tier":"","why":"Integrated marketing ops at a CPG giant — more marketing planning than creative leadership. NYC location adds friction, and the role lacks a brand systems or creative direction component."},
-    {"id":"4426645637","title":"Senior Marketing Director","company":"Human","location":"United States (Remote)","posted":"2026-06-11","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/senior-marketing-director-at-human-4426645637","score":35,"tier":"","why":"Marketing leadership at a startup. No creative direction component visible — skews toward demand gen and growth marketing rather than brand creative. Likely below comp target."},
-    {"id":"4427607375","title":"Director of Brand Marketing","company":"Brio Water Technology","location":"Glendale, CA","posted":"2026-06-11","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/director-of-brand-marketing-at-brio-water-technology-4427607375","score":35,"tier":"","why":"Brand marketing director but likely marketing ops focused rather than creative direction. Water tech is a new vertical with no portfolio overlap."},
-    {"id":"4386933081","title":"Principal Motion Designer","company":"Anduril Industries","location":"Costa Mesa, CA","posted":"2026-06-12","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/principal-motion-designer-at-anduril-industries-4386933081","score":28,"tier":"","why":"Senior IC motion designer at a defense tech company. Below Garman's leadership seniority, too narrow a specialty, and defense/aerospace is a vertical with no portfolio fit."},
-    {"id":"4418022865","title":"Director of Workplace and Hospitality Design & Construction","company":"ALO","location":"Beverly Hills, CA","posted":"2026-06-12","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/director-of-workplace-and-hospitality-design-construction-at-alo-4418022865","score":12,"tier":"","why":"Physical interior and construction design — completely outside Garman's digital/brand discipline. Despite the director title, this is a facilities/architecture role."},
-    {"id":"4411645375","title":"Studio Director / Project Executive","company":"I-Grace","location":"Los Angeles, CA","posted":"2026-06-12","type":"Full-time","pay":"","link":"https://www.linkedin.com/jobs/view/studio-director-project-executive-at-i-grace-4411645375","score":10,"tier":"","why":"Architecture/interior design studio management. Wrong discipline — project executive in physical space design has no connection to brand systems, digital, or advertising creative."}
+    {
+      "id": "LI:4368757946",
+      "score": 58,
+      "title": "Manager, Product Design",
+      "companyName": "Figma",
+      "location": "United States (Remote)",
+      "employmentType": "Full-time",
+      "salary": "Not listed",
+      "postedAt": "2026-06-13",
+      "link": "https://www.linkedin.com/jobs/view/manager-product-design-at-figma-4368757946",
+      "tier": "Tier 2 \u2014 Good fit with tailoring",
+      "leadWith": "Storyfire (full product platform design, solo lead), Toyota Garage (design systems for product UX), Toyota AI Pipeline (AI-native workflow fluency)",
+      "why": "Figma is the most design-led tech company in the industry, and their Manager, Product Design role aligns with Garman's product platform experience (Storyfire, Toyota Garage, Xome) and design systems thinking. His AI workflow fluency is highly relevant as Figma pushes deep into AI-powered design features. Tailoring needed: reframe resume to emphasize design systems governance, engineering collaboration, and product component ownership\u2014Figma will want someone as comfortable talking to engineers about tokens as to executives about vision."
+    },
+    {
+      "id": "LI:4407253768",
+      "score": 41,
+      "title": "Director, Product Design",
+      "companyName": "Samsara",
+      "location": "San Francisco, CA",
+      "employmentType": "Full-time",
+      "salary": "$235,600 \u2013 $294,500/yr",
+      "postedAt": "2026-06-13",
+      "link": "https://www.linkedin.com/jobs/view/director-product-design-at-samsara-4407253768",
+      "tier": "Tier 3 \u2014 Possible",
+      "leadWith": "Storyfire, Toyota Garage, Xome",
+      "why": "Director-level role with exceptional comp ($235K\u2013$294K), but Samsara's domain (connected operations IoT for fleets and industrial physical ops) is a significant mismatch from Garman's consumer brand and entertainment background. SF location adds friction. Score reflects title-level match against domain and location penalty."
+    },
+    {
+      "id": "LI:4417514677",
+      "score": 36,
+      "title": "Senior Product Designer, Design Systems & Platform",
+      "companyName": "VSCO",
+      "location": "San Francisco, CA",
+      "employmentType": "Full-time",
+      "salary": "Not listed",
+      "postedAt": "2026-06-13",
+      "link": "https://www.linkedin.com/jobs/view/senior-product-designer-design-systems-platform-at-vsco-4417514677",
+      "tier": "Tier 3 \u2014 Possible",
+      "leadWith": "Storyfire, Toyota Garage",
+      "why": "VSCO is a creator-economy photography platform\u2014adjacent to Garman's interests\u2014but the role is below ACD/director level and based in SF. Design systems platform work overlaps with his systems thinking, but the title is a step down and compensation likely reflects that."
+    },
+    {
+      "id": "LI:4352991514",
+      "score": 33,
+      "title": "Lead Product Designer, Arc Platform",
+      "companyName": "Circle",
+      "location": "New York City Metropolitan Area",
+      "employmentType": "Full-time",
+      "salary": "Not listed",
+      "postedAt": "2026-06-13",
+      "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4352991514",
+      "tier": "Tier 3 \u2014 Possible",
+      "leadWith": "Xome, Mr. Cooper, Storyfire",
+      "why": "Circle (crypto/stablecoin fintech) Arc platform product design lead. Fintech experience from Mr. Cooper and Xome applies, but NYC location, crypto domain specificity, and below-ACD title make this a weak fit overall."
+    },
+    {
+      "id": "LI:4361288334",
+      "score": 28,
+      "title": "Product Designer",
+      "companyName": "ElevenLabs",
+      "location": "New London, NY",
+      "employmentType": "Full-time",
+      "salary": "Not listed",
+      "postedAt": "2026-06-13",
+      "link": "https://www.linkedin.com/jobs/view/product-designer-at-elevenlabs-4361288334",
+      "tier": "Tier 3 \u2014 Possible",
+      "leadWith": "Storyfire, Toyota AI Pipeline",
+      "why": "ElevenLabs is a prominent AI audio company but the role is individual contributor Product Designer (below ACD level) in NY. AI relevance is high but the title and location are mismatches."
+    },
+    {
+      "id": "LI:4418441151",
+      "score": 22,
+      "title": "Staff Product Designer - Metrics",
+      "companyName": "Datadog",
+      "location": "New York, NY",
+      "employmentType": "Full-time",
+      "salary": "Not listed",
+      "postedAt": "2026-06-13",
+      "link": "https://www.linkedin.com/jobs/view/staff-product-designer-metrics-at-datadog-4418441151",
+      "tier": "Tier 3 \u2014 Possible",
+      "leadWith": "Storyfire, Toyota Garage",
+      "why": "Datadog is a developer infrastructure company. Staff Product Designer for Metrics is highly technical and engineering-focused (telemetry, cardinality). Very different from Garman's brand and consumer-product background. NY location adds friction."
+    }
   ]
 }
 </script>
 <script id="in-data" type="application/json">
 {
-  "generated": "2026-06-12T15:50:00",
+  "generated": "2026-06-14T00:51:34-07:00",
   "source": "Indeed",
-  "count": 8,
+  "searches": [
+    "Creative Director Associate Creative Director \u2014 Los Angeles, CA fulltime",
+    "Brand Design Director AI Creative Lead \u2014 Los Angeles, CA fulltime",
+    "Creative Director Associate Creative Director \u2014 Remote US fulltime",
+    "Product Design Lead CRM Creative Director \u2014 Remote US fulltime"
+  ],
+  "count": 1,
   "jobs": [
-    {"id":"JOBSEARCH_283","title":"Associate Creative Director, Ring Retail & Marketing","company":"Amazon.com (Ring)","location":"Hawthorne, CA","posted":"February 28, 2026","type":"Full-time","pay":"$141,000 – $190,700 a year","link":"https://to.indeed.com/aaqwmf7x2nxg","score":65,"tier":"Tier 1","why":"Ring is Amazon's design-led smart home hardware brand — exactly the consumer-tech brand environment where Garman's brand-system thinking, retail creative leadership, and AI production pipeline provides real leverage. ACD title is a direct match. Lead with Nissan North American Brand System, Toyota AI Pipeline, and Toyota/Lexus Owners CRM. Main risk: posting is ~3.5 months old — verify it's still active before investing time in a cover letter."},
-    {"id":"JOBSEARCH_287","title":"Creative Director (onsite in Sherman Oaks)","company":"colourpop","location":"Sherman Oaks, CA","posted":"June 12, 2026","type":"Full-time","pay":"Up to $150,000 a year","link":"https://to.indeed.com/aa6lry9fxgsq","score":56,"tier":"","why":"Fresh posting, CD-level title match, LA-based. However, $150K cap is minimal upside from current, and beauty/cosmetics is a new vertical with no portfolio overlap. Worth applying only if JD shows brand systems scope beyond product photography."},
-    {"id":"JOBSEARCH_282","title":"Associate Creative Director, Art","company":"Princeton10","location":"Montclair, NJ","posted":"April 20, 2026","type":"Full-time","pay":"$140,000 – $180,000 a year","link":"https://to.indeed.com/aadwg6tnzpmf","score":52,"tier":"","why":"ACD Art title match at an agency with decent pay range. The major friction is NJ location — relocation from LA is a significant ask. Worth a conversation if remote or hybrid is on the table."},
-    {"id":"JOBSEARCH_285","title":"Director of External Relations and Communications","company":"COG Research Foundation","location":"Arcadia, CA","posted":"June 3, 2026","type":"Full-time","pay":"$131,732 – $204,009 a year","link":"https://to.indeed.com/aalkw6qnpswb","score":18,"tier":"","why":"Nonprofit external comms/PR director — fundamentally different discipline from creative direction. Despite the LA location and broad pay range, this is not a fit."},
-    {"id":"JOBSEARCH_289","title":"Sr. Manager, Material Development","company":"Fabletics","location":"El Segundo, CA","posted":"June 11, 2026","type":"Full-time","pay":"$110,000 – $130,000 a year","link":"https://to.indeed.com/aacctwyzgt7f","score":5,"tier":"","why":"Apparel material development — completely unrelated to design or creative direction. Below comp target and wrong discipline."},
-    {"id":"JOBSEARCH_284","title":"Director, Channel Strategies","company":"The CBE Group, Inc.","location":"Des Moines, IA","posted":"June 11, 2026","type":"Full-time","pay":"$85,000 – $90,000 a year","link":"https://to.indeed.com/aatyplxyvcm6","score":5,"tier":"","why":"Financial services collections company strategy role in Iowa at well below comp target. Not relevant."},
-    {"id":"JOBSEARCH_288","title":"Associate Graphic Designer","company":"686 Technical Apparel","location":"Gardena, CA","posted":"April 9, 2026","type":"Full-time","pay":"$95,000 – $120,000 a year","link":"https://to.indeed.com/aa6b8lgq97vp","score":5,"tier":"","why":"Entry/junior level graphic design role — far below Garman's ACD/CD seniority. Not applicable."},
-    {"id":"JOBSEARCH_286","title":"Director of Marketing","company":"OTC Industrial Technologies","location":"Columbus, OH","posted":"April 16, 2026","type":"Full-time","pay":"$93,850 – $152,800 a year","link":"https://to.indeed.com/aadl2n99f8lr","score":12,"tier":"","why":"Industrial B2B marketing director in Ohio — outside creative discipline, wrong geography, and below comp target. Not a fit."}
+    {
+      "id": "IN:JOBSEARCH_361",
+      "score": 69,
+      "title": "Associate Creative Director, Ring Retail & Marketing",
+      "companyName": "Amazon.com (Ring)",
+      "location": "Hawthorne, CA",
+      "employmentType": "Full-time",
+      "salary": "$141,000 \u2013 $190,700/yr",
+      "postedAt": "2026-02-28",
+      "link": "https://to.indeed.com/aa99pndsnjjg",
+      "tier": "Tier 1 \u2014 Apply with confidence",
+      "leadWith": "Toyota AI Pipeline (product imagery at scale \u2194 Ring device marketing), Nissan Brand System (ACD-level consumer brand systems), Toyota/Lexus Owners (retail + digital campaign creative)",
+      "why": "Ring is a consumer tech brand requiring ACD-level creative leadership across retail packaging, marketing campaigns, and brand consistency at scale\u2014precisely where Garman's ACD + AI pipeline experience shines. His Toyota AI production pipeline (turning engineering assets into product-correct marketing imagery at scale) maps directly to Ring's device marketing needs, and his Apple/iAd background signals tech-brand creative standards. Main risk: posting is 3.5 months old and may be close to filled; verify the role is still active before investing application time."
+    }
   ]
 }
 </script>
 
-<script id="dashboard-data" type="application/json">
-{
+<script id="dashboard-data" type="application/json">{
   "enabled": true,
-  "updated": "2026-06-12T15:50:00",
+  "updated": "2026-06-14T00:52:09-07:00",
   "plan": "Pro",
-  "oneOffTasks": [
-    {"id":"2026-06-12_job-board-v4","title":"Dashboard v4 — job board 2-col, no API key, auto-refresh","status":"done","model":"sonnet","tokensEstimate":{"input":55000,"output":11000},"started":"2026-06-12","finished":"2026-06-12","resultFile":"index.html"},
-    {"id":"2026-06-11_dashboard-v3","title":"Dashboard v3 (mobile-first, LinkedIn, workouts, email digest)","status":"done","model":"sonnet","tokensEstimate":{"input":45000,"output":9000},"started":"2026-06-11","finished":"2026-06-11","resultFile":"index.html"},
-    {"id":"2026-06-11_job-search-manual-rerun","title":"Manual re-run: daily job search (4am failed)","status":"done","model":"sonnet","tokensEstimate":{"input":35000,"output":4000},"started":"2026-06-11","finished":"2026-06-11","resultFile":"docs/jobs_2026-06-11.txt"},
-    {"id":"2026-06-11_dashboard-v2","title":"Dashboard v2 (pipelines + token budget)","status":"done","model":"sonnet","tokensEstimate":{"input":30000,"output":6300},"started":"2026-06-11","finished":"2026-06-11","resultFile":"index.html"},
-    {"id":"2026-06-11_dashboard","title":"Manager dashboard v1","status":"done","model":"sonnet","tokensEstimate":{"input":18000,"output":3600},"started":"2026-06-11","finished":"2026-06-11","resultFile":"index.html"}
-  ],
   "scheduledPipelines": [
     {
       "id": "daily-job-search",
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-12T15:50:00",
+      "lastRun": "2026-06-13T04:08:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "51 raw → 1 job scoring 60+. LinkedIn 24hr window returned mostly off-target results. Indeed surfaced Amazon ACD Ring (Tier 1, $141–$191K).",
-      "outputFolder": "C:/Users/gyipl/OneDrive/Documents/Claude/Job Search/Job Searches/",
+      "lastRunNote": "5 jobs scoring 60+. VP Brand & Creative at Proper Hospitality (Tier 2, $235K\u2013$255K). Amazon ACD Ring (Tier 1, $141K\u2013$191K) still active.",
+      "outputFolder": "C:/Users/gyipl/Documents/Claude/Job Search/Job Searches/",
       "documents": [
-        {"date":"2026-06-12","file":"jobs_2026-06-12.txt","relPath":"docs/jobs_2026-06-12.txt","tier1":1,"total":1},
-        {"date":"2026-06-11","file":"jobs_2026-06-11.txt","relPath":"docs/jobs_2026-06-11.txt","tier1":1,"total":1}
-      ],
-      "latestSummary": {
-        "date": "2026-06-12",
-        "items": [
-          {"rank":1,"score":65,"title":"ACD, Ring Retail & Marketing","company":"Amazon (Ring) — Hawthorne, CA — $141K–$191K — Tier 1","link":"https://to.indeed.com/aaqwmf7x2nxg"},
-          {"rank":2,"score":56,"title":"Creative Director","company":"colourpop — Sherman Oaks, CA — up to $150K","link":"https://to.indeed.com/aa6lry9fxgsq"},
-          {"rank":3,"score":49,"title":"Lead Product Designer, Arc Platform","company":"Circle — Remote","link":"https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353001488"}
-        ]
-      }
+        {
+          "date": "2026-06-13",
+          "file": "jobs_2026-06-13.txt",
+          "relPath": "docs/jobs_2026-06-13.txt",
+          "tier1": 1,
+          "total": 5
+        },
+        {
+          "date": "2026-06-12",
+          "file": "jobs_2026-06-12.txt",
+          "relPath": "docs/jobs_2026-06-12.txt",
+          "tier1": 1,
+          "total": 2
+        },
+        {
+          "date": "2026-06-11",
+          "file": "jobs_2026-06-11.txt",
+          "relPath": "docs/jobs_2026-06-11.txt",
+          "tier1": 1,
+          "total": 1
+        }
+      ]
     }
   ],
   "emailDigest": {
     "date": null,
     "summary": null,
     "items": []
-  },
-  "totals": {
-    "sonnetTokensEstimate": 183000
   }
-}
-</script>
+}</script>
+
+<!-- PAT Modal -->
+<div id="pat-modal" class="pat-modal">
+  <div class="pat-modal-box">
+    <div class="pat-modal-title">Connect to GitHub</div>
+    <div class="pat-modal-desc">
+      Paste a GitHub Personal Access Token to save jobs across all your devices.<br><br>
+      <a href="https://github.com/settings/tokens/new?description=agent-dashboard&scopes=repo" target="_blank">Create a token →</a> with <strong>repo</strong> scope, or a fine-grained token with <code>Contents: Read &amp; Write</code> on <code>delreyla-max/agent-dashboard</code>.<br><br>
+      The token is stored only in this browser's local storage and never sent anywhere except GitHub.
+    </div>
+    <input id="pat-input" class="pat-input" type="password" placeholder="github_pat_..." autocomplete="off" />
+    <div class="pat-modal-btns">
+      <button class="btn-ghost" id="pat-cancel-btn">Cancel</button>
+      <button class="btn-primary" id="pat-save-btn">Save &amp; Continue</button>
+    </div>
+  </div>
+</div>
 
 <div id="disabled-overlay">
   <div class="off-icon">&#9899;</div>
@@ -349,8 +497,13 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
     </div>
   </div>
 
-  <div class="layout-2col" style="margin-top:24px;">
-  <div class="col">
+  <!-- Saved Jobs -->
+  <div class="section-header" style="margin-top:24px;">&#11088; Saved Jobs</div>
+  <div class="saved-jobs-panel" id="saved-jobs-list">
+    <div class="saved-empty">Loading…</div>
+  </div>
+
+  <div style="margin-top:24px;">
 
   <!-- Scheduled Pipelines -->
   <div class="section-header">Scheduled Pipelines</div>
@@ -361,14 +514,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   <div class="email-digest-card" id="email-digest-card"></div>
 
   </div>
-  <div class="col">
-
-  <!-- One-Off Tasks -->
-  <div class="section-header">One-Off Tasks</div>
-  <div class="tasks-card-list" id="tasks-list"></div>
-
-  </div>
-  </div><!-- /.layout-2col -->
 
   <footer>Agent Manager Dashboard v4 &middot; Job board auto-refreshes from <code>docs/</code> JSON &middot; GitHub Pages ready</footer>
 </div>
@@ -383,7 +528,6 @@ function fmtK(n){ return n ? Math.round(n/1000)+'K' : '0'; }
 function fmtDate(s){ if(!s) return '—'; var dt=new Date(s); return isNaN(dt)?s:dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'2-digit'}); }
 function fmtTime(s){ if(!s) return ''; var dt=new Date(s); return isNaN(dt)?s:dt.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}); }
 function badge(s){ var m={pending:'badge-pending',in_progress:'badge-in_progress',done:'badge-done',blocked:'badge-blocked',ok:'badge-ok',failed:'badge-failed'}; return '<span class="badge '+(m[s]||'badge-pending')+'">'+esc(s.replace('_',' '))+'</span>'; }
-function mbadge(m){ var c={fable:'mbadge-fable',sonnet:'mbadge-sonnet',haiku:'mbadge-haiku'}; return '<span class="mbadge '+(c[m]||'mbadge-other')+'">'+esc(m||'—')+'</span>'; }
 
 /* ── DATA ── */
 var d = JSON.parse(document.getElementById('dashboard-data').textContent);
@@ -398,38 +542,14 @@ document.getElementById('dash-updated').textContent = 'Updated '+fmtDate(d.updat
 updatePill(); applyEnabled();
 
 /* ── SUMMARY CARDS ── */
-var tasks = d.oneOffTasks||[];
-var pips   = d.scheduledPipelines||[];
-var tots   = d.totals||{};
-var done  = tasks.filter(function(t){return t.status==='done';}).length;
-var prog  = tasks.filter(function(t){return t.status==='in_progress';}).length;
-var blk   = tasks.filter(function(t){return t.status==='blocked';}).length;
-var ttok  = Object.values(tots).reduce(function(a,b){return a+(b||0);},0);
+var pips = d.scheduledPipelines||[];
+var totalDocs = pips.reduce(function(a,p){ return a+(p.documents?p.documents.length:0); },0);
 document.getElementById('summary-cards').innerHTML = [
-  {l:'Total Tasks',v:tasks.length,s:'one-off'},
-  {l:'Done',v:done,s:'completed'},
-  {l:'In Progress',v:prog,s:'running'},
-  {l:'Blocked',v:blk,s:'need attention'},
   {l:'Pipelines',v:pips.length,s:'scheduled'},
-  {l:'Est. Tokens',v:fmtK(ttok),s:'all models'}
+  {l:'Output Files',v:totalDocs,s:'job search logs'}
 ].map(function(c){
   return '<div class="card"><div class="card-label">'+esc(c.l)+'</div><div class="card-value">'+esc(String(c.v))+'</div><div class="card-sub">'+esc(c.s)+'</div></div>';
 }).join('');
-
-/* ── ONE-OFF TASKS (no pagination, newest first) ── */
-var tasksSorted = tasks.slice().sort(function(a,b){ return (b.started||'')>(a.started||'')?1:-1; });
-(function(){
-  var tl = document.getElementById('tasks-list');
-  if(!tasksSorted.length){ tl.innerHTML='<div class="empty-state">No tasks yet.</div>'; return; }
-  tl.innerHTML = tasksSorted.map(function(t){
-    var tok = t.tokensEstimate ? (fmtK(t.tokensEstimate.input||0)+' in / '+fmtK(t.tokensEstimate.output||0)+' out') : '—';
-    var res = t.resultFile ? '<a href="'+esc(t.resultFile)+'" target="_blank">'+esc(t.resultFile)+'</a>' : '—';
-    return '<div class="task-card">'
-      +'<div class="task-card-top"><div class="task-card-title">'+esc(t.title)+'</div>'+badge(t.status)+mbadge(t.model)+'</div>'
-      +'<div class="task-card-meta"><span class="col-tokens">'+tok+'</span><span>'+fmtDate(t.started)+'</span><span>'+res+'</span></div>'
-      +'</div>';
-  }).join('');
-})();
 
 /* ── PIPELINES (no pagination) ── */
 (function(){
@@ -459,16 +579,6 @@ var tasksSorted = tasks.slice().sort(function(a,b){ return (b.started||'')>(a.st
       });
       h+='</ul>';
     } else { h+='<div class="pipeline-empty">No output files yet.</div>'; }
-    var ls = p.latestSummary;
-    if(ls && ls.items && ls.items.length){
-      h+='<div class="pipeline-section-label">Scored matches ('+esc(fmtDate(ls.date))+')</div>'
-        +'<div class="matches-table-wrap"><table class="matches-table"><thead><tr><th>#</th><th>Score</th><th>Title</th><th>Details</th></tr></thead><tbody>';
-      ls.items.forEach(function(item){
-        var tc = item.link ? '<a href="'+esc(item.link)+'" target="_blank">'+esc(item.title)+'</a>' : esc(item.title);
-        h+='<tr><td>'+esc(String(item.rank||''))+'</td><td class="score-cell">'+esc(String(item.score||''))+'</td><td>'+tc+'</td><td>'+esc(item.company||'')+'</td></tr>';
-      });
-      h+='</tbody></table></div>';
-    }
     h+='</div>';
     return h;
   }).join('');
@@ -513,9 +623,17 @@ function renderJobList(jobs, listId, countId){
           scoreHtml = '<span class="score-badge '+sc+'">'+esc(String(j.score))+'/100</span>';
           if(j.tier) scoreHtml += '<span class="tier-badge">'+esc(j.tier)+'</span>';
         }
+        var saved = isJobSaved(j.link||'');
+        var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
+          +' data-link="'+esc(j.link||'')+'"'
+          +' data-title="'+esc(j.title||'')+'"'
+          +' data-company="'+esc(j.company||'')+'"'
+          +' onclick="handleStar(this)"'
+          +' title="'+(saved?'Remove from saved':'Save job')+'">'
+          +(saved?'&#9733;':'&#9734;')+'</button>';
         return '<div class="job-item">'
           +'<div class="job-item-title" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">'+
-            '<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+
+            '<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+starBtn+
           '</div>'
           +'<div class="job-item-company">'+esc(j.company)+'</div>'
           +'<div class="job-item-meta">'+(j.location?'<span>📍 '+esc(j.location)+'</span>':'')+(j.type?'<span>'+esc(j.type)+'</span>':'')+'</div>'
@@ -621,6 +739,176 @@ loadBoard(true);
 
 // Auto-poll every 5 minutes (silently — only re-renders if data changed)
 setInterval(function(){ loadBoard(false); }, 5 * 60 * 1000);
+
+/* ══════════════════════════════════════════
+   SAVED JOBS — reads/writes docs/saved_jobs.json
+   via GitHub API. PAT stored in localStorage.
+   ══════════════════════════════════════════ */
+
+var GH_OWNER   = 'delreyla-max';
+var GH_REPO    = 'agent-dashboard';
+var GH_PATH    = 'docs/saved_jobs.json';
+var PAT_KEY    = 'ghpat_agentdash';
+
+var _saved     = [];   // in-memory list
+var _savedSha  = null; // GitHub file SHA (required for updates)
+var _saving    = false;
+
+function getPAT(){ return localStorage.getItem(PAT_KEY)||''; }
+function setPAT(t){ localStorage.setItem(PAT_KEY, t.trim()); }
+
+function isJobSaved(link){
+  return _saved.some(function(j){ return j.link === link; });
+}
+
+function ghHeaders(pat){
+  var h = {'Accept':'application/vnd.github+json','Content-Type':'application/json'};
+  if(pat) h['Authorization'] = 'Bearer '+pat;
+  return h;
+}
+
+function loadSavedJobs(){
+  var pat = getPAT();
+  fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_PATH,
+    {headers: ghHeaders(pat)})
+    .then(function(r){
+      if(r.status===404) return null;
+      if(r.status===401){ renderSavedJobs(); return null; }
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(data){
+      if(!data){ renderSavedJobs(); return; }
+      _savedSha = data.sha;
+      try {
+        _saved = JSON.parse(atob(data.content.replace(/\s/g,''))) || [];
+      } catch(e){ _saved = []; }
+      renderSavedJobs();
+      updateAllStars();
+    })
+    .catch(function(){ renderSavedJobs(); });
+}
+
+function writeSavedJobs(){
+  if(_saving) return;
+  var pat = getPAT();
+  if(!pat){ showPATModal(writeSavedJobs); return; }
+  _saving = true;
+  setSavingState(true);
+
+  var body = {
+    message: 'Update saved jobs',
+    content: btoa(unescape(encodeURIComponent(JSON.stringify(_saved, null, 2))))
+  };
+  if(_savedSha) body.sha = _savedSha;
+
+  fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_PATH, {
+    method: 'PUT',
+    headers: ghHeaders(pat),
+    body: JSON.stringify(body)
+  })
+  .then(function(r){
+    if(r.status===401){ _saving=false; setSavingState(false); showPATModal(writeSavedJobs); return null; }
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return r.json();
+  })
+  .then(function(data){
+    _saving = false;
+    setSavingState(false);
+    if(data && data.content) _savedSha = data.content.sha;
+    renderSavedJobs();
+    updateAllStars();
+  })
+  .catch(function(e){
+    _saving = false;
+    setSavingState(false);
+    alert('Could not save to GitHub: '+e.message);
+  });
+}
+
+function setSavingState(on){
+  var el = document.getElementById('saved-jobs-list');
+  if(!el) return;
+  var s = el.querySelector('.saved-saving');
+  if(on && !s){
+    var d = document.createElement('div');
+    d.className='saved-saving'; d.textContent='Saving…';
+    el.appendChild(d);
+  } else if(!on && s){ s.remove(); }
+}
+
+window.handleStar = function(btn){
+  var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
+  var idx = _saved.findIndex(function(j){ return j.link===job.link; });
+  if(idx>=0){ _saved.splice(idx,1); } else {
+    _saved.push({title:job.title, company:job.company, link:job.link,
+      savedAt: new Date().toISOString().slice(0,10)});
+  }
+  // Optimistic UI update
+  var saved = isJobSaved(job.link);
+  btn.textContent = saved ? '★' : '☆';
+  btn.classList.toggle('starred', saved);
+  btn.title = saved ? 'Remove from saved' : 'Save job';
+  renderSavedJobs();
+  writeSavedJobs();
+};
+
+window.removeSavedJob = function(idx){
+  _saved.splice(idx,1);
+  renderSavedJobs();
+  updateAllStars();
+  writeSavedJobs();
+};
+
+function updateAllStars(){
+  document.querySelectorAll('.star-btn[data-link]').forEach(function(btn){
+    var saved = isJobSaved(btn.dataset.link);
+    btn.textContent = saved ? '★' : '☆';
+    btn.classList.toggle('starred', saved);
+    btn.title = saved ? 'Remove from saved' : 'Save job';
+  });
+}
+
+function renderSavedJobs(){
+  var el = document.getElementById('saved-jobs-list');
+  if(!el) return;
+  if(!_saved.length){
+    el.innerHTML='<div class="saved-empty">No saved jobs yet — click &#9734; on any listing.</div>';
+    return;
+  }
+  el.innerHTML = _saved.map(function(j,i){
+    return '<div class="saved-job-item">'
+      +'<div class="saved-job-info">'
+      +'<a href="'+esc(j.link)+'" target="_blank" class="saved-job-title">'+esc(j.title)+'</a>'
+      +'<span class="saved-job-company">'+esc(j.company)+'</span>'
+      +'</div>'
+      +(j.savedAt?'<span class="saved-job-date">'+esc(fmtDate(j.savedAt))+'</span>':'')
+      +'<button class="saved-remove-btn" onclick="removeSavedJob('+i+')" title="Remove">&#10005;</button>'
+      +'</div>';
+  }).join('');
+}
+
+/* ── PAT MODAL ── */
+function showPATModal(callback){
+  var m = document.getElementById('pat-modal');
+  m.classList.add('visible');
+  var inp = document.getElementById('pat-input');
+  inp.value = getPAT();
+  setTimeout(function(){ inp.focus(); }, 50);
+  document.getElementById('pat-save-btn').onclick = function(){
+    var t = inp.value.trim();
+    if(!t) return;
+    setPAT(t);
+    m.classList.remove('visible');
+    if(callback) callback();
+  };
+  document.getElementById('pat-cancel-btn').onclick = function(){
+    m.classList.remove('visible');
+  };
+}
+
+// Init
+loadSavedJobs();
 
 })();
 </script>
