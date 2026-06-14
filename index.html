@@ -234,6 +234,16 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 }
 .btn-ghost:hover { background:var(--surface2); color:var(--text); }
 
+/* ── MAIN 2-COL LAYOUT ── */
+.main-2col { display:flex; flex-direction:column; gap:24px; }
+.main-col-left  { flex:1; min-width:0; }
+.main-col-right { flex:0 0 100%; min-width:0; }
+@media (min-width:800px) {
+  .main-2col { flex-direction:row; align-items:start; }
+  .main-col-left  { flex:3; }
+  .main-col-right { flex:1; position:sticky; top:16px; }
+}
+
 /* ── MISC ── */
 footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center; line-height:1.6; }
 .empty-state { font-size:12px; color:var(--muted); padding:12px 0; font-style:italic; }
@@ -252,6 +262,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 .score-mid    { background:#422006; color:#fcd34d; border:1px solid #92400e; }
 .score-low    { background:#1f2937; color:#6b7280; border:1px solid #374151; }
 .tier-badge   { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; background:#312e81; color:#a5b4fc; border:1px solid #4338ca; margin-left:4px; }
+.job-item-company-inline { font-size:12px; color:var(--muted); font-weight:400; }
 .job-item-why { font-size:11px; color:var(--muted); line-height:1.5; margin-top:6px; padding-top:6px; border-top:1px solid var(--border); }
 @media (max-width:680px) {
   .job-board-grid { grid-template-columns:1fr; }
@@ -434,7 +445,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
     "items": []
   }
 }</script>
-<<<<<<< HEAD
 
 <!-- PAT Modal -->
 <div id="pat-modal" class="pat-modal">
@@ -452,8 +462,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
     </div>
   </div>
 </div>
-=======
->>>>>>> 1faab4510e8a2dc087fc9421e8b468a24fc9141a
 
 <div id="disabled-overlay">
   <div class="off-icon">&#9899;</div>
@@ -500,25 +508,27 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
     </div>
   </div>
 
-<<<<<<< HEAD
-  <!-- Saved Jobs -->
-  <div class="section-header" style="margin-top:24px;">&#11088; Saved Jobs</div>
-  <div class="saved-jobs-panel" id="saved-jobs-list">
-    <div class="saved-empty">Loading…</div>
-  </div>
+  <div class="main-2col" style="margin-top:24px;">
+    <div class="main-col-left">
 
-=======
->>>>>>> 1faab4510e8a2dc087fc9421e8b468a24fc9141a
-  <div style="margin-top:24px;">
+      <!-- Scheduled Pipelines -->
+      <div class="section-header">Scheduled Pipelines</div>
+      <div class="pipeline-cards" id="pipeline-cards"></div>
 
-  <!-- Scheduled Pipelines -->
-  <div class="section-header">Scheduled Pipelines</div>
-  <div class="pipeline-cards" id="pipeline-cards"></div>
+      <!-- Email Digest -->
+      <div class="section-header" style="margin-top:22px;">Email Digest</div>
+      <div class="email-digest-card" id="email-digest-card"></div>
 
-  <!-- Email Digest -->
-  <div class="section-header">Email Digest</div>
-  <div class="email-digest-card" id="email-digest-card"></div>
+    </div>
+    <div class="main-col-right">
 
+      <!-- Saved Jobs -->
+      <div class="section-header">&#11088; Saved Jobs</div>
+      <div class="saved-jobs-panel" id="saved-jobs-list">
+        <div class="saved-empty">Loading…</div>
+      </div>
+
+    </div>
   </div>
 
   <footer>Agent Manager Dashboard v4 &middot; Job board auto-refreshes from <code>docs/</code> JSON &middot; GitHub Pages ready</footer>
@@ -639,9 +649,8 @@ function renderJobList(jobs, listId, countId){
           +(saved?'&#9733;':'&#9734;')+'</button>';
         return '<div class="job-item">'
           +'<div class="job-item-title" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">'+
-            '<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+starBtn+
+            '<span style="flex:1 1 200px;">'+titleHtml+(j.company?'<span class="job-item-company-inline"> — '+esc(j.company)+'</span>':'')+'</span>'+scoreHtml+starBtn+
           '</div>'
-          +'<div class="job-item-company">'+esc(j.company)+'</div>'
           +'<div class="job-item-meta">'+(j.location?'<span>📍 '+esc(j.location)+'</span>':'')+(j.type?'<span>'+esc(j.type)+'</span>':'')+'</div>'
           +(j.pay?'<div class="job-item-pay">💰 '+esc(j.pay)+'</div>':'')
           +(j.posted?'<div class="job-item-posted">Posted: '+esc(j.posted)+'</div>':'')
