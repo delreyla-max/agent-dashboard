@@ -562,6 +562,8 @@ var enabled = d.enabled !== false;
 /* ── ON/OFF ── */
 function applyEnabled(){ document.getElementById('disabled-overlay').classList[enabled?'remove':'add']('visible'); }
 function updatePill(){ var p=document.getElementById('toggle-pill'); p.className='pill '+(enabled?'on':'off'); document.getElementById('pill-label').textContent=enabled?'ON':'OFF'; }
+window.loadHistoricalJobs = loadHistoricalJobs;
+window.exitHistoricalMode = exitHistoricalMode;
 window.toggleDashboard = function(){ enabled=!enabled; updatePill(); applyEnabled(); document.getElementById('save-banner').classList.add('visible'); };
 document.getElementById('plan-badge').textContent = d.plan||'Pro';
 document.getElementById('dash-updated').textContent = 'Updated '+fmtDate(d.updated);
