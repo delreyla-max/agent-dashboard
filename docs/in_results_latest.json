@@ -1,39 +1,27 @@
 {
-  "generated": "2026-06-14T00:59:38",
+  "generated": "2026-06-14T00:51:34-07:00",
   "source": "Indeed",
   "searches": [
-    "Creative Director ACD \u2014 Los Angeles fulltime",
-    "Brand Design Director AI Creative Lead \u2014 Los Angeles fulltime",
-    "Creative Director ACD \u2014 Remote fulltime",
-    "Product Design Lead CRM Creative Director \u2014 Remote fulltime"
+    "Creative Director Associate Creative Director \u2014 Los Angeles, CA fulltime",
+    "Brand Design Director AI Creative Lead \u2014 Los Angeles, CA fulltime",
+    "Creative Director Associate Creative Director \u2014 Remote US fulltime",
+    "Product Design Lead CRM Creative Director \u2014 Remote US fulltime"
   ],
-  "count": 2,
+  "count": 1,
   "jobs": [
     {
-      "id": "JOBSEARCH_354",
+      "id": "IN:JOBSEARCH_361",
+      "score": 69,
       "title": "Associate Creative Director, Ring Retail & Marketing",
-      "company": "Amazon",
+      "companyName": "Amazon.com (Ring)",
       "location": "Hawthorne, CA",
-      "posted": "2026-02-28",
-      "type": "Full-time",
-      "pay": "$141,000 - $190,700/yr",
-      "link": "https://to.indeed.com/aasnd94wp9q9",
-      "score": 70,
-      "tier": "Tier 1",
-      "why": "ACD Ring Retail & Marketing at Amazon (Hawthorne, $141k-190k) is an exact title match for Garman's current level. Ring is a consumer tech brand requiring brand creative direction across retail, digital, and campaign touchpoints\u2014precisely where Garman excels. AI production pipeline and brand systems are strong differentiators. Risk: posted Feb 28 (older posting, may be filled) and retail marketing is the primary creative context."
-    },
-    {
-      "id": "JOBSEARCH_357",
-      "title": "Associate Creative Director, Art",
-      "company": "Princeton10",
-      "location": "Montclair, NJ",
-      "posted": "2026-04-20",
-      "type": "Full-time",
-      "pay": "$140,000 - $180,000/yr",
-      "link": "https://to.indeed.com/aawn2mgztfzt",
-      "score": 53,
-      "tier": "",
-      "why": "ACD Art at Princeton10 ($140k-180k) is a title match, but Princeton10 is an unknown company and the Montclair, NJ location (appeared in remote search but unclear if truly remote) is a significant concern. Without company context, hard to assess domain fit or growth potential."
+      "employmentType": "Full-time",
+      "salary": "$141,000 \u2013 $190,700/yr",
+      "postedAt": "2026-02-28",
+      "link": "https://to.indeed.com/aa99pndsnjjg",
+      "tier": "Tier 1 \u2014 Apply with confidence",
+      "leadWith": "Toyota AI Pipeline (product imagery at scale \u2194 Ring device marketing), Nissan Brand System (ACD-level consumer brand systems), Toyota/Lexus Owners (retail + digital campaign creative)",
+      "why": "Ring is a consumer tech brand requiring ACD-level creative leadership across retail packaging, marketing campaigns, and brand consistency at scale\u2014precisely where Garman's ACD + AI pipeline experience shines. His Toyota AI production pipeline (turning engineering assets into product-correct marketing imagery at scale) maps directly to Ring's device marketing needs, and his Apple/iAd background signals tech-brand creative standards. Main risk: posting is 3.5 months old and may be close to filled; verify the role is still active before investing application time."
     }
   ]
 }
