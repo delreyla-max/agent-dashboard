@@ -482,54 +482,42 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
     </div>
   </header>
 
-  <!-- Summary Cards -->
-  <div class="cards-scroll"><div class="cards" id="summary-cards"></div></div>
+  <!-- Saved Jobs -->
+  <div class="section-header" style="margin-top:0;">&#11088; Saved Jobs</div>
+  <div class="saved-jobs-panel" id="saved-jobs-list">
+    <div class="saved-empty">Loading…</div>
+  </div>
 
-  <div class="main-2col" style="margin-top:0;">
-    <div class="main-col-left">
-
-      <!-- Job Board -->
-      <div class="job-board-header">
-        <span class="job-board-title">&#128269; Job Board</span>
-        <span class="job-board-meta" id="board-synced"></span>
-        <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
+  <!-- Job Board -->
+  <div class="job-board-header">
+    <span class="job-board-title">&#128269; Job Board</span>
+    <span class="job-board-meta" id="board-synced"></span>
+    <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
+  </div>
+  <div class="job-board-grid">
+    <div class="job-panel" id="panel-li">
+      <div class="job-panel-head">
+        <div class="job-panel-label"><span class="src-dot li"></span>LinkedIn</div>
+        <span class="job-panel-count" id="li-count"></span>
       </div>
-      <div class="job-board-grid">
-        <div class="job-panel" id="panel-li">
-          <div class="job-panel-head">
-            <div class="job-panel-label"><span class="src-dot li"></span>LinkedIn</div>
-            <span class="job-panel-count" id="li-count"></span>
-          </div>
-          <div id="li-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
-        </div>
-        <div class="job-panel" id="panel-in">
-          <div class="job-panel-head">
-            <div class="job-panel-label"><span class="src-dot indeed"></span>Indeed</div>
-            <span class="job-panel-count" id="in-count"></span>
-          </div>
-          <div id="in-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
-        </div>
-      </div>
-
-      <!-- Scheduled Pipelines -->
-      <div class="section-header" style="margin-top:24px;">Scheduled Pipelines</div>
-      <div class="pipeline-cards" id="pipeline-cards"></div>
-
-      <!-- Email Digest -->
-      <div class="section-header" style="margin-top:22px;">Email Digest</div>
-      <div class="email-digest-card" id="email-digest-card"></div>
-
+      <div id="li-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
     </div>
-    <div class="main-col-right">
-
-      <!-- Saved Jobs -->
-      <div class="section-header">&#11088; Saved Jobs</div>
-      <div class="saved-jobs-panel" id="saved-jobs-list">
-        <div class="saved-empty">Loading…</div>
+    <div class="job-panel" id="panel-in">
+      <div class="job-panel-head">
+        <div class="job-panel-label"><span class="src-dot indeed"></span>Indeed</div>
+        <span class="job-panel-count" id="in-count"></span>
       </div>
-
+      <div id="in-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
     </div>
   </div>
+
+  <!-- Scheduled Pipelines -->
+  <div class="section-header" style="margin-top:24px;">Scheduled Pipelines</div>
+  <div class="pipeline-cards" id="pipeline-cards"></div>
+
+  <!-- Email Digest -->
+  <div class="section-header" style="margin-top:22px;">Email Digest</div>
+  <div class="email-digest-card" id="email-digest-card"></div>
 
   <footer>Agent Manager Dashboard v4 &middot; Job board auto-refreshes from <code>docs/</code> JSON &middot; GitHub Pages ready</footer>
 </div>
@@ -557,15 +545,7 @@ document.getElementById('plan-badge').textContent = d.plan||'Pro';
 document.getElementById('dash-updated').textContent = 'Updated '+fmtDate(d.updated);
 updatePill(); applyEnabled();
 
-/* ── SUMMARY CARDS ── */
 var pips = d.scheduledPipelines||[];
-var totalDocs = pips.reduce(function(a,p){ return a+(p.documents?p.documents.length:0); },0);
-document.getElementById('summary-cards').innerHTML = [
-  {l:'Pipelines',v:pips.length,s:'scheduled'},
-  {l:'Output Files',v:totalDocs,s:'job search logs'}
-].map(function(c){
-  return '<div class="card"><div class="card-label">'+esc(c.l)+'</div><div class="card-value">'+esc(String(c.v))+'</div><div class="card-sub">'+esc(c.s)+'</div></div>';
-}).join('');
 
 /* ── PIPELINES (no pagination) ── */
 (function(){
