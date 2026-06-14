@@ -587,6 +587,7 @@ var pips = d.scheduledPipelines||[];
 
     if(p.documents && p.documents.length){
       h+='<div class="pipeline-section-label">Output files</div><ul class="pipeline-docs">';
+      h+='<li><a href="#" onclick="exitHistoricalMode();return false;">Latest (live)</a></li>';
       p.documents.forEach(function(doc){
         var relPath = doc.relPath||doc.path||doc.file;
         var label = doc.date || doc.file;
