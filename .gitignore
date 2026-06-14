@@ -1,0 +1,3 @@
+# Local config files — contain PAT tokens, never push these
+config.js
+chris/config.js
