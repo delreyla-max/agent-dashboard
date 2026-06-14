@@ -736,17 +736,33 @@ function loadHistoricalJobs(relPath, label){
   if(btn) btn.style.display='none';
   document.getElementById('li-list').innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
   document.getElementById('in-list').innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
-  fetch(relPath+'?nocache='+Date.now())
-    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
-    .then(function(text){
-      var parsed = parseTxtJobs(text);
-      renderJobList(parsed.li, 'li-list', 'li-count');
-      renderJobList(parsed.in, 'in-list', 'in-count');
-    })
-    .catch(function(e){
-      document.getElementById('li-list').innerHTML='<div class="panel-state">Failed to load: '+e.message+'</div>';
-      document.getElementById('in-list').innerHTML='<div class="panel-state"></div>';
-    });
+  // Try dated JSON files first (full filtered results), fall back to txt (60+ only)
+  var nc = '?nocache='+Date.now();
+  var liUrl = 'docs/li_results_'+label+'.json';
+  var inUrl = 'docs/in_results_'+label+'.json';
+  Promise.all([
+    fetch(liUrl+nc).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }),
+    fetch(inUrl+nc).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; })
+  ]).then(function(results){
+    var liData = results[0], inData = results[1];
+    if(liData || inData){
+      renderJobList(liData ? liData.jobs||[] : [], 'li-list', 'li-count');
+      renderJobList(inData ? inData.jobs||[] : [], 'in-list', 'in-count');
+    } else {
+      // Fall back to txt file
+      fetch(relPath+nc)
+        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+        .then(function(text){
+          var parsed = parseTxtJobs(text);
+          renderJobList(parsed.li, 'li-list', 'li-count');
+          renderJobList(parsed.in, 'in-list', 'in-count');
+        })
+        .catch(function(e){
+          document.getElementById('li-list').innerHTML='<div class="panel-state">Failed to load: '+e.message+'</div>';
+          document.getElementById('in-list').innerHTML='<div class="panel-state"></div>';
+        });
+    }
+  });
 }
 
 function exitHistoricalMode(){
