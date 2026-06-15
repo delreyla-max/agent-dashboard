@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-14T23:15:44-07:00",
+  "generated": "2026-06-14T04:14:37-07:00",
   "source": "LinkedIn",
   "searches": [
     "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead \u2014 Los Angeles 24h",
@@ -8,82 +8,82 @@
   "count": 6,
   "jobs": [
     {
-      "id": "LI:4353051446",
-      "title": "Lead Product Designer, Arc Platform",
-      "company": "Circle",
-      "location": "Los Angeles Metropolitan Area",
-      "posted": "2026-06-14",
+      "id": "LI:4409526556",
+      "title": "Sr. Product Designer, Measurement & Conversion",
+      "company": "Pinterest",
+      "location": "San Francisco, CA",
+      "posted": "2026-06-13",
       "type": "Full-time",
       "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353051446",
-      "score": 54,
-      "tier": "Tier 2 \u2014 Good fit with tailoring",
-      "why": "Circle is a well-funded fintech platform and Lead Product Designer in LA aligns with Garman's Storyfire, Xome, and Toyota Garage product design work. Strongest proof points are end-to-end platform ownership and fintech adjacency via Mr. Cooper. Risk: 'Lead' title is a step-down from ACD and crypto-specific knowledge gap."
-    },
-    {
-      "id": "LI:4368776287",
-      "title": "Director of Product Design",
-      "company": "Hiive",
-      "location": "Seattle, WA",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/director-of-product-design-at-hiive-4368776287",
-      "score": 51,
-      "tier": "Tier 2 \u2014 Good fit with tailoring",
-      "why": "Director of Product Design title fits Garman's level. Hiive is a private-market securities marketplace; Garman's Xome (real estate marketplace) and Mr. Cooper (fintech) provide relevant proof. Risk: early-stage startup in Seattle, Garman's creative-director framing may need repositioning as product-first."
-    },
-    {
-      "id": "LI:4428621391",
-      "title": "Art Director, E-Commerce",
-      "company": "Steve Madden",
-      "location": "New York, NY",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/art-director-e-commerce-at-steve-madden-4428621391",
-      "score": 35,
+      "link": "https://www.linkedin.com/jobs/view/4409526556",
+      "score": 45,
       "tier": "",
-      "why": "Art Director is two levels below Garman's current ACD role; NY location is another barrier. Some e-commerce/retail creative overlap (Taco Bell, Adidas Golf digital) but the role level and domain fit are both weak relative to Garman's profile."
+      "why": "Pinterest is design-led and high-craft. Measurement & Conversion is a specialist UX track below ACD leadership scope. Worth monitoring but not priority."
     },
     {
-      "id": "LI:4398146518",
-      "title": "Executive Creative Director",
-      "company": "Conagra Brands",
-      "location": "Chicago, IL",
+      "id": "LI:4359149274",
+      "title": "Director, Firefly Foundry Growth",
+      "company": "Adobe",
+      "location": "Culver City, CA",
       "posted": "2026-06-14",
       "type": "Full-time",
       "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/executive-creative-director-at-conagra-brands-4398146518",
+      "link": "https://www.linkedin.com/jobs/view/4359149274",
       "score": 38,
       "tier": "",
-      "why": "ECD at a major CPG brand is a reach from Garman's ACD level. Brand systems thinking and AI pipeline are relevant differentiators, but CPG domain is thin (only Jeffry's at small scale) and Chicago relocation would be required."
+      "why": "Adobe Firefly is directly relevant AI creative product, but \"Foundry Growth\" reads as product growth/GTM rather than creative direction. High screen-out risk as ACD/CD without explicit product growth background."
     },
     {
-      "id": "LI:4407226475",
-      "title": "Design Operations Lead",
-      "company": "Chime",
-      "location": "San Francisco Bay Area",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/design-operations-lead-at-chime-4407226475",
-      "score": 32,
-      "tier": "",
-      "why": "Design Operations is a process/infrastructure role that does not leverage Garman's creative direction, art direction, or brand-systems strengths. Chime is a notable fintech brand but the role is misaligned with Garman's profile."
-    },
-    {
-      "id": "LI:4428147043",
-      "title": "Head of Performance Creative (Pet Brand)",
-      "company": "Ecom.jobs",
+      "id": "LI:4422202565",
+      "title": "Senior Product Designer",
+      "company": "Fluxon",
       "location": "United States",
       "posted": "2026-06-14",
       "type": "Full-time",
-      "pay": "$200,000 - $250,000/yr",
-      "link": "https://www.linkedin.com/jobs/view/head-of-performance-creative-pet-brand-at-ecom-jobs-4428147043",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/4422202565",
+      "score": 35,
+      "tier": "",
+      "why": "Generic senior product designer role at small consultancy. Below ACD/CD target level."
+    },
+    {
+      "id": "LI:4409123260",
+      "title": "Senior Product Designer - Core Products",
+      "company": "FranConnect",
+      "location": "Herndon, VA",
+      "posted": "2026-06-13",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/4409123260",
       "score": 30,
       "tier": "",
-      "why": "Pay range is strong ($200-250K) but 'Performance Creative' is performance-marketing oriented (paid media, direct response, A/B testing creative) rather than brand systems or product design direction. Pet brand domain and pure DTC performance focus do not align with Garman's strengths."
+      "why": "B2B SaaS franchise management platform, niche domain. Senior IC designer level, not leadership. Below target tier."
+    },
+    {
+      "id": "LI:4427422025",
+      "title": "Creative Brand Strategist",
+      "company": "Attic Salt\u00ae",
+      "location": "United States",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/4427422025",
+      "score": 25,
+      "tier": "",
+      "why": "Below director level, skews strategy/positioning writing rather than visual creative direction."
+    },
+    {
+      "id": "LI:4428626340",
+      "title": "Product Designer - Remote",
+      "company": "Sundayy",
+      "location": "United States",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/4428626340",
+      "score": 22,
+      "tier": "",
+      "why": "IC-level at early-stage startup, well below ACD/CD target. Not a priority."
     }
   ]
 }

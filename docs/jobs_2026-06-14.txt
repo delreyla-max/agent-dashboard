@@ -3,30 +3,42 @@ GARMAN YIP — DAILY JOB MATCHES
 Sunday, June 14, 2026
 ========================================
 
-[1] job found today scoring 60 or above.
+[2] jobs found today scoring 60 or above.
 
 ----------------------------------------
-#1 — SCORE: 64/100  |  SOURCE: Indeed
+#1 — SCORE: 76/100  |  SOURCE: Indeed
 TITLE:    Associate Creative Director, Ring Retail & Marketing
-COMPANY:  Amazon.com
+COMPANY:  Amazon
 LOCATION: Hawthorne, CA
 TYPE:     Full-time
-PAY:      $141,000 - $190,700/yr
+PAY:      $141,000 - $190,700 a year
 POSTED:   2026-02-28
-LINK:     https://to.indeed.com/aa2pl2pgrxnk
-TIER:     Tier 1 — Apply with confidence
-LEAD WITH: Toyota AI Pipeline, Nissan Brand System, Toyota/Lexus Owners (CRM + retail at scale)
-WHY:      ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 — role is 3.5 months old and may already be filled or in late-stage hiring.
+LINK:     https://to.indeed.com/aaw9lbkk92nw
+TIER:     Tier 1
+LEAD WITH: Nissan North American Brand System, Toyota AI Pipeline, Toyota/Lexus Owners CRM
+WHY:      ACD-level fit at a top-tier tech company (Amazon/Ring) in brand and retail marketing creative — directly aligns with Garman's brand systems, campaign, and digital experience leadership. Ring is a design-forward hardware brand that rewards system thinking and visual craft across retail, packaging, digital, and OOH. Apple/iAd background and automotive launch experience translate well to hardware consumer marketing. Slight risk: ring retail can skew heavy-promo; ensure portfolio framing emphasizes consumer brand over CRM.
+----------------------------------------
+#2 — SCORE: 63/100  |  SOURCE: Indeed
+TITLE:    Associate Creative Director, Art
+COMPANY:  Princeton10
+LOCATION: Montclair, NJ (Remote eligible)
+TYPE:     Full-time
+PAY:      $140,000 - $180,000 a year
+POSTED:   2026-04-20
+LINK:     https://to.indeed.com/aa4q26qfyxpm
+TIER:     Tier 1
+LEAD WITH: Nissan North American Brand System, Toyota AI Pipeline, Toyota/Lexus Owners CRM
+WHY:      ACD Art role at a creative consultancy, remote-eligible, with strong compensation ($140K–$180K). Title and level are a direct match. Agency context suits Garman's campaign and brand systems expertise. Lower score reflects limited public info on Princeton10's scale and client roster — strong enough to pursue, but less certainty on brand prestige than an in-house tech or entertainment role.
 ----------------------------------------
 
 SEARCH NOTES
 ------------
-LinkedIn (LA, last 24hrs):     7 raw → 0 after filter+dedup (all previously seen)
-LinkedIn (Remote, last 24hrs): 22 raw → 6 new, all scored below 60
-Indeed (LA searches):          3 raw → 1 scoring 60+
-Indeed (Remote searches):      4 raw → 0 after filter
-Cross-source duplicates:       1 removed (Adobe Firefly Foundry Growth)
-Previously seen (deduped):     22 removed
-Final list:                    1 job
+LinkedIn (LA, last 24hrs):     21 raw → 5 after filter
+LinkedIn (Remote, last 24hrs): 25 raw → 12 after filter
+Indeed (LA searches):          2 raw → 2 after filter
+Indeed (Remote searches):      4 raw → 1 after filter
+Cross-source duplicates:       1 removed (Pinterest dup)
+Previously seen (deduped):     3 removed
+Final list:                    9 jobs scored, 2 above 60
 
 ========================================

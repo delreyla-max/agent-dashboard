@@ -1,0 +1,34 @@
+========================================
+GARMAN YIP — DAILY JOB MATCHES
+Monday, June 15, 2026
+========================================
+
+[1] job found today scoring 60 or above.
+
+----------------------------------------
+#1 — SCORE: 71/100  |  SOURCE: Indeed
+TITLE:    Associate Creative Director, Ring Retail & Marketing
+COMPANY:  Amazon.com
+LOCATION: Hawthorne, CA
+TYPE:     Full-time
+PAY:      $141,000 - $190,700 a year
+POSTED:   2026-02-28
+LINK:     https://to.indeed.com/aa9wybgjs7fj
+TIER:     Tier 1 — Apply with confidence
+LEAD WITH: Toyota AI Pipeline, Toyota/Lexus Owners CRM, Nissan Brand System
+WHY:      ACD-level role at Amazon Ring in Hawthorne, CA (LA area) with pay up to $190K — a meaningful step up from current $140K. Ring retail & marketing creative direction maps directly to Garman's Toyota/Lexus retail CRM and integrated brand campaigns at Rapp. Risk: large Amazon org structure can be process-heavy; Ring is a subsidiary rather than a flagship Amazon brand team.
+
+----------------------------------------
+
+SEARCH NOTES
+------------
+LinkedIn (LA, last 24hrs):     ~25 raw
+LinkedIn (Remote, last 24hrs): ~25 raw
+LinkedIn total:                47 raw → 3 relevant new (rest filtered: non-creative titles, staffing mills)
+Indeed (LA searches):          2 searches → 1 relevant result
+Indeed (Remote searches):      2 searches → 0 relevant results
+Cross-source duplicates:       0 removed
+Previously seen (deduped):     0 removed
+Final scored list:             4 jobs, 1 scoring 60+
+
+========================================

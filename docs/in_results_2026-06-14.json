@@ -1,39 +1,52 @@
 {
-  "generated": "2026-06-14T23:15:44-07:00",
+  "generated": "2026-06-14T04:14:37-07:00",
   "source": "Indeed",
   "searches": [
-    "Creative Director Associate Creative Director \u2014 Los Angeles fulltime",
+    "Creative Director ACD \u2014 Los Angeles fulltime",
     "Brand Design Director AI Creative Lead \u2014 Los Angeles fulltime",
-    "Creative Director Associate Creative Director \u2014 Remote fulltime",
+    "Creative Director ACD \u2014 Remote fulltime",
     "Product Design Lead CRM Creative Director \u2014 Remote fulltime"
   ],
-  "count": 2,
+  "count": 3,
   "jobs": [
     {
-      "id": "IN:JOBSEARCH_407",
+      "id": "IN:JOBSEARCH_367",
       "title": "Associate Creative Director, Ring Retail & Marketing",
-      "company": "Amazon.com",
+      "company": "Amazon",
       "location": "Hawthorne, CA",
       "posted": "2026-02-28",
       "type": "Full-time",
-      "pay": "$141,000 - $190,700/yr",
-      "link": "https://to.indeed.com/aa2pl2pgrxnk",
-      "score": 64,
-      "tier": "Tier 1 \u2014 Apply with confidence",
-      "why": "ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 \u2014 role is 3.5 months old and may already be filled or in late-stage hiring."
+      "pay": "$141,000 - $190,700 a year",
+      "link": "https://to.indeed.com/aaw9lbkk92nw",
+      "score": 76,
+      "tier": "Tier 1",
+      "why": "ACD-level fit at Amazon/Ring \u2014 brand and retail marketing creative aligning with brand systems, campaign, and digital experience leadership. Apple/iAd hardware connection is a differentiator. Slight risk: ensure portfolio leads consumer brand angle over CRM."
     },
     {
-      "id": "IN:JOBSEARCH_413",
+      "id": "IN:JOBSEARCH_369",
       "title": "Associate Creative Director, Art",
       "company": "Princeton10",
-      "location": "Montclair, NJ",
+      "location": "Montclair, NJ (Remote eligible)",
       "posted": "2026-04-20",
       "type": "Full-time",
-      "pay": "$140,000 - $180,000/yr",
-      "link": "https://to.indeed.com/aapy62zblky7",
-      "score": 48,
+      "pay": "$140,000 - $180,000 a year",
+      "link": "https://to.indeed.com/aa4q26qfyxpm",
+      "score": 63,
+      "tier": "Tier 1",
+      "why": "ACD Art at a creative consultancy, remote-eligible, strong comp range. Title and level match directly. Lower score reflects limited info on Princeton10 scale and client roster."
+    },
+    {
+      "id": "IN:JOBSEARCH_372",
+      "title": "Director of Marketing",
+      "company": "OTC Industrial Technologies",
+      "location": "Columbus, OH",
+      "posted": "2026-04-16",
+      "type": "Full-time",
+      "pay": "$93,817 - $152,778 a year",
+      "link": "https://to.indeed.com/aajnfm44tmh9",
+      "score": 15,
       "tier": "",
-      "why": "ACD Art title matches Garman's level and the pay range is just above his $140K baseline. Agency environment aligns with his background. Risk: NJ location is not LA or remote; Princeton10 is a smaller unknown agency; pay at baseline with NJ cost of living is not a clear step up for Garman."
+      "why": "Industrial technologies marketing director \u2014 no creative direction or design system overlap. Not viable."
     }
   ]
 }
