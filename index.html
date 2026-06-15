@@ -7,6 +7,7 @@
 <title>Agent Manager Dashboard</title>
 <!-- Load local config (token + repo overrides). Gitignored — never pushed. Silently skipped on GitHub Pages. -->
 <script src="config.js" onerror="void 0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -204,7 +205,17 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .saved-empty { font-size:12px; color:var(--muted); font-style:italic; padding:16px 14px; }
 .saved-saving { font-size:11px; color:var(--muted); padding:6px 14px; }
 
-/* ── PAT MODAL ── */
+/* ── AUTH USER ── */
+.auth-user { display:none; align-items:center; gap:8px; }
+.auth-user.visible { display:flex; }
+.auth-name { font-size:12px; color:var(--muted); }
+.auth-signout {
+  background:none; border:1px solid var(--border); color:var(--muted);
+  border-radius:5px; padding:3px 10px; font-size:11px; cursor:pointer; transition:border-color .15s,color .15s;
+}
+.auth-signout:hover { border-color:var(--red); color:var(--red); }
+
+/* ── PAT MODAL (unused, kept for reference) ── */
 .pat-modal {
   display:none; position:fixed; inset:0; z-index:200;
   background:rgba(10,11,18,0.88); justify-content:center; align-items:center;
@@ -287,14 +298,28 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
      Used as fallback when running locally (file:// can't fetch). -->
 <script id="li-data" type="application/json">
 {
-  "generated": "2026-06-14T04:14:37-07:00",
+  "generated": "2026-06-14T21:35:00-07:00",
   "source": "LinkedIn",
   "searches": [
     "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead \u2014 Los Angeles 24h",
     "Creative Director OR ACD OR Product Design Lead OR AI Creative Lead OR CRM Creative Director \u2014 US Remote 24h"
   ],
-  "count": 6,
+  "count": 7,
   "jobs": [
+    {
+      "id": "LI:4378677905",
+      "title": "Creative Director CGI, Devices Brand Studio",
+      "company": "Amazon",
+      "location": "Santa Monica, CA",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "$141,000 \u2013 $190,700",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-cgi-devices-brand-studio-at-amazon-4378677905",
+      "score": 71,
+      "tier": "Tier 1",
+      "why": "Amazon Devices Brand Studio converts engineering specs into product-correct photoreal imagery at scale \u2014 directly parallel to Garman\u2019s AI pipeline at Rapp. Strong differentiator fit. Risk: CGI tool depth (C4D, Blender) not in profile; address upfront."
+    },
+
     {
       "id": "LI:4409526556",
       "title": "Sr. Product Designer, Measurement & Conversion",
@@ -433,7 +458,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 
 <script id="dashboard-data" type="application/json">{
   "enabled": true,
-  "updated": "2026-06-14T04:14:37-07:00",
+  "updated": "2026-06-14T21:35:00-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -441,17 +466,17 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-13T04:08:00",
+      "lastRun": "2026-06-14T21:35:00",
       "lastRunStatus": "ok",
       "lastRunNote": "5 jobs scoring 60+. VP Brand & Creative at Proper Hospitality (Tier 2, $235K\u2013$255K). Amazon ACD Ring (Tier 1, $141K\u2013$191K) still active.",
-      "outputFolder": "C:/Users/gyipl/Documents/Claude/Job Search/Job Searches/",
+      "outputFolder": "/Users/gy/Documents/ClaudeCowork/GitHub/agent-dashboard/docs/",
       "documents": [
         {
           "date": "2026-06-14",
           "file": "jobs_2026-06-14.txt",
           "relPath": "docs/jobs_2026-06-14.txt",
-          "tier1": 1,
-          "total": 1
+          "tier1": 2,
+          "total": 3
         },
         {
           "date": "2026-06-13",
@@ -484,22 +509,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   }
 }</script>
 
-<!-- PAT Modal -->
-<div id="pat-modal" class="pat-modal">
-  <div class="pat-modal-box">
-    <div class="pat-modal-title">Connect to GitHub</div>
-    <div class="pat-modal-desc">
-      Paste a GitHub Personal Access Token to save jobs across all your devices.<br><br>
-      <a href="https://github.com/settings/tokens/new?description=agent-dashboard&scopes=repo" target="_blank">Create a token →</a> with <strong>repo</strong> scope, or a fine-grained token with <code>Contents: Read &amp; Write</code> on <code>delreyla-max/agent-dashboard</code>.<br><br>
-      The token is stored only in this browser's local storage and never sent anywhere except GitHub.
-    </div>
-    <input id="pat-input" class="pat-input" type="password" placeholder="github_pat_..." autocomplete="off" />
-    <div class="pat-modal-btns">
-      <button class="btn-ghost" id="pat-cancel-btn">Cancel</button>
-      <button class="btn-primary" id="pat-save-btn">Save &amp; Continue</button>
-    </div>
-  </div>
-</div>
+<!-- Auth state — populated by Supabase onAuthStateChange -->
 
 <div id="disabled-overlay">
   <div class="off-icon">&#9899;</div>
@@ -518,6 +528,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       </button>
       <span class="pill-hint">Toggle tracking</span>
     </div>
+    <div id="auth-user" class="auth-user"></div>
   </header>
 
   <!-- Saved Jobs -->
@@ -858,182 +869,132 @@ loadBoard(true);
 setInterval(function(){ loadBoard(false); }, 5 * 60 * 1000);
 
 /* ══════════════════════════════════════════
-   SAVED JOBS — reads/writes docs/saved_jobs.json
-   via GitHub API. PAT stored in localStorage.
+   SAVED JOBS — Supabase backend
+   Google OAuth, per-user rows, RLS enforced.
+   No tokens to manage — sign in once, stay in.
    ══════════════════════════════════════════ */
 
-var GH_OWNER   = 'delreyla-max';
-var GH_REPO    = 'agent-dashboard';
-var GH_PATH    = 'docs/saved_jobs.json';
-var PAT_KEY    = 'ghpat_agentdash';
+// ── TODO: paste your two Supabase values here (anon key is public-safe to commit) ──
+var SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+var SUPABASE_KEY = 'YOUR_ANON_PUBLIC_KEY';
+// ── config.js override (gitignored local file) ──
+var _sbcfg = window.DASHBOARD_CONFIG || {};
+if(_sbcfg.supabaseUrl) SUPABASE_URL = _sbcfg.supabaseUrl;
+if(_sbcfg.supabaseKey) SUPABASE_KEY = _sbcfg.supabaseKey;
 
-/* ── CONFIG OVERRIDE — from local config.js if present ── */
-var _cfg = window.DASHBOARD_CONFIG || {};
-if(_cfg.ghOwner) GH_OWNER = _cfg.ghOwner;
-if(_cfg.ghRepo)  GH_REPO  = _cfg.ghRepo;
-if(_cfg.ghPath)  GH_PATH  = _cfg.ghPath;
-if(_cfg.patKey)  PAT_KEY  = _cfg.patKey;
-if(_cfg.ghPat)   localStorage.setItem(PAT_KEY, _cfg.ghPat);
+var _configured = (SUPABASE_URL.indexOf('YOUR_') === -1 && SUPABASE_KEY.indexOf('YOUR_') === -1);
+var _sb   = _configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+var _saved  = [];
+var _sbUser = null;
 
-var _saved     = [];   // in-memory list
-var _savedSha  = null; // GitHub file SHA (required for updates)
-var _saving    = false;
+var PENDING_KEY = 'sbpending_job';
 
-function getPAT(){ return localStorage.getItem(PAT_KEY)||''; }
-function setPAT(t){ localStorage.setItem(PAT_KEY, t.trim()); }
+/* ── AUTH STATE MACHINE ── */
+if(_sb){
+  _sb.auth.onAuthStateChange(function(event, session){
+    _sbUser = session ? session.user : null;
+    updateAuthUI();
+    if(event === 'SIGNED_IN'){
+      loadSavedJobs();
+      handlePendingSave();
+    } else if(event === 'SIGNED_OUT'){
+      _saved = [];
+      renderSavedJobs();
+      updateAllStars();
+    }
+  });
+  /* Hydrate on page load */
+  _sb.auth.getSession().then(function(r){
+    _sbUser = (r.data && r.data.session) ? r.data.session.user : null;
+    updateAuthUI();
+    loadSavedJobs();
+    if(_sbUser) handlePendingSave();
+  });
+} else {
+  renderSavedJobs(); /* show "not configured" state */
+}
 
+/* ── PENDING SAVE — survives the OAuth redirect ── */
+function handlePendingSave(){
+  if(!_sbUser) return;
+  try {
+    var pending = JSON.parse(localStorage.getItem(PENDING_KEY)||'null');
+    if(!pending || !pending.link) return;
+    localStorage.removeItem(PENDING_KEY);
+    if(!isJobSaved(pending.link)){
+      var entry = {title:pending.title, company:pending.company, link:pending.link,
+        savedAt:new Date().toISOString().slice(0,10)};
+      _saved.unshift(entry);
+      renderSavedJobs();
+      updateAllStars();
+      dbInsert(pending);
+    }
+  } catch(e){ localStorage.removeItem(PENDING_KEY); }
+}
+
+/* ── DB READS / WRITES ── */
+function loadSavedJobs(){
+  if(!_sb){ renderSavedJobs(); return; }
+  if(!_sbUser){ _saved=[]; renderSavedJobs(); return; }
+  _sb.from('saved_jobs')
+    .select('title, company, link, saved_at')
+    .order('created_at', {ascending:false})
+    .then(function(r){
+      if(r.error){ console.error('load saved_jobs:', r.error); renderSavedJobs(); return; }
+      _saved = (r.data||[]).map(function(j){
+        return {title:j.title, company:j.company, link:j.link, savedAt:j.saved_at};
+      });
+      renderSavedJobs();
+      updateAllStars();
+    });
+}
+
+function dbInsert(job){
+  if(!_sb || !_sbUser) return;
+  _sb.from('saved_jobs').upsert(
+    {user_id:_sbUser.id, title:job.title, company:job.company, link:job.link,
+     saved_at:new Date().toISOString().slice(0,10)},
+    {onConflict:'user_id,link'}
+  ).then(function(r){ if(r.error) console.error('insert saved_job:', r.error); });
+}
+
+function dbDelete(link){
+  if(!_sb || !_sbUser) return;
+  _sb.from('saved_jobs').delete()
+    .eq('user_id', _sbUser.id).eq('link', link)
+    .then(function(r){ if(r.error) console.error('delete saved_job:', r.error); });
+}
+
+/* ── STAR & REMOVE HANDLERS ── */
 function isJobSaved(link){
   return _saved.some(function(j){ return j.link === link; });
 }
 
-function ghHeaders(pat){
-  var h = {'Accept':'application/vnd.github+json','Content-Type':'application/json'};
-  if(pat) h['Authorization'] = 'Bearer '+pat;
-  return h;
-}
-
-function loadSavedJobs(){
-  var pat = getPAT();
-  fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_PATH,
-    {headers: ghHeaders(pat)})
-    .then(function(r){
-      if(r.status===404) return null;
-      if(r.status===401){ renderSavedJobs(); return null; }
-      if(!r.ok) throw new Error('HTTP '+r.status);
-      return r.json();
-    })
-    .then(function(data){
-      if(!data){ renderSavedJobs(); return; }
-      _savedSha = data.sha;
-      try {
-        _saved = JSON.parse(atob(data.content.replace(/\s/g,''))) || [];
-      } catch(e){ _saved = []; }
-      renderSavedJobs();
-      updateAllStars();
-    })
-    .catch(function(){ renderSavedJobs(); });
-}
-
-function writeSavedJobs(){
-  if(_saving) return;
-  var pat = getPAT();
-  if(!pat){ showPATModal(writeSavedJobs); return; }
-  _saving = true;
-  setSavingState(true);
-
-  var body = {
-    message: 'Update saved jobs',
-    content: btoa(unescape(encodeURIComponent(JSON.stringify(_saved, null, 2))))
-  };
-  if(_savedSha) body.sha = _savedSha;
-
-  fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_PATH, {
-    method: 'PUT',
-    headers: ghHeaders(pat),
-    body: JSON.stringify(body)
-  })
-  .then(function(r){
-    if(r.status===401){ _saving=false; setSavingState(false); showPATModal(writeSavedJobs); return null; }
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    return r.json();
-  })
-  .then(function(data){
-    _saving = false;
-    setSavingState(false);
-    if(data && data.content) _savedSha = data.content.sha;
-    renderSavedJobs();
-    updateAllStars();
-  })
-  .catch(function(e){
-    _saving = false;
-    setSavingState(false);
-    alert('Could not save to GitHub: '+e.message);
-  });
-}
-
-function setSavingState(on){
-  var el = document.getElementById('saved-jobs-list');
-  if(!el) return;
-  var s = el.querySelector('.saved-saving');
-  if(on && !s){
-    var d = document.createElement('div');
-    d.className='saved-saving'; d.textContent='Saving…';
-    el.appendChild(d);
-  } else if(!on && s){ s.remove(); }
-}
-
 window.handleStar = function(btn){
   var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
-  var idx = _saved.findIndex(function(j){ return j.link===job.link; });
-  if(idx>=0){ _saved.splice(idx,1); } else {
-    _saved.push({title:job.title, company:job.company, link:job.link,
-      savedAt: new Date().toISOString().slice(0,10)});
+  if(!_configured){
+    alert('Supabase is not configured yet.\nSee TODO comments in index.html or the setup guide in 3_Results/.');
+    return;
   }
-  // Optimistic UI update
-  var saved = isJobSaved(job.link);
-  btn.textContent = saved ? '★' : '☆';
-  btn.classList.toggle('starred', saved);
-  btn.title = saved ? 'Remove from saved' : 'Save job';
-  renderSavedJobs();
-  writeSavedJobs();
-};
-
-window.removeSavedJob = function(idx){
-  _saved.splice(idx,1);
-  renderSavedJobs();
-  updateAllStars();
-  writeSavedJobs();
-};
-
-function updateAllStars(){
-  document.querySelectorAll('.star-btn[data-link]').forEach(function(btn){
-    var saved = isJobSaved(btn.dataset.link);
-    btn.textContent = saved ? '★' : '☆';
-    btn.classList.toggle('starred', saved);
-    btn.title = saved ? 'Remove from saved' : 'Save job';
-  });
-}
-
-function renderSavedJobs(){
-  var el = document.getElementById('saved-jobs-list');
-  if(!el) return;
+  if(!_sbUser){
+    el.innerHTML='<div class="saved-empty">Click &#9734; on any job to sign in with Google and save it across devices.</div>';
+    return;
+  }
   if(!_saved.length){
     el.innerHTML='<div class="saved-empty">No saved jobs yet — click &#9734; on any listing.</div>';
     return;
   }
-  el.innerHTML = _saved.map(function(j,i){
+  el.innerHTML = _saved.map(function(j){
     return '<div class="saved-job-item">'
       +'<div class="saved-job-info">'
       +'<a href="'+esc(j.link)+'" target="_blank" class="saved-job-title">'+esc(j.title)+'</a>'
       +'<span class="saved-job-company">'+esc(j.company)+'</span>'
       +'</div>'
       +(j.savedAt?'<span class="saved-job-date">'+esc(fmtDate(j.savedAt))+'</span>':'')
-      +'<button class="saved-remove-btn" onclick="removeSavedJob('+i+')" title="Remove">&#10005;</button>'
+      +'<button class="saved-remove-btn" onclick="removeSavedJob(\''+esc(j.link)+'\')" title="Remove">&#10005;</button>'
       +'</div>';
   }).join('');
 }
-
-/* ── PAT MODAL ── */
-function showPATModal(callback){
-  var m = document.getElementById('pat-modal');
-  m.classList.add('visible');
-  var inp = document.getElementById('pat-input');
-  inp.value = getPAT();
-  setTimeout(function(){ inp.focus(); }, 50);
-  document.getElementById('pat-save-btn').onclick = function(){
-    var t = inp.value.trim();
-    if(!t) return;
-    setPAT(t);
-    m.classList.remove('visible');
-    if(callback) callback();
-  };
-  document.getElementById('pat-cancel-btn').onclick = function(){
-    m.classList.remove('visible');
-  };
-}
-
-// Init
-loadSavedJobs();
 
 })();
 </script>

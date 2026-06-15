@@ -1,12 +1,25 @@
 {
-  "generated": "2026-06-14T04:14:37-07:00",
+  "generated": "2026-06-14T21:35:00-07:00",
   "source": "LinkedIn",
   "searches": [
     "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead \u2014 Los Angeles 24h",
     "Creative Director OR ACD OR Product Design Lead OR AI Creative Lead OR CRM Creative Director \u2014 US Remote 24h"
   ],
-  "count": 6,
+  "count": 7,
   "jobs": [
+    {
+      "id": "LI:4378677905",
+      "title": "Creative Director CGI, Devices Brand Studio",
+      "company": "Amazon",
+      "location": "Santa Monica, CA",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "$141,000 \u2013 $190,700",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-cgi-devices-brand-studio-at-amazon-4378677905",
+      "score": 71,
+      "tier": "Tier 1",
+      "why": "Amazon Devices Brand Studio converts engineering specs into product-correct photoreal imagery at scale \u2014 directly parallel to Garman\u2019s AI pipeline at Rapp. Strong differentiator fit. Risk: CGI tool depth (C4D, Blender) not in profile; address upfront."
+    },
     {
       "id": "LI:4409526556",
       "title": "Sr. Product Designer, Measurement & Conversion",

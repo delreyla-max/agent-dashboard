@@ -3,7 +3,7 @@ GARMAN YIP — DAILY JOB MATCHES
 Sunday, June 14, 2026
 ========================================
 
-[2] jobs found today scoring 60 or above.
+[3] jobs found today scoring 60 or above.
 
 ----------------------------------------
 #1 — SCORE: 76/100  |  SOURCE: Indeed
@@ -29,6 +29,20 @@ LINK:     https://to.indeed.com/aa4q26qfyxpm
 TIER:     Tier 1
 LEAD WITH: Nissan North American Brand System, Toyota AI Pipeline, Toyota/Lexus Owners CRM
 WHY:      ACD Art role at a creative consultancy, remote-eligible, with strong compensation ($140K–$180K). Title and level are a direct match. Agency context suits Garman's campaign and brand systems expertise. Lower score reflects limited public info on Princeton10's scale and client roster — strong enough to pursue, but less certainty on brand prestige than an in-house tech or entertainment role.
+----------------------------------------
+
+----------------------------------------
+#3 — SCORE: 71/100  |  SOURCE: LinkedIn
+TITLE:    Creative Director CGI, Devices Brand Studio
+COMPANY:  Amazon
+LOCATION: Santa Monica, CA
+TYPE:     Full-time
+PAY:      $141,000 – $190,700 a year (CA)
+POSTED:   2026-06-14
+LINK:     https://www.linkedin.com/jobs/view/creative-director-cgi-devices-brand-studio-at-amazon-4378677905
+TIER:     Tier 1 — Apply with confidence
+LEAD WITH: Toyota AI Pipeline, Nissan North American Brand System, Toyota/Lexus Owners CRM
+WHY:      Amazon Devices Brand Studio is doing exactly what Garman does at Rapp: converting engineering specs and technical source material into product-correct, photoreal imagery at scale. The AI production pipeline differentiator lands directly here — few candidates have a working, shipping system for this. Role also requires directing teams, working with industrial designers on CAD-to-visual workflows, and maintaining high visual standards at speed. Risk: CGI tool depth (C4D, Blender, Octane) not explicitly in Garman's profile; address upfront in application.
 ----------------------------------------
 
 SEARCH NOTES
