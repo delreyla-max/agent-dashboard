@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "updated": "2026-06-15T08:06:00-07:00",
+  "updated": "2026-06-15T14:06:05-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-14T11:45:26-07:00",
-      "lastRunStatus": "success",
-      "lastRunNote": "2 jobs found (2 Tier 2)",
+      "lastRun": "2026-06-15T14:06:05-07:00",
+      "lastRunStatus": "ok",
+      "lastRunNote": "1 new jobs added (0 Tier 1) \u2014 26 total",
       "outputFolder": "C:/Users/gyipl/Documents/Claude/GitHub/agent-dashboard/users/chris/jobs/",
       "documents": []
     }
