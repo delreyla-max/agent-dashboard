@@ -497,8 +497,12 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 
   <div class="board-layout">
     <div class="board-col-left">
+      <!-- Recommendations -->
+      <div class="section-header" style="margin-top:0;">💡 Recommendations</div>
+      <div class="recs-card" id="recs-card"></div>
+
       <!-- Scheduled Pipelines -->
-      <div class="section-header" style="margin-top:0;">Scheduled Pipelines</div>
+      <div class="section-header" style="margin-top:22px;">Scheduled Pipelines</div>
       <div class="pipeline-cards" id="pipeline-cards"></div>
 
       <!-- Filters -->
@@ -523,10 +527,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
           <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>Last 30 days</span></label>
         </div>
       </div>
-
-      <!-- Recommendations -->
-      <div class="section-header" style="margin-top:22px;">💡 Recommendations</div>
-      <div class="recs-card" id="recs-card"></div>
     </div>
     <div class="board-col-right">
       <!-- Job Board -->
