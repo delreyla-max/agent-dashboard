@@ -20,7 +20,7 @@ body {
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   font-size:14px; line-height:1.5; min-height:100vh;
 }
-.page { max-width:960px; margin:0 auto; padding:16px 14px 60px; }
+.page { max-width:1200px; margin:0 auto; padding:16px 14px 60px; }
 
 /* ── HEADER ── */
 header {
@@ -333,8 +333,11 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .board-col-right { flex:1; min-width:0; }
 @media (min-width:760px) {
   .board-layout { flex-direction:row; align-items:start; }
-  .board-col-left  { flex:0 0 30%; }
+  .board-col-left  { flex:0 0 260px; }
   .board-col-right { flex:1; }
+}
+@media (min-width:1024px) {
+  .board-col-left  { flex:0 0 300px; }
 }
 
 /* ── MISC ── */
@@ -348,6 +351,12 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 @media (min-width:900px) {
   .layout-2col { display:grid; grid-template-columns:1fr 1fr; gap:0 24px; align-items:start; }
   .layout-2col .col { min-width:0; }
+}
+@media (min-width:1024px) {
+  .page { padding:28px 32px 60px; }
+}
+@media (min-width:1200px) {
+  .page { padding:32px 40px 60px; }
 }
 .score-badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; font-family:monospace; white-space:nowrap; }
 .score-high   { background:#052e16; color:#86efac; border:1px solid #166534; }
