@@ -102,6 +102,18 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .src-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
 .src-dot.li      { background:#0a66c2; }
 .src-dot.indeed  { background:#2557a7; }
+/* ── FILTERS ── */
+.filter-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:12px 14px; margin-bottom:4px;
+}
+.filter-group-label { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:6px; font-weight:600; }
+.filter-row { display:flex; flex-wrap:wrap; gap:10px; }
+.filter-chk { display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:12px; user-select:none; color:var(--text); }
+.filter-chk input[type="checkbox"],
+.filter-chk input[type="radio"] { accent-color:var(--blue); width:14px; height:14px; cursor:pointer; flex-shrink:0; }
+.filter-chk .src-dot { display:inline-block; }
+
 .src-badge {
   display:inline-flex; align-items:center; gap:4px;
   font-size:10px; font-weight:600; padding:2px 7px; border-radius:999px;
@@ -179,6 +191,18 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .digest-reply { margin-top:8px; }
 .btn-reply { display:inline-flex; align-items:center; gap:5px; background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:5px; padding:5px 12px; font-size:12px; text-decoration:none; transition:background .2s; }
 .btn-reply:hover { background:var(--border); }
+
+/* ── RECOMMENDATIONS ── */
+.recs-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); padding:16px; }
+.rec-item {
+  display:flex; gap:10px; align-items:flex-start;
+  background:var(--surface2); border:1px solid #2a2e45;
+  border-left:3px solid #6366f1;
+  border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:8px;
+}
+.rec-item:last-child { margin-bottom:0; }
+.rec-icon { font-size:14px; flex-shrink:0; margin-top:1px; opacity:.85; }
+.rec-text { font-size:13px; line-height:1.55; color:var(--text); }
 
 /* ── SAVED JOBS ── */
 .star-btn {
@@ -483,13 +507,40 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 
   <div class="board-layout">
     <div class="board-col-left">
+      <!-- Filters -->
+      <div class="section-header" style="margin-top:0;">Filters</div>
+      <div class="filter-card">
+        <div class="filter-group-label">Score</div>
+        <div class="filter-row">
+          <label class="filter-chk"><input type="checkbox" id="f-score50" onchange="applyJobFilter(event)"> <span>50+</span></label>
+          <label class="filter-chk"><input type="checkbox" id="f-score80" onchange="applyJobFilter(event)"> <span>80+</span></label>
+        </div>
+        <div class="filter-group-label" style="margin-top:10px;">Source</div>
+        <div class="filter-row">
+          <label class="filter-chk"><input type="checkbox" id="f-li" checked onchange="applyJobFilter(event)"> <span><span class="src-dot li"></span> LinkedIn</span></label>
+          <label class="filter-chk"><input type="checkbox" id="f-indeed" checked onchange="applyJobFilter(event)"> <span><span class="src-dot indeed"></span> Indeed</span></label>
+        </div>
+        <div class="filter-group-label" style="margin-top:10px;">Date Posted</div>
+        <div class="filter-row" style="flex-direction:column;gap:5px;">
+          <label class="filter-chk"><input type="radio" name="f-date" value="all" checked onchange="applyJobFilter(event)"> <span>All</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="1" onchange="applyJobFilter(event)"> <span>Last 24 hours</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="3" onchange="applyJobFilter(event)"> <span>Last 3 days</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="7" onchange="applyJobFilter(event)"> <span>Last 7 days</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>Last 30 days</span></label>
+        </div>
+      </div>
+
       <!-- Scheduled Pipelines -->
-      <div class="section-header" style="margin-top:0;">Scheduled Pipelines</div>
+      <div class="section-header" style="margin-top:18px;">Scheduled Pipelines</div>
       <div class="pipeline-cards" id="pipeline-cards"></div>
 
       <!-- Email Digest -->
       <div class="section-header" style="margin-top:22px;">Email Digest</div>
       <div class="email-digest-card" id="email-digest-card"></div>
+
+      <!-- Recommendations -->
+      <div class="section-header" style="margin-top:22px;">💡 Recommendations</div>
+      <div class="recs-card" id="recs-card"></div>
     </div>
     <div class="board-col-right">
       <!-- Job Board -->
@@ -563,21 +614,7 @@ function init(d){
     if(p.lastRunStatus) h+=badge(p.lastRunStatus);
     h+='</div>';
 
-    if(p.documents && p.documents.length){
-      h+='<div class="pipeline-section-label">Output files</div><ul class="pipeline-docs">';
-      h+='<li><a href="#" onclick="exitHistoricalMode();return false;">Latest (live)</a></li>';
-      p.documents.forEach(function(doc){
-        var relPath = doc.relPath||doc.path||doc.file;
-        var label = doc.date || doc.file;
-        h+='<li><a href="#" onclick="loadHistoricalJobs(\''+relPath+'\',\''+label+'\');return false;">'+esc(doc.file)+'</a>';
-        var m=[];
-        if(doc.date) m.push(fmtDate(doc.date));
-        if(doc.total!==undefined) m.push(doc.total+' jobs');
-        if(doc.tier1!==undefined) m.push(doc.tier1+' Tier 1');
-        h+='</li>';
-      });
-      h+='</ul>';
-    } else { h+='<div class="pipeline-empty">No output files yet.</div>'; }
+    // (archive links removed — use filters instead)
     h+='</div>';
     return h;
   }).join('');
@@ -599,6 +636,16 @@ function init(d){
   el.innerHTML=h;
 })();
 
+/* ── RECOMMENDATIONS ── */
+(function(){
+  var recs=(d.emailDigest||{}).recommendations||[], el=document.getElementById('recs-card');
+  if(!el) return;
+  if(!recs.length){ el.innerHTML='<div class="email-digest-empty">No recommendations yet — Claude will add search tips here after each run.</div>'; return; }
+  el.innerHTML=recs.map(function(r){
+    return '<div class="rec-item"><span class="rec-icon">💡</span><span class="rec-text">'+esc(r)+'</span></div>';
+  }).join('');
+})();
+
 /* ══════════════════════════════════════════
    JOB BOARD — loads from docs/ JSON files
    No API key required. Results written by
@@ -606,7 +653,27 @@ function init(d){
    the repo. Polls every 5 min for updates.
    ══════════════════════════════════════════ */
 
-var _lastLiGen = null, _lastInGen = null;
+var _lastUpdated = null;
+var _cachedJobs = [];
+var _filters = { score50: false, score80: false, showLI: true, showIndeed: true, daysAgo: 0 };
+
+function applyFilters(jobs){
+  var minScore = _filters.score80 ? 80 : (_filters.score50 ? 50 : 0);
+  var cutoff = null;
+  if(_filters.daysAgo > 0){
+    cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - _filters.daysAgo);
+    cutoff = cutoff.toISOString().slice(0,10); // 'YYYY-MM-DD'
+  }
+  return jobs.filter(function(j){
+    if(minScore > 0 && (j.score == null || j.score < minScore)) return false;
+    var isIndeed = (j._source||'').toLowerCase().indexOf('indeed') >= 0;
+    if(isIndeed && !_filters.showIndeed) return false;
+    if(!isIndeed && !_filters.showLI) return false;
+    if(cutoff && (j.posted||'') < cutoff) return false;
+    return true;
+  });
+}
 
 function jobItemHtml(j){
   var titleHtml = j.link
@@ -641,10 +708,12 @@ function jobItemHtml(j){
     +'</div>';
 }
 
-function renderMergedJobList(liJobs, inJobs){
-  // Tag each job with its source
-  var tagged = (liJobs||[]).map(function(j){ return Object.assign({},j,{_source:'LinkedIn'}); })
-    .concat((inJobs||[]).map(function(j){ return Object.assign({},j,{_source:'Indeed'}); }));
+function renderMergedJobList(jobs){
+  // jobs already have .source from all_jobs.json; map to ._source for jobItemHtml
+  _cachedJobs = jobs || [];
+  var tagged = _cachedJobs.map(function(j){
+    return Object.assign({}, j, {_source: j.source || 'LinkedIn'});
+  });
 
   // Sort newest-first by posted date, then by score descending
   tagged.sort(function(a,b){
@@ -654,139 +723,50 @@ function renderMergedJobList(liJobs, inJobs){
     return (b.score||0) - (a.score||0);
   });
 
+  var filtered = applyFilters(tagged);
+
   var countEl = document.getElementById('merged-count');
   var listEl  = document.getElementById('merged-list');
-  if(countEl) countEl.textContent = tagged.length ? tagged.length+' results' : '';
+  var suffix = filtered.length < tagged.length ? ' of '+tagged.length : '';
+  if(countEl) countEl.textContent = filtered.length ? filtered.length+suffix+' results' : '';
   if(!listEl) return;
-  if(!tagged.length){ listEl.innerHTML='<div class="panel-state">No results.</div>'; return; }
-  listEl.innerHTML = '<div class="job-list">'+tagged.slice(0,20).map(jobItemHtml).join('')+'</div>';
+  if(!filtered.length){ listEl.innerHTML='<div class="panel-state">No results match filters.</div>'; return; }
+  listEl.innerHTML = '<div class="job-list">'+filtered.slice(0,20).map(jobItemHtml).join('')+'</div>';
 }
 
-/* Legacy single-source render kept for any callers that need it */
-function renderJobList(jobs, listId, countId){
-  document.getElementById(countId).textContent = jobs.length ? jobs.length+' results' : '';
-  if(!jobs.length){ document.getElementById(listId).innerHTML='<div class="panel-state">No results.</div>'; return; }
-  document.getElementById(listId).innerHTML = '<div class="job-list">'
-    + jobs.slice(0,10).map(jobItemHtml).join('')
-    +'</div>';
-}
+window.applyJobFilter = function(e){
+  var s50 = document.getElementById('f-score50');
+  var s80 = document.getElementById('f-score80');
+  // Score filters mutually exclusive
+  if(e && e.target){
+    if(e.target.id === 'f-score80' && s80 && s80.checked && s50) s50.checked = false;
+    if(e.target.id === 'f-score50' && s50 && s50.checked && s80) s80.checked = false;
+  }
+  _filters.score50    = !!(s50 && s50.checked);
+  _filters.score80    = !!(s80 && s80.checked);
+  var liEl = document.getElementById('f-li');
+  var inEl = document.getElementById('f-indeed');
+  _filters.showLI     = liEl ? liEl.checked : true;
+  _filters.showIndeed = inEl ? inEl.checked : true;
+  var dateRadio = document.querySelector('input[name="f-date"]:checked');
+  _filters.daysAgo = dateRadio && dateRadio.value !== 'all' ? parseInt(dateRadio.value) : 0;
+  renderMergedJobList(_cachedJobs);
+};
 
 function renderPanelErr(listId, msg){
   document.getElementById(listId).innerHTML='<div class="panel-err">⚠ '+esc(msg)+'</div>';
 }
 
-function getInlineData(path){
-  // Fallback for file:// — read from inline <script> tags
-  var id = path.indexOf('li_results') !== -1 ? 'li-data' : 'in-data';
-  var el = document.getElementById(id);
-  if(el){ try { return JSON.parse(el.textContent); } catch(e){} }
-  return null;
-}
-
-function fetchJobFile(path){
-  // On file:// protocol fetch won't work — use inline data directly
-  if(location.protocol === 'file:'){
-    var data = getInlineData(path);
-    if(data) return Promise.resolve(data);
-    return Promise.reject(new Error('No inline data found'));
-  }
-  return fetch(path+'?t='+Date.now())
-    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .catch(function(e){
-      // On fetch failure (e.g. offline), fall back to inline data
-      var data = getInlineData(path);
-      if(data) return data;
-      throw e;
-    });
-}
-
-var _syncTimes = [];
-function parseTxtJobs(text){
-  var SEP = /\n-{38,}\n/;
-  var blocks = text.split(SEP);
-  var liJobs=[], inJobs=[];
-  blocks.forEach(function(block){
-    if(!block.trim()) return;
-    if(!/^TITLE:/m.test(block)) return; // skip header block
-    var job={};
-    var sm = block.match(/#\d+[\s\S]*?SCORE:\s*(\d+)/);
-    if(sm) job.score = parseInt(sm[1]);
-    var srcm = block.match(/SOURCE:\s*(.+)/);
-    if(srcm) job.source = srcm[1].trim();
-    ['TITLE','COMPANY','LOCATION','TYPE','PAY','POSTED','LINK','TIER'].forEach(function(f){
-      var m = block.match(new RegExp('^'+f+':\\s*(.+)','m'));
-      if(m) job[f.toLowerCase()] = m[1].trim();
-    });
-    var wm = block.match(/^WHY:\s*(.+)/m);
-    if(wm) job.why = wm[1].trim();
-    if(!job.title) return;
-    var jobj={title:job.title,company:job.company||'',link:job.link||'',
-      score:job.score||null,tier:job.tier||'',location:job.location||'',
-      pay:job.pay||'',why:job.why||''};
-    if((job.source||'').toLowerCase().indexOf('indeed')>=0){
-      inJobs.push(jobj);
-    } else {
-      liJobs.push(jobj);
-    }
-  });
-  return {li:liJobs, in:inJobs};
-}
-
-function loadHistoricalJobs(relPath, label){
-  var synced = document.getElementById('board-synced');
-  var btn = document.getElementById('refresh-btn');
-  if(synced) synced.innerHTML = '<span style="color:var(--accent)">Viewing: '+label+'</span>'
-    +'&nbsp;&nbsp;<a href="#" onclick="exitHistoricalMode();return false;" '
-    +'style="font-size:12px;opacity:0.7;text-decoration:underline">&#8592; Back to latest</a>';
-  if(btn) btn.style.display='none';
-  var ml = document.getElementById('merged-list');
-  var mc = document.getElementById('merged-count');
-  if(ml) ml.innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
-  if(mc) mc.textContent='';
-  // Try dated JSON files first (full filtered results), fall back to txt (60+ only)
-  var nc = '?nocache='+Date.now();
-  var liUrl = _docsPrefix + 'li_results_'+label+'.json';
-  var inUrl = _docsPrefix + 'in_results_'+label+'.json';
-  Promise.all([
-    fetch(liUrl+nc).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }),
-    fetch(inUrl+nc).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; })
-  ]).then(function(results){
-    var liData = results[0], inData = results[1];
-    if(liData || inData){
-      renderMergedJobList(liData ? liData.jobs||[] : [], inData ? inData.jobs||[] : []);
-    } else {
-      // Fall back to txt file
-      fetch(relPath+nc)
-        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
-        .then(function(text){
-          var parsed = parseTxtJobs(text);
-          renderMergedJobList(parsed.li, parsed.in);
-        })
-        .catch(function(e){
-          if(ml) ml.innerHTML='<div class="panel-state">Failed to load: '+esc(e.message)+'</div>';
-        });
-    }
-  });
-}
-
-function exitHistoricalMode(){
-  var btn = document.getElementById('refresh-btn');
-  if(btn) btn.style.display='';
-  loadBoard(true);
-}
 
 function updateSyncLabel(){
-  var el=document.getElementById('board-synced');
-  if(!el) return;
-  // Use the most recent generated timestamp from either file
-  var times = _syncTimes.filter(Boolean).sort().reverse();
-  el.textContent = times.length ? 'Synced '+fmtTime(times[0]) : '';
+  var el = document.getElementById('board-synced');
+  if(!el || !_lastUpdated) return;
+  el.textContent = 'Updated '+fmtTime(_lastUpdated);
 }
 
 function loadBoard(showSpinner){
   var btn = document.getElementById('refresh-btn');
   if(btn && showSpinner){ btn.disabled=true; btn.innerHTML='<span class="spin">&#8635;</span> Refreshing…'; }
-
   if(showSpinner){
     var ml = document.getElementById('merged-list');
     var mc = document.getElementById('merged-count');
@@ -794,51 +774,24 @@ function loadBoard(showSpinner){
     if(mc) mc.textContent='';
   }
 
-  var _liJobs = null, _inJobs = null;
-  var liDone=false, inDone=false;
-
-  function checkDone(){
-    if(!liDone || !inDone) return;
-    var changed = showSpinner
-      || (_liJobs !== null)   // new li data arrived
-      || (_inJobs !== null);  // new in data arrived
-    if(changed) renderMergedJobList(_liJobs||[], _inJobs||[]);
-    if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
-    updateSyncLabel();
-  }
-
-  fetchJobFile(_docsPrefix + 'li_results_latest.json')
+  fetch(_docsPrefix + 'all_jobs.json?t='+Date.now())
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(function(data){
-      if(data.generated !== _lastLiGen || showSpinner){
-        _lastLiGen = data.generated;
-        _syncTimes[0] = data.generated;
-        _liJobs = data.jobs||[];
+      if(data.updated !== _lastUpdated || showSpinner){
+        _lastUpdated = data.updated;
+        renderMergedJobList(data.jobs||[]);
       }
-      liDone=true; checkDone();
+      if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
+      updateSyncLabel();
     })
     .catch(function(e){
-      var el = document.getElementById('merged-list');
-      if(el && showSpinner) el.innerHTML='<div class="panel-err">⚠ Could not load LinkedIn results: '+esc(e.message)+'</div>';
-      liDone=true; _liJobs=[]; checkDone();
-    });
-
-  fetchJobFile(_docsPrefix + 'in_results_latest.json')
-    .then(function(data){
-      if(data.generated !== _lastInGen || showSpinner){
-        _lastInGen = data.generated;
-        _syncTimes[1] = data.generated;
-        _inJobs = data.jobs||[];
-      }
-      inDone=true; checkDone();
-    })
-    .catch(function(e){
-      inDone=true; _inJobs=[]; checkDone();
+      var ml = document.getElementById('merged-list');
+      if(ml) ml.innerHTML='<div class="panel-err">&#9888; Could not load jobs: '+esc(e.message)+'</div>';
+      if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
     });
 }
 
 window.refreshBoard = function(){ loadBoard(true); };
-window.loadHistoricalJobs = loadHistoricalJobs;
-window.exitHistoricalMode = exitHistoricalMode;
 window.showSyncModal = showSyncModal;
 
 // Initial load
