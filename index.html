@@ -181,16 +181,6 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .pipeline-docs .doc-meta { color:var(--muted); margin-left:6px; }
 .pipeline-empty { font-size:12px; color:var(--muted); font-style:italic; }
 
-/* ── EMAIL DIGEST ── */
-.email-digest-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); padding:16px; }
-.email-digest-empty { font-size:12px; color:var(--muted); font-style:italic; }
-.digest-item { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:8px; }
-.digest-item:last-child { margin-bottom:0; }
-.digest-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--amber); margin-bottom:4px; }
-.digest-text  { font-size:13px; line-height:1.5; }
-.digest-reply { margin-top:8px; }
-.btn-reply { display:inline-flex; align-items:center; gap:5px; background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:5px; padding:5px 12px; font-size:12px; text-decoration:none; transition:background .2s; }
-.btn-reply:hover { background:var(--border); }
 
 /* ── RECOMMENDATIONS ── */
 .recs-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); padding:16px; }
@@ -507,8 +497,12 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 
   <div class="board-layout">
     <div class="board-col-left">
+      <!-- Scheduled Pipelines -->
+      <div class="section-header" style="margin-top:0;">Scheduled Pipelines</div>
+      <div class="pipeline-cards" id="pipeline-cards"></div>
+
       <!-- Filters -->
-      <div class="section-header" style="margin-top:0;">Filters</div>
+      <div class="section-header" style="margin-top:18px;">Filters</div>
       <div class="filter-card">
         <div class="filter-group-label">Score</div>
         <div class="filter-row">
@@ -529,14 +523,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
           <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>Last 30 days</span></label>
         </div>
       </div>
-
-      <!-- Scheduled Pipelines -->
-      <div class="section-header" style="margin-top:18px;">Scheduled Pipelines</div>
-      <div class="pipeline-cards" id="pipeline-cards"></div>
-
-      <!-- Email Digest -->
-      <div class="section-header" style="margin-top:22px;">Email Digest</div>
-      <div class="email-digest-card" id="email-digest-card"></div>
 
       <!-- Recommendations -->
       <div class="section-header" style="margin-top:22px;">💡 Recommendations</div>
@@ -620,21 +606,6 @@ function init(d){
   }).join('');
 })();
 
-/* ── EMAIL DIGEST ── */
-(function(){
-  var ed=d.emailDigest||{}, el=document.getElementById('email-digest-card');
-  if(!el) return;
-  if(!ed.items||!ed.items.length){ el.innerHTML='<div class="email-digest-empty">No digest yet — Claude will populate this from the daily email scan.</div>'; return; }
-  var h='';
-  if(ed.date) h+='<div class="pipeline-section-label">Digest for '+esc(fmtDate(ed.date))+'</div>';
-  if(ed.summary) h+='<p style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5;">'+esc(ed.summary)+'</p>';
-  ed.items.forEach(function(item){
-    h+='<div class="digest-item"><div class="digest-label">'+esc(item.label||'')+'</div><div class="digest-text">'+esc(item.text||'')+'</div>';
-    if(item.mailto) h+='<div class="digest-reply"><a class="btn-reply" href="'+esc(item.mailto)+'">&#128394; Reply</a></div>';
-    h+='</div>';
-  });
-  el.innerHTML=h;
-})();
 
 /* ── RECOMMENDATIONS ── */
 (function(){
