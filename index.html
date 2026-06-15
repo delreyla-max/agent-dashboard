@@ -530,16 +530,8 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 
   <div class="board-layout">
     <div class="board-col-left">
-      <!-- Recommendations -->
-      <div class="section-header" style="margin-top:0;">&#128161; Recommendations</div>
-      <div class="recs-card" id="recs-card"></div>
-
-      <!-- Scheduled Pipelines -->
-      <div class="section-header" style="margin-top:22px;">Scheduled Pipelines</div>
-      <div class="pipeline-cards" id="pipeline-cards"></div>
-
       <!-- Filters -->
-      <div class="section-header" style="margin-top:18px;">Filters</div>
+      <div class="section-header" style="margin-top:0;">Filters</div>
       <div class="filter-card">
         <div class="filter-group-label">Score</div>
         <div class="filter-row">
@@ -560,6 +552,15 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
           <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>Last 30 days</span></label>
         </div>
       </div>
+
+      <!-- Scheduled Pipelines -->
+      <div class="section-header" style="margin-top:18px;">Scheduled Pipelines</div>
+      <div class="pipeline-cards" id="pipeline-cards"></div>
+      <div id="search-terms-summary"></div>
+
+      <!-- Recommendations -->
+      <div class="section-header" style="margin-top:22px;">&#128161; Recommendations</div>
+      <div class="recs-card" id="recs-card"></div>
     </div>
     <div class="board-col-right">
       <!-- Job Board -->
@@ -981,6 +982,7 @@ function loadKeywordsPanel(){
       _keywordsParsedFrom = row.parsed_from || '';
       _keywordsParsedAt   = row.parsed_at   || '';
       renderKeywordsPanel();
+      renderSearchTermsSummary();
     });
 }
 
@@ -1039,6 +1041,7 @@ window.saveKeywords = function(){
     _keywordsDirty = false;
     if(btn){ btn.disabled=false; btn.textContent='Save'; }
     renderKeywordsPanel();
+    renderSearchTermsSummary();
   });
 };
 
@@ -1059,6 +1062,7 @@ function loadTitlesPanel(){
       if(r.error){ console.error('load user_job_titles:', r.error); renderTitlesPanel(); return; }
       _titles = (r.data && r.data.titles) || [];
       renderTitlesPanel();
+      renderSearchTermsSummary();
     });
 }
 
@@ -1120,8 +1124,40 @@ window.saveTitles = function(){
     _titlesDirty = false;
     if(btn){ btn.disabled=false; btn.textContent='Save'; }
     renderTitlesPanel();
+    renderSearchTermsSummary();
   });
 };
+
+/* ═══════════════════════════════════
+   SEARCH TERMS SUMMARY — pipeline section
+   ═══════════════════════════════════ */
+function renderSearchTermsSummary(){
+  var el = document.getElementById('search-terms-summary');
+  if(!el) return;
+  if(!_titles.length && !_keywords.length){ el.innerHTML=''; return; }
+  var html = '<div class="pipeline-card" style="margin-top:12px;">'
+    +'<div class="pipeline-card-header" style="margin-bottom:10px;">'
+    +'<span class="pipeline-title">&#128269; Active Search Terms</span>'
+    +'</div>';
+  if(_titles.length){
+    html += '<div class="pipeline-section-label">Job Titles</div>'
+      +'<div class="chips-area" style="margin-bottom:10px;">'
+      +_titles.map(function(t){
+        return '<span class="chip" style="font-size:11px;padding:3px 10px;">'+esc(t)+'</span>';
+      }).join('')
+      +'</div>';
+  }
+  if(_keywords.length){
+    html += '<div class="pipeline-section-label">Keywords</div>'
+      +'<div class="chips-area" style="margin-bottom:0;">'
+      +_keywords.map(function(k){
+        return '<span class="chip" style="font-size:11px;padding:3px 10px;background:var(--surface);border-color:#3a3e5a;">'+esc(k)+'</span>';
+      }).join('')
+      +'</div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
 
 })();
 </script>
