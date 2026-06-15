@@ -3,27 +3,26 @@ CHRIS KIM — DAILY JOB MATCHES
 Monday, June 15, 2026
 ========================================
 
-No new matches today — 0 jobs scored 60 or above.
+0 job(s) found today scoring 55 or above.
 
-----------------------------------------
+No new matches today.
 
 SEARCH NOTES
 ------------
-LinkedIn (VP/Head Remote, last 24hrs):          2 raw → 0 after filter
-LinkedIn (Director US, last 24hrs):             41 raw → 0 after filter
-LinkedIn (Consumer Insights US, last 24hrs):    32 raw → 0 after filter
-Indeed (VP Research Remote):                    0 raw → 0 after filter
-Indeed (VP Research LA):                        0 raw → 0 after filter
-Indeed (Director Research LA):                  2 raw → 0 after filter
-Indeed (Director Research Remote):              6 raw → 0 after filter
-Indeed (Consumer Insights Remote):              2 raw → 0 after filter
-Indeed (Consumer Insights LA):                  0 raw → 0 after filter
-Cross-source duplicates:                        0 removed
-Previously seen (deduped):                      0 removed
-Final list:                                     0 jobs
+LinkedIn (VP/Head UX Research — US Remote 7d):   2 raw → 0 after filter
+LinkedIn (VP/Head Research general — US Remote 7d):   3 raw → 0 after filter
+LinkedIn (Director UX Research — US 7d):   1 raw → 0 after filter
+LinkedIn (Director of Research/Head of Insights — US 7d):   8 raw → 0 after filter
+LinkedIn (Senior Director Research/Insights — US 7d):   1 raw → 0 after filter
+LinkedIn (VP/Director Consumer Insights tech — US 7d):   8 raw → 0 after filter
+Indeed (all searches):                       0 raw → 0 after filter
+Cross-source duplicates:                     1 removed (UXR Hunt = Hinge repost)
+Previously seen (deduped):                   1 removed
+Final list:                                  0 job(s)
 
-NOTE: LinkedIn returned 75 results primarily in wrong categories
-(Business Development, Clinical Research, Pharma). No UX Research
-or Consumer Insights leadership roles found today on LinkedIn or Indeed.
+Note: Search D (Director of Research/Head of Insights) pulled significant pharma/healthcare
+noise. Search F (Consumer Insights tech) still returning pharma and FMCG despite industry
+filter — LinkedIn industry codes may not filter strictly. Consider adding explicit exclusion
+keywords (NOT pharma, NOT pharmaceutical) in next tuning pass.
 
 ========================================

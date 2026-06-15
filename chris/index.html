@@ -7,6 +7,7 @@
 <title>Chris – Job Search Dashboard</title>
 <!-- Load local config (token + repo overrides). Gitignored — never pushed. Silently skipped on GitHub Pages. -->
 <script src="config.js" onerror="void 0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -204,7 +205,7 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .saved-empty { font-size:12px; color:var(--muted); font-style:italic; padding:16px 14px; }
 .saved-saving { font-size:11px; color:var(--muted); padding:6px 14px; }
 
-/* ── PAT MODAL ── */
+/* ── SYNC CODE MODAL ── */
 .pat-modal {
   display:none; position:fixed; inset:0; z-index:200;
   background:rgba(10,11,18,0.88); justify-content:center; align-items:center;
@@ -216,7 +217,6 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 }
 .pat-modal-title { font-size:15px; font-weight:700; margin-bottom:10px; }
 .pat-modal-desc { font-size:12px; color:var(--muted); margin-bottom:16px; line-height:1.6; }
-.pat-modal-desc a { color:var(--blue); }
 .pat-modal-desc code { font-family:monospace; background:var(--surface2); padding:1px 4px; border-radius:3px; font-size:11px; }
 .pat-input {
   width:100%; background:var(--surface2); border:1px solid var(--border);
@@ -286,16 +286,342 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 <!-- Inline job data — updated by daily task alongside the docs/ JSON files.
      Used as fallback when running locally (file:// can't fetch). -->
 <script id="li-data" type="application/json">
-{"generated": "2026-06-15T04:19:40-07:00", "source": "LinkedIn", "searches": ["VP Research OR VP UX Research OR Head of Research \u2014 US Remote 24h", "Director UX Research OR Senior Director Research \u2014 US 24h", "VP/Head/Director Consumer Insights OR Customer Insights \u2014 US 24h"], "count": 0, "jobs": []}
+{
+  "generated": "2026-06-15T08:03:20-07:00",
+  "source": "LinkedIn",
+  "searches": [
+    "VP/Head UX Research \u2014 US Remote 7d",
+    "VP/Head Research general \u2014 US Remote 7d",
+    "Director UX Research \u2014 US 7d",
+    "Director of Research/Head of Insights \u2014 US 7d",
+    "Senior Director Research/Insights \u2014 US 7d",
+    "VP/Director Consumer Insights tech \u2014 US 7d"
+  ],
+  "count": 23,
+  "jobs": [
+    {
+      "id": "4428636530",
+      "title": "Director, Insights Intelligence (Post Sale, Customer Care)",
+      "company": "1-800-FLOWERS.COM, INC.",
+      "location": "Jericho, NY",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-insights-intelligence-post-sale-customer-care-at-1-800-flowers-com-inc-4428636530",
+      "score": 52,
+      "tier": "",
+      "why": "1-800-Flowers (e-commerce). Director of VoC/CSAT/NPS/sentiment for customer care. CX analytics role, not product UX research \u2014 Chris's mixed-methods and org-building skills are a partial fit but the domain is operational CX, not discovery or product research. Below 55 threshold."
+    },
+    {
+      "id": "4425791061",
+      "title": "Senior Director, Economic Insights",
+      "company": "Ladders (client undisclosed)",
+      "location": "United States",
+      "posted": "2026-06-15",
+      "type": "Full-time",
+      "pay": "$215,000 - $315,000/yr",
+      "link": "https://www.linkedin.com/jobs/view/senior-director-economic-insights-at-ladders-4425791061",
+      "score": 47,
+      "tier": "",
+      "why": "Recruiter-listed role at unnamed consumer tech company. 'Economic Insights' framing and focus on marketing growth/customer acquisition suggests marketing analytics, not UX research. Pay is VP-range but domain fit is weak."
+    },
+    {
+      "id": "4411512219",
+      "title": "VP, Analytic Insights",
+      "company": "Horizon Media",
+      "location": "New York City Metropolitan Area",
+      "posted": "2026-06-08",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/vp-analytic-insights-at-horizon-media-4411512219",
+      "score": 43,
+      "tier": "",
+      "why": "Ad agency VP Analytic Insights. Marketing/media analytics, not product UX research \u2014 domain mismatch."
+    },
+    {
+      "id": "4424465618",
+      "title": "Vice President, Digital Experience & Optimization",
+      "company": "Ariat International",
+      "location": "San Leandro, CA",
+      "posted": "2026-06-09",
+      "type": "Full-time",
+      "pay": "$270,000 - $290,000/yr",
+      "link": "https://www.linkedin.com/jobs/view/vice-president-digital-experience-optimization-at-ariat-international-4424465618",
+      "score": 40,
+      "tier": "",
+      "why": "Ariat (equestrian apparel/footwear). VP Digital Experience \u2014 owns ecommerce site, UX/UI, CRO. This is a product/execution ownership role, not a research leadership role. Chris's background is research, not product management or design."
+    },
+    {
+      "id": "4427244588",
+      "title": "Director of UX Research, Dating Outcomes & Platform",
+      "company": "UXR Hunt",
+      "location": "New York, NY",
+      "posted": "2026-06-13",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-of-ux-research-dating-outcomes-platform-at-uxr-hunt-4427244588",
+      "score": 35,
+      "tier": "",
+      "why": "Recruiter repost of the Hinge Director UX Research role (4426642829), already seen."
+    },
+    {
+      "id": "4425267594",
+      "title": "Head of Data Science",
+      "company": "Confidential",
+      "location": "United States",
+      "posted": "2026-06-08",
+      "type": "Full-time",
+      "pay": "$190,000 - $220,000/yr",
+      "link": "https://www.linkedin.com/jobs/view/head-of-data-science-at-confidential-4425267594",
+      "score": 35,
+      "tier": "",
+      "why": "Head of Data Science & Analytics \u2014 data/ML leadership, not UX research."
+    },
+    {
+      "id": "4346132439",
+      "title": "Vice President, Data Science",
+      "company": "Five9",
+      "location": "United States",
+      "posted": "2026-06-13",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/vice-president-data-science-at-five9-4346132439",
+      "score": 35,
+      "tier": "",
+      "why": "Cloud contact center software. VP Data Science \u2014 ML/data leadership, not UX research."
+    },
+    {
+      "id": "4428111079",
+      "title": "Research Lead",
+      "company": "Fi",
+      "location": "New York, NY",
+      "posted": "2026-06-12",
+      "type": "Full-time",
+      "pay": "$100,000 - $160,000/yr",
+      "link": "https://www.linkedin.com/jobs/view/research-lead-at-fi-4428111079",
+      "score": 20,
+      "tier": "",
+      "why": "Small pet-tech startup. Research Lead \u2014 IC scope, pay well below target."
+    },
+    {
+      "id": "4398012762",
+      "title": "Executive Director of Portfolio Insights & Analytics",
+      "company": "Genentech",
+      "location": "South San Francisco, CA",
+      "posted": "2026-06-10",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/executive-director-of-portfolio-insights-analytics-at-genentech-4398012762",
+      "score": 15,
+      "tier": "",
+      "why": "Genentech pharma. Portfolio/pipeline analytics for oncology drugs. Not product UX."
+    },
+    {
+      "id": "4416733285",
+      "title": "Senior Director, Data Management and Analysis",
+      "company": "The Jed Foundation (JED)",
+      "location": "New York, NY",
+      "posted": "2026-06-12",
+      "type": "Full-time",
+      "pay": "$135,000 - $190,000/yr",
+      "link": "https://www.linkedin.com/jobs/view/senior-director-data-management-and-analysis-at-the-jed-foundation-jed-4416733285",
+      "score": 13,
+      "tier": "",
+      "why": "Nonprofit mental health org. Senior Director of data management and program evaluation. Nonprofit/academic scope, not product UX."
+    },
+    {
+      "id": "4425441924",
+      "title": "Director, Customer Insights & Analytics - Neurology",
+      "company": "Regeneron (BioSpace)",
+      "location": "Sleepy Hollow, NY",
+      "posted": "2026-06-09",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-customer-insights-analytics-neurology-at-biospace-4425441924",
+      "score": 10,
+      "tier": "",
+      "why": "Pharma. Neurology drug launch analytics. Not product UX research."
+    },
+    {
+      "id": "4369164579",
+      "title": "Director, Customer Insights & Analytics - Neurology",
+      "company": "Regeneron",
+      "location": "Sleepy Hollow, NY",
+      "posted": "2026-06-15",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-customer-insights-analytics-neurology-at-regeneron-4369164579",
+      "score": 10,
+      "tier": "",
+      "why": "Pharma. Same Regeneron neurology role as BioSpace listing above. Not product UX."
+    },
+    {
+      "id": "4415921207",
+      "title": "Associate Client Director (Consumer Insights)",
+      "company": "NielsenIQ",
+      "location": "Edison, NJ",
+      "posted": "2026-06-09",
+      "type": "Full-time",
+      "pay": "$99,800 - $126,000/yr",
+      "link": "https://www.linkedin.com/jobs/view/associate-client-director-consumer-insights-at-nielseniq-4415921207",
+      "score": 9,
+      "tier": "",
+      "why": "Market research firm. Client-facing Associate Director, below Director threshold, wrong domain."
+    },
+    {
+      "id": "4427232364",
+      "title": "Sr. Manager, Consumer Insights - Brand & Audience",
+      "company": "Versant Media",
+      "location": "New York, NY",
+      "posted": "2026-06-12",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/sr-manager-consumer-insights-brand-audience-at-versant-media-4427232364",
+      "score": 9,
+      "tier": "",
+      "why": "Media company. Senior Manager level \u2014 below Director threshold."
+    },
+    {
+      "id": "4387822306",
+      "title": "Manager, Consumer Insights",
+      "company": "Potbelly Sandwich Works",
+      "location": "Chicago, IL",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/manager-consumer-insights-at-potbelly-sandwich-works-4387822306",
+      "score": 9,
+      "tier": "",
+      "why": "Restaurant chain. Manager level, wrong domain."
+    },
+    {
+      "id": "4426561451",
+      "title": "Sr Mgr., Client Research & Insights",
+      "company": "Invesco",
+      "location": "New York, NY",
+      "posted": "2026-06-09",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/sr-mgr-client-research-insights-at-invesco-4426561451",
+      "score": 8,
+      "tier": "",
+      "why": "Investment firm. Senior Manager level, financial services client research."
+    },
+    {
+      "id": "4417449888",
+      "title": "Head of Patient Insights & Engagement",
+      "company": "UCB",
+      "location": "Atlanta, GA",
+      "posted": "2026-06-11",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/head-of-patient-insights-engagement-at-ucb-4417449888",
+      "score": 8,
+      "tier": "",
+      "why": "Pharma. Patient insights and market access for drug commercialization. Not product UX."
+    },
+    {
+      "id": "4407540615",
+      "title": "Director, Qualitative Research",
+      "company": "Adelphi Research",
+      "location": "Doylestown, PA",
+      "posted": "2026-06-09",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-qualitative-research-at-adelphi-research-global-pharma-market-insight-consultancy-4407540615",
+      "score": 7,
+      "tier": "",
+      "why": "Pharma market research consultancy. Exclusively pharmaceutical domain. Not product UX."
+    },
+    {
+      "id": "4426939595",
+      "title": "Director Planning & Research",
+      "company": "AdventHealth",
+      "location": "Fort Worth, TX",
+      "posted": "2026-06-12",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-planning-research-at-adventhealth-4426939595",
+      "score": 3,
+      "tier": "",
+      "why": "Healthcare system. Hospital strategic planning and community health research. Not product UX."
+    },
+    {
+      "id": "4398707779",
+      "title": "Director, Global Insights",
+      "company": "Revolution Medicines",
+      "location": "San Francisco Bay Area",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-global-insights-at-revolution-medicines-4398707779",
+      "score": 3,
+      "tier": "",
+      "why": "Pharma oncology. Global market insights for RAS-targeted cancer therapies. Not product UX."
+    },
+    {
+      "id": "4414407038",
+      "title": "Associate Director, Custom Research & Consulting",
+      "company": "Veris Insights",
+      "location": "United States",
+      "posted": "2026-06-09",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/associate-director-custom-research-consulting-at-veris-insights-4414407038",
+      "score": 3,
+      "tier": "",
+      "why": "Recruiting analytics firm. Associate Director of custom research/consulting. Wrong level, wrong domain."
+    },
+    {
+      "id": "4426571285",
+      "title": "Associate Director, Camzyos Customer Insights & Engagement",
+      "company": "Bristol Myers Squibb",
+      "location": "Princeton, NJ",
+      "posted": "2026-06-09",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/associate-director-camzyos-customer-insights-engagement-at-bristol-myers-squibb-4426571285",
+      "score": 0,
+      "tier": "",
+      "why": "Pharma. Commercial/clinical insights for cardiovascular drug launch. Not product UX research."
+    },
+    {
+      "id": "4398088666",
+      "title": "Shopper Insights and Analytics Senior Manager",
+      "company": "Kinder's Premium Quality Seasonings",
+      "location": "Walnut Creek, CA",
+      "posted": "2026-06-13",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/shopper-insights-and-analytics-senior-manager-at-kinder-s-premium-quality-seasonings-sauces-4398088666",
+      "score": 0,
+      "tier": "",
+      "why": "FMCG food company. Senior Manager shopper analytics. Wrong domain, wrong level."
+    }
+  ]
+}
 </script>
 <script id="in-data" type="application/json">
-{"generated": "2026-06-15T04:19:40-07:00", "source": "Indeed", "searches": ["VP UX Research Head of Research \u2014 Remote fulltime", "VP User Research Head of UX Research \u2014 Los Angeles fulltime", "Director UX Research Senior Director \u2014 Los Angeles fulltime", "Director UX Research Senior Director \u2014 Remote fulltime", "VP Consumer Insights Head of Consumer Insights \u2014 Remote fulltime", "VP Customer Insights Director Consumer Insights \u2014 Los Angeles fulltime"], "count": 0, "jobs": []}
+{
+  "generated": "2026-06-15T08:03:20-07:00",
+  "source": "Indeed",
+  "searches": [
+    "VP UX Research Head of Research \u2014 Remote fulltime",
+    "VP User Research Head of UX Research \u2014 Los Angeles fulltime",
+    "Director UX Research Senior Director \u2014 Los Angeles fulltime",
+    "Director UX Research Senior Director \u2014 Remote fulltime",
+    "VP Consumer Insights Head of Consumer Insights \u2014 Remote fulltime",
+    "VP Customer Insights Director Consumer Insights \u2014 Los Angeles fulltime"
+  ],
+  "count": 0,
+  "jobs": []
+}
 </script>
 
 <script id="dashboard-data" type="application/json">
 {
   "enabled": true,
-  "updated": "2026-06-15T04:19:40-07:00",
+  "updated": "2026-06-15T08:03:33-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -320,7 +646,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
           "file": "jobs_2026-06-14.txt",
           "relPath": "docs/chris/jobs_2026-06-14.txt",
           "tier1": 0,
-          "total": 0
+          "total": 2
         }]
     }
   ],
@@ -331,16 +657,15 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   }
 }</script>
 
-<!-- PAT Modal -->
+<!-- Sync Code Modal -->
 <div id="pat-modal" class="pat-modal">
   <div class="pat-modal-box">
-    <div class="pat-modal-title">Connect to GitHub</div>
+    <div class="pat-modal-title">Enter your sync code</div>
     <div class="pat-modal-desc">
-      Paste a GitHub Personal Access Token to save jobs across all your devices.<br><br>
-      <a href="https://github.com/settings/tokens/new?description=agent-dashboard&scopes=repo" target="_blank">Create a token →</a> with <strong>repo</strong> scope, or a fine-grained token with <code>Contents: Read &amp; Write</code> on <code>delreyla-max/agent-dashboard</code>.<br><br>
-      The token is stored only in this browser's local storage and never sent anywhere except GitHub.
+      Pick any code you like (e.g. <code>chris-jobs</code>).<br><br>
+      Use the same code on all your devices and your saved jobs will sync automatically. No login required.
     </div>
-    <input id="pat-input" class="pat-input" type="password" placeholder="github_pat_..." autocomplete="off" />
+    <input id="pat-input" class="pat-input" type="text" placeholder="e.g. chris-jobs" autocomplete="off" />
     <div class="pat-modal-btns">
       <button class="btn-ghost" id="pat-cancel-btn">Cancel</button>
       <button class="btn-primary" id="pat-save-btn">Save &amp; Continue</button>
@@ -698,130 +1023,87 @@ loadBoard(true);
 setInterval(function(){ loadBoard(false); }, 5 * 60 * 1000);
 
 /* ══════════════════════════════════════════
-   SAVED JOBS — reads/writes docs/chris/saved_jobs.json
-   via GitHub API. PAT stored in localStorage.
+   SAVED JOBS — Supabase backend (sync code)
+   No login required. Enter your sync code once
+   per device and saves persist across devices.
    ══════════════════════════════════════════ */
 
-var GH_OWNER   = 'delreyla-max';
-var GH_REPO    = 'agent-dashboard';
-var GH_PATH    = 'docs/chris/saved_jobs.json';
-var PAT_KEY    = 'ghpat_agentdash_chris';
+var SUPABASE_URL = 'https://olteamqjgekiuymydloz.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdGVhbXFqZ2VraXV5bXlkbG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0ODY4NDYsImV4cCI6MjA5NzA2Mjg0Nn0.Qnt89ErUAJ6yHF0T7V-7bjsHJD9n5R00abKhTMhsfIM';
 
-/* ── CONFIG OVERRIDE — from local config.js if present ── */
-var _cfg = window.DASHBOARD_CONFIG || {};
-if(_cfg.ghOwner) GH_OWNER = _cfg.ghOwner;
-if(_cfg.ghRepo)  GH_REPO  = _cfg.ghRepo;
-if(_cfg.ghPath)  GH_PATH  = _cfg.ghPath;
-if(_cfg.patKey)  PAT_KEY  = _cfg.patKey;
-if(_cfg.ghPat)   localStorage.setItem(PAT_KEY, _cfg.ghPat);
+var _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+var _saved = [];
+var SYNC_CODE_KEY = 'sb_sync_code_chris';
 
-var _saved     = [];
-var _savedSha  = null;
-var _saving    = false;
+/* ── SYNC CODE helpers ── */
+function getSyncCode(){
+  return localStorage.getItem(SYNC_CODE_KEY) || '';
+}
 
-function getPAT(){ return localStorage.getItem(PAT_KEY)||''; }
-function setPAT(t){ localStorage.setItem(PAT_KEY, t.trim()); }
+/* ── DB READS / WRITES ── */
+function loadSavedJobs(){
+  var code = getSyncCode();
+  if(!code){ renderSavedJobs(); return; }
+  _sb.from('saved_jobs')
+    .select('title, company, link, saved_at')
+    .eq('sync_code', code)
+    .order('saved_at', {ascending:false})
+    .then(function(r){
+      if(r.error){ console.error('load saved_jobs:', r.error); renderSavedJobs(); return; }
+      _saved = (r.data||[]).map(function(j){
+        return {title:j.title, company:j.company, link:j.link, savedAt:j.saved_at};
+      });
+      renderSavedJobs();
+      updateAllStars();
+    });
+}
+
+function dbInsert(job){
+  var code = getSyncCode();
+  if(!code) return;
+  _sb.from('saved_jobs').upsert(
+    {sync_code:code, title:job.title, company:job.company, link:job.link},
+    {onConflict:'sync_code,link'}
+  ).then(function(r){ if(r.error) console.error('insert saved_job:', r.error); });
+}
+
+function dbDelete(link){
+  var code = getSyncCode();
+  if(!code) return;
+  _sb.from('saved_jobs').delete()
+    .eq('sync_code', code).eq('link', link)
+    .then(function(r){ if(r.error) console.error('delete saved_job:', r.error); });
+}
 
 function isJobSaved(link){
   return _saved.some(function(j){ return j.link === link; });
 }
 
-function ghHeaders(pat){
-  var h = {'Accept':'application/vnd.github+json','Content-Type':'application/json'};
-  if(pat) h['Authorization'] = 'Bearer '+pat;
-  return h;
-}
-
-function loadSavedJobs(){
-  var pat = getPAT();
-  fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_PATH,
-    {headers: ghHeaders(pat)})
-    .then(function(r){
-      if(r.status===404) return null;
-      if(r.status===401){ renderSavedJobs(); return null; }
-      if(!r.ok) throw new Error('HTTP '+r.status);
-      return r.json();
-    })
-    .then(function(data){
-      if(!data){ renderSavedJobs(); return; }
-      _savedSha = data.sha;
-      try {
-        _saved = JSON.parse(atob(data.content.replace(/\s/g,''))) || [];
-      } catch(e){ _saved = []; }
-      renderSavedJobs();
-      updateAllStars();
-    })
-    .catch(function(){ renderSavedJobs(); });
-}
-
-function writeSavedJobs(){
-  if(_saving) return;
-  var pat = getPAT();
-  if(!pat){ showPATModal(writeSavedJobs); return; }
-  _saving = true;
-  setSavingState(true);
-
-  var body = {
-    message: 'Update saved jobs (Chris)',
-    content: btoa(unescape(encodeURIComponent(JSON.stringify(_saved, null, 2))))
-  };
-  if(_savedSha) body.sha = _savedSha;
-
-  fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_PATH, {
-    method: 'PUT',
-    headers: ghHeaders(pat),
-    body: JSON.stringify(body)
-  })
-  .then(function(r){
-    if(r.status===401){ _saving=false; setSavingState(false); showPATModal(writeSavedJobs); return null; }
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    return r.json();
-  })
-  .then(function(data){
-    _saving = false;
-    setSavingState(false);
-    if(data && data.content) _savedSha = data.content.sha;
-    renderSavedJobs();
-    updateAllStars();
-  })
-  .catch(function(e){
-    _saving = false;
-    setSavingState(false);
-    alert('Could not save to GitHub: '+e.message);
-  });
-}
-
-function setSavingState(on){
-  var el = document.getElementById('saved-jobs-list');
-  if(!el) return;
-  var s = el.querySelector('.saved-saving');
-  if(on && !s){
-    var d = document.createElement('div');
-    d.className='saved-saving'; d.textContent='Saving…';
-    el.appendChild(d);
-  } else if(!on && s){ s.remove(); }
-}
-
 window.handleStar = function(btn){
   var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
-  var idx = _saved.findIndex(function(j){ return j.link===job.link; });
-  if(idx>=0){ _saved.splice(idx,1); } else {
-    _saved.push({title:job.title, company:job.company, link:job.link,
+  var code = getSyncCode();
+  if(!code){ showSyncModal(function(){ window.handleStar(btn); }); return; }
+  var already = isJobSaved(job.link);
+  if(already){
+    _saved = _saved.filter(function(j){ return j.link !== job.link; });
+    dbDelete(job.link);
+  } else {
+    _saved.unshift({title:job.title, company:job.company, link:job.link,
       savedAt: new Date().toISOString().slice(0,10)});
+    dbInsert(job);
   }
   var saved = isJobSaved(job.link);
   btn.textContent = saved ? '★' : '☆';
   btn.classList.toggle('starred', saved);
   btn.title = saved ? 'Remove from saved' : 'Save job';
   renderSavedJobs();
-  writeSavedJobs();
 };
 
-window.removeSavedJob = function(idx){
-  _saved.splice(idx,1);
+window.removeSavedJob = function(link){
+  _saved = _saved.filter(function(j){ return j.link !== link; });
+  dbDelete(link);
   renderSavedJobs();
   updateAllStars();
-  writeSavedJobs();
 };
 
 function updateAllStars(){
@@ -836,34 +1118,40 @@ function updateAllStars(){
 function renderSavedJobs(){
   var el = document.getElementById('saved-jobs-list');
   if(!el) return;
+  var code = getSyncCode();
+  if(!code){
+    el.innerHTML='<div class="saved-empty">Click &#9734; on any job to set your sync code and start saving.</div>';
+    return;
+  }
   if(!_saved.length){
     el.innerHTML='<div class="saved-empty">No saved jobs yet — click &#9734; on any listing.</div>';
     return;
   }
-  el.innerHTML = _saved.map(function(j,i){
+  el.innerHTML = _saved.map(function(j){
     return '<div class="saved-job-item">'
       +'<div class="saved-job-info">'
       +'<a href="'+esc(j.link)+'" target="_blank" class="saved-job-title">'+esc(j.title)+'</a>'
       +'<span class="saved-job-company">'+esc(j.company)+'</span>'
       +'</div>'
       +(j.savedAt?'<span class="saved-job-date">'+esc(fmtDate(j.savedAt))+'</span>':'')
-      +'<button class="saved-remove-btn" onclick="removeSavedJob('+i+')" title="Remove">&#10005;</button>'
+      +'<button class="saved-remove-btn" onclick="removeSavedJob(\''+esc(j.link)+'\')" title="Remove">&#10005;</button>'
       +'</div>';
   }).join('');
 }
 
-/* ── PAT MODAL ── */
-function showPATModal(callback){
+/* ── SYNC CODE MODAL ── */
+function showSyncModal(callback){
   var m = document.getElementById('pat-modal');
   m.classList.add('visible');
   var inp = document.getElementById('pat-input');
-  inp.value = getPAT();
+  inp.value = getSyncCode();
   setTimeout(function(){ inp.focus(); }, 50);
   document.getElementById('pat-save-btn').onclick = function(){
-    var t = inp.value.trim();
+    var t = inp.value.trim().toLowerCase();
     if(!t) return;
-    setPAT(t);
+    localStorage.setItem(SYNC_CODE_KEY, t);
     m.classList.remove('visible');
+    loadSavedJobs();
     if(callback) callback();
   };
   document.getElementById('pat-cancel-btn').onclick = function(){
