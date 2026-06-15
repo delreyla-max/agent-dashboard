@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<!-- MANAGER: update #dashboard-data JSON after each task/pipeline event -->
+<!-- MANAGER: update data/{user}.json after each task/pipeline event -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agent Manager Dashboard</title>
+<title>Job Search Dashboard</title>
+<!-- Load local config (token + repo overrides). Gitignored — never pushed. Silently skipped on GitHub Pages. -->
+<script src="config.js" onerror="void 0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -202,7 +205,17 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .saved-empty { font-size:12px; color:var(--muted); font-style:italic; padding:16px 14px; }
 .saved-saving { font-size:11px; color:var(--muted); padding:6px 14px; }
 
-/* ── PAT MODAL ── */
+/* ── AUTH USER ── */
+.auth-user { display:none; align-items:center; gap:8px; }
+.auth-user.visible { display:flex; }
+.auth-name { font-size:12px; color:var(--muted); }
+.auth-signout {
+  background:none; border:1px solid var(--border); color:var(--muted);
+  border-radius:5px; padding:3px 10px; font-size:11px; cursor:pointer; transition:border-color .15s,color .15s;
+}
+.auth-signout:hover { border-color:var(--red); color:var(--red); }
+
+/* ── PAT MODAL (unused, kept for reference) ── */
 .pat-modal {
   display:none; position:fixed; inset:0; z-index:200;
   background:rgba(10,11,18,0.88); justify-content:center; align-items:center;
@@ -281,11 +294,10 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 </head>
 <body>
 
-<!-- Inline job data — updated by daily task alongside the docs/ JSON files.
-     Used as fallback when running locally (file:// can't fetch). -->
+<!-- Inline job data — fallback for file:// local testing (garman only) -->
 <script id="li-data" type="application/json">
 {
-  "generated": "2026-06-14T00:51:34-07:00",
+  "generated": "2026-06-14T23:15:44-07:00",
   "source": "LinkedIn",
   "searches": [
     "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead \u2014 Los Angeles 24h",
@@ -294,191 +306,130 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   "count": 6,
   "jobs": [
     {
-      "id": "LI:4368757946",
-      "score": 58,
-      "title": "Manager, Product Design",
-      "companyName": "Figma",
-      "location": "United States (Remote)",
-      "employmentType": "Full-time",
-      "salary": "Not listed",
-      "postedAt": "2026-06-13",
-      "link": "https://www.linkedin.com/jobs/view/manager-product-design-at-figma-4368757946",
-      "tier": "Tier 2 \u2014 Good fit with tailoring",
-      "leadWith": "Storyfire (full product platform design, solo lead), Toyota Garage (design systems for product UX), Toyota AI Pipeline (AI-native workflow fluency)",
-      "why": "Figma is the most design-led tech company in the industry, and their Manager, Product Design role aligns with Garman's product platform experience (Storyfire, Toyota Garage, Xome) and design systems thinking. His AI workflow fluency is highly relevant as Figma pushes deep into AI-powered design features. Tailoring needed: reframe resume to emphasize design systems governance, engineering collaboration, and product component ownership\u2014Figma will want someone as comfortable talking to engineers about tokens as to executives about vision."
-    },
-    {
-      "id": "LI:4407253768",
-      "score": 41,
-      "title": "Director, Product Design",
-      "companyName": "Samsara",
-      "location": "San Francisco, CA",
-      "employmentType": "Full-time",
-      "salary": "$235,600 \u2013 $294,500/yr",
-      "postedAt": "2026-06-13",
-      "link": "https://www.linkedin.com/jobs/view/director-product-design-at-samsara-4407253768",
-      "tier": "Tier 3 \u2014 Possible",
-      "leadWith": "Storyfire, Toyota Garage, Xome",
-      "why": "Director-level role with exceptional comp ($235K\u2013$294K), but Samsara's domain (connected operations IoT for fleets and industrial physical ops) is a significant mismatch from Garman's consumer brand and entertainment background. SF location adds friction. Score reflects title-level match against domain and location penalty."
-    },
-    {
-      "id": "LI:4417514677",
-      "score": 36,
-      "title": "Senior Product Designer, Design Systems & Platform",
-      "companyName": "VSCO",
-      "location": "San Francisco, CA",
-      "employmentType": "Full-time",
-      "salary": "Not listed",
-      "postedAt": "2026-06-13",
-      "link": "https://www.linkedin.com/jobs/view/senior-product-designer-design-systems-platform-at-vsco-4417514677",
-      "tier": "Tier 3 \u2014 Possible",
-      "leadWith": "Storyfire, Toyota Garage",
-      "why": "VSCO is a creator-economy photography platform\u2014adjacent to Garman's interests\u2014but the role is below ACD/director level and based in SF. Design systems platform work overlaps with his systems thinking, but the title is a step down and compensation likely reflects that."
-    },
-    {
-      "id": "LI:4352991514",
-      "score": 33,
+      "id": "LI:4353051446",
       "title": "Lead Product Designer, Arc Platform",
-      "companyName": "Circle",
-      "location": "New York City Metropolitan Area",
-      "employmentType": "Full-time",
-      "salary": "Not listed",
-      "postedAt": "2026-06-13",
-      "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4352991514",
-      "tier": "Tier 3 \u2014 Possible",
-      "leadWith": "Xome, Mr. Cooper, Storyfire",
-      "why": "Circle (crypto/stablecoin fintech) Arc platform product design lead. Fintech experience from Mr. Cooper and Xome applies, but NYC location, crypto domain specificity, and below-ACD title make this a weak fit overall."
+      "company": "Circle",
+      "location": "Los Angeles Metropolitan Area",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353051446",
+      "score": 54,
+      "tier": "Tier 2 \u2014 Good fit with tailoring",
+      "why": "Circle is a well-funded fintech platform and Lead Product Designer in LA aligns with Garman's Storyfire, Xome, and Toyota Garage product design work. Strongest proof points are end-to-end platform ownership and fintech adjacency via Mr. Cooper. Risk: 'Lead' title is a step-down from ACD and crypto-specific knowledge gap."
     },
     {
-      "id": "LI:4361288334",
-      "score": 28,
-      "title": "Product Designer",
-      "companyName": "ElevenLabs",
-      "location": "New London, NY",
-      "employmentType": "Full-time",
-      "salary": "Not listed",
-      "postedAt": "2026-06-13",
-      "link": "https://www.linkedin.com/jobs/view/product-designer-at-elevenlabs-4361288334",
-      "tier": "Tier 3 \u2014 Possible",
-      "leadWith": "Storyfire, Toyota AI Pipeline",
-      "why": "ElevenLabs is a prominent AI audio company but the role is individual contributor Product Designer (below ACD level) in NY. AI relevance is high but the title and location are mismatches."
+      "id": "LI:4368776287",
+      "title": "Director of Product Design",
+      "company": "Hiive",
+      "location": "Seattle, WA",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-of-product-design-at-hiive-4368776287",
+      "score": 51,
+      "tier": "Tier 2 \u2014 Good fit with tailoring",
+      "why": "Director of Product Design title fits Garman's level. Hiive is a private-market securities marketplace; Garman's Xome (real estate marketplace) and Mr. Cooper (fintech) provide relevant proof. Risk: early-stage startup in Seattle, Garman's creative-director framing may need repositioning as product-first."
     },
     {
-      "id": "LI:4418441151",
-      "score": 22,
-      "title": "Staff Product Designer - Metrics",
-      "companyName": "Datadog",
+      "id": "LI:4428621391",
+      "title": "Art Director, E-Commerce",
+      "company": "Steve Madden",
       "location": "New York, NY",
-      "employmentType": "Full-time",
-      "salary": "Not listed",
-      "postedAt": "2026-06-13",
-      "link": "https://www.linkedin.com/jobs/view/staff-product-designer-metrics-at-datadog-4418441151",
-      "tier": "Tier 3 \u2014 Possible",
-      "leadWith": "Storyfire, Toyota Garage",
-      "why": "Datadog is a developer infrastructure company. Staff Product Designer for Metrics is highly technical and engineering-focused (telemetry, cardinality). Very different from Garman's brand and consumer-product background. NY location adds friction."
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/art-director-e-commerce-at-steve-madden-4428621391",
+      "score": 35,
+      "tier": "",
+      "why": "Art Director is two levels below Garman's current ACD role; NY location is another barrier. Some e-commerce/retail creative overlap (Taco Bell, Adidas Golf digital) but the role level and domain fit are both weak relative to Garman's profile."
+    },
+    {
+      "id": "LI:4398146518",
+      "title": "Executive Creative Director",
+      "company": "Conagra Brands",
+      "location": "Chicago, IL",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/executive-creative-director-at-conagra-brands-4398146518",
+      "score": 38,
+      "tier": "",
+      "why": "ECD at a major CPG brand is a reach from Garman's ACD level. Brand systems thinking and AI pipeline are relevant differentiators, but CPG domain is thin (only Jeffry's at small scale) and Chicago relocation would be required."
+    },
+    {
+      "id": "LI:4407226475",
+      "title": "Design Operations Lead",
+      "company": "Chime",
+      "location": "San Francisco Bay Area",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/design-operations-lead-at-chime-4407226475",
+      "score": 32,
+      "tier": "",
+      "why": "Design Operations is a process/infrastructure role that does not leverage Garman's creative direction, art direction, or brand-systems strengths. Chime is a notable fintech brand but the role is misaligned with Garman's profile."
+    },
+    {
+      "id": "LI:4428147043",
+      "title": "Head of Performance Creative (Pet Brand)",
+      "company": "Ecom.jobs",
+      "location": "United States",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "$200,000 - $250,000/yr",
+      "link": "https://www.linkedin.com/jobs/view/head-of-performance-creative-pet-brand-at-ecom-jobs-4428147043",
+      "score": 30,
+      "tier": "",
+      "why": "Pay range is strong ($200-250K) but 'Performance Creative' is performance-marketing oriented (paid media, direct response, A/B testing creative) rather than brand systems or product design direction. Pet brand domain and pure DTC performance focus do not align with Garman's strengths."
     }
   ]
 }
 </script>
 <script id="in-data" type="application/json">
 {
-  "generated": "2026-06-14T00:51:34-07:00",
+  "generated": "2026-06-14T23:15:44-07:00",
   "source": "Indeed",
   "searches": [
-    "Creative Director Associate Creative Director \u2014 Los Angeles, CA fulltime",
-    "Brand Design Director AI Creative Lead \u2014 Los Angeles, CA fulltime",
-    "Creative Director Associate Creative Director \u2014 Remote US fulltime",
-    "Product Design Lead CRM Creative Director \u2014 Remote US fulltime"
+    "Creative Director Associate Creative Director \u2014 Los Angeles fulltime",
+    "Brand Design Director AI Creative Lead \u2014 Los Angeles fulltime",
+    "Creative Director Associate Creative Director \u2014 Remote fulltime",
+    "Product Design Lead CRM Creative Director \u2014 Remote fulltime"
   ],
-  "count": 1,
+  "count": 2,
   "jobs": [
     {
-      "id": "IN:JOBSEARCH_361",
-      "score": 69,
+      "id": "IN:JOBSEARCH_407",
       "title": "Associate Creative Director, Ring Retail & Marketing",
-      "companyName": "Amazon.com (Ring)",
+      "company": "Amazon.com",
       "location": "Hawthorne, CA",
-      "employmentType": "Full-time",
-      "salary": "$141,000 \u2013 $190,700/yr",
-      "postedAt": "2026-02-28",
-      "link": "https://to.indeed.com/aa99pndsnjjg",
+      "posted": "2026-02-28",
+      "type": "Full-time",
+      "pay": "$141,000 - $190,700/yr",
+      "link": "https://to.indeed.com/aa2pl2pgrxnk",
+      "score": 64,
       "tier": "Tier 1 \u2014 Apply with confidence",
-      "leadWith": "Toyota AI Pipeline (product imagery at scale \u2194 Ring device marketing), Nissan Brand System (ACD-level consumer brand systems), Toyota/Lexus Owners (retail + digital campaign creative)",
-      "why": "Ring is a consumer tech brand requiring ACD-level creative leadership across retail packaging, marketing campaigns, and brand consistency at scale\u2014precisely where Garman's ACD + AI pipeline experience shines. His Toyota AI production pipeline (turning engineering assets into product-correct marketing imagery at scale) maps directly to Ring's device marketing needs, and his Apple/iAd background signals tech-brand creative standards. Main risk: posting is 3.5 months old and may be close to filled; verify the role is still active before investing application time."
+      "why": "ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 \u2014 role is 3.5 months old and may already be filled or in late-stage hiring."
+    },
+    {
+      "id": "IN:JOBSEARCH_413",
+      "title": "Associate Creative Director, Art",
+      "company": "Princeton10",
+      "location": "Montclair, NJ",
+      "posted": "2026-04-20",
+      "type": "Full-time",
+      "pay": "$140,000 - $180,000/yr",
+      "link": "https://to.indeed.com/aapy62zblky7",
+      "score": 48,
+      "tier": "",
+      "why": "ACD Art title matches Garman's level and the pay range is just above his $140K baseline. Agency environment aligns with his background. Risk: NJ location is not LA or remote; Princeton10 is a smaller unknown agency; pay at baseline with NJ cost of living is not a clear step up for Garman."
     }
   ]
 }
 </script>
 
-<script id="dashboard-data" type="application/json">{
-  "enabled": true,
-  "updated": "2026-06-14T00:52:09-07:00",
-  "plan": "Pro",
-  "scheduledPipelines": [
-    {
-      "id": "daily-job-search",
-      "title": "Daily job search",
-      "schedule": "4:08am daily",
-      "enabled": true,
-      "lastRun": "2026-06-13T04:08:00",
-      "lastRunStatus": "ok",
-      "lastRunNote": "5 jobs scoring 60+. VP Brand & Creative at Proper Hospitality (Tier 2, $235K\u2013$255K). Amazon ACD Ring (Tier 1, $141K\u2013$191K) still active.",
-      "outputFolder": "C:/Users/gyipl/Documents/Claude/Job Search/Job Searches/",
-      "documents": [
-        {
-          "date": "2026-06-14",
-          "file": "jobs_2026-06-14.txt",
-          "relPath": "docs/jobs_2026-06-14.txt",
-          "tier1": 1,
-          "total": 1
-        },
-        {
-          "date": "2026-06-13",
-          "file": "jobs_2026-06-13.txt",
-          "relPath": "docs/jobs_2026-06-13.txt",
-          "tier1": 1,
-          "total": 5
-        },
-        {
-          "date": "2026-06-12",
-          "file": "jobs_2026-06-12.txt",
-          "relPath": "docs/jobs_2026-06-12.txt",
-          "tier1": 1,
-          "total": 2
-        },
-        {
-          "date": "2026-06-11",
-          "file": "jobs_2026-06-11.txt",
-          "relPath": "docs/jobs_2026-06-11.txt",
-          "tier1": 1,
-          "total": 1
-        }
-      ]
-    }
-  ],
-  "emailDigest": {
-    "date": null,
-    "summary": null,
-    "items": []
-  }
-}</script>
 
-<!-- PAT Modal -->
-<div id="pat-modal" class="pat-modal">
-  <div class="pat-modal-box">
-    <div class="pat-modal-title">Connect to GitHub</div>
-    <div class="pat-modal-desc">
-      Paste a GitHub Personal Access Token to save jobs across all your devices.<br><br>
-      <a href="https://github.com/settings/tokens/new?description=agent-dashboard&scopes=repo" target="_blank">Create a token →</a> with <strong>repo</strong> scope, or a fine-grained token with <code>Contents: Read &amp; Write</code> on <code>delreyla-max/agent-dashboard</code>.<br><br>
-      The token is stored only in this browser's local storage and never sent anywhere except GitHub.
-    </div>
-    <input id="pat-input" class="pat-input" type="password" placeholder="github_pat_..." autocomplete="off" />
-    <div class="pat-modal-btns">
-      <button class="btn-ghost" id="pat-cancel-btn">Cancel</button>
-      <button class="btn-primary" id="pat-save-btn">Save &amp; Continue</button>
-    </div>
-  </div>
-</div>
+<!-- Auth state — populated by Supabase onAuthStateChange -->
 
 <div id="disabled-overlay">
   <div class="off-icon">&#9899;</div>
@@ -488,7 +439,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 
 <div class="page">
   <header>
-    <h1>Agent Manager Dashboard</h1>
+    <h1 id="dash-title">Job Search Dashboard</h1>
     <span class="plan-badge" id="plan-badge"></span>
     <span class="updated" id="dash-updated"></span>
     <div class="pill-wrap">
@@ -497,6 +448,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       </button>
       <span class="pill-hint">Toggle tracking</span>
     </div>
+    <div id="auth-user" class="auth-user"></div>
   </header>
 
   <!-- Saved Jobs -->
@@ -541,7 +493,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
     </div>
   </div>
 
-  <footer>Agent Manager Dashboard v4 &middot; Job board auto-refreshes from <code>docs/</code> JSON &middot; GitHub Pages ready</footer>
+  <footer>Job Search Dashboard &middot; Job board auto-refreshes from <code id="footer-docs-path">docs/</code> JSON &middot; GitHub Pages ready</footer>
 </div>
 
 <script>
@@ -555,9 +507,11 @@ function fmtDate(s){ if(!s) return '—'; var dt=new Date(s); return isNaN(dt)?s
 function fmtTime(s){ if(!s) return ''; var dt=new Date(s); return isNaN(dt)?s:dt.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}); }
 function badge(s){ var m={pending:'badge-pending',in_progress:'badge-in_progress',done:'badge-done',blocked:'badge-blocked',ok:'badge-ok',failed:'badge-failed'}; return '<span class="badge '+(m[s]||'badge-pending')+'">'+esc(s.replace('_',' '))+'</span>'; }
 
-/* ── DATA ── */
-var d = JSON.parse(document.getElementById('dashboard-data').textContent);
-var enabled = d.enabled !== false;
+/* ── USER / DATA BOOTSTRAP ── */
+var _docsPrefix = 'docs/';
+var _user = (new URLSearchParams(location.search).get('user') || 'garman').replace(/[^a-z0-9_-]/gi,'');
+
+var enabled = true; // will be set in init()
 
 /* ── ON/OFF ── */
 function applyEnabled(){ document.getElementById('disabled-overlay').classList[enabled?'remove':'add']('visible'); }
@@ -565,11 +519,20 @@ function updatePill(){ var p=document.getElementById('toggle-pill'); p.className
 window.loadHistoricalJobs = loadHistoricalJobs;
 window.exitHistoricalMode = exitHistoricalMode;
 window.toggleDashboard = function(){ enabled=!enabled; updatePill(); applyEnabled(); document.getElementById('save-banner').classList.add('visible'); };
-document.getElementById('plan-badge').textContent = d.plan||'Pro';
-document.getElementById('dash-updated').textContent = 'Updated '+fmtDate(d.updated);
-updatePill(); applyEnabled();
 
-var pips = d.scheduledPipelines||[];
+function init(d){
+  _docsPrefix = d.docsPrefix || 'docs/';
+  enabled = d.enabled !== false;
+  var name = d.name || _user;
+  document.title = name + ' – Job Search Dashboard';
+  document.getElementById('dash-title').textContent = name + ' – Job Search Dashboard';
+  var fp = document.getElementById('footer-docs-path');
+  if(fp) fp.textContent = _docsPrefix;
+  document.getElementById('plan-badge').textContent = d.plan||'Pro';
+  document.getElementById('dash-updated').textContent = 'Updated '+fmtDate(d.updated);
+  updatePill(); applyEnabled();
+
+  var pips = d.scheduledPipelines||[];
 
 /* ── PIPELINES (no pagination) ── */
 (function(){
@@ -738,8 +701,8 @@ function loadHistoricalJobs(relPath, label){
   document.getElementById('in-list').innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
   // Try dated JSON files first (full filtered results), fall back to txt (60+ only)
   var nc = '?nocache='+Date.now();
-  var liUrl = 'docs/li_results_'+label+'.json';
-  var inUrl = 'docs/in_results_'+label+'.json';
+  var liUrl = _docsPrefix + 'li_results_'+label+'.json';
+  var inUrl = _docsPrefix + 'in_results_'+label+'.json';
   Promise.all([
     fetch(liUrl+nc).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }),
     fetch(inUrl+nc).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; })
@@ -798,7 +761,7 @@ function loadBoard(showSpinner){
     document.getElementById('in-count').textContent='';
   }
 
-  fetchJobFile('docs/li_results_latest.json')
+  fetchJobFile(_docsPrefix + 'li_results_latest.json')
     .then(function(data){
       // Only re-render if data changed
       if(data.generated !== _lastLiGen || showSpinner){
@@ -813,7 +776,7 @@ function loadBoard(showSpinner){
       liDone=true; checkDone();
     });
 
-  fetchJobFile('docs/in_results_latest.json')
+  fetchJobFile(_docsPrefix + 'in_results_latest.json')
     .then(function(data){
       if(data.generated !== _lastInGen || showSpinner){
         _lastInGen = data.generated;
@@ -835,175 +798,164 @@ loadBoard(true);
 
 // Auto-poll every 5 minutes (silently — only re-renders if data changed)
 setInterval(function(){ loadBoard(false); }, 5 * 60 * 1000);
+} // end init()
+
+/* ── FETCH USER DATA AND BOOT ── */
+fetch('users/' + _user + '/config.json?t=' + Date.now())
+  .then(function(r){
+    if(!r.ok) throw new Error('No data found for user: ' + _user);
+    return r.json();
+  })
+  .then(function(d){ init(d); })
+  .catch(function(e){
+    document.querySelector('.page').innerHTML =
+      '<div style="padding:40px;color:var(--red);font-size:14px;">⚠ ' + e.message +
+      '<br><br><small>Add <code>data/' + _user + '.json</code> to the repo.</small></div>';
+  });
 
 /* ══════════════════════════════════════════
-   SAVED JOBS — reads/writes docs/saved_jobs.json
-   via GitHub API. PAT stored in localStorage.
+   SAVED JOBS — Supabase backend (sync code)
+   No login required. Enter your sync code once
+   per device and saves persist across devices.
    ══════════════════════════════════════════ */
 
-var GH_OWNER   = 'delreyla-max';
-var GH_REPO    = 'agent-dashboard';
-var GH_PATH    = 'docs/saved_jobs.json';
-var PAT_KEY    = 'ghpat_agentdash';
+var SUPABASE_URL = 'https://olteamqjgekiuymydloz.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdGVhbXFqZ2VraXV5bXlkbG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0ODY4NDYsImV4cCI6MjA5NzA2Mjg0Nn0.Qnt89ErUAJ6yHF0T7V-7bjsHJD9n5R00abKhTMhsfIM';
 
-var _saved     = [];   // in-memory list
-var _savedSha  = null; // GitHub file SHA (required for updates)
-var _saving    = false;
+var _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+var _saved = [];
+var SYNC_CODE_KEY = 'sb_sync_code';
 
-function getPAT(){ return localStorage.getItem(PAT_KEY)||''; }
-function setPAT(t){ localStorage.setItem(PAT_KEY, t.trim()); }
+/* ── SYNC CODE helpers ── */
+function getSyncCode(){
+  return localStorage.getItem(SYNC_CODE_KEY) || '';
+}
 
+function promptSyncCode(){
+  var code = prompt('Enter your sync code to save jobs across devices.\n\nPick any code you like (e.g. gyip-jobs).\nYou\'ll use the same code on all your devices.');
+  if(code && code.trim()){
+    var c = code.trim().toLowerCase();
+    localStorage.setItem(SYNC_CODE_KEY, c);
+    return c;
+  }
+  return '';
+}
+
+/* ── DB READS / WRITES ── */
+function loadSavedJobs(){
+  var code = getSyncCode();
+  if(!code){ renderSavedJobs(); return; }
+  _sb.from('saved_jobs')
+    .select('title, company, link, saved_at')
+    .eq('sync_code', code)
+    .order('saved_at', {ascending:false})
+    .then(function(r){
+      if(r.error){ console.error('load saved_jobs:', r.error); renderSavedJobs(); return; }
+      _saved = (r.data||[]).map(function(j){
+        return {title:j.title, company:j.company, link:j.link, savedAt:j.saved_at};
+      });
+      renderSavedJobs();
+      updateAllStars();
+    });
+}
+
+function dbInsert(job){
+  var code = getSyncCode();
+  if(!code) return;
+  _sb.from('saved_jobs').upsert(
+    {sync_code:code, title:job.title, company:job.company, link:job.link},
+    {onConflict:'sync_code,link'}
+  ).then(function(r){ if(r.error) console.error('insert saved_job:', r.error); });
+}
+
+function dbDelete(link){
+  var code = getSyncCode();
+  if(!code) return;
+  _sb.from('saved_jobs').delete()
+    .eq('sync_code', code).eq('link', link)
+    .then(function(r){ if(r.error) console.error('delete saved_job:', r.error); });
+}
+
+/* ── STAR & REMOVE HANDLERS ── */
 function isJobSaved(link){
   return _saved.some(function(j){ return j.link === link; });
 }
 
-function ghHeaders(pat){
-  var h = {'Accept':'application/vnd.github+json','Content-Type':'application/json'};
-  if(pat) h['Authorization'] = 'Bearer '+pat;
-  return h;
-}
+/* ── AUTH UI stub (no-op — no login needed) ── */
+function updateAuthUI(){}
 
-function loadSavedJobs(){
-  var pat = getPAT();
-  fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_PATH,
-    {headers: ghHeaders(pat)})
-    .then(function(r){
-      if(r.status===404) return null;
-      if(r.status===401){ renderSavedJobs(); return null; }
-      if(!r.ok) throw new Error('HTTP '+r.status);
-      return r.json();
-    })
-    .then(function(data){
-      if(!data){ renderSavedJobs(); return; }
-      _savedSha = data.sha;
-      try {
-        _saved = JSON.parse(atob(data.content.replace(/\s/g,''))) || [];
-      } catch(e){ _saved = []; }
-      renderSavedJobs();
-      updateAllStars();
-    })
-    .catch(function(){ renderSavedJobs(); });
-}
-
-function writeSavedJobs(){
-  if(_saving) return;
-  var pat = getPAT();
-  if(!pat){ showPATModal(writeSavedJobs); return; }
-  _saving = true;
-  setSavingState(true);
-
-  var body = {
-    message: 'Update saved jobs',
-    content: btoa(unescape(encodeURIComponent(JSON.stringify(_saved, null, 2))))
-  };
-  if(_savedSha) body.sha = _savedSha;
-
-  fetch('https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_PATH, {
-    method: 'PUT',
-    headers: ghHeaders(pat),
-    body: JSON.stringify(body)
-  })
-  .then(function(r){
-    if(r.status===401){ _saving=false; setSavingState(false); showPATModal(writeSavedJobs); return null; }
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    return r.json();
-  })
-  .then(function(data){
-    _saving = false;
-    setSavingState(false);
-    if(data && data.content) _savedSha = data.content.sha;
-    renderSavedJobs();
-    updateAllStars();
-  })
-  .catch(function(e){
-    _saving = false;
-    setSavingState(false);
-    alert('Could not save to GitHub: '+e.message);
-  });
-}
-
-function setSavingState(on){
-  var el = document.getElementById('saved-jobs-list');
-  if(!el) return;
-  var s = el.querySelector('.saved-saving');
-  if(on && !s){
-    var d = document.createElement('div');
-    d.className='saved-saving'; d.textContent='Saving…';
-    el.appendChild(d);
-  } else if(!on && s){ s.remove(); }
-}
-
-window.handleStar = function(btn){
-  var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
-  var idx = _saved.findIndex(function(j){ return j.link===job.link; });
-  if(idx>=0){ _saved.splice(idx,1); } else {
-    _saved.push({title:job.title, company:job.company, link:job.link,
-      savedAt: new Date().toISOString().slice(0,10)});
-  }
-  // Optimistic UI update
-  var saved = isJobSaved(job.link);
-  btn.textContent = saved ? '★' : '☆';
-  btn.classList.toggle('starred', saved);
-  btn.title = saved ? 'Remove from saved' : 'Save job';
-  renderSavedJobs();
-  writeSavedJobs();
-};
-
-window.removeSavedJob = function(idx){
-  _saved.splice(idx,1);
-  renderSavedJobs();
-  updateAllStars();
-  writeSavedJobs();
-};
-
-function updateAllStars(){
-  document.querySelectorAll('.star-btn[data-link]').forEach(function(btn){
-    var saved = isJobSaved(btn.dataset.link);
-    btn.textContent = saved ? '★' : '☆';
-    btn.classList.toggle('starred', saved);
-    btn.title = saved ? 'Remove from saved' : 'Save job';
-  });
-}
-
+/* ── RENDER SAVED JOBS PANEL ── */
 function renderSavedJobs(){
   var el = document.getElementById('saved-jobs-list');
   if(!el) return;
+  var code = getSyncCode();
+  if(!code){
+    el.innerHTML='<div class="saved-empty">Click &#9734; on any job to set your sync code and start saving.</div>';
+    return;
+  }
   if(!_saved.length){
     el.innerHTML='<div class="saved-empty">No saved jobs yet — click &#9734; on any listing.</div>';
     return;
   }
-  el.innerHTML = _saved.map(function(j,i){
+  el.innerHTML = _saved.map(function(j){
     return '<div class="saved-job-item">'
       +'<div class="saved-job-info">'
       +'<a href="'+esc(j.link)+'" target="_blank" class="saved-job-title">'+esc(j.title)+'</a>'
       +'<span class="saved-job-company">'+esc(j.company)+'</span>'
       +'</div>'
       +(j.savedAt?'<span class="saved-job-date">'+esc(fmtDate(j.savedAt))+'</span>':'')
-      +'<button class="saved-remove-btn" onclick="removeSavedJob('+i+')" title="Remove">&#10005;</button>'
+      +'<button class="saved-remove-btn" onclick="removeSavedJob(\''+esc(j.link)+'\')" title="Remove">&#10005;</button>'
       +'</div>';
   }).join('');
 }
 
-/* ── PAT MODAL ── */
-function showPATModal(callback){
-  var m = document.getElementById('pat-modal');
-  m.classList.add('visible');
-  var inp = document.getElementById('pat-input');
-  inp.value = getPAT();
-  setTimeout(function(){ inp.focus(); }, 50);
-  document.getElementById('pat-save-btn').onclick = function(){
-    var t = inp.value.trim();
-    if(!t) return;
-    setPAT(t);
-    m.classList.remove('visible');
-    if(callback) callback();
-  };
-  document.getElementById('pat-cancel-btn').onclick = function(){
-    m.classList.remove('visible');
-  };
+/* ── UPDATE STAR BUTTONS ── */
+function updateAllStars(){
+  document.querySelectorAll('.star-btn').forEach(function(btn){
+    var saved = isJobSaved(btn.dataset.link||'');
+    btn.classList.toggle('starred', saved);
+    btn.innerHTML = saved ? '&#9733;' : '&#9734;';
+    btn.title = saved ? 'Remove from saved' : 'Save job';
+  });
 }
 
-// Init
+/* ── REMOVE SAVED JOB ── */
+window.removeSavedJob = function(link){
+  _saved = _saved.filter(function(j){ return j.link !== link; });
+  dbDelete(link);
+  renderSavedJobs();
+  updateAllStars();
+};
+
+window.handleStar = function(btn){
+  var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
+  var code = getSyncCode();
+  if(!code){
+    code = promptSyncCode();
+    if(!code) return;
+    // after setting code, save this job then reload list
+    var entry = {title:job.title, company:job.company, link:job.link,
+      savedAt:new Date().toISOString()};
+    _saved.unshift(entry);
+    dbInsert(job);
+    renderSavedJobs();
+    updateAllStars();
+    return;
+  }
+  if(isJobSaved(job.link)){
+    _saved = _saved.filter(function(j){ return j.link !== job.link; });
+    dbDelete(job.link);
+  } else {
+    var entry = {title:job.title, company:job.company, link:job.link,
+      savedAt:new Date().toISOString()};
+    _saved.unshift(entry);
+    dbInsert(job);
+  }
+  renderSavedJobs();
+  updateAllStars();
+};
+
+/* ── Initial load ── */
 loadSavedJobs();
 
 })();

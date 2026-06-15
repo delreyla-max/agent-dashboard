@@ -1,0 +1,3 @@
+# Local config files — never push these
+config.js
+users/*/config.js

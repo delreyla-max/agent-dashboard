@@ -1,0 +1,40 @@
+{
+  "enabled": true,
+  "updated": "2026-06-15T08:06:00-07:00",
+  "plan": "Pro",
+  "scheduledPipelines": [
+    {
+      "id": "daily-job-search-chris",
+      "title": "Daily job search",
+      "schedule": "4:08am daily",
+      "enabled": true,
+      "lastRun": "2026-06-14T11:45:26-07:00",
+      "lastRunStatus": "success",
+      "lastRunNote": "2 jobs found (2 Tier 2)",
+      "outputFolder": "C:/Users/gyipl/Documents/Claude/GitHub/agent-dashboard/users/chris/jobs/",
+      "documents": [
+        {
+          "date": "2026-06-15",
+          "file": "jobs_2026-06-15.txt",
+          "relPath": "users/chris/jobs/archive/jobs_2026-06-15.txt",
+          "tier1": 0,
+          "total": 7
+        },
+        {
+          "date": "2026-06-14",
+          "file": "jobs_2026-06-14.txt",
+          "relPath": "users/chris/jobs/archive/jobs_2026-06-14.txt",
+          "tier1": 0,
+          "total": 2
+        }
+      ]
+    }
+  ],
+  "emailDigest": {
+    "date": null,
+    "summary": null,
+    "items": []
+  },
+  "name": "Chris",
+  "docsPrefix": "users/chris/jobs/"
+}

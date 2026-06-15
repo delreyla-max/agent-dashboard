@@ -1,0 +1,54 @@
+{
+  "enabled": true,
+  "updated": "2026-06-14T23:16:00-07:00",
+  "plan": "Pro",
+  "scheduledPipelines": [
+    {
+      "id": "daily-job-search",
+      "title": "Daily job search",
+      "schedule": "4:08am daily",
+      "enabled": true,
+      "lastRun": "2026-06-14T23:16:00-07:00",
+      "lastRunStatus": "ok",
+      "lastRunNote": "1 match (Tier 1) \u2014 Amazon Ring ACD, Hawthorne CA",
+      "outputFolder": "/Users/gy/Documents/ClaudeCowork/GitHub/agent-dashboard/docs/",
+      "documents": [
+        {
+          "date": "2026-06-14",
+          "file": "jobs_2026-06-14.txt",
+          "relPath": "docs/jobs_2026-06-14.txt",
+          "tier1": 2,
+          "total": 3
+        },
+        {
+          "date": "2026-06-13",
+          "file": "jobs_2026-06-13.txt",
+          "relPath": "docs/jobs_2026-06-13.txt",
+          "tier1": 1,
+          "total": 5
+        },
+        {
+          "date": "2026-06-12",
+          "file": "jobs_2026-06-12.txt",
+          "relPath": "docs/jobs_2026-06-12.txt",
+          "tier1": 1,
+          "total": 2
+        },
+        {
+          "date": "2026-06-11",
+          "file": "jobs_2026-06-11.txt",
+          "relPath": "docs/jobs_2026-06-11.txt",
+          "tier1": 1,
+          "total": 1
+        }
+      ]
+    }
+  ],
+  "emailDigest": {
+    "date": null,
+    "summary": null,
+    "items": []
+  },
+  "name": "Garman",
+  "docsPrefix": "docs/"
+}
