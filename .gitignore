@@ -1,9 +1,3 @@
-<<<<<<< HEAD
 # Local config files — never push these
 config.js
 users/*/config.js
-=======
-# Local config files — contain PAT tokens, never push these
-config.js
-chris/config.js
->>>>>>> f7ed51681ebdd9811100e9798fb8bae63864584f

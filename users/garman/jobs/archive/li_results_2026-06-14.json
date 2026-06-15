@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD:users/garman/jobs/archive/li_results_2026-06-14.json
   "generated": "2026-06-14T23:15:44-07:00",
-=======
-  "generated": "2026-06-14T04:14:37-07:00",
->>>>>>> f7ed51681ebdd9811100e9798fb8bae63864584f:docs/li_results_2026-06-14.json
   "source": "LinkedIn",
   "searches": [
     "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead \u2014 Los Angeles 24h",
@@ -12,7 +8,6 @@
   "count": 6,
   "jobs": [
     {
-<<<<<<< HEAD:users/garman/jobs/archive/li_results_2026-06-14.json
       "id": "LI:4353051446",
       "title": "Lead Product Designer, Arc Platform",
       "company": "Circle",
@@ -89,84 +84,6 @@
       "score": 30,
       "tier": "",
       "why": "Pay range is strong ($200-250K) but 'Performance Creative' is performance-marketing oriented (paid media, direct response, A/B testing creative) rather than brand systems or product design direction. Pet brand domain and pure DTC performance focus do not align with Garman's strengths."
-=======
-      "id": "LI:4409526556",
-      "title": "Sr. Product Designer, Measurement & Conversion",
-      "company": "Pinterest",
-      "location": "San Francisco, CA",
-      "posted": "2026-06-13",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/4409526556",
-      "score": 45,
-      "tier": "",
-      "why": "Pinterest is design-led and high-craft. Measurement & Conversion is a specialist UX track below ACD leadership scope. Worth monitoring but not priority."
-    },
-    {
-      "id": "LI:4359149274",
-      "title": "Director, Firefly Foundry Growth",
-      "company": "Adobe",
-      "location": "Culver City, CA",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/4359149274",
-      "score": 38,
-      "tier": "",
-      "why": "Adobe Firefly is directly relevant AI creative product, but \"Foundry Growth\" reads as product growth/GTM rather than creative direction. High screen-out risk as ACD/CD without explicit product growth background."
-    },
-    {
-      "id": "LI:4422202565",
-      "title": "Senior Product Designer",
-      "company": "Fluxon",
-      "location": "United States",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/4422202565",
-      "score": 35,
-      "tier": "",
-      "why": "Generic senior product designer role at small consultancy. Below ACD/CD target level."
-    },
-    {
-      "id": "LI:4409123260",
-      "title": "Senior Product Designer - Core Products",
-      "company": "FranConnect",
-      "location": "Herndon, VA",
-      "posted": "2026-06-13",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/4409123260",
-      "score": 30,
-      "tier": "",
-      "why": "B2B SaaS franchise management platform, niche domain. Senior IC designer level, not leadership. Below target tier."
-    },
-    {
-      "id": "LI:4427422025",
-      "title": "Creative Brand Strategist",
-      "company": "Attic Salt\u00ae",
-      "location": "United States",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/4427422025",
-      "score": 25,
-      "tier": "",
-      "why": "Below director level, skews strategy/positioning writing rather than visual creative direction."
-    },
-    {
-      "id": "LI:4428626340",
-      "title": "Product Designer - Remote",
-      "company": "Sundayy",
-      "location": "United States",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/4428626340",
-      "score": 22,
-      "tier": "",
-      "why": "IC-level at early-stage startup, well below ACD/CD target. Not a priority."
->>>>>>> f7ed51681ebdd9811100e9798fb8bae63864584f:docs/li_results_2026-06-14.json
     }
   ]
 }
