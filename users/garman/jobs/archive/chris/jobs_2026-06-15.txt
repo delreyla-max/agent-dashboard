@@ -1,0 +1,108 @@
+========================================
+CHRIS KIM — DAILY JOB MATCHES
+Monday, June 15, 2026
+========================================
+
+7 job(s) found today scoring 40 or above.
+
+----------------------------------------
+#1 — SCORE: 52/100  |  SOURCE: LinkedIn
+TITLE:    Director, Insights Intelligence (Post Sale, Customer Care)
+COMPANY:  1-800-FLOWERS.COM, INC.
+LOCATION: Jericho, NY
+TYPE:     Full-time
+PAY:      Not listed
+POSTED:   2026-06-14
+LINK:     https://www.linkedin.com/jobs/view/director-insights-intelligence-post-sale-customer-care-at-1-800-flowers-com-inc-4428636530
+TIER:     Tier 3 — Possible, lower priority
+WHY:      1-800-Flowers (e-commerce gifting platform). Director of VoC/CSAT/NPS/sentiment for customer care — brings together voice of customer signals to drive CX improvements. Chris's mixed-methods, exec storytelling, and insights-to-action skills transfer well. Main gaps: it's customer care analytics (not product discovery research), and 1-800-Flowers is not a tech platform. NYC-area location required.
+----------------------------------------
+----------------------------------------
+#2 — SCORE: 47/100  |  SOURCE: LinkedIn
+TITLE:    Senior Director, Economic Insights
+COMPANY:  Ladders (client undisclosed)
+LOCATION: United States
+TYPE:     Full-time
+PAY:      $215,000 - $315,000/yr
+POSTED:   2026-06-15
+LINK:     https://www.linkedin.com/jobs/view/senior-director-economic-insights-at-ladders-4425791061
+TIER:     Tier 3 — Possible, lower priority
+WHY:      Recruiter-listed role at unnamed consumer tech company. 'Economic Insights' focus on marketing growth and customer acquisition suggests this leans marketing analytics over product UX research. Pay range ($215-315K) is VP-level. Worth requesting company name from Ladders before investing time — if it's a consumer platform, the role could have meaningful overlap.
+----------------------------------------
+----------------------------------------
+#3 — SCORE: 43/100  |  SOURCE: LinkedIn
+TITLE:    VP, Analytic Insights
+COMPANY:  Horizon Media
+LOCATION: New York City Metropolitan Area
+TYPE:     Full-time
+PAY:      Not listed
+POSTED:   2026-06-08
+LINK:     https://www.linkedin.com/jobs/view/vp-analytic-insights-at-horizon-media-4411512219
+TIER:     Tier 3 — Possible, lower priority
+WHY:      VP-level at Horizon Media (major media agency). Role owns analytic insights across clients — marketing/media analytics, not product UX research. Domain mismatch from Chris's product research background, but VP scope and insights leadership are relevant skills. Worth a look if Chris is open to media/agency adjacents.
+----------------------------------------
+----------------------------------------
+#4 — SCORE: 42/100  |  SOURCE: LinkedIn
+TITLE:    Director of UX Research, Dating Outcomes & Platform
+COMPANY:  UXR Hunt
+LOCATION: New York, NY
+TYPE:     Full-time
+PAY:      Not listed
+POSTED:   2026-06-13
+LINK:     https://www.linkedin.com/jobs/view/director-of-ux-research-dating-outcomes-platform-at-uxr-hunt-4427244588
+TIER:     Tier 3 — Possible, lower priority
+WHY:      Recruiter repost of the Hinge Director UX Research role (already seen as 4426642829). Dating/relationship tech is a near-perfect domain fit. Score reduced because this is a duplicate listing through UXR Hunt, not the original — apply via Hinge directly.
+----------------------------------------
+----------------------------------------
+#5 — SCORE: 40/100  |  SOURCE: LinkedIn
+TITLE:    Head of Data Science
+COMPANY:  Confidential
+LOCATION: United States
+TYPE:     Full-time
+PAY:      $190,000 - $220,000/yr
+POSTED:   2026-06-08
+LINK:     https://www.linkedin.com/jobs/view/head-of-data-science-at-confidential-4425267594
+TIER:     Tier 3 — Possible, lower priority
+WHY:      Undisclosed company seeking Head of Data Science & Analytics. Remote, VP-range comp. This is a data/ML leadership role, not UX research — but worth reviewing the full JD if the company turns out to be a consumer tech platform where research and data science overlap.
+----------------------------------------
+----------------------------------------
+#6 — SCORE: 40/100  |  SOURCE: LinkedIn
+TITLE:    Vice President, Data Science
+COMPANY:  Five9
+LOCATION: United States
+TYPE:     Full-time
+PAY:      Not listed
+POSTED:   2026-06-13
+LINK:     https://www.linkedin.com/jobs/view/vice-president-data-science-at-five9-4346132439
+TIER:     Tier 3 — Possible, lower priority
+WHY:      Five9 (cloud contact center SaaS). VP Data Science — ML/AI focus, not UX research. Five9 does have product and customer experience angles but this role is analytics/data science leadership, not research. Borderline inclusion.
+----------------------------------------
+----------------------------------------
+#7 — SCORE: 40/100  |  SOURCE: LinkedIn
+TITLE:    Vice President, Digital Experience & Optimization
+COMPANY:  Ariat International
+LOCATION: San Leandro, CA
+TYPE:     Full-time
+PAY:      $270,000 - $290,000/yr
+POSTED:   2026-06-09
+LINK:     https://www.linkedin.com/jobs/view/vice-president-digital-experience-optimization-at-ariat-international-4424465618
+TIER:     Tier 3 — Possible, lower priority
+WHY:      Ariat (equestrian apparel/footwear e-commerce). VP Digital Experience owns site UX/UI, merchandising, and CRO. Pay is strong ($270-290K). This is a product/execution ownership role rather than a research leadership role — Chris would be running the experience, not studying users. Worth reviewing if open to pivoting toward digital product leadership.
+----------------------------------------
+
+SEARCH NOTES
+------------
+LinkedIn (VP/Head UX Research — US Remote 7d):   2 raw → 2 after filter
+LinkedIn (VP/Head Research general — US Remote 7d):   3 raw → 2 after filter
+LinkedIn (Director UX Research — US 7d):   1 raw → 1 after filter
+LinkedIn (Director of Research/Head of Insights — US 7d):   8 raw → 2 after filter
+LinkedIn (Senior Director Research/Insights — US 7d):   1 raw → 0 after filter
+LinkedIn (VP/Director Consumer Insights tech — US 7d):   8 raw → 0 after filter
+Indeed (all searches):                                0 raw → 0 after filter
+Cross-source duplicates:                              1 removed (UXR Hunt = Hinge repost)
+Previously seen (deduped):                            1 removed
+Final list:                                           7 job(s)
+
+Note: Score threshold lowered to 40 per request. Jobs 40-54 are Tier 3 long-shots
+included for awareness — domain or role-type gaps noted in WHY field.
+========================================

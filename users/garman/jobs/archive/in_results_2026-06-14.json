@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD:users/garman/jobs/archive/in_results_2026-06-14.json
   "generated": "2026-06-14T23:15:44-07:00",
   "source": "Indeed",
   "searches": [
@@ -34,6 +35,56 @@
       "score": 48,
       "tier": "",
       "why": "ACD Art title matches Garman's level and the pay range is just above his $140K baseline. Agency environment aligns with his background. Risk: NJ location is not LA or remote; Princeton10 is a smaller unknown agency; pay at baseline with NJ cost of living is not a clear step up for Garman."
+=======
+  "generated": "2026-06-14T04:14:37-07:00",
+  "source": "Indeed",
+  "searches": [
+    "Creative Director ACD \u2014 Los Angeles fulltime",
+    "Brand Design Director AI Creative Lead \u2014 Los Angeles fulltime",
+    "Creative Director ACD \u2014 Remote fulltime",
+    "Product Design Lead CRM Creative Director \u2014 Remote fulltime"
+  ],
+  "count": 3,
+  "jobs": [
+    {
+      "id": "IN:JOBSEARCH_367",
+      "title": "Associate Creative Director, Ring Retail & Marketing",
+      "company": "Amazon",
+      "location": "Hawthorne, CA",
+      "posted": "2026-02-28",
+      "type": "Full-time",
+      "pay": "$141,000 - $190,700 a year",
+      "link": "https://to.indeed.com/aaw9lbkk92nw",
+      "score": 76,
+      "tier": "Tier 1",
+      "why": "ACD-level fit at Amazon/Ring \u2014 brand and retail marketing creative aligning with brand systems, campaign, and digital experience leadership. Apple/iAd hardware connection is a differentiator. Slight risk: ensure portfolio leads consumer brand angle over CRM."
+    },
+    {
+      "id": "IN:JOBSEARCH_369",
+      "title": "Associate Creative Director, Art",
+      "company": "Princeton10",
+      "location": "Montclair, NJ (Remote eligible)",
+      "posted": "2026-04-20",
+      "type": "Full-time",
+      "pay": "$140,000 - $180,000 a year",
+      "link": "https://to.indeed.com/aa4q26qfyxpm",
+      "score": 63,
+      "tier": "Tier 1",
+      "why": "ACD Art at a creative consultancy, remote-eligible, strong comp range. Title and level match directly. Lower score reflects limited info on Princeton10 scale and client roster."
+    },
+    {
+      "id": "IN:JOBSEARCH_372",
+      "title": "Director of Marketing",
+      "company": "OTC Industrial Technologies",
+      "location": "Columbus, OH",
+      "posted": "2026-04-16",
+      "type": "Full-time",
+      "pay": "$93,817 - $152,778 a year",
+      "link": "https://to.indeed.com/aajnfm44tmh9",
+      "score": 15,
+      "tier": "",
+      "why": "Industrial technologies marketing director \u2014 no creative direction or design system overlap. Not viable."
+>>>>>>> f7ed51681ebdd9811100e9798fb8bae63864584f:docs/in_results_2026-06-14.json
     }
   ]
 }
