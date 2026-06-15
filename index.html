@@ -307,6 +307,15 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .btn-add-chip:hover { background:var(--border); }
 .chip-count { font-size:11px; color:var(--muted); white-space:nowrap; }
 .chip-parsed { font-size:11px; color:var(--muted); margin-top:8px; }
+.chip-panel-toggle {
+  background:none; border:none; color:var(--muted); cursor:pointer;
+  font-size:13px; padding:0 2px; line-height:1; transition:transform .2s, color .15s;
+  flex-shrink:0;
+}
+.chip-panel-toggle:hover { color:var(--text); }
+.chip-panel-toggle.collapsed { transform:rotate(-90deg); }
+.chip-panel-body { overflow:hidden; transition:max-height .25s ease, opacity .2s ease; max-height:600px; opacity:1; }
+.chip-panel-body.collapsed { max-height:0; opacity:0; pointer-events:none; }
 
 /* ── MAIN 2-COL LAYOUT ── */
 .main-2col { display:flex; flex-direction:column; gap:24px; }
@@ -498,16 +507,19 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       <span class="chip-panel-title">&#128196; Resume Keywords</span>
       <span class="chip-panel-dirty" id="keywords-dirty">Unsaved changes</span>
       <button class="btn-save-chips" id="keywords-save-btn" onclick="saveKeywords()">Save</button>
+      <button class="chip-panel-toggle" id="keywords-toggle" onclick="togglePanel('keywords')" title="Collapse">&#9660;</button>
     </div>
-    <div class="chips-area" id="keywords-chips">
-      <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+    <div class="chip-panel-body" id="keywords-body">
+      <div class="chips-area" id="keywords-chips">
+        <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+      </div>
+      <div class="chip-add-row">
+        <input class="chip-input" id="keyword-input" type="text" placeholder="Add keyword…"
+          onkeydown="if(event.key==='Enter') addKeyword()" />
+        <button class="btn-add-chip" onclick="addKeyword()">Add</button>
+      </div>
+      <div class="chip-parsed" id="keywords-parsed"></div>
     </div>
-    <div class="chip-add-row">
-      <input class="chip-input" id="keyword-input" type="text" placeholder="Add keyword…"
-        onkeydown="if(event.key==='Enter') addKeyword()" />
-      <button class="btn-add-chip" onclick="addKeyword()">Add</button>
-    </div>
-    <div class="chip-parsed" id="keywords-parsed"></div>
   </div>
 
   <!-- Job Titles Panel -->
@@ -517,14 +529,17 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
       <span class="chip-count" id="titles-count"></span>
       <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
+      <button class="chip-panel-toggle" id="titles-toggle" onclick="togglePanel('titles')" title="Collapse">&#9660;</button>
     </div>
-    <div class="chips-area" id="titles-chips">
-      <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-    </div>
-    <div class="chip-add-row">
-      <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
-        onkeydown="if(event.key==='Enter') addTitle()" />
-      <button class="btn-add-chip" onclick="addTitle()">Add</button>
+    <div class="chip-panel-body" id="titles-body">
+      <div class="chips-area" id="titles-chips">
+        <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+      </div>
+      <div class="chip-add-row">
+        <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
+          onkeydown="if(event.key==='Enter') addTitle()" />
+        <button class="btn-add-chip" onclick="addTitle()">Add</button>
+      </div>
     </div>
   </div>
 
@@ -760,6 +775,12 @@ function init(d){
   }
 
   function jobItemHtml(j){
+    // normalize field name variants from different pipeline outputs
+    var company = j.company || j.companyName || '';
+    var pay     = j.pay     || j.salary      || '';
+    var why     = j.why     || j.scoreNotes  || '';
+    var type    = j.type    || j.employmentType || '';
+
     var titleHtml = j.link
       ? '<a href="'+esc(j.link)+'" target="_blank" rel="noopener">'+esc(j.title)+'</a>'
       : esc(j.title);
@@ -773,7 +794,7 @@ function init(d){
     var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
       +' data-link="'+esc(j.link||'')+'"'
       +' data-title="'+esc(j.title||'')+'"'
-      +' data-company="'+esc(j.company||'')+'"'
+      +' data-company="'+esc(company)+'"'
       +' onclick="handleStar(this)"'
       +' title="'+(saved?'Remove from saved':'Save job')+'">'
       +(saved?'&#9733;':'&#9734;')+'</button>';
@@ -784,11 +805,11 @@ function init(d){
       +'<div class="job-item-title" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">'
         +'<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+srcBadge+starBtn
       +'</div>'
-      +(j.company?'<div class="job-item-company">'+esc(j.company)+'</div>':'')
-      +'<div class="job-item-meta">'+(j.location?'<span>&#128205; '+esc(j.location)+'</span>':'')+(j.type?'<span>'+esc(j.type)+'</span>':'')+'</div>'
-      +(j.pay?'<div class="job-item-pay">&#128176; '+esc(j.pay)+'</div>':'')
+      +(company?'<div class="job-item-company">'+esc(company)+'</div>':'')
+      +'<div class="job-item-meta">'+(j.location?'<span>&#128205; '+esc(j.location)+'</span>':'')+(type?'<span>'+esc(type)+'</span>':'')+'</div>'
+      +(pay?'<div class="job-item-pay">&#128176; '+esc(pay)+'</div>':'')
       +(j.posted?'<div class="job-item-posted">Posted: '+esc(j.posted)+'</div>':'')
-      +(j.why?'<div class="job-item-why">'+esc(j.why)+'</div>':'')
+      +(why?'<div class="job-item-why">'+esc(why)+'</div>':'')
       +'</div>';
   }
 
@@ -959,6 +980,19 @@ window.handleStar = function(btn){
   }
   renderSavedJobs();
   updateAllStars();
+};
+
+/* ═══════════════════════════════════
+   COLLAPSIBLE PANELS
+   ═══════════════════════════════════ */
+var _panelState = { keywords: true, titles: true }; // true = expanded
+
+window.togglePanel = function(name){
+  _panelState[name] = !_panelState[name];
+  var body   = document.getElementById(name+'-body');
+  var toggle = document.getElementById(name+'-toggle');
+  if(body)   body.classList.toggle('collapsed', !_panelState[name]);
+  if(toggle) toggle.classList.toggle('collapsed', !_panelState[name]);
 };
 
 /* ═══════════════════════════════════
