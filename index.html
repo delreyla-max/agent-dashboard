@@ -530,8 +530,6 @@ var enabled = true; // will be set in init()
 /* ── ON/OFF ── */
 function applyEnabled(){ document.getElementById('disabled-overlay').classList[enabled?'remove':'add']('visible'); }
 function updatePill(){ var p=document.getElementById('toggle-pill'); p.className='pill '+(enabled?'on':'off'); document.getElementById('pill-label').textContent=enabled?'ON':'OFF'; }
-window.loadHistoricalJobs = loadHistoricalJobs;
-window.exitHistoricalMode = exitHistoricalMode;
 window.toggleDashboard = function(){ enabled=!enabled; updatePill(); applyEnabled(); document.getElementById('save-banner').classList.add('visible'); };
 
 function init(d){
@@ -806,6 +804,8 @@ function loadBoard(showSpinner){
 }
 
 window.refreshBoard = function(){ loadBoard(true); };
+window.loadHistoricalJobs = loadHistoricalJobs;
+window.exitHistoricalMode = exitHistoricalMode;
 
 // Initial load
 loadBoard(true);
