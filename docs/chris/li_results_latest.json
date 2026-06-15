@@ -1,10 +1,10 @@
 {
-  "generated": "2026-06-14T11:45:26-07:00",
+  "generated": "2026-06-14T23:26:10-07:00",
   "source": "LinkedIn",
   "searches": [
-    "\"VP UX Research\" OR \"Head of UX Research\" \u2014 US Remote 7d (exact phrases)",
-    "\"Director UX Research\" OR \"Director of User Research\" \u2014 US 7d (exact phrases)",
-    "\"VP Consumer Insights\" OR \"Head of Consumer Insights\" \u2014 US 7d (exact phrases)"
+    "VP Research OR VP UX Research OR Head of Research \u2014 US Remote 24h",
+    "Director UX Research OR Senior Director Research \u2014 US 24h",
+    "VP/Head/Director Consumer Insights OR Customer Insights \u2014 US 24h"
   ],
   "count": 2,
   "jobs": [
@@ -19,20 +19,20 @@
       "link": "https://www.linkedin.com/jobs/view/director-of-ux-research-dating-outcomes-platform-at-hinge-4426642829",
       "score": 70,
       "tier": "Tier 2",
-      "why": "Dating Outcomes & Platform at Hinge is almost identical to Chris's 12-year focus at Match Group. VP-level comp ($235-287K), manage-managers scope, strategic ownership of core product research. Gaps: NYC (not LA), Director title below prior VP level."
+      "why": "Dating Outcomes & Platform research at Hinge is almost identical to Chris's 12-year focus at Match Group. VP-level comp, manage-managers scope, strategic product research ownership."
     },
     {
       "id": "4425268802",
       "title": "Director, UX Research, Search Verticals",
       "company": "Google",
-      "location": "Mountain View, CA / New York, NY / San Francisco, CA",
+      "location": "Mountain View, CA",
       "posted": "2026-06-08",
       "type": "Full-time",
-      "pay": "",
+      "pay": "Not listed",
       "link": "https://www.linkedin.com/jobs/view/director-ux-research-search-verticals-at-google-4425268802",
       "score": 62,
       "tier": "Tier 2",
-      "why": "Search Verticals = information-seeking/discovery = Chris's deepest research domain. Requires 15 years managing research teams (Chris has 15+). Gaps: PhD preferred, content design team management required, relocation to MTV/NY/SF."
+      "why": "Google Search Verticals aligns with Chris's core expertise in information-seeking, discovery, and search. Requires 15 years managing research teams at scale."
     }
   ]
 }
