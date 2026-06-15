@@ -429,7 +429,21 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 </script>
 
 
-<!-- Auth state — populated by Supabase onAuthStateChange -->
+<!-- Sync Code Modal -->
+<div id="pat-modal" class="pat-modal">
+  <div class="pat-modal-box">
+    <div class="pat-modal-title">Enter your sync code</div>
+    <div class="pat-modal-desc">
+      Pick any code you like (e.g. <code>gyip-jobs</code>).<br><br>
+      Use the same code on all your devices and your saved jobs will sync automatically. No login required.
+    </div>
+    <input id="pat-input" class="pat-input" type="text" placeholder="e.g. gyip-jobs" autocomplete="off" />
+    <div class="pat-modal-btns">
+      <button class="btn-ghost" id="pat-cancel-btn">Cancel</button>
+      <button class="btn-primary" id="pat-save-btn">Save &amp; Continue</button>
+    </div>
+  </div>
+</div>
 
 <div id="disabled-overlay">
   <div class="off-icon">&#9899;</div>
@@ -831,14 +845,23 @@ function getSyncCode(){
   return localStorage.getItem(SYNC_CODE_KEY) || '';
 }
 
-function promptSyncCode(){
-  var code = prompt('Enter your sync code to save jobs across devices.\n\nPick any code you like (e.g. gyip-jobs).\nYou\'ll use the same code on all your devices.');
-  if(code && code.trim()){
-    var c = code.trim().toLowerCase();
-    localStorage.setItem(SYNC_CODE_KEY, c);
-    return c;
-  }
-  return '';
+function showSyncModal(callback){
+  var m = document.getElementById('pat-modal');
+  m.classList.add('visible');
+  var inp = document.getElementById('pat-input');
+  inp.value = getSyncCode();
+  setTimeout(function(){ inp.focus(); }, 50);
+  document.getElementById('pat-save-btn').onclick = function(){
+    var t = inp.value.trim().toLowerCase();
+    if(!t) return;
+    localStorage.setItem(SYNC_CODE_KEY, t);
+    m.classList.remove('visible');
+    loadSavedJobs();
+    if(callback) callback();
+  };
+  document.getElementById('pat-cancel-btn').onclick = function(){
+    m.classList.remove('visible');
+  };
 }
 
 /* ── DB READS / WRITES ── */
@@ -930,18 +953,7 @@ window.removeSavedJob = function(link){
 window.handleStar = function(btn){
   var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
   var code = getSyncCode();
-  if(!code){
-    code = promptSyncCode();
-    if(!code) return;
-    // after setting code, save this job then reload list
-    var entry = {title:job.title, company:job.company, link:job.link,
-      savedAt:new Date().toISOString()};
-    _saved.unshift(entry);
-    dbInsert(job);
-    renderSavedJobs();
-    updateAllStars();
-    return;
-  }
+  if(!code){ showSyncModal(function(){ window.handleStar(btn); }); return; }
   if(isJobSaved(job.link)){
     _saved = _saved.filter(function(j){ return j.link !== job.link; });
     dbDelete(job.link);
