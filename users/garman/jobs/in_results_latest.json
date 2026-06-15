@@ -1,39 +1,41 @@
 {
-  "generated": "2026-06-14T23:15:44-07:00",
+  "generated": "2026-06-15T14:05:23-07:00",
   "source": "Indeed",
   "searches": [
-    "Creative Director Associate Creative Director \u2014 Los Angeles fulltime",
-    "Brand Design Director AI Creative Lead \u2014 Los Angeles fulltime",
-    "Creative Director Associate Creative Director \u2014 Remote fulltime",
-    "Product Design Lead CRM Creative Director \u2014 Remote fulltime"
+    "Creative Director / ACD \u2014 Los Angeles fulltime",
+    "Brand Design Director / AI Creative Lead \u2014 Los Angeles fulltime",
+    "Creative Director / ACD \u2014 Remote fulltime",
+    "Product Design Lead / CRM Creative Director \u2014 Remote fulltime"
   ],
   "count": 2,
   "jobs": [
     {
-      "id": "IN:JOBSEARCH_407",
+      "id": "JOBSEARCH_477",
       "title": "Associate Creative Director, Ring Retail & Marketing",
-      "company": "Amazon.com",
+      "companyName": "Amazon",
       "location": "Hawthorne, CA",
       "posted": "2026-02-28",
-      "type": "Full-time",
-      "pay": "$141,000 - $190,700/yr",
-      "link": "https://to.indeed.com/aa2pl2pgrxnk",
-      "score": 64,
-      "tier": "Tier 1 \u2014 Apply with confidence",
-      "why": "ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 \u2014 role is 3.5 months old and may already be filled or in late-stage hiring."
+      "salary": "$141,000 - $190,700",
+      "link": "https://to.indeed.com/aajzkqcxpwyh",
+      "descriptionText": "ACD role on Ring Retail & Marketing at Amazon in Hawthorne CA. Creative direction for Ring brand marketing, retail campaigns, digital, product launch campaigns.",
+      "score": 65,
+      "tier": "Tier 2",
+      "scoreNotes": "ACD is Tier 1 level (25/25). Amazon Ring is consumer tech/smart home brand with strong design culture (12/15). Core skill overlap: brand direction, campaigns, product launches, CRM/lifecycle possible (22/30). AI pipeline and Apple consumer-electronics credibility are differentiators (11/15). Slight comp risk (Ring retail scope narrower than full brand systems) (-5). Strong LA location match.",
+      "source": "Indeed"
     },
     {
-      "id": "IN:JOBSEARCH_413",
+      "id": "JOBSEARCH_479",
       "title": "Associate Creative Director, Art",
-      "company": "Princeton10",
+      "companyName": "Princeton10",
       "location": "Montclair, NJ",
       "posted": "2026-04-20",
-      "type": "Full-time",
-      "pay": "$140,000 - $180,000/yr",
-      "link": "https://to.indeed.com/aapy62zblky7",
-      "score": 48,
-      "tier": "",
-      "why": "ACD Art title matches Garman's level and the pay range is just above his $140K baseline. Agency environment aligns with his background. Risk: NJ location is not LA or remote; Princeton10 is a smaller unknown agency; pay at baseline with NJ cost of living is not a clear step up for Garman."
+      "salary": "$140,000 - $180,000",
+      "link": "https://to.indeed.com/aazx4j9v7r4g",
+      "descriptionText": "ACD Art at Princeton10, an ad agency in NJ. Art direction, brand campaigns, creative team leadership.",
+      "score": 51,
+      "tier": "Below Threshold",
+      "scoreNotes": "ACD Art is perfect title match (25/25). Agency work aligns with Garman's background (18/30 core skills). Unknown specific clients limit domain/brand fit score (7/15). AI pipeline and brand systems are genuine differentiators for agency (10/15). Location penalty: NJ requires relocation from LA (-9). Comp is competitive.",
+      "source": "Indeed"
     }
   ]
 }

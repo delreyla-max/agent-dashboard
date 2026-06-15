@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "updated": "2026-06-14T23:16:00-07:00",
+  "updated": "2026-06-15T14:05:23-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-14T23:16:00-07:00",
+      "lastRun": "2026-06-15T14:05:23-07:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "1 match (Tier 1) \u2014 Amazon Ring ACD, Hawthorne CA",
+      "lastRunNote": "7 new jobs added (0 Tier 1, 2 Tier 2) \u2014 19 total cumulative",
       "outputFolder": "/Users/gy/Documents/ClaudeCowork/GitHub/agent-dashboard/users/garman/jobs/",
       "documents": []
     }
@@ -20,7 +20,7 @@
     "summary": null,
     "items": [],
     "recommendations": [
-      "The Amazon Ring ACD in today's Indeed results was posted February 28 — nearly 4 months ago. Indeed isn't filtering by recency, so stale roles are mixing in with fresh ones. Worth adding a \"past 14 days\" filter to Indeed searches so what surfaces is actually new."
+      "The Amazon Ring ACD in today's Indeed results was posted February 28 \u2014 nearly 4 months ago. Indeed isn't filtering by recency, so stale roles are mixing in with fresh ones. Worth adding a \"past 14 days\" filter to Indeed searches so what surfaces is actually new."
     ]
   },
   "name": "Garman",

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- MANAGER: update data/{user}.json after each task/pipeline event -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -162,7 +161,6 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .badge-ok          { background:#052e16; color:#86efac; border:1px solid #166534; }
 .badge-failed      { background:#450a0a; color:#fca5a5; border:1px solid #991b1b; }
 
-
 /* ── PIPELINE CARD ── */
 .pipeline-cards { display:flex; flex-direction:column; gap:14px; }
 .pipeline-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); padding:16px; }
@@ -180,7 +178,6 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .pipeline-docs a:hover { text-decoration:underline; }
 .pipeline-docs .doc-meta { color:var(--muted); margin-left:6px; }
 .pipeline-empty { font-size:12px; color:var(--muted); font-style:italic; }
-
 
 /* ── RECOMMENDATIONS ── */
 .recs-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); padding:16px; }
@@ -236,37 +233,80 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 }
 .auth-signout:hover { border-color:var(--red); color:var(--red); }
 
-/* ── PAT MODAL (unused, kept for reference) ── */
-.pat-modal {
+/* ── LOGIN MODAL ── */
+.login-modal {
   display:none; position:fixed; inset:0; z-index:200;
-  background:rgba(10,11,18,0.88); justify-content:center; align-items:center;
+  background:rgba(10,11,18,0.92); justify-content:center; align-items:center;
 }
-.pat-modal.visible { display:flex; }
-.pat-modal-box {
+.login-modal.visible { display:flex; }
+.login-box {
   background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-card); padding:24px; max-width:440px; width:92%;
+  border-radius:var(--radius-card); padding:28px 28px 24px; max-width:380px; width:92%;
 }
-.pat-modal-title { font-size:15px; font-weight:700; margin-bottom:10px; }
-.pat-modal-desc { font-size:12px; color:var(--muted); margin-bottom:16px; line-height:1.6; }
-.pat-modal-desc a { color:var(--blue); }
-.pat-modal-desc code { font-family:monospace; background:var(--surface2); padding:1px 4px; border-radius:3px; font-size:11px; }
-.pat-input {
+.login-title { font-size:16px; font-weight:700; margin-bottom:4px; }
+.login-sub { font-size:12px; color:var(--muted); margin-bottom:20px; }
+.login-label { font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; display:block; }
+.login-input {
   width:100%; background:var(--surface2); border:1px solid var(--border);
-  border-radius:6px; padding:8px 10px; font-size:13px; color:var(--text);
-  margin-bottom:14px; font-family:monospace; box-sizing:border-box;
+  border-radius:6px; padding:9px 11px; font-size:13px; color:var(--text);
+  margin-bottom:14px; outline:none; transition:border-color .15s;
 }
-.pat-input:focus { outline:none; border-color:var(--blue); }
-.pat-modal-btns { display:flex; gap:8px; justify-content:flex-end; }
+.login-input:focus { border-color:var(--blue); }
+.login-error { font-size:12px; color:var(--red); margin-bottom:12px; display:none; }
+.login-error.visible { display:block; }
 .btn-primary {
-  background:var(--blue); color:#fff; border:none; border-radius:6px;
-  padding:7px 18px; font-size:13px; font-weight:600; cursor:pointer; transition:opacity .15s;
+  width:100%; background:var(--blue); color:#fff; border:none; border-radius:6px;
+  padding:9px 18px; font-size:13px; font-weight:600; cursor:pointer; transition:opacity .15s;
 }
 .btn-primary:hover { opacity:.85; }
-.btn-ghost {
-  background:none; color:var(--muted); border:1px solid var(--border);
-  border-radius:6px; padding:7px 14px; font-size:13px; cursor:pointer;
+.btn-primary:disabled { opacity:.5; cursor:not-allowed; }
+
+/* ── CHIP PANELS ── */
+.chip-panel-wrap {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-card); padding:14px 16px; margin-bottom:16px;
 }
-.btn-ghost:hover { background:var(--surface2); color:var(--text); }
+.chip-panel-header {
+  display:flex; align-items:center; gap:8px; margin-bottom:12px;
+}
+.chip-panel-title { font-size:13px; font-weight:700; flex:1; }
+.chip-panel-dirty { font-size:11px; color:var(--amber); display:none; }
+.chip-panel-dirty.visible { display:inline; }
+.chip-panel-meta { font-size:11px; color:var(--muted); }
+.btn-save-chips {
+  background:var(--blue); color:#fff; border:none; border-radius:5px;
+  padding:4px 12px; font-size:12px; font-weight:600; cursor:pointer;
+  transition:opacity .15s; display:none;
+}
+.btn-save-chips.visible { display:inline-block; }
+.btn-save-chips:hover { opacity:.85; }
+.chips-area { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:11px; min-height:28px; }
+.chip {
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:999px; padding:4px 10px 4px 12px;
+  font-size:12px; color:var(--text);
+}
+.chip-remove {
+  background:none; border:none; color:var(--muted); cursor:pointer;
+  font-size:13px; line-height:1; padding:0; transition:color .15s;
+}
+.chip-remove:hover { color:var(--red); }
+.chip-add-row { display:flex; gap:8px; align-items:center; }
+.chip-input {
+  flex:1; background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; padding:6px 10px; font-size:12px; color:var(--text);
+  outline:none; transition:border-color .15s;
+}
+.chip-input:focus { border-color:var(--blue); }
+.btn-add-chip {
+  background:var(--surface2); color:var(--text); border:1px solid var(--border);
+  border-radius:6px; padding:6px 14px; font-size:12px; font-weight:600;
+  cursor:pointer; transition:background .15s; white-space:nowrap;
+}
+.btn-add-chip:hover { background:var(--border); }
+.chip-count { font-size:11px; color:var(--muted); white-space:nowrap; }
+.chip-parsed { font-size:11px; color:var(--muted); margin-top:8px; }
 
 /* ── MAIN 2-COL LAYOUT ── */
 .main-2col { display:flex; flex-direction:column; gap:24px; }
@@ -292,7 +332,6 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center; line-height:1.6; }
 .empty-state { font-size:12px; color:var(--muted); padding:12px 0; font-style:italic; }
 
-/* ── 2-COL LAYOUT ── */
 @media (min-width:700px) {
   .page { padding:24px 20px 60px; }
   header h1 { font-size:21px; }
@@ -321,8 +360,8 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   "generated": "2026-06-14T23:15:44-07:00",
   "source": "LinkedIn",
   "searches": [
-    "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead \u2014 Los Angeles 24h",
-    "Creative Director OR ACD OR Product Design Lead OR AI Creative Lead OR CRM Creative Director \u2014 US Remote 24h"
+    "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead — Los Angeles 24h",
+    "Creative Director OR ACD OR Product Design Lead OR AI Creative Lead OR CRM Creative Director — US Remote 24h"
   ],
   "count": 3,
   "jobs": [
@@ -336,7 +375,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       "pay": "",
       "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353051446",
       "score": 54,
-      "tier": "Tier 2 \u2014 Good fit with tailoring",
+      "tier": "Tier 2 — Good fit with tailoring",
       "why": "Circle is a well-funded fintech platform and Lead Product Designer in LA aligns with Garman's Storyfire, Xome, and Toyota Garage product design work. Strongest proof points are end-to-end platform ownership and fintech adjacency via Mr. Cooper. Risk: 'Lead' title is a step-down from ACD and crypto-specific knowledge gap."
     },
     {
@@ -349,7 +388,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       "pay": "",
       "link": "https://www.linkedin.com/jobs/view/director-of-product-design-at-hiive-4368776287",
       "score": 51,
-      "tier": "Tier 2 \u2014 Good fit with tailoring",
+      "tier": "Tier 2 — Good fit with tailoring",
       "why": "Director of Product Design title fits Garman's level. Hiive is a private-market securities marketplace; Garman's Xome (real estate marketplace) and Mr. Cooper (fintech) provide relevant proof. Risk: early-stage startup in Seattle, Garman's creative-director framing may need repositioning as product-first."
     },
     {
@@ -364,45 +403,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       "score": 35,
       "tier": "",
       "why": "Art Director is two levels below Garman's current ACD role; NY location is another barrier. Some e-commerce/retail creative overlap (Taco Bell, Adidas Golf digital) but the role level and domain fit are both weak relative to Garman's profile."
-    },
-    {
-      "id": "LI:4398146518",
-      "title": "Executive Creative Director",
-      "company": "Conagra Brands",
-      "location": "Chicago, IL",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/executive-creative-director-at-conagra-brands-4398146518",
-      "score": 38,
-      "tier": "",
-      "why": "ECD at a major CPG brand is a reach from Garman's ACD level. Brand systems thinking and AI pipeline are relevant differentiators, but CPG domain is thin (only Jeffry's at small scale) and Chicago relocation would be required."
-    },
-    {
-      "id": "LI:4407226475",
-      "title": "Design Operations Lead",
-      "company": "Chime",
-      "location": "San Francisco Bay Area",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/design-operations-lead-at-chime-4407226475",
-      "score": 32,
-      "tier": "",
-      "why": "Design Operations is a process/infrastructure role that does not leverage Garman's creative direction, art direction, or brand-systems strengths. Chime is a notable fintech brand but the role is misaligned with Garman's profile."
-    },
-    {
-      "id": "LI:4428147043",
-      "title": "Head of Performance Creative (Pet Brand)",
-      "company": "Ecom.jobs",
-      "location": "United States",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "$200,000 - $250,000/yr",
-      "link": "https://www.linkedin.com/jobs/view/head-of-performance-creative-pet-brand-at-ecom-jobs-4428147043",
-      "score": 30,
-      "tier": "",
-      "why": "Pay range is strong ($200-250K) but 'Performance Creative' is performance-marketing oriented (paid media, direct response, A/B testing creative) rather than brand systems or product design direction. Pet brand domain and pure DTC performance focus do not align with Garman's strengths."
     }
   ]
 }
@@ -412,10 +412,10 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   "generated": "2026-06-14T23:15:44-07:00",
   "source": "Indeed",
   "searches": [
-    "Creative Director Associate Creative Director \u2014 Los Angeles fulltime",
-    "Brand Design Director AI Creative Lead \u2014 Los Angeles fulltime",
-    "Creative Director Associate Creative Director \u2014 Remote fulltime",
-    "Product Design Lead CRM Creative Director \u2014 Remote fulltime"
+    "Creative Director Associate Creative Director — Los Angeles fulltime",
+    "Brand Design Director AI Creative Lead — Los Angeles fulltime",
+    "Creative Director Associate Creative Director — Remote fulltime",
+    "Product Design Lead CRM Creative Director — Remote fulltime"
   ],
   "count": 2,
   "jobs": [
@@ -429,8 +429,8 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       "pay": "$141,000 - $190,700/yr",
       "link": "https://to.indeed.com/aa2pl2pgrxnk",
       "score": 64,
-      "tier": "Tier 1 \u2014 Apply with confidence",
-      "why": "ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 \u2014 role is 3.5 months old and may already be filled or in late-stage hiring."
+      "tier": "Tier 1 — Apply with confidence",
+      "why": "ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 — role is 3.5 months old and may already be filled or in late-stage hiring."
     },
     {
       "id": "IN:JOBSEARCH_413",
@@ -449,20 +449,17 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 }
 </script>
 
-
-<!-- Sync Code Modal -->
-<div id="pat-modal" class="pat-modal">
-  <div class="pat-modal-box">
-    <div class="pat-modal-title">Enter your sync code</div>
-    <div class="pat-modal-desc">
-      Pick any code you like (e.g. <code>gyip-jobs</code>).<br><br>
-      Use the same code on all your devices and your saved jobs will sync automatically. No login required.
-    </div>
-    <input id="pat-input" class="pat-input" type="text" placeholder="e.g. gyip-jobs" autocomplete="off" />
-    <div class="pat-modal-btns">
-      <button class="btn-ghost" id="pat-cancel-btn">Cancel</button>
-      <button class="btn-primary" id="pat-save-btn">Save &amp; Continue</button>
-    </div>
+<!-- Login Modal -->
+<div id="login-modal" class="login-modal">
+  <div class="login-box">
+    <div class="login-title">Job Search Dashboard</div>
+    <div class="login-sub">Sign in to access your dashboard</div>
+    <label class="login-label" for="login-email">Email</label>
+    <input id="login-email" class="login-input" type="email" placeholder="you@example.com" autocomplete="email" />
+    <label class="login-label" for="login-password">Password</label>
+    <input id="login-password" class="login-input" type="password" placeholder="••••••••" autocomplete="current-password" />
+    <div id="login-error" class="login-error"></div>
+    <button id="login-btn" class="btn-primary" onclick="doLogin()">Sign in</button>
   </div>
 </div>
 
@@ -487,18 +484,54 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   </header>
 
   <!-- Saved Jobs -->
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-    <div class="section-header" style="margin-top:0;margin-bottom:0;">&#11088; Saved Jobs</div>
-    <button onclick="showSyncModal()" style="background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:4px 10px;border-radius:6px;cursor:pointer;" id="sync-code-btn">🔑 Sync code</button>
-  </div>
+  <div class="section-header" style="margin-top:0;">&#11088; Saved Jobs</div>
   <div class="saved-jobs-panel" id="saved-jobs-list">
-    <div class="saved-empty">Loading…</div>
+    <div class="saved-empty">Sign in to see saved jobs.</div>
+  </div>
+
+  <!-- Search Settings -->
+  <div class="section-header">&#9881;&#65039; Search Settings</div>
+
+  <!-- Resume Keywords Panel -->
+  <div class="chip-panel-wrap" id="keywords-panel-wrap">
+    <div class="chip-panel-header">
+      <span class="chip-panel-title">&#128196; Resume Keywords</span>
+      <span class="chip-panel-dirty" id="keywords-dirty">Unsaved changes</span>
+      <button class="btn-save-chips" id="keywords-save-btn" onclick="saveKeywords()">Save</button>
+    </div>
+    <div class="chips-area" id="keywords-chips">
+      <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+    </div>
+    <div class="chip-add-row">
+      <input class="chip-input" id="keyword-input" type="text" placeholder="Add keyword…"
+        onkeydown="if(event.key==='Enter') addKeyword()" />
+      <button class="btn-add-chip" onclick="addKeyword()">Add</button>
+    </div>
+    <div class="chip-parsed" id="keywords-parsed"></div>
+  </div>
+
+  <!-- Job Titles Panel -->
+  <div class="chip-panel-wrap" id="titles-panel-wrap">
+    <div class="chip-panel-header">
+      <span class="chip-panel-title">&#128269; Job Titles</span>
+      <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
+      <span class="chip-count" id="titles-count"></span>
+      <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
+    </div>
+    <div class="chips-area" id="titles-chips">
+      <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+    </div>
+    <div class="chip-add-row">
+      <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
+        onkeydown="if(event.key==='Enter') addTitle()" />
+      <button class="btn-add-chip" onclick="addTitle()">Add</button>
+    </div>
   </div>
 
   <div class="board-layout">
     <div class="board-col-left">
       <!-- Recommendations -->
-      <div class="section-header" style="margin-top:0;">💡 Recommendations</div>
+      <div class="section-header" style="margin-top:0;">&#128161; Recommendations</div>
       <div class="recs-card" id="recs-card"></div>
 
       <!-- Scheduled Pipelines -->
@@ -556,26 +589,113 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
 
 /* ── UTILS ── */
 function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function fmtK(n){ return n ? Math.round(n/1000)+'K' : '0'; }
 function fmtDate(s){ if(!s) return '—'; var dt=new Date(s); return isNaN(dt)?s:dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'2-digit'}); }
 function fmtTime(s){ if(!s) return ''; var dt=new Date(s); return isNaN(dt)?s:dt.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}); }
 function badge(s){ var m={pending:'badge-pending',in_progress:'badge-in_progress',done:'badge-done',blocked:'badge-blocked',ok:'badge-ok',failed:'badge-failed'}; return '<span class="badge '+(m[s]||'badge-pending')+'">'+esc(s.replace('_',' '))+'</span>'; }
 
-/* ── USER / DATA BOOTSTRAP ── */
-var _docsPrefix = 'docs/';
-var _user = (new URLSearchParams(location.search).get('user') || 'garman').replace(/[^a-z0-9_-]/gi,'');
+/* ── SUPABASE ── */
+var SUPABASE_URL = 'https://olteamqjgekiuymydloz.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdGVhbXFqZ2VraXV5bXlkbG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0ODY4NDYsImV4cCI6MjA5NzA2Mjg0Nn0.Qnt89ErUAJ6yHF0T7V-7bjsHJD9n5R00abKhTMhsfIM';
+var _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-var enabled = true; // will be set in init()
+/* ── AUTH STATE ── */
+var _authUser = null;
+
+/* ═══════════════════════════════════
+   BOOT — check session on load
+   ═══════════════════════════════════ */
+_sb.auth.getSession().then(function(res){
+  var session = res.data && res.data.session;
+  if(session){
+    _authUser = session.user;
+    bootDashboard();
+  } else {
+    showLoginModal();
+  }
+});
+
+/* ── LOGIN MODAL ── */
+function showLoginModal(){
+  document.getElementById('login-modal').classList.add('visible');
+  setTimeout(function(){ document.getElementById('login-email').focus(); }, 50);
+}
+
+function hideLoginModal(){
+  document.getElementById('login-modal').classList.remove('visible');
+}
+
+// Allow Enter key on password field
+document.getElementById('login-password').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') doLogin();
+});
+
+window.doLogin = function(){
+  var email = document.getElementById('login-email').value.trim();
+  var pass  = document.getElementById('login-password').value;
+  var btn   = document.getElementById('login-btn');
+  var errEl = document.getElementById('login-error');
+  if(!email || !pass) return;
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  errEl.classList.remove('visible');
+  _sb.auth.signInWithPassword({email:email, password:pass}).then(function(res){
+    if(res.error){
+      errEl.textContent = res.error.message;
+      errEl.classList.add('visible');
+      btn.disabled = false; btn.textContent = 'Sign in';
+      return;
+    }
+    _authUser = res.data.user;
+    hideLoginModal();
+    bootDashboard();
+  });
+};
+
+window.doSignOut = function(){
+  _sb.auth.signOut().then(function(){ location.reload(); });
+};
+
+/* ── AUTH UI ── */
+function updateAuthUI(){
+  var el = document.getElementById('auth-user');
+  if(!_authUser){ el.classList.remove('visible'); return; }
+  el.innerHTML = '<span class="auth-name">'+esc(_authUser.email)+'</span>'
+    +'<button class="auth-signout" onclick="doSignOut()">Sign out</button>';
+  el.classList.add('visible');
+}
+
+/* ── BOOT DASHBOARD ── */
+function bootDashboard(){
+  updateAuthUI();
+  loadSavedJobs();
+  loadKeywordsPanel();
+  loadTitlesPanel();
+
+  var username = (_authUser.user_metadata||{}).username || 'garman';
+  fetch('users/'+username+'/config.json?t='+Date.now())
+    .then(function(r){
+      if(!r.ok) throw new Error('No config for user: '+username);
+      return r.json();
+    })
+    .then(function(d){ init(d); })
+    .catch(function(e){
+      document.querySelector('.page').innerHTML =
+        '<div style="padding:40px;color:var(--red);font-size:14px;">&#9888; '+esc(e.message)+'</div>';
+    });
+}
 
 /* ── ON/OFF ── */
+var enabled = true;
 function applyEnabled(){ document.getElementById('disabled-overlay').classList[enabled?'remove':'add']('visible'); }
 function updatePill(){ var p=document.getElementById('toggle-pill'); p.className='pill '+(enabled?'on':'off'); document.getElementById('pill-label').textContent=enabled?'ON':'OFF'; }
 window.toggleDashboard = function(){ enabled=!enabled; updatePill(); applyEnabled(); document.getElementById('save-banner').classList.add('visible'); };
 
+/* ═══════════════════════════════════
+   INIT — called after config fetch
+   ═══════════════════════════════════ */
 function init(d){
-  _docsPrefix = d.docsPrefix || 'docs/';
+  var _docsPrefix = d.docsPrefix || 'docs/';
   enabled = d.enabled !== false;
-  var name = d.name || _user;
+  var name = d.name || ((_authUser&&_authUser.user_metadata||{}).username||'');
   document.title = name + ' – Job Search Dashboard';
   document.getElementById('dash-title').textContent = name + ' – Job Search Dashboard';
   var fp = document.getElementById('footer-docs-path');
@@ -586,249 +706,177 @@ function init(d){
 
   var pips = d.scheduledPipelines||[];
 
-/* ── PIPELINES (no pagination) ── */
-(function(){
-  var pc = document.getElementById('pipeline-cards');
-  if(!pips.length){ pc.innerHTML='<div class="empty-state">No pipelines configured.</div>'; return; }
-  pc.innerHTML = pips.map(function(p){
-    var h = '<div class="pipeline-card">'
-      +'<div class="pipeline-card-header">'
-      +'<span class="pipeline-enabled-dot '+(p.enabled?'on':'off')+'"></span>'
-      +'<span class="pipeline-title">'+esc(p.title)+'</span>'
-      +'<span class="pipeline-meta">'+esc(p.schedule||'')+'</span>';
-    if(p.lastRun) h+='<span class="pipeline-meta">Last: '+fmtDate(p.lastRun)+'</span>';
-    if(p.lastRunStatus) h+=badge(p.lastRunStatus);
-    h+='</div>';
+  /* ── PIPELINES ── */
+  (function(){
+    var pc = document.getElementById('pipeline-cards');
+    if(!pips.length){ pc.innerHTML='<div class="empty-state">No pipelines configured.</div>'; return; }
+    pc.innerHTML = pips.map(function(p){
+      var h = '<div class="pipeline-card">'
+        +'<div class="pipeline-card-header">'
+        +'<span class="pipeline-enabled-dot '+(p.enabled?'on':'off')+'"></span>'
+        +'<span class="pipeline-title">'+esc(p.title)+'</span>'
+        +'<span class="pipeline-meta">'+esc(p.schedule||'')+'</span>';
+      if(p.lastRun) h+='<span class="pipeline-meta">Last: '+fmtDate(p.lastRun)+'</span>';
+      if(p.lastRunStatus) h+=badge(p.lastRunStatus);
+      h+='</div></div>';
+      return h;
+    }).join('');
+  })();
 
-    // (archive links removed — use filters instead)
-    h+='</div>';
-    return h;
-  }).join('');
-})();
+  /* ── RECOMMENDATIONS ── */
+  (function(){
+    var recs=(d.emailDigest||{}).recommendations||[], el=document.getElementById('recs-card');
+    if(!el) return;
+    if(!recs.length){ el.innerHTML='<div class="empty-state">No recommendations yet.</div>'; return; }
+    el.innerHTML=recs.map(function(r){
+      return '<div class="rec-item"><span class="rec-icon">&#128161;</span><span class="rec-text">'+esc(r)+'</span></div>';
+    }).join('');
+  })();
 
+  /* ═══════════════════════════════════
+     JOB BOARD
+     ═══════════════════════════════════ */
+  var _lastUpdated = null;
+  var _cachedJobs = [];
+  var _filters = { score50:false, score80:false, showLI:true, showIndeed:true, daysAgo:0 };
 
-/* ── RECOMMENDATIONS ── */
-(function(){
-  var recs=(d.emailDigest||{}).recommendations||[], el=document.getElementById('recs-card');
-  if(!el) return;
-  if(!recs.length){ el.innerHTML='<div class="email-digest-empty">No recommendations yet — Claude will add search tips here after each run.</div>'; return; }
-  el.innerHTML=recs.map(function(r){
-    return '<div class="rec-item"><span class="rec-icon">💡</span><span class="rec-text">'+esc(r)+'</span></div>';
-  }).join('');
-})();
-
-/* ══════════════════════════════════════════
-   JOB BOARD — loads from docs/ JSON files
-   No API key required. Results written by
-   the daily scheduled task and committed to
-   the repo. Polls every 5 min for updates.
-   ══════════════════════════════════════════ */
-
-var _lastUpdated = null;
-var _cachedJobs = [];
-var _filters = { score50: false, score80: false, showLI: true, showIndeed: true, daysAgo: 0 };
-
-function applyFilters(jobs){
-  var minScore = _filters.score80 ? 80 : (_filters.score50 ? 50 : 0);
-  var cutoff = null;
-  if(_filters.daysAgo > 0){
-    cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - _filters.daysAgo);
-    cutoff = cutoff.toISOString().slice(0,10); // 'YYYY-MM-DD'
-  }
-  return jobs.filter(function(j){
-    if(minScore > 0 && (j.score == null || j.score < minScore)) return false;
-    var isIndeed = (j._source||'').toLowerCase().indexOf('indeed') >= 0;
-    if(isIndeed && !_filters.showIndeed) return false;
-    if(!isIndeed && !_filters.showLI) return false;
-    if(cutoff && (j.posted||'') < cutoff) return false;
-    return true;
-  });
-}
-
-function jobItemHtml(j){
-  var titleHtml = j.link
-    ? '<a href="'+esc(j.link)+'" target="_blank" rel="noopener">'+esc(j.title)+'</a>'
-    : esc(j.title);
-  var scoreHtml = '';
-  if(j.score != null){
-    var sc = j.score >= 60 ? 'score-high' : j.score >= 40 ? 'score-mid' : 'score-low';
-    scoreHtml = '<span class="score-badge '+sc+'">'+esc(String(j.score))+'/100</span>';
-    if(j.tier) scoreHtml += '<span class="tier-badge">'+esc(j.tier)+'</span>';
-  }
-  var saved = isJobSaved(j.link||'');
-  var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
-    +' data-link="'+esc(j.link||'')+'"'
-    +' data-title="'+esc(j.title||'')+'"'
-    +' data-company="'+esc(j.company||'')+'"'
-    +' onclick="handleStar(this)"'
-    +' title="'+(saved?'Remove from saved':'Save job')+'">'
-    +(saved?'&#9733;':'&#9734;')+'</button>';
-  var srcKey = (j._source||'').toLowerCase().indexOf('indeed') >= 0 ? 'indeed' : 'li';
-  var srcLabel = srcKey === 'indeed' ? 'Indeed' : 'LinkedIn';
-  var srcBadge = '<span class="src-badge '+srcKey+'"><span class="src-dot '+srcKey+'"></span>'+srcLabel+'</span>';
-  return '<div class="job-item">'
-    +'<div class="job-item-title" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">'+
-      '<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+srcBadge+starBtn+
-    '</div>'
-    +(j.company?'<div class="job-item-company">'+esc(j.company)+'</div>':'')
-    +'<div class="job-item-meta">'+(j.location?'<span>📍 '+esc(j.location)+'</span>':'')+(j.type?'<span>'+esc(j.type)+'</span>':'')+'</div>'
-    +(j.pay?'<div class="job-item-pay">💰 '+esc(j.pay)+'</div>':'')
-    +(j.posted?'<div class="job-item-posted">Posted: '+esc(j.posted)+'</div>':'')
-    +(j.why?'<div class="job-item-why">'+esc(j.why)+'</div>':'')
-    +'</div>';
-}
-
-function renderMergedJobList(jobs){
-  // jobs already have .source from all_jobs.json; map to ._source for jobItemHtml
-  _cachedJobs = jobs || [];
-  var tagged = _cachedJobs.map(function(j){
-    return Object.assign({}, j, {_source: j.source || 'LinkedIn'});
-  });
-
-  // Sort newest-first by posted date, then by score descending
-  tagged.sort(function(a,b){
-    var da = a.posted||'', db = b.posted||'';
-    if(db > da) return 1;
-    if(da > db) return -1;
-    return (b.score||0) - (a.score||0);
-  });
-
-  var filtered = applyFilters(tagged);
-
-  var countEl = document.getElementById('merged-count');
-  var listEl  = document.getElementById('merged-list');
-  var suffix = filtered.length < tagged.length ? ' of '+tagged.length : '';
-  if(countEl) countEl.textContent = filtered.length ? filtered.length+suffix+' results' : '';
-  if(!listEl) return;
-  if(!filtered.length){ listEl.innerHTML='<div class="panel-state">No results match filters.</div>'; return; }
-  listEl.innerHTML = '<div class="job-list">'+filtered.slice(0,20).map(jobItemHtml).join('')+'</div>';
-}
-
-window.applyJobFilter = function(e){
-  var s50 = document.getElementById('f-score50');
-  var s80 = document.getElementById('f-score80');
-  // Score filters mutually exclusive
-  if(e && e.target){
-    if(e.target.id === 'f-score80' && s80 && s80.checked && s50) s50.checked = false;
-    if(e.target.id === 'f-score50' && s50 && s50.checked && s80) s80.checked = false;
-  }
-  _filters.score50    = !!(s50 && s50.checked);
-  _filters.score80    = !!(s80 && s80.checked);
-  var liEl = document.getElementById('f-li');
-  var inEl = document.getElementById('f-indeed');
-  _filters.showLI     = liEl ? liEl.checked : true;
-  _filters.showIndeed = inEl ? inEl.checked : true;
-  var dateRadio = document.querySelector('input[name="f-date"]:checked');
-  _filters.daysAgo = dateRadio && dateRadio.value !== 'all' ? parseInt(dateRadio.value) : 0;
-  renderMergedJobList(_cachedJobs);
-};
-
-function renderPanelErr(listId, msg){
-  document.getElementById(listId).innerHTML='<div class="panel-err">⚠ '+esc(msg)+'</div>';
-}
-
-
-function updateSyncLabel(){
-  var el = document.getElementById('board-synced');
-  if(!el || !_lastUpdated) return;
-  el.textContent = 'Updated '+fmtTime(_lastUpdated);
-}
-
-function loadBoard(showSpinner){
-  var btn = document.getElementById('refresh-btn');
-  if(btn && showSpinner){ btn.disabled=true; btn.innerHTML='<span class="spin">&#8635;</span> Refreshing…'; }
-  if(showSpinner){
-    var ml = document.getElementById('merged-list');
-    var mc = document.getElementById('merged-count');
-    if(ml) ml.innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
-    if(mc) mc.textContent='';
-  }
-
-  fetch(_docsPrefix + 'all_jobs.json?t='+Date.now())
-    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(function(data){
-      if(data.updated !== _lastUpdated || showSpinner){
-        _lastUpdated = data.updated;
-        renderMergedJobList(data.jobs||[]);
-      }
-      if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
-      updateSyncLabel();
-    })
-    .catch(function(e){
-      var ml = document.getElementById('merged-list');
-      if(ml) ml.innerHTML='<div class="panel-err">&#9888; Could not load jobs: '+esc(e.message)+'</div>';
-      if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
+  function applyFilters(jobs){
+    var minScore = _filters.score80 ? 80 : (_filters.score50 ? 50 : 0);
+    var cutoff = null;
+    if(_filters.daysAgo > 0){
+      cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - _filters.daysAgo);
+      cutoff = cutoff.toISOString().slice(0,10);
+    }
+    return jobs.filter(function(j){
+      if(minScore > 0 && (j.score == null || j.score < minScore)) return false;
+      var isIndeed = (j._source||'').toLowerCase().indexOf('indeed') >= 0;
+      if(isIndeed && !_filters.showIndeed) return false;
+      if(!isIndeed && !_filters.showLI) return false;
+      if(cutoff && (j.posted||'') < cutoff) return false;
+      return true;
     });
-}
+  }
 
-window.refreshBoard = function(){ loadBoard(true); };
-window.showSyncModal = showSyncModal;
+  function jobItemHtml(j){
+    var titleHtml = j.link
+      ? '<a href="'+esc(j.link)+'" target="_blank" rel="noopener">'+esc(j.title)+'</a>'
+      : esc(j.title);
+    var scoreHtml = '';
+    if(j.score != null){
+      var sc = j.score >= 60 ? 'score-high' : j.score >= 40 ? 'score-mid' : 'score-low';
+      scoreHtml = '<span class="score-badge '+sc+'">'+esc(String(j.score))+'/100</span>';
+      if(j.tier) scoreHtml += '<span class="tier-badge">'+esc(j.tier)+'</span>';
+    }
+    var saved = isJobSaved(j.link||'');
+    var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
+      +' data-link="'+esc(j.link||'')+'"'
+      +' data-title="'+esc(j.title||'')+'"'
+      +' data-company="'+esc(j.company||'')+'"'
+      +' onclick="handleStar(this)"'
+      +' title="'+(saved?'Remove from saved':'Save job')+'">'
+      +(saved?'&#9733;':'&#9734;')+'</button>';
+    var srcKey = (j._source||'').toLowerCase().indexOf('indeed') >= 0 ? 'indeed' : 'li';
+    var srcLabel = srcKey === 'indeed' ? 'Indeed' : 'LinkedIn';
+    var srcBadge = '<span class="src-badge '+srcKey+'"><span class="src-dot '+srcKey+'"></span>'+srcLabel+'</span>';
+    return '<div class="job-item">'
+      +'<div class="job-item-title" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">'
+        +'<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+srcBadge+starBtn
+      +'</div>'
+      +(j.company?'<div class="job-item-company">'+esc(j.company)+'</div>':'')
+      +'<div class="job-item-meta">'+(j.location?'<span>&#128205; '+esc(j.location)+'</span>':'')+(j.type?'<span>'+esc(j.type)+'</span>':'')+'</div>'
+      +(j.pay?'<div class="job-item-pay">&#128176; '+esc(j.pay)+'</div>':'')
+      +(j.posted?'<div class="job-item-posted">Posted: '+esc(j.posted)+'</div>':'')
+      +(j.why?'<div class="job-item-why">'+esc(j.why)+'</div>':'')
+      +'</div>';
+  }
 
-// Initial load
-loadBoard(true);
+  function renderMergedJobList(jobs){
+    _cachedJobs = jobs || [];
+    var tagged = _cachedJobs.map(function(j){
+      return Object.assign({}, j, {_source: j.source || 'LinkedIn'});
+    });
+    tagged.sort(function(a,b){
+      var da = a.posted||'', db = b.posted||'';
+      if(db > da) return 1; if(da > db) return -1;
+      return (b.score||0) - (a.score||0);
+    });
+    var filtered = applyFilters(tagged);
+    var countEl = document.getElementById('merged-count');
+    var listEl  = document.getElementById('merged-list');
+    var suffix = filtered.length < tagged.length ? ' of '+tagged.length : '';
+    if(countEl) countEl.textContent = filtered.length ? filtered.length+suffix+' results' : '';
+    if(!listEl) return;
+    if(!filtered.length){ listEl.innerHTML='<div class="panel-state">No results match filters.</div>'; return; }
+    listEl.innerHTML = '<div class="job-list">'+filtered.slice(0,20).map(jobItemHtml).join('')+'</div>';
+  }
 
-// Auto-poll every 5 minutes (silently — only re-renders if data changed)
-setInterval(function(){ loadBoard(false); }, 5 * 60 * 1000);
+  window.applyJobFilter = function(e){
+    var s50 = document.getElementById('f-score50');
+    var s80 = document.getElementById('f-score80');
+    if(e && e.target){
+      if(e.target.id === 'f-score80' && s80 && s80.checked && s50) s50.checked = false;
+      if(e.target.id === 'f-score50' && s50 && s50.checked && s80) s80.checked = false;
+    }
+    _filters.score50    = !!(s50 && s50.checked);
+    _filters.score80    = !!(s80 && s80.checked);
+    var liEl = document.getElementById('f-li');
+    var inEl = document.getElementById('f-indeed');
+    _filters.showLI     = liEl ? liEl.checked : true;
+    _filters.showIndeed = inEl ? inEl.checked : true;
+    var dateRadio = document.querySelector('input[name="f-date"]:checked');
+    _filters.daysAgo = dateRadio && dateRadio.value !== 'all' ? parseInt(dateRadio.value) : 0;
+    renderMergedJobList(_cachedJobs);
+  };
+
+  function updateSyncLabel(){
+    var el = document.getElementById('board-synced');
+    if(!el || !_lastUpdated) return;
+    el.textContent = 'Updated '+fmtTime(_lastUpdated);
+  }
+
+  function loadBoard(showSpinner){
+    var btn = document.getElementById('refresh-btn');
+    if(btn && showSpinner){ btn.disabled=true; btn.innerHTML='<span class="spin">&#8635;</span> Refreshing…'; }
+    if(showSpinner){
+      var ml = document.getElementById('merged-list');
+      var mc = document.getElementById('merged-count');
+      if(ml) ml.innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
+      if(mc) mc.textContent='';
+    }
+    fetch(_docsPrefix + 'all_jobs.json?t='+Date.now())
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(data){
+        if(data.updated !== _lastUpdated || showSpinner){
+          _lastUpdated = data.updated;
+          renderMergedJobList(data.jobs||[]);
+        }
+        if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
+        updateSyncLabel();
+      })
+      .catch(function(e){
+        var ml = document.getElementById('merged-list');
+        if(ml) ml.innerHTML='<div class="panel-err">&#9888; Could not load jobs: '+esc(e.message)+'</div>';
+        if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
+      });
+  }
+
+  window.refreshBoard = function(){ loadBoard(true); };
+  loadBoard(true);
+  setInterval(function(){ loadBoard(false); }, 5 * 60 * 1000);
+
 } // end init()
 
-/* ── FETCH USER DATA AND BOOT ── */
-fetch('users/' + _user + '/config.json?t=' + Date.now())
-  .then(function(r){
-    if(!r.ok) throw new Error('No data found for user: ' + _user);
-    return r.json();
-  })
-  .then(function(d){ init(d); })
-  .catch(function(e){
-    document.querySelector('.page').innerHTML =
-      '<div style="padding:40px;color:var(--red);font-size:14px;">⚠ ' + e.message +
-      '<br><br><small>Add <code>data/' + _user + '.json</code> to the repo.</small></div>';
-  });
-
-/* ══════════════════════════════════════════
-   SAVED JOBS — Supabase backend (sync code)
-   No login required. Enter your sync code once
-   per device and saves persist across devices.
-   ══════════════════════════════════════════ */
-
-var SUPABASE_URL = 'https://olteamqjgekiuymydloz.supabase.co';
-var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdGVhbXFqZ2VraXV5bXlkbG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0ODY4NDYsImV4cCI6MjA5NzA2Mjg0Nn0.Qnt89ErUAJ6yHF0T7V-7bjsHJD9n5R00abKhTMhsfIM';
-
-var _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+/* ═══════════════════════════════════
+   SAVED JOBS — Supabase, user_id auth
+   ═══════════════════════════════════ */
 var _saved = [];
-var SYNC_CODE_KEY = 'sb_sync_code';
 
-/* ── SYNC CODE helpers ── */
-function getSyncCode(){
-  return localStorage.getItem(SYNC_CODE_KEY) || '';
-}
-
-function showSyncModal(callback){
-  var m = document.getElementById('pat-modal');
-  m.classList.add('visible');
-  var inp = document.getElementById('pat-input');
-  inp.value = getSyncCode();
-  setTimeout(function(){ inp.focus(); }, 50);
-  document.getElementById('pat-save-btn').onclick = function(){
-    var t = inp.value.trim().toLowerCase();
-    if(!t) return;
-    localStorage.setItem(SYNC_CODE_KEY, t);
-    m.classList.remove('visible');
-    loadSavedJobs();
-    if(callback) callback();
-  };
-  document.getElementById('pat-cancel-btn').onclick = function(){
-    m.classList.remove('visible');
-  };
-}
-
-/* ── DB READS / WRITES ── */
 function loadSavedJobs(){
-  var code = getSyncCode();
-  if(!code){ renderSavedJobs(); return; }
+  if(!_authUser){ renderSavedJobs(); return; }
   _sb.from('saved_jobs')
     .select('title, company, link, saved_at')
-    .eq('sync_code', code)
+    .eq('user_id', _authUser.id)
     .order('saved_at', {ascending:false})
     .then(function(r){
       if(r.error){ console.error('load saved_jobs:', r.error); renderSavedJobs(); return; }
@@ -841,40 +889,29 @@ function loadSavedJobs(){
 }
 
 function dbInsert(job){
-  var code = getSyncCode();
-  if(!code) return;
+  if(!_authUser) return;
   _sb.from('saved_jobs').upsert(
-    {sync_code:code, title:job.title, company:job.company, link:job.link},
-    {onConflict:'sync_code,link'}
+    {user_id:_authUser.id, title:job.title, company:job.company, link:job.link},
+    {onConflict:'user_id,link'}
   ).then(function(r){ if(r.error) console.error('insert saved_job:', r.error); });
 }
 
 function dbDelete(link){
-  var code = getSyncCode();
-  if(!code) return;
+  if(!_authUser) return;
   _sb.from('saved_jobs').delete()
-    .eq('sync_code', code).eq('link', link)
+    .eq('user_id', _authUser.id).eq('link', link)
     .then(function(r){ if(r.error) console.error('delete saved_job:', r.error); });
 }
 
-/* ── STAR & REMOVE HANDLERS ── */
 function isJobSaved(link){
   return _saved.some(function(j){ return j.link === link; });
 }
 
-/* ── AUTH UI stub (no-op — no login needed) ── */
-function updateAuthUI(){}
-
-/* ── RENDER SAVED JOBS PANEL ── */
 function renderSavedJobs(){
   var el = document.getElementById('saved-jobs-list');
   if(!el) return;
-  var code = getSyncCode();
-  // Update sync button label
-  var btn = document.getElementById('sync-code-btn');
-  if(btn) btn.textContent = code ? '🔑 Code: ' + code : '🔑 Set sync code';
-  if(!code){
-    el.innerHTML='<div class="saved-empty">Click &#9734; on any job, or tap "Set sync code" above to sync saves across devices.</div>';
+  if(!_authUser){
+    el.innerHTML='<div class="saved-empty">Sign in to save jobs.</div>';
     return;
   }
   if(!_saved.length){
@@ -893,7 +930,6 @@ function renderSavedJobs(){
   }).join('');
 }
 
-/* ── UPDATE STAR BUTTONS ── */
 function updateAllStars(){
   document.querySelectorAll('.star-btn').forEach(function(btn){
     var saved = isJobSaved(btn.dataset.link||'');
@@ -903,7 +939,6 @@ function updateAllStars(){
   });
 }
 
-/* ── REMOVE SAVED JOB ── */
 window.removeSavedJob = function(link){
   _saved = _saved.filter(function(j){ return j.link !== link; });
   dbDelete(link);
@@ -912,24 +947,181 @@ window.removeSavedJob = function(link){
 };
 
 window.handleStar = function(btn){
+  if(!_authUser) return;
   var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
-  var code = getSyncCode();
-  if(!code){ showSyncModal(function(){ window.handleStar(btn); }); return; }
   if(isJobSaved(job.link)){
     _saved = _saved.filter(function(j){ return j.link !== job.link; });
     dbDelete(job.link);
   } else {
-    var entry = {title:job.title, company:job.company, link:job.link,
-      savedAt:new Date().toISOString()};
-    _saved.unshift(entry);
+    _saved.unshift({title:job.title, company:job.company, link:job.link, savedAt:new Date().toISOString()});
     dbInsert(job);
   }
   renderSavedJobs();
   updateAllStars();
 };
 
-/* ── Initial load ── */
-loadSavedJobs();
+/* ═══════════════════════════════════
+   KEYWORDS PANEL
+   ═══════════════════════════════════ */
+var _keywords = [];
+var _keywordsDirty = false;
+var _keywordsParsedFrom = '';
+var _keywordsParsedAt = '';
+
+function loadKeywordsPanel(){
+  if(!_authUser) return;
+  _sb.from('user_keywords')
+    .select('keywords, parsed_from, parsed_at')
+    .eq('user_id', _authUser.id)
+    .maybeSingle()
+    .then(function(r){
+      if(r.error){ console.error('load user_keywords:', r.error); renderKeywordsPanel(); return; }
+      var row = r.data || {};
+      _keywords = row.keywords || [];
+      _keywordsParsedFrom = row.parsed_from || '';
+      _keywordsParsedAt   = row.parsed_at   || '';
+      renderKeywordsPanel();
+    });
+}
+
+function renderKeywordsPanel(){
+  var chipsEl  = document.getElementById('keywords-chips');
+  var parsedEl = document.getElementById('keywords-parsed');
+  var dirtyEl  = document.getElementById('keywords-dirty');
+  var saveBtn  = document.getElementById('keywords-save-btn');
+  if(!chipsEl) return;
+
+  if(!_keywords.length){
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No keywords yet. Add one below or ask Claude to parse your resume.</span>';
+  } else {
+    chipsEl.innerHTML = _keywords.map(function(kw, i){
+      return '<span class="chip">'+esc(kw)
+        +'<button class="chip-remove" onclick="removeKeyword('+i+')" title="Remove">&#10005;</button>'
+        +'</span>';
+    }).join('');
+  }
+
+  if(parsedEl){
+    parsedEl.textContent = _keywordsParsedFrom
+      ? 'Parsed from: '+_keywordsParsedFrom+(_keywordsParsedAt?' · '+fmtDate(_keywordsParsedAt):'')
+      : '';
+  }
+  if(dirtyEl)  dirtyEl.classList[_keywordsDirty?'add':'remove']('visible');
+  if(saveBtn)  saveBtn.classList[_keywordsDirty?'add':'remove']('visible');
+}
+
+window.removeKeyword = function(idx){
+  _keywords.splice(idx, 1);
+  _keywordsDirty = true;
+  renderKeywordsPanel();
+};
+
+window.addKeyword = function(){
+  var inp = document.getElementById('keyword-input');
+  var val = (inp.value||'').trim();
+  if(!val) return;
+  if(_keywords.indexOf(val) === -1) _keywords.push(val);
+  inp.value = '';
+  _keywordsDirty = true;
+  renderKeywordsPanel();
+  inp.focus();
+};
+
+window.saveKeywords = function(){
+  if(!_authUser) return;
+  var btn = document.getElementById('keywords-save-btn');
+  if(btn){ btn.disabled=true; btn.textContent='Saving…'; }
+  _sb.from('user_keywords').upsert(
+    {user_id:_authUser.id, keywords:_keywords, updated_at:new Date().toISOString()},
+    {onConflict:'user_id'}
+  ).then(function(r){
+    if(r.error){ console.error('save keywords:', r.error); }
+    _keywordsDirty = false;
+    if(btn){ btn.disabled=false; btn.textContent='Save'; }
+    renderKeywordsPanel();
+  });
+};
+
+/* ═══════════════════════════════════
+   JOB TITLES PANEL
+   ═══════════════════════════════════ */
+var _titles = [];
+var _titlesDirty = false;
+var MAX_TITLES = 10;
+
+function loadTitlesPanel(){
+  if(!_authUser) return;
+  _sb.from('user_job_titles')
+    .select('titles')
+    .eq('user_id', _authUser.id)
+    .maybeSingle()
+    .then(function(r){
+      if(r.error){ console.error('load user_job_titles:', r.error); renderTitlesPanel(); return; }
+      _titles = (r.data && r.data.titles) || [];
+      renderTitlesPanel();
+    });
+}
+
+function renderTitlesPanel(){
+  var chipsEl  = document.getElementById('titles-chips');
+  var countEl  = document.getElementById('titles-count');
+  var dirtyEl  = document.getElementById('titles-dirty');
+  var saveBtn  = document.getElementById('titles-save-btn');
+  if(!chipsEl) return;
+
+  if(!_titles.length){
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No job titles yet. Add up to '+MAX_TITLES+' titles to search.</span>';
+  } else {
+    chipsEl.innerHTML = _titles.map(function(t, i){
+      return '<span class="chip">'+esc(t)
+        +'<button class="chip-remove" onclick="removeTitle('+i+')" title="Remove">&#10005;</button>'
+        +'</span>';
+    }).join('');
+  }
+
+  if(countEl) countEl.textContent = _titles.length+'/'+MAX_TITLES;
+  if(dirtyEl)  dirtyEl.classList[_titlesDirty?'add':'remove']('visible');
+  if(saveBtn)  saveBtn.classList[_titlesDirty?'add':'remove']('visible');
+
+  // Disable add button if at limit
+  var addBtn = document.querySelector('#titles-panel-wrap .btn-add-chip');
+  var inp    = document.getElementById('title-input');
+  if(addBtn) addBtn.disabled = _titles.length >= MAX_TITLES;
+  if(inp)    inp.disabled    = _titles.length >= MAX_TITLES;
+}
+
+window.removeTitle = function(idx){
+  _titles.splice(idx, 1);
+  _titlesDirty = true;
+  renderTitlesPanel();
+};
+
+window.addTitle = function(){
+  if(_titles.length >= MAX_TITLES) return;
+  var inp = document.getElementById('title-input');
+  var val = (inp.value||'').trim();
+  if(!val) return;
+  if(_titles.indexOf(val) === -1) _titles.push(val);
+  inp.value = '';
+  _titlesDirty = true;
+  renderTitlesPanel();
+  inp.focus();
+};
+
+window.saveTitles = function(){
+  if(!_authUser) return;
+  var btn = document.getElementById('titles-save-btn');
+  if(btn){ btn.disabled=true; btn.textContent='Saving…'; }
+  _sb.from('user_job_titles').upsert(
+    {user_id:_authUser.id, titles:_titles, updated_at:new Date().toISOString()},
+    {onConflict:'user_id'}
+  ).then(function(r){
+    if(r.error){ console.error('save titles:', r.error); }
+    _titlesDirty = false;
+    if(btn){ btn.disabled=false; btn.textContent='Save'; }
+    renderTitlesPanel();
+  });
+};
 
 })();
 </script>
