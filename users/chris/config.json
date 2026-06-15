@@ -12,22 +12,7 @@
       "lastRunStatus": "success",
       "lastRunNote": "2 jobs found (2 Tier 2)",
       "outputFolder": "C:/Users/gyipl/Documents/Claude/GitHub/agent-dashboard/users/chris/jobs/",
-      "documents": [
-        {
-          "date": "2026-06-15",
-          "file": "jobs_2026-06-15.txt",
-          "relPath": "users/chris/jobs/archive/jobs_2026-06-15.txt",
-          "tier1": 0,
-          "total": 7
-        },
-        {
-          "date": "2026-06-14",
-          "file": "jobs_2026-06-14.txt",
-          "relPath": "users/chris/jobs/archive/jobs_2026-06-14.txt",
-          "tier1": 0,
-          "total": 2
-        }
-      ]
+      "documents": []
     }
   ],
   "emailDigest": {
