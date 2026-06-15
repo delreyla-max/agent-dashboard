@@ -466,7 +466,10 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   </header>
 
   <!-- Saved Jobs -->
-  <div class="section-header" style="margin-top:0;">&#11088; Saved Jobs</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+    <div class="section-header" style="margin-top:0;margin-bottom:0;">&#11088; Saved Jobs</div>
+    <button onclick="showSyncModal()" style="background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:4px 10px;border-radius:6px;cursor:pointer;" id="sync-code-btn">🔑 Sync code</button>
+  </div>
   <div class="saved-jobs-panel" id="saved-jobs-list">
     <div class="saved-empty">Loading…</div>
   </div>
@@ -912,8 +915,11 @@ function renderSavedJobs(){
   var el = document.getElementById('saved-jobs-list');
   if(!el) return;
   var code = getSyncCode();
+  // Update sync button label
+  var btn = document.getElementById('sync-code-btn');
+  if(btn) btn.textContent = code ? '🔑 Code: ' + code : '🔑 Set sync code';
   if(!code){
-    el.innerHTML='<div class="saved-empty">Click &#9734; on any job to set your sync code and start saving.</div>';
+    el.innerHTML='<div class="saved-empty">Click &#9734; on any job, or tap "Set sync code" above to sync saves across devices.</div>';
     return;
   }
   if(!_saved.length){
