@@ -842,76 +842,41 @@ loadBoard(true);
 setInterval(function(){ loadBoard(false); }, 5 * 60 * 1000);
 
 /* ══════════════════════════════════════════
-   SAVED JOBS — Supabase backend
-   Google OAuth, per-user rows, RLS enforced.
-   No tokens to manage — sign in once, stay in.
+   SAVED JOBS — Supabase backend (sync code)
+   No login required. Enter your sync code once
+   per device and saves persist across devices.
    ══════════════════════════════════════════ */
 
-// ── TODO: paste your two Supabase values here (anon key is public-safe to commit) ──
-var SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-var SUPABASE_KEY = 'YOUR_ANON_PUBLIC_KEY';
-// ── config.js override (gitignored local file) ──
-var _sbcfg = window.DASHBOARD_CONFIG || {};
-if(_sbcfg.supabaseUrl) SUPABASE_URL = _sbcfg.supabaseUrl;
-if(_sbcfg.supabaseKey) SUPABASE_KEY = _sbcfg.supabaseKey;
+var SUPABASE_URL = 'https://olteamqjgekiuymydloz.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdGVhbXFqZ2VraXV5bXlkbG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0ODY4NDYsImV4cCI6MjA5NzA2Mjg0Nn0.Qnt89ErUAJ6yHF0T7V-7bjsHJD9n5R00abKhTMhsfIM';
 
-var _configured = (SUPABASE_URL.indexOf('YOUR_') === -1 && SUPABASE_KEY.indexOf('YOUR_') === -1);
-var _sb   = _configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
-var _saved  = [];
-var _sbUser = null;
+var _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+var _saved = [];
+var SYNC_CODE_KEY = 'sb_sync_code';
 
-var PENDING_KEY = 'sbpending_job';
-
-/* ── AUTH STATE MACHINE ── */
-if(_sb){
-  _sb.auth.onAuthStateChange(function(event, session){
-    _sbUser = session ? session.user : null;
-    updateAuthUI();
-    if(event === 'SIGNED_IN'){
-      loadSavedJobs();
-      handlePendingSave();
-    } else if(event === 'SIGNED_OUT'){
-      _saved = [];
-      renderSavedJobs();
-      updateAllStars();
-    }
-  });
-  /* Hydrate on page load */
-  _sb.auth.getSession().then(function(r){
-    _sbUser = (r.data && r.data.session) ? r.data.session.user : null;
-    updateAuthUI();
-    loadSavedJobs();
-    if(_sbUser) handlePendingSave();
-  });
-} else {
-  renderSavedJobs(); /* show "not configured" state */
+/* ── SYNC CODE helpers ── */
+function getSyncCode(){
+  return localStorage.getItem(SYNC_CODE_KEY) || '';
 }
 
-/* ── PENDING SAVE — survives the OAuth redirect ── */
-function handlePendingSave(){
-  if(!_sbUser) return;
-  try {
-    var pending = JSON.parse(localStorage.getItem(PENDING_KEY)||'null');
-    if(!pending || !pending.link) return;
-    localStorage.removeItem(PENDING_KEY);
-    if(!isJobSaved(pending.link)){
-      var entry = {title:pending.title, company:pending.company, link:pending.link,
-        savedAt:new Date().toISOString().slice(0,10)};
-      _saved.unshift(entry);
-      renderSavedJobs();
-      updateAllStars();
-      dbInsert(pending);
-    }
-  } catch(e){ localStorage.removeItem(PENDING_KEY); }
+function promptSyncCode(){
+  var code = prompt('Enter your sync code to save jobs across devices.\n\nPick any code you like (e.g. gyip-jobs).\nYou\'ll use the same code on all your devices.');
+  if(code && code.trim()){
+    var c = code.trim().toLowerCase();
+    localStorage.setItem(SYNC_CODE_KEY, c);
+    return c;
+  }
+  return '';
 }
 
 /* ── DB READS / WRITES ── */
 function loadSavedJobs(){
-  if(!_sb){ renderSavedJobs(); return; }
-  if(!_sbUser){ _saved=[]; renderSavedJobs(); return; }
+  var code = getSyncCode();
+  if(!code){ renderSavedJobs(); return; }
   _sb.from('saved_jobs')
     .select('title, company, link, saved_at')
-    .order('created_at', {ascending:false})
+    .eq('sync_code', code)
+    .order('saved_at', {ascending:false})
     .then(function(r){
       if(r.error){ console.error('load saved_jobs:', r.error); renderSavedJobs(); return; }
       _saved = (r.data||[]).map(function(j){
@@ -923,18 +888,19 @@ function loadSavedJobs(){
 }
 
 function dbInsert(job){
-  if(!_sb || !_sbUser) return;
+  var code = getSyncCode();
+  if(!code) return;
   _sb.from('saved_jobs').upsert(
-    {user_id:_sbUser.id, title:job.title, company:job.company, link:job.link,
-     saved_at:new Date().toISOString().slice(0,10)},
-    {onConflict:'user_id,link'}
+    {sync_code:code, title:job.title, company:job.company, link:job.link},
+    {onConflict:'sync_code,link'}
   ).then(function(r){ if(r.error) console.error('insert saved_job:', r.error); });
 }
 
 function dbDelete(link){
-  if(!_sb || !_sbUser) return;
+  var code = getSyncCode();
+  if(!code) return;
   _sb.from('saved_jobs').delete()
-    .eq('user_id', _sbUser.id).eq('link', link)
+    .eq('sync_code', code).eq('link', link)
     .then(function(r){ if(r.error) console.error('delete saved_job:', r.error); });
 }
 
@@ -943,14 +909,16 @@ function isJobSaved(link){
   return _saved.some(function(j){ return j.link === link; });
 }
 
-window.handleStar = function(btn){
-  var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
-  if(!_configured){
-    alert('Supabase is not configured yet.\nSee TODO comments in index.html or the setup guide in 3_Results/.');
-    return;
-  }
-  if(!_sbUser){
-    el.innerHTML='<div class="saved-empty">Click &#9734; on any job to sign in with Google and save it across devices.</div>';
+/* ── AUTH UI stub (no-op — no login needed) ── */
+function updateAuthUI(){}
+
+/* ── RENDER SAVED JOBS PANEL ── */
+function renderSavedJobs(){
+  var el = document.getElementById('saved-jobs-list');
+  if(!el) return;
+  var code = getSyncCode();
+  if(!code){
+    el.innerHTML='<div class="saved-empty">Click &#9734; on any job to set your sync code and start saving.</div>';
     return;
   }
   if(!_saved.length){
@@ -968,6 +936,55 @@ window.handleStar = function(btn){
       +'</div>';
   }).join('');
 }
+
+/* ── UPDATE STAR BUTTONS ── */
+function updateAllStars(){
+  document.querySelectorAll('.star-btn').forEach(function(btn){
+    var saved = isJobSaved(btn.dataset.link||'');
+    btn.classList.toggle('starred', saved);
+    btn.innerHTML = saved ? '&#9733;' : '&#9734;';
+    btn.title = saved ? 'Remove from saved' : 'Save job';
+  });
+}
+
+/* ── REMOVE SAVED JOB ── */
+window.removeSavedJob = function(link){
+  _saved = _saved.filter(function(j){ return j.link !== link; });
+  dbDelete(link);
+  renderSavedJobs();
+  updateAllStars();
+};
+
+window.handleStar = function(btn){
+  var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
+  var code = getSyncCode();
+  if(!code){
+    code = promptSyncCode();
+    if(!code) return;
+    // after setting code, save this job then reload list
+    var entry = {title:job.title, company:job.company, link:job.link,
+      savedAt:new Date().toISOString()};
+    _saved.unshift(entry);
+    dbInsert(job);
+    renderSavedJobs();
+    updateAllStars();
+    return;
+  }
+  if(isJobSaved(job.link)){
+    _saved = _saved.filter(function(j){ return j.link !== job.link; });
+    dbDelete(job.link);
+  } else {
+    var entry = {title:job.title, company:job.company, link:job.link,
+      savedAt:new Date().toISOString()};
+    _saved.unshift(entry);
+    dbInsert(job);
+  }
+  renderSavedJobs();
+  updateAllStars();
+};
+
+/* ── Initial load ── */
+loadSavedJobs();
 
 })();
 </script>
