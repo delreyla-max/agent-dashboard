@@ -110,7 +110,8 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .filter-group-label { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:6px; font-weight:600; }
 .filter-row { display:flex; flex-wrap:wrap; gap:10px; }
 .filter-chk { display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:12px; user-select:none; color:var(--text); }
-.filter-chk input[type="checkbox"] { accent-color:var(--blue); width:14px; height:14px; cursor:pointer; flex-shrink:0; }
+.filter-chk input[type="checkbox"],
+.filter-chk input[type="radio"] { accent-color:var(--blue); width:14px; height:14px; cursor:pointer; flex-shrink:0; }
 .filter-chk .src-dot { display:inline-block; }
 
 .src-badge {
@@ -507,6 +508,14 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
           <label class="filter-chk"><input type="checkbox" id="f-li" checked onchange="applyJobFilter(event)"> <span><span class="src-dot li"></span> LinkedIn</span></label>
           <label class="filter-chk"><input type="checkbox" id="f-indeed" checked onchange="applyJobFilter(event)"> <span><span class="src-dot indeed"></span> Indeed</span></label>
         </div>
+        <div class="filter-group-label" style="margin-top:10px;">Date Posted</div>
+        <div class="filter-row" style="flex-direction:column;gap:5px;">
+          <label class="filter-chk"><input type="radio" name="f-date" value="all" checked onchange="applyJobFilter(event)"> <span>All</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="1" onchange="applyJobFilter(event)"> <span>Last 24 hours</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="3" onchange="applyJobFilter(event)"> <span>Last 3 days</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="7" onchange="applyJobFilter(event)"> <span>Last 7 days</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>Last 30 days</span></label>
+        </div>
       </div>
 
       <!-- Scheduled Pipelines -->
@@ -620,15 +629,22 @@ function init(d){
 
 var _lastUpdated = null;
 var _cachedJobs = [];
-var _filters = { score50: false, score80: false, showLI: true, showIndeed: true };
+var _filters = { score50: false, score80: false, showLI: true, showIndeed: true, daysAgo: 0 };
 
 function applyFilters(jobs){
   var minScore = _filters.score80 ? 80 : (_filters.score50 ? 50 : 0);
+  var cutoff = null;
+  if(_filters.daysAgo > 0){
+    cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - _filters.daysAgo);
+    cutoff = cutoff.toISOString().slice(0,10); // 'YYYY-MM-DD'
+  }
   return jobs.filter(function(j){
     if(minScore > 0 && (j.score == null || j.score < minScore)) return false;
     var isIndeed = (j._source||'').toLowerCase().indexOf('indeed') >= 0;
     if(isIndeed && !_filters.showIndeed) return false;
     if(!isIndeed && !_filters.showLI) return false;
+    if(cutoff && (j.posted||'') < cutoff) return false;
     return true;
   });
 }
@@ -706,6 +722,8 @@ window.applyJobFilter = function(e){
   var inEl = document.getElementById('f-indeed');
   _filters.showLI     = liEl ? liEl.checked : true;
   _filters.showIndeed = inEl ? inEl.checked : true;
+  var dateRadio = document.querySelector('input[name="f-date"]:checked');
+  _filters.daysAgo = dateRadio && dateRadio.value !== 'all' ? parseInt(dateRadio.value) : 0;
   renderMergedJobList(_cachedJobs);
 };
 
