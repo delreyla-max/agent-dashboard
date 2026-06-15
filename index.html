@@ -498,51 +498,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
     <div class="saved-empty">Sign in to see saved jobs.</div>
   </div>
 
-  <!-- Search Settings -->
-  <div class="section-header">&#9881;&#65039; Search Settings</div>
-
-  <!-- Resume Keywords Panel -->
-  <div class="chip-panel-wrap" id="keywords-panel-wrap">
-    <div class="chip-panel-header">
-      <span class="chip-panel-title">&#128196; Resume Keywords</span>
-      <span class="chip-panel-dirty" id="keywords-dirty">Unsaved changes</span>
-      <button class="btn-save-chips" id="keywords-save-btn" onclick="saveKeywords()">Save</button>
-      <button class="chip-panel-toggle" id="keywords-toggle" onclick="togglePanel('keywords')" title="Collapse">&#9660;</button>
-    </div>
-    <div class="chip-panel-body" id="keywords-body">
-      <div class="chips-area" id="keywords-chips">
-        <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-      </div>
-      <div class="chip-add-row">
-        <input class="chip-input" id="keyword-input" type="text" placeholder="Add keyword…"
-          onkeydown="if(event.key==='Enter') addKeyword()" />
-        <button class="btn-add-chip" onclick="addKeyword()">Add</button>
-      </div>
-      <div class="chip-parsed" id="keywords-parsed"></div>
-    </div>
-  </div>
-
-  <!-- Job Titles Panel -->
-  <div class="chip-panel-wrap" id="titles-panel-wrap">
-    <div class="chip-panel-header">
-      <span class="chip-panel-title">&#128269; Job Titles</span>
-      <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
-      <span class="chip-count" id="titles-count"></span>
-      <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
-      <button class="chip-panel-toggle" id="titles-toggle" onclick="togglePanel('titles')" title="Collapse">&#9660;</button>
-    </div>
-    <div class="chip-panel-body" id="titles-body">
-      <div class="chips-area" id="titles-chips">
-        <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-      </div>
-      <div class="chip-add-row">
-        <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
-          onkeydown="if(event.key==='Enter') addTitle()" />
-        <button class="btn-add-chip" onclick="addTitle()">Add</button>
-      </div>
-    </div>
-  </div>
-
   <div class="board-layout">
     <div class="board-col-left">
       <!-- Filters -->
@@ -571,7 +526,48 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       <!-- Scheduled Pipelines -->
       <div class="section-header" style="margin-top:18px;">Scheduled Pipelines</div>
       <div class="pipeline-cards" id="pipeline-cards"></div>
-      <div id="search-terms-summary"></div>
+
+      <!-- Resume Keywords Panel -->
+      <div class="chip-panel-wrap" id="keywords-panel-wrap" style="margin-top:14px;">
+        <div class="chip-panel-header">
+          <span class="chip-panel-title">&#128196; Resume Keywords</span>
+          <span class="chip-panel-dirty" id="keywords-dirty">Unsaved changes</span>
+          <button class="btn-save-chips" id="keywords-save-btn" onclick="saveKeywords()">Save</button>
+          <button class="chip-panel-toggle" id="keywords-toggle" onclick="togglePanel('keywords')" title="Collapse">&#9660;</button>
+        </div>
+        <div class="chip-panel-body" id="keywords-body">
+          <div class="chips-area" id="keywords-chips">
+            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+          </div>
+          <div class="chip-add-row">
+            <input class="chip-input" id="keyword-input" type="text" placeholder="Add keyword…"
+              onkeydown="if(event.key==='Enter') addKeyword()" />
+            <button class="btn-add-chip" onclick="addKeyword()">Add</button>
+          </div>
+          <div class="chip-parsed" id="keywords-parsed"></div>
+        </div>
+      </div>
+
+      <!-- Job Titles Panel -->
+      <div class="chip-panel-wrap" id="titles-panel-wrap" style="margin-top:10px;">
+        <div class="chip-panel-header">
+          <span class="chip-panel-title">&#128269; Job Titles</span>
+          <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
+          <span class="chip-count" id="titles-count"></span>
+          <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
+          <button class="chip-panel-toggle" id="titles-toggle" onclick="togglePanel('titles')" title="Collapse">&#9660;</button>
+        </div>
+        <div class="chip-panel-body" id="titles-body">
+          <div class="chips-area" id="titles-chips">
+            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+          </div>
+          <div class="chip-add-row">
+            <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
+              onkeydown="if(event.key==='Enter') addTitle()" />
+            <button class="btn-add-chip" onclick="addTitle()">Add</button>
+          </div>
+        </div>
+      </div>
 
       <!-- Recommendations -->
       <div class="section-header" style="margin-top:22px;">&#128161; Recommendations</div>
@@ -1016,7 +1012,6 @@ function loadKeywordsPanel(){
       _keywordsParsedFrom = row.parsed_from || '';
       _keywordsParsedAt   = row.parsed_at   || '';
       renderKeywordsPanel();
-      renderSearchTermsSummary();
     });
 }
 
@@ -1096,7 +1091,6 @@ function loadTitlesPanel(){
       if(r.error){ console.error('load user_job_titles:', r.error); renderTitlesPanel(); return; }
       _titles = (r.data && r.data.titles) || [];
       renderTitlesPanel();
-      renderSearchTermsSummary();
     });
 }
 
@@ -1161,37 +1155,6 @@ window.saveTitles = function(){
     renderSearchTermsSummary();
   });
 };
-
-/* ═══════════════════════════════════
-   SEARCH TERMS SUMMARY — pipeline section
-   ═══════════════════════════════════ */
-function renderSearchTermsSummary(){
-  var el = document.getElementById('search-terms-summary');
-  if(!el) return;
-  if(!_titles.length && !_keywords.length){ el.innerHTML=''; return; }
-  var html = '<div class="pipeline-card" style="margin-top:12px;">'
-    +'<div class="pipeline-card-header" style="margin-bottom:10px;">'
-    +'<span class="pipeline-title">&#128269; Active Search Terms</span>'
-    +'</div>';
-  if(_titles.length){
-    html += '<div class="pipeline-section-label">Job Titles</div>'
-      +'<div class="chips-area" style="margin-bottom:10px;">'
-      +_titles.map(function(t){
-        return '<span class="chip" style="font-size:11px;padding:3px 10px;">'+esc(t)+'</span>';
-      }).join('')
-      +'</div>';
-  }
-  if(_keywords.length){
-    html += '<div class="pipeline-section-label">Keywords</div>'
-      +'<div class="chips-area" style="margin-bottom:0;">'
-      +_keywords.map(function(k){
-        return '<span class="chip" style="font-size:11px;padding:3px 10px;background:var(--surface);border-color:#3a3e5a;">'+esc(k)+'</span>';
-      }).join('')
-      +'</div>';
-  }
-  html += '</div>';
-  el.innerHTML = html;
-}
 
 })();
 </script>
