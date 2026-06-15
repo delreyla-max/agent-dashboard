@@ -102,6 +102,13 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .src-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
 .src-dot.li      { background:#0a66c2; }
 .src-dot.indeed  { background:#2557a7; }
+.src-badge {
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:10px; font-weight:600; padding:2px 7px; border-radius:999px;
+  white-space:nowrap; flex-shrink:0;
+}
+.src-badge.li     { background:#0a66c210; color:#5b9bd5; border:1px solid #0a66c230; }
+.src-badge.indeed { background:#2557a710; color:#7aa7d5; border:1px solid #2557a730; }
 .job-panel-count { font-size:11px; color:var(--muted); }
 
 .job-list { display:flex; flex-direction:column; }
@@ -492,19 +499,12 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
         <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
       </div>
       <div class="job-board-grid">
-        <div class="job-panel" id="panel-li">
+        <div class="job-panel" id="panel-merged">
           <div class="job-panel-head">
-            <div class="job-panel-label"><span class="src-dot li"></span>LinkedIn</div>
-            <span class="job-panel-count" id="li-count"></span>
+            <div class="job-panel-label">All Sources</div>
+            <span class="job-panel-count" id="merged-count"></span>
           </div>
-          <div id="li-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
-        </div>
-        <div class="job-panel" id="panel-in">
-          <div class="job-panel-head">
-            <div class="job-panel-label"><span class="src-dot indeed"></span>Indeed</div>
-            <span class="job-panel-count" id="in-count"></span>
-          </div>
-          <div id="in-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
+          <div id="merged-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
         </div>
       </div>
     </div>
@@ -608,39 +608,66 @@ function init(d){
 
 var _lastLiGen = null, _lastInGen = null;
 
+function jobItemHtml(j){
+  var titleHtml = j.link
+    ? '<a href="'+esc(j.link)+'" target="_blank" rel="noopener">'+esc(j.title)+'</a>'
+    : esc(j.title);
+  var scoreHtml = '';
+  if(j.score != null){
+    var sc = j.score >= 60 ? 'score-high' : j.score >= 40 ? 'score-mid' : 'score-low';
+    scoreHtml = '<span class="score-badge '+sc+'">'+esc(String(j.score))+'/100</span>';
+    if(j.tier) scoreHtml += '<span class="tier-badge">'+esc(j.tier)+'</span>';
+  }
+  var saved = isJobSaved(j.link||'');
+  var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
+    +' data-link="'+esc(j.link||'')+'"'
+    +' data-title="'+esc(j.title||'')+'"'
+    +' data-company="'+esc(j.company||'')+'"'
+    +' onclick="handleStar(this)"'
+    +' title="'+(saved?'Remove from saved':'Save job')+'">'
+    +(saved?'&#9733;':'&#9734;')+'</button>';
+  var srcKey = (j._source||'').toLowerCase().indexOf('indeed') >= 0 ? 'indeed' : 'li';
+  var srcLabel = srcKey === 'indeed' ? 'Indeed' : 'LinkedIn';
+  var srcBadge = '<span class="src-badge '+srcKey+'"><span class="src-dot '+srcKey+'"></span>'+srcLabel+'</span>';
+  return '<div class="job-item">'
+    +'<div class="job-item-title" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">'+
+      '<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+srcBadge+starBtn+
+    '</div>'
+    +(j.company?'<div class="job-item-company">'+esc(j.company)+'</div>':'')
+    +'<div class="job-item-meta">'+(j.location?'<span>📍 '+esc(j.location)+'</span>':'')+(j.type?'<span>'+esc(j.type)+'</span>':'')+'</div>'
+    +(j.pay?'<div class="job-item-pay">💰 '+esc(j.pay)+'</div>':'')
+    +(j.posted?'<div class="job-item-posted">Posted: '+esc(j.posted)+'</div>':'')
+    +(j.why?'<div class="job-item-why">'+esc(j.why)+'</div>':'')
+    +'</div>';
+}
+
+function renderMergedJobList(liJobs, inJobs){
+  // Tag each job with its source
+  var tagged = (liJobs||[]).map(function(j){ return Object.assign({},j,{_source:'LinkedIn'}); })
+    .concat((inJobs||[]).map(function(j){ return Object.assign({},j,{_source:'Indeed'}); }));
+
+  // Sort newest-first by posted date, then by score descending
+  tagged.sort(function(a,b){
+    var da = a.posted||'', db = b.posted||'';
+    if(db > da) return 1;
+    if(da > db) return -1;
+    return (b.score||0) - (a.score||0);
+  });
+
+  var countEl = document.getElementById('merged-count');
+  var listEl  = document.getElementById('merged-list');
+  if(countEl) countEl.textContent = tagged.length ? tagged.length+' results' : '';
+  if(!listEl) return;
+  if(!tagged.length){ listEl.innerHTML='<div class="panel-state">No results.</div>'; return; }
+  listEl.innerHTML = '<div class="job-list">'+tagged.slice(0,20).map(jobItemHtml).join('')+'</div>';
+}
+
+/* Legacy single-source render kept for any callers that need it */
 function renderJobList(jobs, listId, countId){
   document.getElementById(countId).textContent = jobs.length ? jobs.length+' results' : '';
   if(!jobs.length){ document.getElementById(listId).innerHTML='<div class="panel-state">No results.</div>'; return; }
   document.getElementById(listId).innerHTML = '<div class="job-list">'
-    + jobs.slice(0,10).map(function(j){
-        var titleHtml = j.link
-          ? '<a href="'+esc(j.link)+'" target="_blank" rel="noopener">'+esc(j.title)+'</a>'
-          : esc(j.title);
-        var scoreHtml = '';
-        if(j.score != null){
-          var sc = j.score >= 60 ? 'score-high' : j.score >= 40 ? 'score-mid' : 'score-low';
-          scoreHtml = '<span class="score-badge '+sc+'">'+esc(String(j.score))+'/100</span>';
-          if(j.tier) scoreHtml += '<span class="tier-badge">'+esc(j.tier)+'</span>';
-        }
-        var saved = isJobSaved(j.link||'');
-        var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
-          +' data-link="'+esc(j.link||'')+'"'
-          +' data-title="'+esc(j.title||'')+'"'
-          +' data-company="'+esc(j.company||'')+'"'
-          +' onclick="handleStar(this)"'
-          +' title="'+(saved?'Remove from saved':'Save job')+'">'
-          +(saved?'&#9733;':'&#9734;')+'</button>';
-        return '<div class="job-item">'
-          +'<div class="job-item-title" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">'+
-            '<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+starBtn+
-          '</div>'
-          +(j.company?'<div class="job-item-company">'+esc(j.company)+'</div>':'')
-          +'<div class="job-item-meta">'+(j.location?'<span>📍 '+esc(j.location)+'</span>':'')+(j.type?'<span>'+esc(j.type)+'</span>':'')+'</div>'
-          +(j.pay?'<div class="job-item-pay">💰 '+esc(j.pay)+'</div>':'')
-          +(j.posted?'<div class="job-item-posted">Posted: '+esc(j.posted)+'</div>':'')
-          +(j.why?'<div class="job-item-why">'+esc(j.why)+'</div>':'')
-          +'</div>';
-      }).join('')
+    + jobs.slice(0,10).map(jobItemHtml).join('')
     +'</div>';
 }
 
@@ -712,8 +739,10 @@ function loadHistoricalJobs(relPath, label){
     +'&nbsp;&nbsp;<a href="#" onclick="exitHistoricalMode();return false;" '
     +'style="font-size:12px;opacity:0.7;text-decoration:underline">&#8592; Back to latest</a>';
   if(btn) btn.style.display='none';
-  document.getElementById('li-list').innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
-  document.getElementById('in-list').innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
+  var ml = document.getElementById('merged-list');
+  var mc = document.getElementById('merged-count');
+  if(ml) ml.innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
+  if(mc) mc.textContent='';
   // Try dated JSON files first (full filtered results), fall back to txt (60+ only)
   var nc = '?nocache='+Date.now();
   var liUrl = _docsPrefix + 'li_results_'+label+'.json';
@@ -724,20 +753,17 @@ function loadHistoricalJobs(relPath, label){
   ]).then(function(results){
     var liData = results[0], inData = results[1];
     if(liData || inData){
-      renderJobList(liData ? liData.jobs||[] : [], 'li-list', 'li-count');
-      renderJobList(inData ? inData.jobs||[] : [], 'in-list', 'in-count');
+      renderMergedJobList(liData ? liData.jobs||[] : [], inData ? inData.jobs||[] : []);
     } else {
       // Fall back to txt file
       fetch(relPath+nc)
         .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
         .then(function(text){
           var parsed = parseTxtJobs(text);
-          renderJobList(parsed.li, 'li-list', 'li-count');
-          renderJobList(parsed.in, 'in-list', 'in-count');
+          renderMergedJobList(parsed.li, parsed.in);
         })
         .catch(function(e){
-          document.getElementById('li-list').innerHTML='<div class="panel-state">Failed to load: '+e.message+'</div>';
-          document.getElementById('in-list').innerHTML='<div class="panel-state"></div>';
+          if(ml) ml.innerHTML='<div class="panel-state">Failed to load: '+esc(e.message)+'</div>';
         });
     }
   });
@@ -761,34 +787,39 @@ function loadBoard(showSpinner){
   var btn = document.getElementById('refresh-btn');
   if(btn && showSpinner){ btn.disabled=true; btn.innerHTML='<span class="spin">&#8635;</span> Refreshing…'; }
 
-  var liDone=false, inDone=false;
-  function checkDone(){
-    if(liDone && inDone){
-      if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
-      updateSyncLabel();
-    }
+  if(showSpinner){
+    var ml = document.getElementById('merged-list');
+    var mc = document.getElementById('merged-count');
+    if(ml) ml.innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
+    if(mc) mc.textContent='';
   }
 
-  if(showSpinner){
-    document.getElementById('li-list').innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
-    document.getElementById('in-list').innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
-    document.getElementById('li-count').textContent='';
-    document.getElementById('in-count').textContent='';
+  var _liJobs = null, _inJobs = null;
+  var liDone=false, inDone=false;
+
+  function checkDone(){
+    if(!liDone || !inDone) return;
+    var changed = showSpinner
+      || (_liJobs !== null)   // new li data arrived
+      || (_inJobs !== null);  // new in data arrived
+    if(changed) renderMergedJobList(_liJobs||[], _inJobs||[]);
+    if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
+    updateSyncLabel();
   }
 
   fetchJobFile(_docsPrefix + 'li_results_latest.json')
     .then(function(data){
-      // Only re-render if data changed
       if(data.generated !== _lastLiGen || showSpinner){
         _lastLiGen = data.generated;
         _syncTimes[0] = data.generated;
-        renderJobList(data.jobs||[], 'li-list', 'li-count');
+        _liJobs = data.jobs||[];
       }
       liDone=true; checkDone();
     })
     .catch(function(e){
-      renderPanelErr('li-list', 'Could not load LinkedIn results: '+e.message);
-      liDone=true; checkDone();
+      var el = document.getElementById('merged-list');
+      if(el && showSpinner) el.innerHTML='<div class="panel-err">⚠ Could not load LinkedIn results: '+esc(e.message)+'</div>';
+      liDone=true; _liJobs=[]; checkDone();
     });
 
   fetchJobFile(_docsPrefix + 'in_results_latest.json')
@@ -796,13 +827,12 @@ function loadBoard(showSpinner){
       if(data.generated !== _lastInGen || showSpinner){
         _lastInGen = data.generated;
         _syncTimes[1] = data.generated;
-        renderJobList(data.jobs||[], 'in-list', 'in-count');
+        _inJobs = data.jobs||[];
       }
       inDone=true; checkDone();
     })
     .catch(function(e){
-      renderPanelErr('in-list', 'Could not load Indeed results: '+e.message);
-      inDone=true; checkDone();
+      inDone=true; _inJobs=[]; checkDone();
     });
 }
 
