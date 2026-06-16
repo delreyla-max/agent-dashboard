@@ -220,6 +220,13 @@ body {
 .jb-tier-badge.tier-2 { background:var(--indigo-bg); color:var(--indigo); }
 .jb-tier-badge.tier-3 { background:#f3f4f6; color:var(--muted); }
 .jb-tier-dash { color:var(--muted2); }
+.jb-pref-badge {
+  display:inline-block; margin-top:5px; padding:2px 8px; border-radius:999px;
+  font-size:10px; font-weight:700; white-space:nowrap; letter-spacing:.02em;
+}
+.jb-pref-badge.pref-high { background:var(--green-bg); color:var(--green); }
+.jb-pref-badge.pref-mid  { background:var(--amber-bg); color:var(--amber); }
+.jb-pref-badge.pref-low  { background:#f3f4f6; color:var(--muted2); }
 .jb-title-link { color:var(--text); font-weight:600; text-decoration:none; }
 .jb-title-link:hover { color:var(--blue); text-decoration:underline; }
 .jb-why { font-size:11px; color:var(--muted); line-height:1.5; margin-top:4px; }
@@ -329,6 +336,13 @@ body {
 .btn-add-chip:hover { background:var(--border); }
 .chip-count { font-size:11px; color:var(--muted); white-space:nowrap; }
 .chip-parsed { font-size:11px; color:var(--muted); margin-top:8px; }
+.pref-textarea {
+  width:100%; box-sizing:border-box; background:var(--surface); border:1px solid var(--border);
+  border-radius:6px; padding:8px 10px; font-size:12px; color:var(--text); outline:none;
+  resize:vertical; min-height:70px; font-family:inherit; line-height:1.5; margin-bottom:11px;
+  transition:border-color .15s;
+}
+.pref-textarea:focus { border-color:var(--blue); }
 .chip-panel-toggle {
   background:none; border:none; color:var(--muted2); cursor:pointer;
   font-size:13px; padding:0 2px; line-height:1; transition:transform .2s, color .15s;
@@ -657,6 +671,34 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         </div>
       </div>
     </div>
+    <div class="chip-panel-wrap" id="prefs-panel-wrap">
+      <div class="chip-panel-header">
+        <span class="chip-panel-title">What You're Looking For</span>
+        <span class="chip-panel-dirty" id="prefs-dirty">Unsaved changes</span>
+        <span class="chip-count" id="prefs-count"></span>
+        <button class="btn-save-chips" id="prefs-save-btn" onclick="savePreferences()">Save</button>
+        <button class="chip-panel-toggle" id="prefs-toggle" onclick="togglePanel('prefs')" title="Collapse">&#9660;</button>
+      </div>
+      <div class="chip-panel-body" id="prefs-body">
+        <div class="chip-panel-body-inner">
+          <textarea class="pref-textarea" id="prefs-text" oninput="markPrefsDirty()"
+            placeholder="Describe the role you want in a few sentences — type of company, seniority, what excites you, dealbreakers. e.g. 'Remote or LA ACD/CD role at a design-led tech or entertainment brand. I want to lead AI-assisted production and brand systems. Not interested in pure social or automotive dealership work.'"></textarea>
+          <div class="chip-add-row" style="margin-bottom:11px;">
+            <button class="btn-add-chip" onclick="extractPreferences()">Extract keywords &#8595;</button>
+            <span class="chip-count" id="prefs-extract-note"></span>
+          </div>
+          <div class="chips-area" id="prefs-chips">
+            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+          </div>
+          <div class="chip-add-row">
+            <input class="chip-input" id="pref-input" type="text" placeholder="Add preference keyword…"
+              onkeydown="if(event.key==='Enter') addPreference()" />
+            <button class="btn-add-chip" onclick="addPreference()">Add</button>
+          </div>
+          <div class="chip-parsed" id="prefs-parsed">These drive a separate "Pref fit" badge on each job — they don't change your resume keyword score.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer>Job Search Dashboard &middot; Job board auto-refreshes from <code id="footer-docs-path">docs/</code> JSON &middot; GitHub Pages ready</footer>
@@ -750,6 +792,7 @@ function bootDashboard(){
   loadSavedJobs();
   loadKeywordsPanel();
   loadTitlesPanel();
+  loadPreferencesPanel();
 
   var username = (_authUser.user_metadata||{}).username || 'garman';
   fetch('users/'+username+'/config.json?t='+Date.now())
@@ -890,6 +933,13 @@ function init(d){
       scoreTxt = String(j.score);
     }
 
+    var prefHtml = '';
+    if(j.prefScore != null){
+      var pCls = j.prefScore >= 60 ? 'pref-high' : j.prefScore >= 30 ? 'pref-mid' : 'pref-low';
+      var pm = (j.prefMatched && j.prefMatched.length) ? j.prefMatched.join(', ') : 'no preference matches';
+      prefHtml = '<span class="jb-pref-badge '+pCls+'" title="Matches your preferences: '+esc(pm)+'">&#9733; Pref fit '+esc(String(j.prefScore))+'%</span>';
+    }
+
     var saved = isJobSaved(j.link||'');
     var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
       +' data-link="'+esc(j.link||'')+'"'
@@ -909,6 +959,7 @@ function init(d){
         +titleHtml
         +(pay?'<div class="jb-pay">&#128176; '+esc(pay)+'</div>':'')
         +(why?'<div class="jb-why">'+esc(why)+'</div>':'')
+        +(prefHtml?'<div>'+prefHtml+'</div>':'')
       +'</div>'
       +'<div class="jb-cell jb-company" data-label="Company">'+esc(company)+'</div>'
       +'<div class="jb-cell jb-location" data-label="Location">'+esc(j.location||'')+'</div>'
@@ -1103,7 +1154,7 @@ window.handleStar = function(btn){
 /* ═══════════════════════════════════
    COLLAPSIBLE PANELS
    ═══════════════════════════════════ */
-var _panelState = { keywords: true, titles: true }; // true = expanded
+var _panelState = { keywords: true, titles: true, prefs: true }; // true = expanded
 
 window.togglePanel = function(name){
   _panelState[name] = !_panelState[name];
@@ -1229,6 +1280,162 @@ window.saveKeywords = function(){
     _keywordsDirty = false;
     if(btn){ btn.disabled=false; btn.textContent='Save'; }
     renderKeywordsPanel();
+  });
+};
+
+/* ═══════════════════════════════════
+   PREFERENCES PANEL  ("What you're looking for")
+   Free-text intent → extracted preference keywords.
+   Scored separately from resume keywords; surfaced as a "Pref fit" badge.
+   ═══════════════════════════════════ */
+var _prefs = [];        // extracted/edited preference keywords (chips)
+var _prefText = '';     // raw free-text the user wrote
+var _prefsDirty = false;
+var MAX_PREFS = 15;
+
+// Stopwords + filler dropped during client-side extraction.
+var _PREF_STOP = {};
+('a an the and or but to of in on for with at by from as is are be been being this that these those i my me we our you your it its their there here ' +
+ 'role roles job jobs position positions work working want wanting looking like would prefer prefer ideally really very just also able open interested ' +
+ 'into not no none any some more most much many few less least into about around over under than then so such only own same other another each every ' +
+ 'company companies brand brands team teams place places thing things etc e g eg ie new good great strong nice big small large high low full time ' +
+ 'who what when where why how which while because if while can could should will shall may might must do does did done get got make makes made ' +
+ 'they them he she his her people someone something anything everything nothing somewhere anywhere everywhere')
+  .split(' ').forEach(function(w){ if(w) _PREF_STOP[w] = true; });
+
+// Extract candidate phrases (1–3 word runs of non-stopwords) from free text.
+function extractKeywordsFromText(text){
+  var out = [], seen = {};
+  // Split into clauses on sentence/comma boundaries, keep hyphenated words intact.
+  var clauses = String(text||'').toLowerCase().split(/[.,;:!?\n()]+|\bnot\b|\bno\b|\bbut\b|\band\b|\bor\b/);
+  clauses.forEach(function(cl){
+    var toks = cl.split(/[^a-z0-9+\-]+/).filter(Boolean);
+    var run = [];
+    function flush(){
+      if(!run.length) return;
+      // emit the whole run (capped at 3 words) and also notable single tokens
+      for(var len = Math.min(run.length,3); len >= 1; len--){
+        for(var s = 0; s + len <= run.length; s++){
+          var phrase = run.slice(s, s+len).join(' ');
+          if(phrase.length < 3) continue;
+          if(len===1 && run.length>1 && phrase.length<4) continue; // skip tiny lone tokens inside a phrase
+          if(!seen[phrase]){ seen[phrase] = true; out.push(phrase); }
+        }
+      }
+      run = [];
+    }
+    toks.forEach(function(t){
+      t = t.replace(/^[\-+]+|[\-+]+$/g,'');
+      if(!t || t.length < 2 || _PREF_STOP[t] || /^\d+$/.test(t)) { flush(); return; }
+      run.push(t);
+      if(run.length >= 3) flush();
+    });
+    flush();
+  });
+  // Prefer multi-word phrases first, then fill with singles, cap at MAX_PREFS.
+  out.sort(function(a,b){ return b.split(' ').length - a.split(' ').length; });
+  return out.slice(0, MAX_PREFS);
+}
+
+function loadPreferencesPanel(){
+  if(!_authUser) return;
+  _sb.from('user_preferences')
+    .select('pref_text, keywords')
+    .eq('user_id', _authUser.id)
+    .maybeSingle()
+    .then(function(r){
+      if(r.error){ console.error('load user_preferences:', r.error); renderPreferencesPanel(); return; }
+      var row = r.data || {};
+      _prefText = row.pref_text || '';
+      _prefs    = row.keywords  || [];
+      var ta = document.getElementById('prefs-text');
+      if(ta) ta.value = _prefText;
+      renderPreferencesPanel();
+    });
+}
+
+function renderPreferencesPanel(){
+  var chipsEl = document.getElementById('prefs-chips');
+  var dirtyEl = document.getElementById('prefs-dirty');
+  var saveBtn = document.getElementById('prefs-save-btn');
+  var countEl = document.getElementById('prefs-count');
+  if(!chipsEl) return;
+
+  if(!_prefs.length){
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No preference keywords yet. Write a few sentences above, then hit "Extract keywords" — or add your own below.</span>';
+  } else {
+    chipsEl.innerHTML = _prefs.map(function(kw, i){
+      return '<span class="chip">'+esc(kw)
+        +'<button class="chip-remove" onclick="removePreference('+i+')" title="Remove">&#10005;</button>'
+        +'</span>';
+    }).join('');
+  }
+  if(countEl){
+    countEl.textContent = _prefs.length+'/'+MAX_PREFS;
+    countEl.style.color = _prefs.length > MAX_PREFS ? 'var(--danger, #c0392b)' : '';
+  }
+  if(dirtyEl) dirtyEl.classList[_prefsDirty?'add':'remove']('visible');
+  if(saveBtn) saveBtn.classList[_prefsDirty?'add':'remove']('visible');
+
+  var addBtn = document.querySelector('#prefs-panel-wrap .chip-add-row .btn-add-chip[onclick="addPreference()"]');
+  var inp    = document.getElementById('pref-input');
+  if(addBtn) addBtn.disabled = _prefs.length >= MAX_PREFS;
+  if(inp)    inp.disabled    = _prefs.length >= MAX_PREFS;
+}
+
+window.markPrefsDirty = function(){
+  _prefsDirty = true;
+  renderPreferencesPanel();
+};
+
+window.extractPreferences = function(){
+  var ta = document.getElementById('prefs-text');
+  var note = document.getElementById('prefs-extract-note');
+  var text = ta ? (ta.value||'') : '';
+  if(!text.trim()){ if(note) note.textContent = 'Write a sentence or two first.'; return; }
+  var extracted = extractKeywordsFromText(text);
+  // Merge with any existing chips the user kept, dedup, cap.
+  var merged = _prefs.slice();
+  extracted.forEach(function(k){ if(merged.indexOf(k) === -1) merged.push(k); });
+  _prefs = merged.slice(0, MAX_PREFS);
+  _prefText = text;
+  _prefsDirty = true;
+  if(note) note.textContent = extracted.length+' found — edit freely, then Save.';
+  renderPreferencesPanel();
+};
+
+window.addPreference = function(){
+  if(_prefs.length >= MAX_PREFS) return;
+  var inp = document.getElementById('pref-input');
+  var val = (inp.value||'').trim().toLowerCase();
+  if(!val) return;
+  if(_prefs.indexOf(val) === -1) _prefs.push(val);
+  inp.value = '';
+  _prefsDirty = true;
+  renderPreferencesPanel();
+  inp.focus();
+};
+
+window.removePreference = function(idx){
+  _prefs.splice(idx, 1);
+  _prefsDirty = true;
+  renderPreferencesPanel();
+};
+
+window.savePreferences = function(){
+  if(!_authUser) return;
+  var ta = document.getElementById('prefs-text');
+  if(ta) _prefText = ta.value || '';
+  var btn = document.getElementById('prefs-save-btn');
+  if(btn){ btn.disabled=true; btn.textContent='Saving…'; }
+  _sb.from('user_preferences').upsert(
+    {user_id:_authUser.id, pref_text:_prefText, keywords:_prefs, updated_at:new Date().toISOString()},
+    {onConflict:'user_id'}
+  ).then(function(r){
+    if(r.error){ console.error('save preferences:', r.error); }
+    _prefsDirty = false;
+    if(btn){ btn.disabled=false; btn.textContent='Save'; }
+    renderPreferencesPanel();
   });
 };
 
