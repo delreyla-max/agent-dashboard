@@ -32,7 +32,7 @@ body {
 .navbar {
   display:flex; align-items:center; gap:16px; flex-wrap:wrap;
   background:var(--surface); border-bottom:1px solid var(--border);
-  padding:12px 32px; margin:0 -32px 24px;
+  padding:7px 32px; margin:0 -32px 20px;
 }
 .nav-brand { display:flex; align-items:center; gap:10px; flex:0 0 auto; }
 .nav-logo {
@@ -42,14 +42,7 @@ body {
 }
 .nav-brand-text { font-weight:700; font-size:15px; color:var(--text); white-space:nowrap; }
 .nav-center { flex:1 1 auto; min-width:160px; text-align:center; }
-.nav-title { font-weight:600; font-size:18px; color:var(--text); }
-.nav-subline { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:2px; flex-wrap:wrap; }
-.plan-badge {
-  display:inline-block; padding:2px 10px; border-radius:999px;
-  font-size:10px; font-weight:700; letter-spacing:0.05em;
-  background:var(--indigo-bg); color:var(--indigo); border:1px solid #c7d2fe;
-}
-.updated { color:var(--muted); font-size:11px; white-space:nowrap; }
+.nav-title { font-weight:600; font-size:16px; color:var(--text); }
 .nav-right { display:flex; align-items:center; gap:12px; flex:0 0 auto; }
 .pill-wrap { display:flex; align-items:center; gap:6px; }
 .pill {
@@ -105,19 +98,19 @@ body {
 .stat-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:20px; }
 .stat-card {
   background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card);
-  padding:16px 18px; display:flex; align-items:flex-start; gap:12px;
+  padding:10px 16px; display:flex; align-items:center; gap:11px;
 }
-.stat-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.stat-icon svg { width:20px; height:20px; }
+.stat-icon { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.stat-icon svg { width:18px; height:18px; }
 .stat-icon.search  { background:var(--indigo-bg); color:#4f46e5; }
 .stat-icon.results { background:#f3e8ff; color:#9333ea; }
 .stat-icon.saved   { background:var(--green-bg); color:var(--green); }
 .stat-icon.pipeline{ background:#ffedd5; color:#ea580c; }
 .stat-body { min-width:0; }
-.stat-label { font-size:12px; color:var(--muted); font-weight:500; margin-bottom:2px; }
-.stat-value { font-size:22px; font-weight:700; color:var(--text); line-height:1.2; }
-.stat-value.text-val { font-size:14px; font-weight:700; }
-.stat-sub { font-size:11px; color:var(--muted2); margin-top:3px; }
+.stat-label { font-size:12px; color:var(--muted); font-weight:500; margin-bottom:1px; }
+.stat-value { font-size:18px; font-weight:700; color:var(--text); line-height:1.15; }
+.stat-value.text-val { font-size:13px; font-weight:700; }
+.stat-sub { font-size:11px; color:var(--muted2); margin-top:1px; }
 
 /* ── INFO BANNER ── */
 .info-banner {
@@ -125,6 +118,21 @@ body {
   border-radius:var(--radius-sm); padding:10px 16px; font-size:12.5px; margin-top:16px;
   line-height:1.5;
 }
+
+/* ── SETTINGS (collapsible) ── */
+.settings-section { margin-top:16px; }
+.settings-header {
+  width:100%; display:flex; align-items:center; gap:8px; cursor:pointer;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card);
+  padding:11px 18px; font:inherit; color:var(--text); text-align:left;
+}
+.settings-header:hover { background:var(--bg); }
+.settings-title { font-size:15px; font-weight:600; flex:1 1 auto; }
+.settings-chevron { color:var(--muted); font-size:12px; transition:transform .25s ease; }
+.settings-header.collapsed .settings-chevron { transform:rotate(-90deg); }
+.settings-body { overflow:hidden; transition:max-height .4s ease, opacity .2s ease, margin-top .3s ease; max-height:6000px; opacity:1; margin-top:14px; }
+.settings-body.collapsed { max-height:0; opacity:0; margin-top:0; pointer-events:none; }
+.settings-body .bottom-panels { margin-top:0; }
 
 /* ── PANELS (generic white card) ── */
 .panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); overflow:hidden; }
@@ -391,15 +399,15 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
 .empty-state { font-size:12.5px; color:var(--muted); padding:14px 0; font-style:italic; }
 
 @media (max-width:1180px){
-  .stat-cards { grid-template-columns:repeat(2,1fr); }
+  .stat-cards { gap:10px; }
   .bottom-panels { grid-template-columns:repeat(2,1fr); }
 }
 @media (max-width:760px){
   .page { padding:0 16px 50px; }
   .navbar { padding:12px 16px; margin:0 -16px 18px; }
   .nav-center { order:3; flex:1 1 100%; text-align:left; margin-top:6px; }
-  .nav-subline { justify-content:flex-start; }
-  .stat-cards { grid-template-columns:1fr; }
+  .stat-cards { gap:7px; }
+  .stat-card { flex-direction:column; align-items:flex-start; gap:6px; padding:9px 10px; }
   .bottom-panels { grid-template-columns:1fr; }
   .job-board-meta { margin-left:0; text-align:left; flex:1 1 100%; }
 }
@@ -529,10 +537,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
   </div>
   <div class="nav-center">
     <div class="nav-title" id="dash-title">Job Search Dashboard</div>
-    <div class="nav-subline">
-      <span class="plan-badge" id="plan-badge"></span>
-      <span class="updated" id="dash-updated"></span>
-    </div>
   </div>
   <div class="nav-right">
     <div class="pill-wrap">
@@ -578,6 +582,86 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <div class="stat-label">Scheduled Pipelines</div>
         <div class="stat-value text-val" id="stat-pipeline-value">—</div>
         <div class="stat-sub" id="stat-pipeline-sub"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings (collapsible) -->
+  <div class="settings-section">
+    <button class="settings-header collapsed" id="settings-toggle" onclick="toggleSettings()" aria-expanded="false">
+      <span class="settings-title">&#9881; Settings</span>
+      <span class="settings-chevron">&#9660;</span>
+    </button>
+    <div class="settings-body collapsed" id="settings-body">
+      <div class="bottom-panels">
+        <div class="panel">
+          <div class="panel-header"><span class="panel-title">Resume</span></div>
+          <div class="bottom-panel-body" id="resume-card"></div>
+        </div>
+        <div class="chip-panel-wrap" id="titles-panel-wrap">
+          <div class="chip-panel-header">
+            <span class="chip-panel-title">Job Titles</span>
+            <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
+            <span class="chip-count" id="titles-count"></span>
+            <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
+            <button class="chip-panel-toggle" id="titles-toggle" onclick="togglePanel('titles')" title="Collapse">&#9660;</button>
+          </div>
+          <div class="chip-panel-body" id="titles-body">
+            <div class="chip-panel-body-inner">
+              <div class="chips-area" id="titles-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-add-row">
+                <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
+                  onkeydown="if(event.key==='Enter') addTitle()" />
+                <button class="btn-add-chip" onclick="addTitle()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chip-panel-wrap" id="learned-panel-wrap">
+          <div class="chip-panel-header">
+            <span class="chip-panel-title">Learned From Your Activity</span>
+            <span class="chip-count" id="learned-count"></span>
+            <button class="chip-panel-toggle" id="learned-toggle" onclick="togglePanel('learned')" title="Collapse">&#9660;</button>
+          </div>
+          <div class="chip-panel-body" id="learned-body">
+            <div class="chip-panel-body-inner">
+              <div class="chips-area" id="learned-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-parsed" id="learned-note">Save a job (&#9734;) to teach the system its words. Thumbs-down (&#128078;) a job to drop them. This list feeds your Pref-fit score on the next search run.</div>
+            </div>
+          </div>
+        </div>
+        <div class="chip-panel-wrap" id="prefs-panel-wrap">
+          <div class="chip-panel-header">
+            <span class="chip-panel-title">What You're Looking For</span>
+            <span class="chip-panel-dirty" id="prefs-dirty">Unsaved changes</span>
+            <span class="chip-count" id="prefs-count"></span>
+            <button class="btn-save-chips" id="prefs-save-btn" onclick="savePreferences()">Save</button>
+            <button class="chip-panel-toggle" id="prefs-toggle" onclick="togglePanel('prefs')" title="Collapse">&#9660;</button>
+          </div>
+          <div class="chip-panel-body" id="prefs-body">
+            <div class="chip-panel-body-inner">
+              <textarea class="pref-textarea" id="prefs-text" oninput="markPrefsDirty()"
+                placeholder="Describe the role you want in a few sentences — type of company, seniority, what excites you, dealbreakers. e.g. 'Remote or LA ACD/CD role at a design-led tech or entertainment brand. I want to lead AI-assisted production and brand systems. Not interested in pure social or automotive dealership work.'"></textarea>
+              <div class="chip-add-row" style="margin-bottom:11px;">
+                <button class="btn-add-chip" onclick="extractPreferences()">Extract keywords &#8595;</button>
+                <span class="chip-count" id="prefs-extract-note"></span>
+              </div>
+              <div class="chips-area" id="prefs-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-add-row">
+                <input class="chip-input" id="pref-input" type="text" placeholder="Add preference keyword…"
+                  onkeydown="if(event.key==='Enter') addPreference()" />
+                <button class="btn-add-chip" onclick="addPreference()">Add</button>
+              </div>
+              <div class="chip-parsed" id="prefs-parsed">These drive a separate "Pref fit" badge on each job — they don't change your resume keyword score.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -633,82 +717,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <div class="jb-footer">
       <span id="merged-count"></span>
       <span id="jb-footer-note">Auto-refreshes every 5 minutes</span>
-    </div>
-  </div>
-
-  <!-- Bottom panel row -->
-  <div class="bottom-panels">
-    <div class="panel">
-      <div class="panel-header"><span class="panel-title">&#128161; Recommendations</span></div>
-      <div class="bottom-panel-body" id="recs-card"></div>
-    </div>
-    <div class="panel">
-      <div class="panel-header"><span class="panel-title">Resume</span></div>
-      <div class="bottom-panel-body" id="resume-card"></div>
-    </div>
-    <div class="chip-panel-wrap" id="titles-panel-wrap">
-      <div class="chip-panel-header">
-        <span class="chip-panel-title">Job Titles</span>
-        <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
-        <span class="chip-count" id="titles-count"></span>
-        <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
-        <button class="chip-panel-toggle" id="titles-toggle" onclick="togglePanel('titles')" title="Collapse">&#9660;</button>
-      </div>
-      <div class="chip-panel-body" id="titles-body">
-        <div class="chip-panel-body-inner">
-          <div class="chips-area" id="titles-chips">
-            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-          </div>
-          <div class="chip-add-row">
-            <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
-              onkeydown="if(event.key==='Enter') addTitle()" />
-            <button class="btn-add-chip" onclick="addTitle()">Add</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chip-panel-wrap" id="learned-panel-wrap">
-      <div class="chip-panel-header">
-        <span class="chip-panel-title">Learned From Your Activity</span>
-        <span class="chip-count" id="learned-count"></span>
-        <button class="chip-panel-toggle" id="learned-toggle" onclick="togglePanel('learned')" title="Collapse">&#9660;</button>
-      </div>
-      <div class="chip-panel-body" id="learned-body">
-        <div class="chip-panel-body-inner">
-          <div class="chips-area" id="learned-chips">
-            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-          </div>
-          <div class="chip-parsed" id="learned-note">Save a job (&#9734;) to teach the system its words. Thumbs-down (&#128078;) a job to drop them. This list feeds your Pref-fit score on the next search run.</div>
-        </div>
-      </div>
-    </div>
-    <div class="chip-panel-wrap" id="prefs-panel-wrap">
-      <div class="chip-panel-header">
-        <span class="chip-panel-title">What You're Looking For</span>
-        <span class="chip-panel-dirty" id="prefs-dirty">Unsaved changes</span>
-        <span class="chip-count" id="prefs-count"></span>
-        <button class="btn-save-chips" id="prefs-save-btn" onclick="savePreferences()">Save</button>
-        <button class="chip-panel-toggle" id="prefs-toggle" onclick="togglePanel('prefs')" title="Collapse">&#9660;</button>
-      </div>
-      <div class="chip-panel-body" id="prefs-body">
-        <div class="chip-panel-body-inner">
-          <textarea class="pref-textarea" id="prefs-text" oninput="markPrefsDirty()"
-            placeholder="Describe the role you want in a few sentences — type of company, seniority, what excites you, dealbreakers. e.g. 'Remote or LA ACD/CD role at a design-led tech or entertainment brand. I want to lead AI-assisted production and brand systems. Not interested in pure social or automotive dealership work.'"></textarea>
-          <div class="chip-add-row" style="margin-bottom:11px;">
-            <button class="btn-add-chip" onclick="extractPreferences()">Extract keywords &#8595;</button>
-            <span class="chip-count" id="prefs-extract-note"></span>
-          </div>
-          <div class="chips-area" id="prefs-chips">
-            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-          </div>
-          <div class="chip-add-row">
-            <input class="chip-input" id="pref-input" type="text" placeholder="Add preference keyword…"
-              onkeydown="if(event.key==='Enter') addPreference()" />
-            <button class="btn-add-chip" onclick="addPreference()">Add</button>
-          </div>
-          <div class="chip-parsed" id="prefs-parsed">These drive a separate "Pref fit" badge on each job — they don't change your resume keyword score.</div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -824,6 +832,13 @@ var enabled = true;
 function applyEnabled(){ document.getElementById('disabled-overlay').classList[enabled?'remove':'add']('visible'); }
 function updatePill(){ var p=document.getElementById('toggle-pill'); p.className='pill '+(enabled?'on':'off'); document.getElementById('pill-label').textContent=enabled?'ON':'OFF'; }
 window.toggleDashboard = function(){ enabled=!enabled; updatePill(); applyEnabled(); document.getElementById('save-banner').classList.add('visible'); };
+window.toggleSettings = function(){
+  var body=document.getElementById('settings-body'), hdr=document.getElementById('settings-toggle');
+  if(!body||!hdr) return;
+  var collapsed = body.classList.toggle('collapsed');
+  hdr.classList.toggle('collapsed', collapsed);
+  hdr.setAttribute('aria-expanded', String(!collapsed));
+};
 
 /* ═══════════════════════════════════
    INIT — called after config fetch
@@ -836,8 +851,6 @@ function init(d){
   document.getElementById('dash-title').textContent = name + ' – Job Search Dashboard';
   var fp = document.getElementById('footer-docs-path');
   if(fp) fp.textContent = _docsPrefix;
-  document.getElementById('plan-badge').textContent = d.plan||'Pro';
-  document.getElementById('dash-updated').textContent = 'Updated '+fmtDate(d.updated);
   updatePill(); applyEnabled();
 
   var pips = d.scheduledPipelines||[];
@@ -874,16 +887,6 @@ function init(d){
     var p = pips[0];
     var schedTxt = p.schedule ? p.schedule.toLowerCase() : 'on a schedule';
     el.textContent = 'An automated search ('+(p.title||'pipeline')+') runs '+schedTxt+' and fetches the latest jobs from LinkedIn and Indeed.';
-  })();
-
-  /* ── RECOMMENDATIONS ── */
-  (function(){
-    var recs=(d.emailDigest||{}).recommendations||[], el=document.getElementById('recs-card');
-    if(!el) return;
-    if(!recs.length){ el.innerHTML='<div class="empty-state">No recommendations yet.</div>'; return; }
-    el.innerHTML='<div class="rec-box">'+recs.map(function(r){
-      return '<div class="rec-item"><div class="rec-item-desc">'+esc(r)+'</div></div>';
-    }).join('')+'</div>';
   })();
 
   /* ═══════════════════════════════════
