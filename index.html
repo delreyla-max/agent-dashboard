@@ -44,32 +44,6 @@ body {
 .nav-center { flex:1 1 auto; min-width:160px; text-align:center; }
 .nav-title { font-weight:600; font-size:16px; color:var(--text); }
 .nav-right { display:flex; align-items:center; gap:12px; flex:0 0 auto; }
-.pill-wrap { display:flex; align-items:center; gap:6px; }
-.pill {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:5px 12px; border-radius:999px; font-size:12px; font-weight:600;
-  cursor:pointer; border:none; transition:background .2s,color .2s; user-select:none;
-}
-.pill.on  { background:var(--green-bg); color:var(--green); }
-.pill.off { background:#f3f4f6; color:#9ca3af; border:1px solid var(--border); }
-.pill-dot { width:7px; height:7px; border-radius:50%; }
-.pill.on  .pill-dot { background:var(--green); }
-.pill.off .pill-dot { background:#9ca3af; }
-.pill-hint { font-size:10px; color:var(--muted2); display:none; }
-@media (min-width:1100px){ .pill-hint{ display:inline; } }
-#save-banner {
-  display:none; background:var(--blue-bg); border:1px solid var(--blue-border); color:#1d4ed8;
-  font-size:12px; padding:7px 14px; border-radius:6px; margin-bottom:14px;
-}
-#save-banner.visible { display:block; }
-#disabled-overlay {
-  display:none; position:fixed; inset:0; z-index:10;
-  background:rgba(17,24,39,0.85); justify-content:center; align-items:center;
-  flex-direction:column; gap:12px;
-}
-#disabled-overlay.visible { display:flex; }
-#disabled-overlay .off-icon { font-size:48px; opacity:.6; color:#fff; }
-#disabled-overlay p { font-size:18px; color:#e5e7eb; }
 
 /* ── AUTH USER ── */
 .auth-user { display:none; align-items:center; gap:10px; }
@@ -100,7 +74,6 @@ body {
   background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card);
   padding:10px 16px; display:flex; align-items:flex-start; gap:11px;
 }
-.stat-body .pill { margin-top:8px; padding:4px 11px; font-size:11px; }
 .stat-icon { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .stat-icon svg { width:18px; height:18px; }
 .stat-icon.search  { background:var(--indigo-bg); color:#4f46e5; }
@@ -536,11 +509,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
   </div>
 </div>
 
-<div id="disabled-overlay">
-  <div class="off-icon">&#9899;</div>
-  <p>Dashboard is disabled</p>
-</div>
-
 <div class="page">
 <!-- Navbar (nested in .page so its negative margin bleeds exactly to page's own padding, not past the viewport) -->
 <div class="navbar">
@@ -555,7 +523,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <div id="auth-user" class="auth-user"></div>
   </div>
 </div>
-<div id="save-banner">Dashboard toggled — tell Claude to persist this setting.</div>
 
   <!-- Settings (hidden; opened from the user menu, top-right) -->
   <div class="settings-section" id="settings-section">
@@ -669,9 +636,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <div class="stat-label">Scheduled Pipelines</div>
         <div class="stat-value text-val" id="stat-pipeline-value">—</div>
         <div class="stat-sub" id="stat-pipeline-sub"></div>
-        <button class="pill" id="toggle-pill" onclick="toggleDashboard()" title="Pause or resume tracking">
-          <span class="pill-dot"></span><span id="pill-label">ON</span>
-        </button>
       </div>
     </div>
   </div>
@@ -869,23 +833,17 @@ function bootDashboard(){
 }
 
 /* ── ON/OFF ── */
-var enabled = true;
-function applyEnabled(){ document.getElementById('disabled-overlay').classList[enabled?'remove':'add']('visible'); }
-function updatePill(){ var p=document.getElementById('toggle-pill'); p.className='pill '+(enabled?'on':'off'); document.getElementById('pill-label').textContent=enabled?'ON':'OFF'; }
-window.toggleDashboard = function(){ enabled=!enabled; updatePill(); applyEnabled(); document.getElementById('save-banner').classList.add('visible'); };
 
 /* ═══════════════════════════════════
    INIT — called after config fetch
    ═══════════════════════════════════ */
 function init(d){
   var _docsPrefix = d.docsPrefix || 'docs/';
-  enabled = d.enabled !== false;
   var name = d.name || ((_authUser&&_authUser.user_metadata||{}).username||'');
   document.title = name + ' – Job Search Dashboard';
   document.getElementById('dash-title').textContent = name ? ('Today could be your day, ' + name) : 'Today could be your day';
   var fp = document.getElementById('footer-docs-path');
   if(fp) fp.textContent = _docsPrefix;
-  updatePill(); applyEnabled();
 
   var pips = d.scheduledPipelines||[];
 
