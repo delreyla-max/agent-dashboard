@@ -7,244 +7,270 @@
 <!-- Load local config (token + repo overrides). Gitignored — never pushed. Silently skipped on GitHub Pages. -->
 <script src="config.js" onerror="void 0"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg:#0f1117; --surface:#1a1d27; --surface2:#222635; --border:#2e3248;
-  --text:#e2e8f0; --muted:#8892a4; --amber:#f59e0b; --green:#22c55e;
-  --red:#ef4444; --gray:#6b7280; --blue:#3b82f6; --teal:#14b8a6;
-  --radius-card:12px; --radius-sm:8px;
+  --bg:#f3f4f6; --surface:#ffffff; --surface2:#f9fafb; --border:#e5e7eb;
+  --text:#111827; --muted:#6b7280; --muted2:#9ca3af;
+  --blue:#2563eb; --blue-bg:#eff6ff; --blue-border:#bfdbfe;
+  --green:#16a34a; --green-bg:#dcfce7;
+  --indigo:#4338ca; --indigo-bg:#e0e7ff;
+  --amber:#d97706; --amber-bg:#fef3c7;
+  --red:#dc2626; --red-bg:#fee2e2;
+  --radius-card:12px; --radius-sm:8px; --radius-pill:999px;
 }
 body {
   background:var(--bg); color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   font-size:14px; line-height:1.5; min-height:100vh;
 }
-.page { max-width:1200px; margin:0 auto; padding:16px 14px 60px; }
+.page { max-width:1440px; margin:0 auto; padding:0 32px 60px; }
 
-/* ── HEADER ── */
-header {
-  display:flex; align-items:center; flex-wrap:wrap;
-  gap:10px; margin-bottom:20px;
-  padding-bottom:16px; border-bottom:1px solid var(--border);
+/* ── NAVBAR ── */
+.navbar {
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  background:var(--surface); border-bottom:1px solid var(--border);
+  padding:12px 32px; margin:0 -32px 24px;
 }
-header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 auto; }
-.updated  { color:var(--muted); font-size:11px; white-space:nowrap; }
+.nav-brand { display:flex; align-items:center; gap:10px; flex:0 0 auto; }
+.nav-logo {
+  width:32px; height:32px; border-radius:8px; background:var(--blue-bg);
+  color:var(--blue); display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:15px; flex-shrink:0;
+}
+.nav-brand-text { font-weight:700; font-size:15px; color:var(--text); white-space:nowrap; }
+.nav-center { flex:1 1 auto; min-width:160px; text-align:center; }
+.nav-title { font-weight:600; font-size:18px; color:var(--text); }
+.nav-subline { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:2px; flex-wrap:wrap; }
 .plan-badge {
   display:inline-block; padding:2px 10px; border-radius:999px;
-  font-size:11px; font-weight:700; letter-spacing:0.05em;
-  background:#312e81; color:#a5b4fc; border:1px solid #4338ca;
+  font-size:10px; font-weight:700; letter-spacing:0.05em;
+  background:var(--indigo-bg); color:var(--indigo); border:1px solid #c7d2fe;
 }
-.pill-wrap { display:flex; align-items:center; gap:8px; }
+.updated { color:var(--muted); font-size:11px; white-space:nowrap; }
+.nav-right { display:flex; align-items:center; gap:12px; flex:0 0 auto; }
+.pill-wrap { display:flex; align-items:center; gap:6px; }
 .pill {
   display:inline-flex; align-items:center; gap:6px;
-  padding:5px 14px; border-radius:999px; font-size:13px; font-weight:600;
+  padding:5px 12px; border-radius:999px; font-size:12px; font-weight:600;
   cursor:pointer; border:none; transition:background .2s,color .2s; user-select:none;
 }
-.pill.on  { background:#15803d; color:#bbf7d0; }
-.pill.off { background:#374151; color:#9ca3af; }
-.pill-dot { width:8px; height:8px; border-radius:50%; }
-.pill.on  .pill-dot { background:#86efac; }
-.pill.off .pill-dot { background:#6b7280; }
-.pill-hint { font-size:11px; color:var(--muted); }
+.pill.on  { background:var(--green-bg); color:var(--green); }
+.pill.off { background:#f3f4f6; color:#9ca3af; border:1px solid var(--border); }
+.pill-dot { width:7px; height:7px; border-radius:50%; }
+.pill.on  .pill-dot { background:var(--green); }
+.pill.off .pill-dot { background:#9ca3af; }
+.pill-hint { font-size:10px; color:var(--muted2); display:none; }
+@media (min-width:1100px){ .pill-hint{ display:inline; } }
 #save-banner {
-  display:none; background:#1e293b; border:1px solid #334155; color:#94a3b8;
+  display:none; background:var(--blue-bg); border:1px solid var(--blue-border); color:#1d4ed8;
   font-size:12px; padding:7px 14px; border-radius:6px; margin-bottom:14px;
 }
 #save-banner.visible { display:block; }
 #disabled-overlay {
   display:none; position:fixed; inset:0; z-index:10;
-  background:rgba(10,11,18,0.88); justify-content:center; align-items:center;
+  background:rgba(17,24,39,0.85); justify-content:center; align-items:center;
   flex-direction:column; gap:12px;
 }
 #disabled-overlay.visible { display:flex; }
-#disabled-overlay .off-icon { font-size:48px; opacity:.5; }
-#disabled-overlay p { font-size:18px; color:var(--muted); }
+#disabled-overlay .off-icon { font-size:48px; opacity:.6; color:#fff; }
+#disabled-overlay p { font-size:18px; color:#e5e7eb; }
+
+/* ── AUTH USER ── */
+.auth-user { display:none; align-items:center; gap:10px; }
+.auth-user.visible { display:flex; }
+.auth-info { text-align:right; line-height:1.3; }
+.auth-name { font-size:12px; font-weight:600; color:var(--text); display:block; }
+.auth-email { font-size:11px; color:var(--muted); display:block; }
+.auth-avatar {
+  width:32px; height:32px; border-radius:50%; background:#dbeafe; color:var(--blue);
+  display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;
+  flex-shrink:0;
+}
+.auth-signout {
+  background:none; border:1px solid var(--border); color:var(--muted);
+  border-radius:5px; padding:4px 10px; font-size:11px; cursor:pointer; transition:border-color .15s,color .15s;
+}
+.auth-signout:hover { border-color:var(--red); color:var(--red); }
 
 /* ── SECTION HEADERS ── */
 .section-header {
-  font-size:14px; font-weight:700; margin:22px 0 12px;
-  padding-bottom:7px; border-bottom:1px solid var(--border);
+  font-size:16px; font-weight:600; margin:24px 0 12px; color:var(--text);
   display:flex; align-items:center; gap:8px;
 }
 
-/* ── JOB BOARD ── */
-.job-board-header {
-  display:flex; align-items:center; flex-wrap:wrap; gap:10px;
-  margin:22px 0 12px; padding-bottom:7px; border-bottom:1px solid var(--border);
+/* ── STAT CARDS ── */
+.stat-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:20px; }
+.stat-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card);
+  padding:16px 18px; display:flex; align-items:flex-start; gap:12px;
 }
-.job-board-title { font-size:14px; font-weight:700; flex:1 1 auto; }
-.job-board-meta  { font-size:11px; color:var(--muted); }
-.btn-refresh {
-  display:inline-flex; align-items:center; gap:5px;
-  background:var(--surface2); color:var(--text); border:1px solid var(--border);
-  border-radius:6px; padding:5px 12px; font-size:12px; font-weight:600; cursor:pointer;
-  transition:background .2s;
+.stat-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.stat-icon svg { width:20px; height:20px; }
+.stat-icon.search  { background:var(--indigo-bg); color:#4f46e5; }
+.stat-icon.results { background:#f3e8ff; color:#9333ea; }
+.stat-icon.saved   { background:var(--green-bg); color:var(--green); }
+.stat-icon.pipeline{ background:#ffedd5; color:#ea580c; }
+.stat-body { min-width:0; }
+.stat-label { font-size:12px; color:var(--muted); font-weight:500; margin-bottom:2px; }
+.stat-value { font-size:22px; font-weight:700; color:var(--text); line-height:1.2; }
+.stat-value.text-val { font-size:14px; font-weight:700; }
+.stat-sub { font-size:11px; color:var(--muted2); margin-top:3px; }
+
+/* ── INFO BANNER ── */
+.info-banner {
+  background:var(--blue-bg); border:1px solid var(--blue-border); color:#1d4ed8;
+  border-radius:var(--radius-sm); padding:10px 16px; font-size:12.5px; margin-top:16px;
+  line-height:1.5;
 }
-.btn-refresh:hover { background:var(--border); }
-.btn-refresh:disabled { opacity:.45; cursor:not-allowed; }
-.spin { display:inline-block; animation:spin .65s linear infinite; }
-@keyframes spin { to { transform:rotate(360deg); } }
 
-.job-board-grid { display:grid; grid-template-columns:1fr; gap:16px; }
-
-.job-panel {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-card); overflow:hidden;
-}
-.job-panel-head {
-  display:flex; align-items:center; gap:8px; justify-content:space-between;
-  padding:10px 14px; border-bottom:1px solid var(--border);
-  background:var(--surface2);
-}
-.job-panel-label { font-size:13px; font-weight:700; display:flex; align-items:center; gap:7px; }
-.src-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-.src-dot.li      { background:#0a66c2; }
-.src-dot.indeed  { background:#2557a7; }
-/* ── FILTERS ── */
-.filter-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-sm); padding:12px 14px; margin-bottom:4px;
-}
-.filter-group-label { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:6px; font-weight:600; }
-.filter-row { display:flex; flex-wrap:wrap; gap:10px; }
-.filter-chk { display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:12px; user-select:none; color:var(--text); }
-.filter-chk input[type="checkbox"],
-.filter-chk input[type="radio"] { accent-color:var(--blue); width:14px; height:14px; cursor:pointer; flex-shrink:0; }
-.filter-chk .src-dot { display:inline-block; }
-
-.src-badge {
-  display:inline-flex; align-items:center; gap:4px;
-  font-size:10px; font-weight:600; padding:2px 7px; border-radius:999px;
-  white-space:nowrap; flex-shrink:0;
-}
-.src-badge.li     { background:#0a66c210; color:#5b9bd5; border:1px solid #0a66c230; }
-.src-badge.indeed { background:#2557a710; color:#7aa7d5; border:1px solid #2557a730; }
-.job-panel-count { font-size:11px; color:var(--muted); }
-
-.job-list { display:flex; flex-direction:column; }
-.job-item {
-  padding:11px 14px; border-bottom:1px solid var(--border);
-  transition:background .15s;
-}
-.job-item:last-child { border-bottom:none; }
-.job-item:hover { background:var(--surface2); }
-.job-item-title { font-size:13px; font-weight:600; margin-bottom:2px; }
-.job-item-title a { color:var(--blue); text-decoration:none; }
-.job-item-title a:hover { text-decoration:underline; }
-.job-item-company { font-size:12px; color:var(--text); margin-bottom:3px; }
-.job-item-meta { font-size:11px; color:var(--muted); display:flex; flex-wrap:wrap; gap:6px; }
-.job-item-pay { font-size:11px; color:#4ade80; font-weight:500; margin-top:2px; }
-.job-item-posted { font-size:10px; color:var(--gray); margin-top:1px; }
-
-.panel-state { padding:24px 14px; text-align:center; font-size:12px; color:var(--muted); }
-.mini-spin { display:inline-block; width:14px; height:14px; border:2px solid var(--border); border-top-color:var(--blue); border-radius:50%; animation:spin .65s linear infinite; vertical-align:middle; margin-right:5px; }
-.panel-err { background:#450a0a22; border:1px solid #450a0a; border-radius:6px; padding:8px 12px; margin:10px 14px; font-size:11px; color:var(--red); }
-
-/* ── SUMMARY CARDS ── */
-.cards-scroll { overflow-x:auto; margin-bottom:18px; -webkit-overflow-scrolling:touch; }
-.cards { display:flex; gap:10px; padding-bottom:2px; }
-.card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-sm); padding:14px 16px; min-width:100px; flex-shrink:0;
-}
-.card-label { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:4px; }
-.card-value { font-size:22px; font-weight:700; }
-.card-sub   { font-size:10px; color:var(--muted); margin-top:2px; }
-
-/* ── BADGES ── */
-.badge { display:inline-block; padding:2px 9px; border-radius:999px; font-size:11px; font-weight:600; white-space:nowrap; }
-.badge-pending     { background:#374151; color:#9ca3af; }
-.badge-in_progress { background:#451a03; color:#fcd34d; border:1px solid #92400e; }
-.badge-done        { background:#052e16; color:#86efac; border:1px solid #166534; }
-.badge-blocked     { background:#450a0a; color:#fca5a5; border:1px solid #991b1b; }
-.badge-ok          { background:#052e16; color:#86efac; border:1px solid #166534; }
-.badge-failed      { background:#450a0a; color:#fca5a5; border:1px solid #991b1b; }
-
-/* ── PIPELINE CARD ── */
-.pipeline-cards { display:flex; flex-direction:column; gap:14px; }
-.pipeline-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); padding:16px; }
-.pipeline-card-header { display:flex; align-items:flex-start; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
-.pipeline-title { font-size:14px; font-weight:700; flex:1 1 auto; }
-.pipeline-meta  { font-size:11px; color:var(--muted); }
-.pipeline-enabled-dot { width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:3px; flex-shrink:0; margin-top:4px; }
-.pipeline-enabled-dot.on  { background:#22c55e; box-shadow:0 0 4px #22c55e80; }
-.pipeline-enabled-dot.off { background:#6b7280; }
-.pipeline-run-note { font-size:12px; color:var(--muted); margin-top:4px; line-height:1.4; }
-.pipeline-section-label { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-top:12px; margin-bottom:5px; font-weight:600; }
-.pipeline-docs { list-style:none; display:flex; flex-direction:column; gap:4px; }
-.pipeline-docs li { font-size:12px; }
-.pipeline-docs a { color:var(--blue); text-decoration:none; }
-.pipeline-docs a:hover { text-decoration:underline; }
-.pipeline-docs .doc-meta { color:var(--muted); margin-left:6px; }
-.pipeline-empty { font-size:12px; color:var(--muted); font-style:italic; }
-
-/* ── RECOMMENDATIONS ── */
-.recs-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); padding:16px; }
-.rec-item {
-  display:flex; gap:10px; align-items:flex-start;
-  background:var(--surface2); border:1px solid #2a2e45;
-  border-left:3px solid #6366f1;
-  border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:8px;
-}
-.rec-item:last-child { margin-bottom:0; }
-.rec-icon { font-size:14px; flex-shrink:0; margin-top:1px; opacity:.85; }
-.rec-text { font-size:13px; line-height:1.55; color:var(--text); }
+/* ── PANELS (generic white card) ── */
+.panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); overflow:hidden; }
+.panel-header { display:flex; align-items:center; gap:8px; padding:14px 18px; border-bottom:1px solid var(--border); }
+.panel-title { font-size:15px; font-weight:600; color:var(--text); flex:1 1 auto; }
+.panel-link { font-size:12px; color:var(--blue); }
 
 /* ── SAVED JOBS ── */
 .star-btn {
   background:none; border:none; cursor:pointer; font-size:17px;
-  color:var(--muted); padding:0 3px; line-height:1; transition:color .15s; flex-shrink:0;
+  color:var(--muted2); padding:0 3px; line-height:1; transition:color .15s; flex-shrink:0;
 }
-.star-btn:hover  { color:var(--amber); }
-.star-btn.starred { color:var(--amber); }
-.saved-jobs-panel {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-card); overflow:hidden;
-}
+.star-btn:hover  { color:#f59e0b; }
+.star-btn.starred { color:#f59e0b; }
 .saved-job-item {
   display:flex; align-items:center; gap:10px;
-  padding:10px 14px; border-bottom:1px solid var(--border);
+  padding:11px 18px; border-bottom:1px solid var(--border);
 }
 .saved-job-item:last-child { border-bottom:none; }
 .saved-job-info { flex:1; min-width:0; }
 .saved-job-title {
-  font-size:13px; font-weight:600; color:var(--blue); text-decoration:none;
+  font-size:13px; font-weight:600; color:var(--text); text-decoration:none;
   display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
-.saved-job-title:hover { text-decoration:underline; }
-.saved-job-company { font-size:11px; color:var(--muted); display:block; margin-top:2px; }
-.saved-job-date { font-size:10px; color:var(--gray); margin-left:auto; flex-shrink:0; }
+.saved-job-title:hover { color:var(--blue); text-decoration:underline; }
+.saved-job-company { font-size:11.5px; color:var(--muted); display:block; margin-top:2px; }
+.saved-job-date { font-size:10.5px; color:var(--muted2); margin-left:auto; flex-shrink:0; white-space:nowrap; }
 .saved-remove-btn {
-  background:none; border:none; color:var(--muted); cursor:pointer;
-  font-size:14px; padding:4px 6px; border-radius:4px; transition:color .15s,background .15s; flex-shrink:0;
+  background:none; border:none; color:var(--muted2); cursor:pointer;
+  font-size:13px; padding:4px 6px; border-radius:4px; transition:color .15s,background .15s; flex-shrink:0;
 }
-.saved-remove-btn:hover { color:var(--red); background:#450a0a44; }
-.saved-empty { font-size:12px; color:var(--muted); font-style:italic; padding:16px 14px; }
-.saved-saving { font-size:11px; color:var(--muted); padding:6px 14px; }
+.saved-remove-btn:hover { color:var(--red); background:var(--red-bg); }
+.saved-empty { font-size:12.5px; color:var(--muted); font-style:italic; padding:18px; }
+.saved-saving { font-size:11px; color:var(--muted); padding:6px 18px; }
 
-/* ── AUTH USER ── */
-.auth-user { display:none; align-items:center; gap:8px; }
-.auth-user.visible { display:flex; }
-.auth-name { font-size:12px; color:var(--muted); }
-.auth-signout {
-  background:none; border:1px solid var(--border); color:var(--muted);
-  border-radius:5px; padding:3px 10px; font-size:11px; cursor:pointer; transition:border-color .15s,color .15s;
+/* ── JOB BOARD ── */
+.job-board-header { padding:16px 18px 14px; border-bottom:1px solid var(--border); }
+.job-board-toprow { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+.job-board-title { font-size:16px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:6px; }
+.job-board-meta  { font-size:11.5px; color:var(--muted); margin-left:auto; text-align:right; }
+.btn-refresh {
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--surface); color:var(--text); border:1px solid var(--border);
+  border-radius:6px; padding:6px 12px; font-size:12px; font-weight:600; cursor:pointer;
+  transition:background .2s;
 }
-.auth-signout:hover { border-color:var(--red); color:var(--red); }
+.btn-refresh:hover { background:var(--surface2); }
+.btn-refresh:disabled { opacity:.5; cursor:not-allowed; }
+.spin { display:inline-block; animation:spin .65s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ── FILTER BAR (horizontal, in job board header) ── */
+.filter-bar {
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  padding:10px 14px;
+}
+.filter-group { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.filter-group-label { font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted2); font-weight:700; margin-right:2px; }
+.filter-chk { display:inline-flex; align-items:center; gap:5px; cursor:pointer; font-size:12px; user-select:none; color:var(--text); white-space:nowrap; }
+.filter-chk input[type="checkbox"],
+.filter-chk input[type="radio"] { accent-color:var(--blue); width:13px; height:13px; cursor:pointer; flex-shrink:0; }
+.filter-sep { width:1px; height:18px; background:var(--border); flex-shrink:0; }
+
+.src-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; display:inline-block; }
+.src-dot.li      { background:#0a66c2; }
+.src-dot.indeed  { background:#2557a7; }
+
+/* ── JOB TABLE ── */
+.jb-head-row, .jb-row {
+  display:grid;
+  grid-template-columns: 46px 96px minmax(180px,1fr) 130px 150px 80px 90px 96px 36px;
+  gap:10px; align-items:start; padding:10px 18px;
+}
+.jb-head-row {
+  font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; font-weight:700;
+  color:var(--muted2); border-bottom:1px solid var(--border); background:var(--surface2);
+}
+.jb-row { border-bottom:1px solid var(--border); font-size:12.5px; }
+.jb-row:last-child { border-bottom:none; }
+.jb-row.alt { background:#fafbfc; }
+.jb-row:hover { background:var(--blue-bg); }
+.jb-cell { min-width:0; }
+.jb-score { font-family:'SF Mono',Menlo,monospace; font-weight:700; padding-top:1px; }
+.jb-score.score-high { color:var(--green); }
+.jb-score.score-mid  { color:var(--amber); }
+.jb-score.score-low  { color:var(--muted2); }
+.jb-tier-badge {
+  display:inline-block; padding:2px 8px; border-radius:999px; font-size:10.5px; font-weight:700;
+  white-space:nowrap; cursor:default;
+}
+.jb-tier-badge.tier-1 { background:var(--green-bg); color:var(--green); }
+.jb-tier-badge.tier-2 { background:var(--indigo-bg); color:var(--indigo); }
+.jb-tier-badge.tier-3 { background:#f3f4f6; color:var(--muted); }
+.jb-tier-dash { color:var(--muted2); }
+.jb-title-link { color:var(--text); font-weight:600; text-decoration:none; }
+.jb-title-link:hover { color:var(--blue); text-decoration:underline; }
+.jb-why { font-size:11px; color:var(--muted); line-height:1.5; margin-top:4px; }
+.jb-pay { font-size:11px; color:var(--green); margin-top:3px; font-weight:500; }
+.jb-company { color:var(--text); }
+.jb-location { color:var(--muted); }
+.jb-source.li { color:var(--blue); font-weight:500; }
+.jb-source.indeed { color:#374151; font-weight:500; }
+.jb-posted { color:var(--muted); white-space:nowrap; }
+.jb-type-pill {
+  display:inline-block; padding:2px 9px; border-radius:999px; font-size:10.5px; font-weight:600; white-space:nowrap;
+}
+.jb-type-pill.remote { background:#dbeafe; color:#1655a3; }
+.jb-type-pill.fulltime { background:var(--green-bg); color:var(--green); }
+.jb-type-pill.parttime { background:var(--amber-bg); color:var(--amber); }
+.jb-type-pill.other { background:#f3f4f6; color:var(--muted); }
+.jb-save { text-align:center; }
+
+.jb-cell[data-label]::before { content:none; }
+@media (max-width:920px){
+  .jb-head-row { display:none; }
+  .jb-row { display:flex; flex-direction:column; gap:4px; padding:14px 18px; }
+  .jb-cell[data-label]::before {
+    content:attr(data-label); color:var(--muted2); font-weight:700; font-size:10px;
+    text-transform:uppercase; letter-spacing:.05em; margin-right:6px;
+  }
+  .jb-score,.jb-tier-cell { order:-1; display:inline-block; margin-right:10px; }
+  .jb-score[data-label]::before, .jb-tier-cell[data-label]::before { display:inline; }
+  .jb-title-cell { order:-2; }
+  .jb-save { order:-3; position:absolute; top:14px; right:18px; text-align:right; }
+  .jb-row { position:relative; }
+}
+
+.panel-state { padding:28px 18px; text-align:center; font-size:12.5px; color:var(--muted); }
+.mini-spin { display:inline-block; width:14px; height:14px; border:2px solid var(--border); border-top-color:var(--blue); border-radius:50%; animation:spin .65s linear infinite; vertical-align:middle; margin-right:6px; }
+.panel-err { background:var(--red-bg); border:1px solid #fecaca; border-radius:6px; padding:10px 14px; margin:12px 18px; font-size:12px; color:var(--red); }
+.jb-footer { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:12px 18px; font-size:11.5px; color:var(--muted); border-top:1px solid var(--border); background:var(--surface2); }
 
 /* ── LOGIN MODAL ── */
 .login-modal {
   display:none; position:fixed; inset:0; z-index:200;
-  background:rgba(10,11,18,0.92); justify-content:center; align-items:center;
+  background:rgba(17,24,39,0.6); justify-content:center; align-items:center;
 }
 .login-modal.visible { display:flex; }
 .login-box {
   background:var(--surface); border:1px solid var(--border);
   border-radius:var(--radius-card); padding:28px 28px 24px; max-width:380px; width:92%;
+  box-shadow:0 10px 40px rgba(0,0,0,.15);
 }
-.login-title { font-size:16px; font-weight:700; margin-bottom:4px; }
-.login-sub { font-size:12px; color:var(--muted); margin-bottom:20px; }
+.login-title { font-size:17px; font-weight:700; margin-bottom:4px; color:var(--text); }
+.login-sub { font-size:12.5px; color:var(--muted); margin-bottom:20px; }
 .login-label { font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; display:block; }
 .login-input {
   width:100%; background:var(--surface2); border:1px solid var(--border);
@@ -258,18 +284,13 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
   width:100%; background:var(--blue); color:#fff; border:none; border-radius:6px;
   padding:9px 18px; font-size:13px; font-weight:600; cursor:pointer; transition:opacity .15s;
 }
-.btn-primary:hover { opacity:.85; }
+.btn-primary:hover { opacity:.88; }
 .btn-primary:disabled { opacity:.5; cursor:not-allowed; }
 
 /* ── CHIP PANELS ── */
-.chip-panel-wrap {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-card); padding:14px 16px; margin-bottom:16px;
-}
-.chip-panel-header {
-  display:flex; align-items:center; gap:8px; margin-bottom:12px;
-}
-.chip-panel-title { font-size:13px; font-weight:700; flex:1; }
+.chip-panel-wrap { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); overflow:hidden; }
+.chip-panel-header { display:flex; align-items:center; gap:8px; padding:14px 18px; border-bottom:1px solid var(--border); }
+.chip-panel-title { font-size:15px; font-weight:600; flex:1; color:var(--text); }
 .chip-panel-dirty { font-size:11px; color:var(--amber); display:none; }
 .chip-panel-dirty.visible { display:inline; }
 .chip-panel-meta { font-size:11px; color:var(--muted); }
@@ -280,21 +301,22 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 }
 .btn-save-chips.visible { display:inline-block; }
 .btn-save-chips:hover { opacity:.85; }
+.chip-panel-body-inner { padding:14px 18px; }
 .chips-area { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:11px; min-height:28px; }
 .chip {
   display:inline-flex; align-items:center; gap:5px;
   background:var(--surface2); border:1px solid var(--border);
   border-radius:999px; padding:4px 10px 4px 12px;
-  font-size:12px; color:var(--text);
+  font-size:12px; color:#374151;
 }
 .chip-remove {
-  background:none; border:none; color:var(--muted); cursor:pointer;
+  background:none; border:none; color:var(--muted2); cursor:pointer;
   font-size:13px; line-height:1; padding:0; transition:color .15s;
 }
 .chip-remove:hover { color:var(--red); }
 .chip-add-row { display:flex; gap:8px; align-items:center; }
 .chip-input {
-  flex:1; background:var(--surface2); border:1px solid var(--border);
+  flex:1; background:var(--surface); border:1px solid var(--border);
   border-radius:6px; padding:6px 10px; font-size:12px; color:var(--text);
   outline:none; transition:border-color .15s;
 }
@@ -308,7 +330,7 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .chip-count { font-size:11px; color:var(--muted); white-space:nowrap; }
 .chip-parsed { font-size:11px; color:var(--muted); margin-top:8px; }
 .chip-panel-toggle {
-  background:none; border:none; color:var(--muted); cursor:pointer;
+  background:none; border:none; color:var(--muted2); cursor:pointer;
   font-size:13px; padding:0 2px; line-height:1; transition:transform .2s, color .15s;
   flex-shrink:0;
 }
@@ -317,61 +339,45 @@ header h1 { font-size:18px; font-weight:700; letter-spacing:-0.3px; flex:1 1 aut
 .chip-panel-body { overflow:hidden; transition:max-height .4s ease, opacity .2s ease; max-height:9999px; opacity:1; }
 .chip-panel-body.collapsed { max-height:0; opacity:0; pointer-events:none; }
 
-/* ── MAIN 2-COL LAYOUT ── */
-.main-2col { display:flex; flex-direction:column; gap:24px; }
-.main-col-left  { flex:1; min-width:0; }
-.main-col-right { flex:0 0 100%; min-width:0; }
-@media (min-width:800px) {
-  .main-2col { flex-direction:row; align-items:start; }
-  .main-col-left  { flex:3; }
-  .main-col-right { flex:1; position:sticky; top:16px; }
+/* ── RECOMMENDATIONS / RESUME ── */
+.rec-box, .resume-box {
+  background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  padding:12px 14px;
 }
+.rec-item { margin-bottom:10px; }
+.rec-item:last-child { margin-bottom:0; }
+.rec-item-title { font-size:12.5px; font-weight:600; color:var(--text); margin-bottom:3px; }
+.rec-item-desc { font-size:12px; color:var(--muted); line-height:1.5; }
+.resume-filename { font-size:13px; font-weight:600; color:var(--text); margin-bottom:3px; }
+.resume-meta { font-size:11.5px; color:var(--muted); }
+.resume-status { display:inline-block; margin-top:8px; padding:2px 9px; border-radius:999px; font-size:10.5px; font-weight:700; background:var(--green-bg); color:var(--green); }
+.resume-status.empty { background:#f3f4f6; color:var(--muted); }
+.resume-explain { font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:10px; }
 
-/* ── BOARD LAYOUT ── */
-.board-layout { display:flex; flex-direction:column; gap:24px; margin-top:16px; }
-.board-col-left  { flex:0 0 100%; min-width:0; }
-.board-col-right { flex:1; min-width:0; }
-@media (min-width:760px) {
-  .board-layout { flex-direction:row; align-items:start; }
-  .board-col-left  { flex:0 0 260px; }
-  .board-col-right { flex:1; }
-}
-@media (min-width:1024px) {
-  .board-col-left  { flex:0 0 300px; }
-}
+/* ── BOTTOM PANEL ROW ── */
+.bottom-panels { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:24px; }
+.bottom-panel-body { padding:14px 18px; }
 
 /* ── MISC ── */
-footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center; line-height:1.6; }
-.empty-state { font-size:12px; color:var(--muted); padding:12px 0; font-style:italic; }
+footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center; line-height:1.6; }
+.empty-state { font-size:12.5px; color:var(--muted); padding:14px 0; font-style:italic; }
 
-@media (min-width:700px) {
-  .page { padding:24px 20px 60px; }
-  header h1 { font-size:21px; }
+@media (max-width:1180px){
+  .stat-cards { grid-template-columns:repeat(2,1fr); }
+  .bottom-panels { grid-template-columns:repeat(2,1fr); }
 }
-@media (min-width:900px) {
-  .layout-2col { display:grid; grid-template-columns:1fr 1fr; gap:0 24px; align-items:start; }
-  .layout-2col .col { min-width:0; }
-}
-@media (min-width:1024px) {
-  .page { padding:28px 32px 60px; }
-}
-@media (min-width:1200px) {
-  .page { padding:32px 40px 60px; }
-}
-.score-badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; font-family:monospace; white-space:nowrap; }
-.score-high   { background:#052e16; color:#86efac; border:1px solid #166534; }
-.score-mid    { background:#422006; color:#fcd34d; border:1px solid #92400e; }
-.score-low    { background:#1f2937; color:#6b7280; border:1px solid #374151; }
-.tier-badge   { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; background:#312e81; color:#a5b4fc; border:1px solid #4338ca; margin-left:4px; }
-.job-item-company-inline { font-size:12px; color:var(--muted); font-weight:400; }
-.job-item-why { font-size:11px; color:var(--muted); line-height:1.5; margin-top:6px; padding-top:6px; border-top:1px solid var(--border); }
-@media (max-width:680px) {
-  .job-board-grid { grid-template-columns:1fr; }
+@media (max-width:760px){
+  .page { padding:0 16px 50px; }
+  .navbar { padding:12px 16px; margin:0 -16px 18px; }
+  .nav-center { order:3; flex:1 1 100%; text-align:left; margin-top:6px; }
+  .nav-subline { justify-content:flex-start; }
+  .stat-cards { grid-template-columns:1fr; }
+  .bottom-panels { grid-template-columns:1fr; }
+  .job-board-meta { margin-left:0; text-align:left; flex:1 1 100%; }
 }
 </style>
 </head>
 <body>
-
 <!-- Inline job data — fallback for file:// local testing (garman only) -->
 <script id="li-data" type="application/json">
 {
@@ -485,13 +491,22 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
   <div class="off-icon">&#9899;</div>
   <p>Dashboard is disabled</p>
 </div>
-<div id="save-banner">Dashboard toggled — tell Claude to persist this setting.</div>
 
 <div class="page">
-  <header>
-    <h1 id="dash-title">Job Search Dashboard</h1>
-    <span class="plan-badge" id="plan-badge"></span>
-    <span class="updated" id="dash-updated"></span>
+<!-- Navbar (nested in .page so its negative margin bleeds exactly to page's own padding, not past the viewport) -->
+<div class="navbar">
+  <div class="nav-brand">
+    <div class="nav-logo">J</div>
+    <span class="nav-brand-text">Jobbyjob</span>
+  </div>
+  <div class="nav-center">
+    <div class="nav-title" id="dash-title">Job Search Dashboard</div>
+    <div class="nav-subline">
+      <span class="plan-badge" id="plan-badge"></span>
+      <span class="updated" id="dash-updated"></span>
+    </div>
+  </div>
+  <div class="nav-right">
     <div class="pill-wrap">
       <button class="pill" id="toggle-pill" onclick="toggleDashboard()">
         <span class="pill-dot"></span><span id="pill-label">ON</span>
@@ -499,52 +514,136 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
       <span class="pill-hint">Toggle tracking</span>
     </div>
     <div id="auth-user" class="auth-user"></div>
-  </header>
+  </div>
+</div>
+<div id="save-banner">Dashboard toggled — tell Claude to persist this setting.</div>
 
-  <!-- Saved Jobs -->
-  <div class="section-header" style="margin-top:0;">&#11088; Saved Jobs</div>
-  <div class="saved-jobs-panel" id="saved-jobs-list">
-    <div class="saved-empty">Sign in to see saved jobs.</div>
+  <!-- Stat Cards -->
+  <div class="stat-cards">
+    <div class="stat-card">
+      <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Active Search</div>
+        <div class="stat-value" id="stat-active-value">—</div>
+        <div class="stat-sub" id="stat-active-sub"></div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Results Found</div>
+        <div class="stat-value" id="stat-results-value">—</div>
+        <div class="stat-sub" id="stat-results-sub">Top results from LinkedIn &amp; Indeed</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Saved Jobs</div>
+        <div class="stat-value" id="stat-saved-value">0</div>
+        <div class="stat-sub">Jobs you've saved</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Scheduled Pipelines</div>
+        <div class="stat-value text-val" id="stat-pipeline-value">—</div>
+        <div class="stat-sub" id="stat-pipeline-sub"></div>
+      </div>
+    </div>
   </div>
 
-  <div class="board-layout">
-    <div class="board-col-left">
-      <!-- Filters -->
-      <div class="section-header" style="margin-top:0;">Filters</div>
-      <div class="filter-card">
-        <div class="filter-group-label">Score</div>
-        <div class="filter-row">
+  <!-- Info Banner -->
+  <div class="info-banner" id="info-banner"></div>
+
+  <!-- Saved Jobs -->
+  <div class="section-header">&#11088; Saved Jobs</div>
+  <div class="panel" id="saved-jobs-list">
+    <div class="saved-empty">Sign in to see saved jobs.</div>
+  </div>
+  <!-- Job Board -->
+  <div class="section-header">&#128269; Job Board</div>
+  <div class="panel" id="panel-merged">
+    <div class="job-board-header">
+      <div class="job-board-toprow">
+        <span class="job-board-title">Job Board</span>
+        <span class="job-board-meta" id="board-synced"></span>
+        <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
+      </div>
+      <div class="filter-bar">
+        <div class="filter-group">
+          <span class="filter-group-label">Score</span>
           <label class="filter-chk"><input type="checkbox" id="f-score50" onchange="applyJobFilter(event)"> <span>50+</span></label>
           <label class="filter-chk"><input type="checkbox" id="f-score80" onchange="applyJobFilter(event)"> <span>80+</span></label>
         </div>
-        <div class="filter-group-label" style="margin-top:10px;">Source</div>
-        <div class="filter-row">
+        <div class="filter-sep"></div>
+        <div class="filter-group">
+          <span class="filter-group-label">Source</span>
           <label class="filter-chk"><input type="checkbox" id="f-li" checked onchange="applyJobFilter(event)"> <span><span class="src-dot li"></span> LinkedIn</span></label>
           <label class="filter-chk"><input type="checkbox" id="f-indeed" checked onchange="applyJobFilter(event)"> <span><span class="src-dot indeed"></span> Indeed</span></label>
         </div>
-        <div class="filter-group-label" style="margin-top:10px;">Date Posted</div>
-        <div class="filter-row" style="flex-direction:column;gap:5px;">
+        <div class="filter-sep"></div>
+        <div class="filter-group">
+          <span class="filter-group-label">Date Posted</span>
           <label class="filter-chk"><input type="radio" name="f-date" value="all" checked onchange="applyJobFilter(event)"> <span>All</span></label>
-          <label class="filter-chk"><input type="radio" name="f-date" value="1" onchange="applyJobFilter(event)"> <span>Last 24 hours</span></label>
-          <label class="filter-chk"><input type="radio" name="f-date" value="3" onchange="applyJobFilter(event)"> <span>Last 3 days</span></label>
-          <label class="filter-chk"><input type="radio" name="f-date" value="7" onchange="applyJobFilter(event)"> <span>Last 7 days</span></label>
-          <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>Last 30 days</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="1" onchange="applyJobFilter(event)"> <span>24h</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="3" onchange="applyJobFilter(event)"> <span>3d</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="7" onchange="applyJobFilter(event)"> <span>7d</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>30d</span></label>
         </div>
       </div>
+    </div>
+    <div class="jb-head-row">
+      <div>Score</div><div>Tier</div><div>Job Title</div><div>Company</div><div>Location</div><div>Source</div><div>Posted</div><div>Job Type</div><div>Save</div>
+    </div>
+    <div id="merged-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
+    <div class="jb-footer">
+      <span id="merged-count"></span>
+      <span id="jb-footer-note">Auto-refreshes every 5 minutes</span>
+    </div>
+  </div>
 
-      <!-- Scheduled Pipelines -->
-      <div class="section-header" style="margin-top:18px;">Scheduled Pipelines</div>
-      <div class="pipeline-cards" id="pipeline-cards"></div>
-
-      <!-- Resume Keywords Panel -->
-      <div class="chip-panel-wrap" id="keywords-panel-wrap" style="margin-top:14px;">
-        <div class="chip-panel-header">
-          <span class="chip-panel-title">&#128196; Resume Keywords</span>
-          <span class="chip-panel-dirty" id="keywords-dirty">Unsaved changes</span>
-          <button class="btn-save-chips" id="keywords-save-btn" onclick="saveKeywords()">Save</button>
-          <button class="chip-panel-toggle" id="keywords-toggle" onclick="togglePanel('keywords')" title="Collapse">&#9660;</button>
+  <!-- Bottom panel row -->
+  <div class="bottom-panels">
+    <div class="panel">
+      <div class="panel-header"><span class="panel-title">&#128161; Recommendations</span></div>
+      <div class="bottom-panel-body" id="recs-card"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><span class="panel-title">Resume</span></div>
+      <div class="bottom-panel-body" id="resume-card"></div>
+    </div>
+    <div class="chip-panel-wrap" id="titles-panel-wrap">
+      <div class="chip-panel-header">
+        <span class="chip-panel-title">Job Titles</span>
+        <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
+        <span class="chip-count" id="titles-count"></span>
+        <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
+        <button class="chip-panel-toggle" id="titles-toggle" onclick="togglePanel('titles')" title="Collapse">&#9660;</button>
+      </div>
+      <div class="chip-panel-body" id="titles-body">
+        <div class="chip-panel-body-inner">
+          <div class="chips-area" id="titles-chips">
+            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+          </div>
+          <div class="chip-add-row">
+            <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
+              onkeydown="if(event.key==='Enter') addTitle()" />
+            <button class="btn-add-chip" onclick="addTitle()">Add</button>
+          </div>
         </div>
-        <div class="chip-panel-body" id="keywords-body">
+      </div>
+    </div>
+    <div class="chip-panel-wrap" id="keywords-panel-wrap">
+      <div class="chip-panel-header">
+        <span class="chip-panel-title">Resume Keywords</span>
+        <span class="chip-panel-dirty" id="keywords-dirty">Unsaved changes</span>
+        <button class="btn-save-chips" id="keywords-save-btn" onclick="saveKeywords()">Save</button>
+        <button class="chip-panel-toggle" id="keywords-toggle" onclick="togglePanel('keywords')" title="Collapse">&#9660;</button>
+      </div>
+      <div class="chip-panel-body" id="keywords-body">
+        <div class="chip-panel-body-inner">
           <div class="chips-area" id="keywords-chips">
             <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
           </div>
@@ -556,54 +655,11 @@ footer { margin-top:32px; font-size:11px; color:var(--muted); text-align:center;
           <div class="chip-parsed" id="keywords-parsed"></div>
         </div>
       </div>
-
-      <!-- Job Titles Panel -->
-      <div class="chip-panel-wrap" id="titles-panel-wrap" style="margin-top:10px;">
-        <div class="chip-panel-header">
-          <span class="chip-panel-title">&#128269; Job Titles</span>
-          <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
-          <span class="chip-count" id="titles-count"></span>
-          <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
-          <button class="chip-panel-toggle" id="titles-toggle" onclick="togglePanel('titles')" title="Collapse">&#9660;</button>
-        </div>
-        <div class="chip-panel-body" id="titles-body">
-          <div class="chips-area" id="titles-chips">
-            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-          </div>
-          <div class="chip-add-row">
-            <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
-              onkeydown="if(event.key==='Enter') addTitle()" />
-            <button class="btn-add-chip" onclick="addTitle()">Add</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Recommendations -->
-      <div class="section-header" style="margin-top:22px;">&#128161; Recommendations</div>
-      <div class="recs-card" id="recs-card"></div>
-    </div>
-    <div class="board-col-right">
-      <!-- Job Board -->
-      <div class="job-board-header" style="margin-top:0;">
-        <span class="job-board-title">&#128269; Job Board</span>
-        <span class="job-board-meta" id="board-synced"></span>
-        <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
-      </div>
-      <div class="job-board-grid">
-        <div class="job-panel" id="panel-merged">
-          <div class="job-panel-head">
-            <div class="job-panel-label">All Sources</div>
-            <span class="job-panel-count" id="merged-count"></span>
-          </div>
-          <div id="merged-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
-        </div>
-      </div>
     </div>
   </div>
 
   <footer>Job Search Dashboard &middot; Job board auto-refreshes from <code id="footer-docs-path">docs/</code> JSON &middot; GitHub Pages ready</footer>
 </div>
-
 <script>
 (function(){
 'use strict';
@@ -679,7 +735,10 @@ window.doSignOut = function(){
 function updateAuthUI(){
   var el = document.getElementById('auth-user');
   if(!_authUser){ el.classList.remove('visible'); return; }
-  el.innerHTML = '<span class="auth-name">'+esc(_authUser.email)+'</span>'
+  var email = _authUser.email || '';
+  var initials = email.slice(0,2).toUpperCase();
+  el.innerHTML = '<div class="auth-info"><span class="auth-name">'+esc(email)+'</span></div>'
+    +'<div class="auth-avatar">'+esc(initials)+'</div>'
     +'<button class="auth-signout" onclick="doSignOut()">Sign out</button>';
   el.classList.add('visible');
 }
@@ -727,21 +786,38 @@ function init(d){
 
   var pips = d.scheduledPipelines||[];
 
-  /* ── PIPELINES ── */
+  /* ── STAT CARD: Active Search ── */
   (function(){
-    var pc = document.getElementById('pipeline-cards');
-    if(!pips.length){ pc.innerHTML='<div class="empty-state">No pipelines configured.</div>'; return; }
-    pc.innerHTML = pips.map(function(p){
-      var h = '<div class="pipeline-card">'
-        +'<div class="pipeline-card-header">'
-        +'<span class="pipeline-enabled-dot '+(p.enabled?'on':'off')+'"></span>'
-        +'<span class="pipeline-title">'+esc(p.title)+'</span>'
-        +'<span class="pipeline-meta">'+esc(p.schedule||'')+'</span>';
-      if(p.lastRun) h+='<span class="pipeline-meta">Last: '+fmtDate(p.lastRun)+'</span>';
-      if(p.lastRunStatus) h+=badge(p.lastRunStatus);
-      h+='</div></div>';
-      return h;
-    }).join('');
+    var valEl = document.getElementById('stat-active-value');
+    var subEl = document.getElementById('stat-active-sub');
+    if(valEl) valEl.textContent = String(pips.length);
+    if(subEl) subEl.textContent = pips.length===1 ? (pips[0].schedule || 'Runs automatically') : (pips.length ? pips.length+' pipelines configured' : 'No pipelines configured');
+  })();
+
+  /* ── STAT CARD: Scheduled Pipelines (repurposed 4th card) ── */
+  (function(){
+    var valEl = document.getElementById('stat-pipeline-value');
+    var subEl = document.getElementById('stat-pipeline-sub');
+    if(!valEl) return;
+    if(!pips.length){ valEl.textContent='—'; if(subEl) subEl.textContent='No pipelines configured.'; return; }
+    var p = pips[0];
+    valEl.textContent = p.schedule || p.title || '—';
+    var subParts = [];
+    if(pips.length > 1) subParts.push(pips.length+' pipelines');
+    else if(p.title) subParts.push(p.title);
+    if(p.lastRun) subParts.push('Last run '+fmtDate(p.lastRun)+(p.lastRunStatus?' · '+p.lastRunStatus.replace('_',' '):''));
+    else subParts.push(p.enabled===false ? 'Disabled' : 'Enabled');
+    if(subEl) subEl.textContent = subParts.join(' · ');
+  })();
+
+  /* ── INFO BANNER ── */
+  (function(){
+    var el = document.getElementById('info-banner');
+    if(!el) return;
+    if(!pips.length){ el.textContent = 'No automated search pipeline is configured yet.'; return; }
+    var p = pips[0];
+    var schedTxt = p.schedule ? p.schedule.toLowerCase() : 'on a schedule';
+    el.textContent = 'An automated search ('+(p.title||'pipeline')+') runs '+schedTxt+' and fetches the latest jobs from LinkedIn and Indeed.';
   })();
 
   /* ── RECOMMENDATIONS ── */
@@ -749,9 +825,9 @@ function init(d){
     var recs=(d.emailDigest||{}).recommendations||[], el=document.getElementById('recs-card');
     if(!el) return;
     if(!recs.length){ el.innerHTML='<div class="empty-state">No recommendations yet.</div>'; return; }
-    el.innerHTML=recs.map(function(r){
-      return '<div class="rec-item"><span class="rec-icon">&#128161;</span><span class="rec-text">'+esc(r)+'</span></div>';
-    }).join('');
+    el.innerHTML='<div class="rec-box">'+recs.map(function(r){
+      return '<div class="rec-item"><div class="rec-item-desc">'+esc(r)+'</div></div>';
+    }).join('')+'</div>';
   })();
 
   /* ═══════════════════════════════════
@@ -779,7 +855,23 @@ function init(d){
     });
   }
 
-  function jobItemHtml(j){
+  function tierBadgeHtml(tier){
+    if(!tier) return '<span class="jb-tier-dash">—</span>';
+    var m = /^Tier\s*(\d+)/i.exec(tier);
+    var n = m ? m[1] : '';
+    var cls = n==='1' ? 'tier-1' : n==='2' ? 'tier-2' : 'tier-3';
+    var label = n ? 'Tier '+n : tier;
+    return '<span class="jb-tier-badge '+cls+'" title="'+esc(tier)+'">'+esc(label)+'</span>';
+  }
+
+  function typePillHtml(type){
+    if(!type) return '';
+    var t = type.toLowerCase();
+    var cls = /remote/.test(t) ? 'remote' : /full.?time/.test(t) ? 'fulltime' : /part.?time/.test(t) ? 'parttime' : 'other';
+    return '<span class="jb-type-pill '+cls+'">'+esc(type)+'</span>';
+  }
+
+  function jobItemHtml(j, alt){
     // normalize field name variants from different pipeline outputs
     var company = j.company || j.companyName || '';
     var pay     = j.pay     || j.salary      || '';
@@ -787,14 +879,16 @@ function init(d){
     var type    = j.type    || j.employmentType || '';
 
     var titleHtml = j.link
-      ? '<a href="'+esc(j.link)+'" target="_blank" rel="noopener">'+esc(j.title)+'</a>'
-      : esc(j.title);
-    var scoreHtml = '';
+      ? '<a class="jb-title-link" href="'+esc(j.link)+'" target="_blank" rel="noopener">'+esc(j.title)+'</a>'
+      : '<span class="jb-title-link">'+esc(j.title)+'</span>';
+
+    var scoreCls = '';
+    var scoreTxt = '—';
     if(j.score != null){
-      var sc = j.score >= 60 ? 'score-high' : j.score >= 40 ? 'score-mid' : 'score-low';
-      scoreHtml = '<span class="score-badge '+sc+'">'+esc(String(j.score))+'/100</span>';
-      if(j.tier) scoreHtml += '<span class="tier-badge">'+esc(j.tier)+'</span>';
+      scoreCls = j.score >= 60 ? 'score-high' : j.score >= 40 ? 'score-mid' : 'score-low';
+      scoreTxt = String(j.score);
     }
+
     var saved = isJobSaved(j.link||'');
     var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
       +' data-link="'+esc(j.link||'')+'"'
@@ -803,18 +897,24 @@ function init(d){
       +' onclick="handleStar(this)"'
       +' title="'+(saved?'Remove from saved':'Save job')+'">'
       +(saved?'&#9733;':'&#9734;')+'</button>';
+
     var srcKey = (j._source||'').toLowerCase().indexOf('indeed') >= 0 ? 'indeed' : 'li';
     var srcLabel = srcKey === 'indeed' ? 'Indeed' : 'LinkedIn';
-    var srcBadge = '<span class="src-badge '+srcKey+'"><span class="src-dot '+srcKey+'"></span>'+srcLabel+'</span>';
-    return '<div class="job-item">'
-      +'<div class="job-item-title" style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;">'
-        +'<span style="flex:1 1 200px;">'+titleHtml+'</span>'+scoreHtml+srcBadge+starBtn
+
+    return '<div class="jb-row'+(alt?' alt':'')+'">'
+      +'<div class="jb-cell jb-score '+scoreCls+'" data-label="Score">'+esc(scoreTxt)+'</div>'
+      +'<div class="jb-cell jb-tier-cell" data-label="Tier">'+tierBadgeHtml(j.tier)+'</div>'
+      +'<div class="jb-cell jb-title-cell" data-label="">'
+        +titleHtml
+        +(pay?'<div class="jb-pay">&#128176; '+esc(pay)+'</div>':'')
+        +(why?'<div class="jb-why">'+esc(why)+'</div>':'')
       +'</div>'
-      +(company?'<div class="job-item-company">'+esc(company)+'</div>':'')
-      +'<div class="job-item-meta">'+(j.location?'<span>&#128205; '+esc(j.location)+'</span>':'')+(type?'<span>'+esc(type)+'</span>':'')+'</div>'
-      +(pay?'<div class="job-item-pay">&#128176; '+esc(pay)+'</div>':'')
-      +(j.posted?'<div class="job-item-posted">Posted: '+esc(j.posted)+'</div>':'')
-      +(why?'<div class="job-item-why">'+esc(why)+'</div>':'')
+      +'<div class="jb-cell jb-company" data-label="Company">'+esc(company)+'</div>'
+      +'<div class="jb-cell jb-location" data-label="Location">'+esc(j.location||'')+'</div>'
+      +'<div class="jb-cell jb-source '+srcKey+'" data-label="Source">'+esc(srcLabel)+'</div>'
+      +'<div class="jb-cell jb-posted" data-label="Posted">'+esc(j.posted||'')+'</div>'
+      +'<div class="jb-cell" data-label="Type">'+typePillHtml(type)+'</div>'
+      +'<div class="jb-cell jb-save" data-label="">'+starBtn+'</div>'
       +'</div>';
   }
 
@@ -831,11 +931,21 @@ function init(d){
     var filtered = applyFilters(tagged);
     var countEl = document.getElementById('merged-count');
     var listEl  = document.getElementById('merged-list');
-    var suffix = filtered.length < tagged.length ? ' of '+tagged.length : '';
-    if(countEl) countEl.textContent = filtered.length ? filtered.length+suffix+' results' : '';
+    var shown = Math.min(filtered.length, 20);
+    if(countEl) countEl.textContent = filtered.length ? 'Showing 1 to '+shown+' of '+filtered.length+' jobs' : '';
+
+    var resVal = document.getElementById('stat-results-value');
+    var resSub = document.getElementById('stat-results-sub');
+    if(resVal) resVal.textContent = String(tagged.length);
+    if(resSub){
+      var liCount = tagged.filter(function(j){ return (j._source||'').toLowerCase().indexOf('indeed')<0; }).length;
+      var inCount = tagged.length - liCount;
+      resSub.textContent = liCount+' LinkedIn · '+inCount+' Indeed';
+    }
+
     if(!listEl) return;
     if(!filtered.length){ listEl.innerHTML='<div class="panel-state">No results match filters.</div>'; return; }
-    listEl.innerHTML = '<div class="job-list">'+filtered.slice(0,20).map(jobItemHtml).join('')+'</div>';
+    listEl.innerHTML = filtered.slice(0,20).map(function(j,i){ return jobItemHtml(j, i%2===1); }).join('');
   }
 
   window.applyJobFilter = function(e){
@@ -859,7 +969,7 @@ function init(d){
   function updateSyncLabel(){
     var el = document.getElementById('board-synced');
     if(!el || !_lastUpdated) return;
-    el.textContent = 'Updated '+fmtTime(_lastUpdated);
+    el.textContent = 'Sources: LinkedIn, Indeed · Updated '+fmtTime(_lastUpdated);
   }
 
   function loadBoard(showSpinner){
@@ -936,6 +1046,8 @@ function isJobSaved(link){
 
 function renderSavedJobs(){
   var el = document.getElementById('saved-jobs-list');
+  var statEl = document.getElementById('stat-saved-value');
+  if(statEl) statEl.textContent = String(_saved.length);
   if(!el) return;
   if(!_authUser){
     el.innerHTML='<div class="saved-empty">Sign in to save jobs.</div>';
@@ -1001,6 +1113,28 @@ window.togglePanel = function(name){
 };
 
 /* ═══════════════════════════════════
+   RESUME CARD (derived from parsed_from/parsed_at on user_keywords)
+   ═══════════════════════════════════ */
+function renderResumeCard(){
+  var el = document.getElementById('resume-card');
+  if(!el) return;
+  if(!_keywordsParsedFrom){
+    el.innerHTML = '<div class="resume-box">'
+      +'<div class="resume-filename">No resume parsed yet</div>'
+      +'<span class="resume-status empty">—</span>'
+      +'</div>'
+      +'<div class="resume-explain">We\'ll use your resume to extract skills and improve search accuracy.</div>';
+    return;
+  }
+  el.innerHTML = '<div class="resume-box">'
+    +'<div class="resume-filename">'+esc(_keywordsParsedFrom)+'</div>'
+    +(_keywordsParsedAt?'<div class="resume-meta">Parsed '+esc(fmtDate(_keywordsParsedAt))+'</div>':'')
+    +'<span class="resume-status">OK</span>'
+    +'</div>'
+    +'<div class="resume-explain">We\'ll use your resume to extract skills and improve search accuracy.</div>';
+}
+
+/* ═══════════════════════════════════
    KEYWORDS PANEL
    ═══════════════════════════════════ */
 var _keywords = [];
@@ -1048,6 +1182,7 @@ function renderKeywordsPanel(){
   }
   if(dirtyEl)  dirtyEl.classList[_keywordsDirty?'add':'remove']('visible');
   if(saveBtn)  saveBtn.classList[_keywordsDirty?'add':'remove']('visible');
+  renderResumeCard();
 }
 
 window.removeKeyword = function(idx){
@@ -1079,7 +1214,6 @@ window.saveKeywords = function(){
     _keywordsDirty = false;
     if(btn){ btn.disabled=false; btn.textContent='Save'; }
     renderKeywordsPanel();
-    renderSearchTermsSummary();
   });
 };
 
@@ -1161,7 +1295,6 @@ window.saveTitles = function(){
     _titlesDirty = false;
     if(btn){ btn.disabled=false; btn.textContent='Save'; }
     renderTitlesPanel();
-    renderSearchTermsSummary();
   });
 };
 
