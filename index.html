@@ -85,6 +85,11 @@ body {
 .stat-value { font-size:18px; font-weight:700; color:var(--text); line-height:1.15; }
 .stat-value.text-val { font-size:13px; font-weight:700; }
 .stat-sub { font-size:11px; color:var(--muted2); margin-top:1px; }
+.stat-cta {
+  margin-top:7px; background:none; border:none; padding:0; cursor:pointer;
+  font:inherit; font-size:11.5px; font-weight:600; color:var(--blue);
+}
+.stat-cta:hover { text-decoration:underline; }
 
 /* ── SETTINGS (hidden; opened from user menu) ── */
 .settings-section { margin-top:0; }
@@ -607,19 +612,19 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
   <!-- Stat Cards -->
   <div class="stat-cards">
     <div class="stat-card">
-      <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Active Search</div>
-        <div class="stat-value" id="stat-active-value">—</div>
-        <div class="stat-sub" id="stat-active-sub"></div>
+        <div class="stat-label">Scheduled Pipelines</div>
+        <div class="stat-value text-val" id="stat-pipeline-value">—</div>
+        <div class="stat-sub" id="stat-pipeline-sub"></div>
       </div>
     </div>
     <div class="stat-card">
       <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Results Found</div>
+        <div class="stat-label">Today's Results</div>
         <div class="stat-value" id="stat-results-value">—</div>
-        <div class="stat-sub" id="stat-results-sub">Top results from LinkedIn &amp; Indeed</div>
+        <div class="stat-sub" id="stat-results-sub">New listings from latest search</div>
       </div>
     </div>
     <div class="stat-card">
@@ -631,11 +636,12 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
       </div>
     </div>
     <div class="stat-card">
-      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+      <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Scheduled Pipelines</div>
-        <div class="stat-value text-val" id="stat-pipeline-value">—</div>
-        <div class="stat-sub" id="stat-pipeline-sub"></div>
+        <div class="stat-label">Resume</div>
+        <div class="stat-value text-val" id="stat-resume-name">—</div>
+        <div class="stat-sub" id="stat-resume-date"></div>
+        <button class="stat-cta" id="resume-review-cta" onclick="openSettings()">Review Keywords &#8594;</button>
       </div>
     </div>
   </div>
@@ -847,15 +853,25 @@ function init(d){
 
   var pips = d.scheduledPipelines||[];
 
-  /* ── STAT CARD: Active Search ── */
+  /* ── STAT CARD: Today's Results (new listings from the latest search run) ── */
   (function(){
-    var valEl = document.getElementById('stat-active-value');
-    var subEl = document.getElementById('stat-active-sub');
-    if(valEl) valEl.textContent = String(pips.length);
-    if(subEl) subEl.textContent = pips.length===1 ? (pips[0].schedule || 'Runs automatically') : (pips.length ? pips.length+' pipelines configured' : 'No pipelines configured');
+    var valEl = document.getElementById('stat-results-value');
+    var subEl = document.getElementById('stat-results-sub');
+    if(!valEl) return;
+    Promise.all([
+      fetch(_docsPrefix+'li_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
+      fetch(_docsPrefix+'in_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
+    ]).then(function(res){
+      var li=res[0], inn=res[1];
+      var liN = li ? (typeof li.count==='number'?li.count:(li.jobs||[]).length) : 0;
+      var inN = inn ? (typeof inn.count==='number'?inn.count:(inn.jobs||[]).length) : 0;
+      valEl.textContent = String(liN+inN);
+      var when = (li&&li.generated) || (inn&&inn.generated) || null;
+      if(subEl) subEl.textContent = liN+' LinkedIn · '+inN+' Indeed'+(when?' · '+fmtDate(when):'');
+    });
   })();
 
-  /* ── STAT CARD: Scheduled Pipelines (repurposed 4th card) ── */
+  /* ── STAT CARD: Scheduled Pipelines ── */
   (function(){
     var valEl = document.getElementById('stat-pipeline-value');
     var subEl = document.getElementById('stat-pipeline-sub');
@@ -994,15 +1010,6 @@ function init(d){
     var listEl  = document.getElementById('merged-list');
     var shown = Math.min(filtered.length, 20);
     if(countEl) countEl.textContent = filtered.length ? 'Showing 1 to '+shown+' of '+filtered.length+' jobs' : '';
-
-    var resVal = document.getElementById('stat-results-value');
-    var resSub = document.getElementById('stat-results-sub');
-    if(resVal) resVal.textContent = String(tagged.length);
-    if(resSub){
-      var liCount = tagged.filter(function(j){ return (j._source||'').toLowerCase().indexOf('indeed')<0; }).length;
-      var inCount = tagged.length - liCount;
-      resSub.textContent = liCount+' LinkedIn · '+inCount+' Indeed';
-    }
 
     if(!listEl) return;
     if(!filtered.length){ listEl.innerHTML='<div class="panel-state">No results match filters.</div>'; return; }
@@ -1281,6 +1288,24 @@ function loadKeywordsPanel(){
 // Résumé keywords are now read-only and shown inside the Resume card; they still drive the Score.
 function renderKeywordsPanel(){
   renderResumeCard();
+  renderResumeHeader();
+}
+
+// Header stat card: resume name + date added, with a CTA to the Settings page. No keywords shown here.
+function renderResumeHeader(){
+  var nameEl = document.getElementById('stat-resume-name');
+  var dateEl = document.getElementById('stat-resume-date');
+  var cta    = document.getElementById('resume-review-cta');
+  if(!nameEl) return;
+  if(!_keywordsParsedFrom){
+    nameEl.textContent = 'Not added';
+    if(dateEl) dateEl.textContent = 'No resume parsed yet';
+    if(cta) cta.style.display = 'none';
+    return;
+  }
+  nameEl.textContent = _keywordsParsedFrom;
+  if(dateEl) dateEl.textContent = _keywordsParsedAt ? ('Added ' + fmtDate(_keywordsParsedAt)) : '';
+  if(cta) cta.style.display = '';
 }
 
 /* ═══════════════════════════════════
