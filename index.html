@@ -639,6 +639,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
       <div class="chip-panel-header">
         <span class="chip-panel-title">Resume Keywords</span>
         <span class="chip-panel-dirty" id="keywords-dirty">Unsaved changes</span>
+        <span class="chip-count" id="keywords-count"></span>
         <button class="btn-save-chips" id="keywords-save-btn" onclick="saveKeywords()">Save</button>
         <button class="chip-panel-toggle" id="keywords-toggle" onclick="togglePanel('keywords')" title="Collapse">&#9660;</button>
       </div>
@@ -1141,6 +1142,7 @@ var _keywords = [];
 var _keywordsDirty = false;
 var _keywordsParsedFrom = '';
 var _keywordsParsedAt = '';
+var MAX_KEYWORDS = 15;
 
 function loadKeywordsPanel(){
   if(!_authUser) return;
@@ -1163,10 +1165,11 @@ function renderKeywordsPanel(){
   var parsedEl = document.getElementById('keywords-parsed');
   var dirtyEl  = document.getElementById('keywords-dirty');
   var saveBtn  = document.getElementById('keywords-save-btn');
+  var countEl  = document.getElementById('keywords-count');
   if(!chipsEl) return;
 
   if(!_keywords.length){
-    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No keywords yet. Add one below or ask Claude to parse your resume.</span>';
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No keywords yet. Add up to '+MAX_KEYWORDS+' below, or ask Claude to parse your resume. These drive job ranking — jobs are scored by how many of these appear in the posting.</span>';
   } else {
     chipsEl.innerHTML = _keywords.map(function(kw, i){
       return '<span class="chip">'+esc(kw)
@@ -1180,8 +1183,19 @@ function renderKeywordsPanel(){
       ? 'Parsed from: '+_keywordsParsedFrom+(_keywordsParsedAt?' · '+fmtDate(_keywordsParsedAt):'')
       : '';
   }
+  if(countEl){
+    countEl.textContent = _keywords.length+'/'+MAX_KEYWORDS;
+    countEl.style.color = _keywords.length > MAX_KEYWORDS ? 'var(--danger, #c0392b)' : '';
+  }
   if(dirtyEl)  dirtyEl.classList[_keywordsDirty?'add':'remove']('visible');
   if(saveBtn)  saveBtn.classList[_keywordsDirty?'add':'remove']('visible');
+
+  // Disable add button if at limit (existing rows over the limit can still be removed, just not added to)
+  var addBtn = document.querySelector('#keywords-panel-wrap .btn-add-chip');
+  var inp    = document.getElementById('keyword-input');
+  if(addBtn) addBtn.disabled = _keywords.length >= MAX_KEYWORDS;
+  if(inp)    inp.disabled    = _keywords.length >= MAX_KEYWORDS;
+
   renderResumeCard();
 }
 
@@ -1192,6 +1206,7 @@ window.removeKeyword = function(idx){
 };
 
 window.addKeyword = function(){
+  if(_keywords.length >= MAX_KEYWORDS) return;
   var inp = document.getElementById('keyword-input');
   var val = (inp.value||'').trim();
   if(!val) return;
@@ -1222,7 +1237,7 @@ window.saveKeywords = function(){
    ═══════════════════════════════════ */
 var _titles = [];
 var _titlesDirty = false;
-var MAX_TITLES = 10;
+var MAX_TITLES = 4;
 
 function loadTitlesPanel(){
   if(!_authUser) return;
@@ -1245,7 +1260,7 @@ function renderTitlesPanel(){
   if(!chipsEl) return;
 
   if(!_titles.length){
-    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No job titles yet. Add up to '+MAX_TITLES+' titles to search.</span>';
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No job titles yet. Add up to '+MAX_TITLES+' — these are the exact terms searched on LinkedIn and Indeed.</span>';
   } else {
     chipsEl.innerHTML = _titles.map(function(t, i){
       return '<span class="chip">'+esc(t)
