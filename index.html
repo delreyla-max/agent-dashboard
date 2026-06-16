@@ -139,6 +139,18 @@ body {
 }
 .star-btn:hover  { color:#f59e0b; }
 .star-btn.starred { color:#f59e0b; }
+.dismiss-btn {
+  background:none; border:none; cursor:pointer; font-size:13px;
+  color:var(--muted2); padding:0 2px; line-height:1; transition:opacity .15s, filter .15s;
+  flex-shrink:0; opacity:.45;
+}
+.dismiss-btn:hover { opacity:1; }
+.jb-save { display:flex; align-items:center; gap:4px; }
+.undo-btn {
+  background:none; border:1px solid var(--border); cursor:pointer; font-size:10.5px;
+  color:var(--muted); padding:2px 7px; border-radius:5px; line-height:1.2; white-space:nowrap;
+}
+.undo-btn:hover { background:var(--surface2); color:var(--text); }
 .saved-job-item {
   display:flex; align-items:center; gap:10px;
   padding:11px 18px; border-bottom:1px solid var(--border);
@@ -367,6 +379,8 @@ body {
 .resume-status { display:inline-block; margin-top:8px; padding:2px 9px; border-radius:999px; font-size:10.5px; font-weight:700; background:var(--green-bg); color:var(--green); }
 .resume-status.empty { background:#f3f4f6; color:var(--muted); }
 .resume-explain { font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:10px; }
+.resume-kw-wrap { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+.resume-kw { display:inline-block; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:2px 9px; font-size:11px; color:var(--muted); }
 
 /* ── BOTTOM PANEL ROW ── */
 .bottom-panels { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:24px; }
@@ -606,6 +620,10 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
           <label class="filter-chk"><input type="radio" name="f-date" value="7" onchange="applyJobFilter(event)"> <span>7d</span></label>
           <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>30d</span></label>
         </div>
+        <div class="filter-sep"></div>
+        <div class="filter-group">
+          <label class="filter-chk"><input type="checkbox" id="f-show-dismissed" onchange="toggleShowDismissed()"> <span>&#128078; Show dismissed</span></label>
+        </div>
       </div>
     </div>
     <div class="jb-head-row">
@@ -649,25 +667,18 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         </div>
       </div>
     </div>
-    <div class="chip-panel-wrap" id="keywords-panel-wrap">
+    <div class="chip-panel-wrap" id="learned-panel-wrap">
       <div class="chip-panel-header">
-        <span class="chip-panel-title">Resume Keywords</span>
-        <span class="chip-panel-dirty" id="keywords-dirty">Unsaved changes</span>
-        <span class="chip-count" id="keywords-count"></span>
-        <button class="btn-save-chips" id="keywords-save-btn" onclick="saveKeywords()">Save</button>
-        <button class="chip-panel-toggle" id="keywords-toggle" onclick="togglePanel('keywords')" title="Collapse">&#9660;</button>
+        <span class="chip-panel-title">Learned From Your Activity</span>
+        <span class="chip-count" id="learned-count"></span>
+        <button class="chip-panel-toggle" id="learned-toggle" onclick="togglePanel('learned')" title="Collapse">&#9660;</button>
       </div>
-      <div class="chip-panel-body" id="keywords-body">
+      <div class="chip-panel-body" id="learned-body">
         <div class="chip-panel-body-inner">
-          <div class="chips-area" id="keywords-chips">
+          <div class="chips-area" id="learned-chips">
             <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
           </div>
-          <div class="chip-add-row">
-            <input class="chip-input" id="keyword-input" type="text" placeholder="Add keyword…"
-              onkeydown="if(event.key==='Enter') addKeyword()" />
-            <button class="btn-add-chip" onclick="addKeyword()">Add</button>
-          </div>
-          <div class="chip-parsed" id="keywords-parsed"></div>
+          <div class="chip-parsed" id="learned-note">Save a job (&#9734;) to teach the system its words. Thumbs-down (&#128078;) a job to drop them. This list feeds your Pref-fit score on the next search run.</div>
         </div>
       </div>
     </div>
@@ -793,6 +804,7 @@ function bootDashboard(){
   loadKeywordsPanel();
   loadTitlesPanel();
   loadPreferencesPanel();
+  loadDismissedJobs();
 
   var username = (_authUser.user_metadata||{}).username || 'garman';
   fetch('users/'+username+'/config.json?t='+Date.now())
@@ -879,6 +891,7 @@ function init(d){
      ═══════════════════════════════════ */
   var _lastUpdated = null;
   var _cachedJobs = [];
+  _rerenderBoard = function(){ renderMergedJobList(_cachedJobs); };
   var _filters = { score50:false, score80:false, showLI:true, showIndeed:true, daysAgo:0 };
 
   function applyFilters(jobs){
@@ -890,6 +903,7 @@ function init(d){
       cutoff = cutoff.toISOString().slice(0,10);
     }
     return jobs.filter(function(j){
+      if(!_showDismissed && isJobDismissed(j.link||'')) return false;
       if(minScore > 0 && (j.score == null || j.score < minScore)) return false;
       var isIndeed = (j._source||'').toLowerCase().indexOf('indeed') >= 0;
       if(isIndeed && !_filters.showIndeed) return false;
@@ -941,13 +955,23 @@ function init(d){
     }
 
     var saved = isJobSaved(j.link||'');
-    var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
-      +' data-link="'+esc(j.link||'')+'"'
+    var dismissed = isJobDismissed(j.link||'');
+    var dataAttrs = ' data-link="'+esc(j.link||'')+'"'
       +' data-title="'+esc(j.title||'')+'"'
-      +' data-company="'+esc(company)+'"'
-      +' onclick="handleStar(this)"'
-      +' title="'+(saved?'Remove from saved':'Save job')+'">'
-      +(saved?'&#9733;':'&#9734;')+'</button>';
+      +' data-company="'+esc(company)+'"';
+    var actionBtns;
+    if(dismissed){
+      actionBtns = '<button class="undo-btn" onclick="undismissJob(\''+esc(j.link||'')+'\')" title="Restore to board">&#8634; undo</button>';
+    } else {
+      var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'+dataAttrs
+        +' onclick="handleStar(this)"'
+        +' title="'+(saved?'Remove from saved':'Save job')+'">'
+        +(saved?'&#9733;':'&#9734;')+'</button>';
+      var dismissBtn = '<button class="dismiss-btn"'+dataAttrs
+        +' onclick="handleDismiss(this)"'
+        +' title="Not interested — hide and stop learning its words">&#128078;</button>';
+      actionBtns = starBtn + dismissBtn;
+    }
 
     var srcKey = (j._source||'').toLowerCase().indexOf('indeed') >= 0 ? 'indeed' : 'li';
     var srcLabel = srcKey === 'indeed' ? 'Indeed' : 'LinkedIn';
@@ -966,7 +990,7 @@ function init(d){
       +'<div class="jb-cell jb-source '+srcKey+'" data-label="Source">'+esc(srcLabel)+'</div>'
       +'<div class="jb-cell jb-posted" data-label="Posted">'+esc(j.posted||'')+'</div>'
       +'<div class="jb-cell" data-label="Type">'+typePillHtml(type)+'</div>'
-      +'<div class="jb-cell jb-save" data-label="">'+starBtn+'</div>'
+      +'<div class="jb-cell jb-save" data-label="">'+actionBtns+'</div>'
       +'</div>';
   }
 
@@ -1146,15 +1170,69 @@ window.handleStar = function(btn){
   } else {
     _saved.unshift({title:job.title, company:job.company, link:job.link, savedAt:new Date().toISOString()});
     dbInsert(job);
+    addLearnedFromTitle(job.title);   // saving a job teaches the system its words
   }
   renderSavedJobs();
   updateAllStars();
 };
 
 /* ═══════════════════════════════════
+   DISMISSED JOBS  (thumbs-down)
+   Hides the job from the board AND removes its words from the learned list.
+   Persisted to dismissed_jobs so the job won't come back on the next search.
+   ═══════════════════════════════════ */
+var _dismissed = [];          // array of links
+var _showDismissed = false;
+var _rerenderBoard = function(){};   // set inside init() so out-of-scope handlers can redraw the board
+
+function loadDismissedJobs(){
+  if(!_authUser){ return; }
+  _sb.from('dismissed_jobs')
+    .select('link')
+    .eq('user_id', _authUser.id)
+    .then(function(r){
+      if(r.error){ console.error('load dismissed_jobs:', r.error); return; }
+      _dismissed = (r.data||[]).map(function(d){ return d.link; });
+      _rerenderBoard();
+    });
+}
+
+function isJobDismissed(link){
+  return _dismissed.indexOf(link) !== -1;
+}
+
+window.handleDismiss = function(btn){
+  if(!_authUser) return;
+  var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
+  if(!job.link || isJobDismissed(job.link)) return;
+  _dismissed.push(job.link);
+  // If it was saved, unsave it too (you changed your mind).
+  if(isJobSaved(job.link)){ _saved = _saved.filter(function(j){ return j.link !== job.link; }); dbDelete(job.link); renderSavedJobs(); }
+  removeLearnedFromTitle(job.title);   // thumbs-down drops the job's words
+  _sb.from('dismissed_jobs').upsert(
+    {user_id:_authUser.id, link:job.link, title:job.title, company:job.company},
+    {onConflict:'user_id,link'}
+  ).then(function(r){ if(r.error) console.error('insert dismissed_job:', r.error); });
+  _rerenderBoard();
+};
+
+window.undismissJob = function(link){
+  _dismissed = _dismissed.filter(function(l){ return l !== link; });
+  _sb.from('dismissed_jobs').delete()
+    .eq('user_id', _authUser.id).eq('link', link)
+    .then(function(r){ if(r.error) console.error('delete dismissed_job:', r.error); });
+  _rerenderBoard();
+};
+
+window.toggleShowDismissed = function(){
+  _showDismissed = !_showDismissed;
+  _rerenderBoard();
+};
+
+/* ═══════════════════════════════════
    COLLAPSIBLE PANELS
    ═══════════════════════════════════ */
-var _panelState = { keywords: true, titles: true, prefs: true }; // true = expanded
+var _panelState = { learned: true, titles: true, prefs: true }; // true = expanded
 
 window.togglePanel = function(name){
   _panelState[name] = !_panelState[name];
@@ -1178,12 +1256,16 @@ function renderResumeCard(){
       +'<div class="resume-explain">We\'ll use your resume to extract skills and improve search accuracy.</div>';
     return;
   }
+  var kwChips = _keywords.length
+    ? '<div class="resume-kw-wrap">'+_keywords.map(function(kw){ return '<span class="resume-kw">'+esc(kw)+'</span>'; }).join('')+'</div>'
+    : '';
   el.innerHTML = '<div class="resume-box">'
     +'<div class="resume-filename">'+esc(_keywordsParsedFrom)+'</div>'
     +(_keywordsParsedAt?'<div class="resume-meta">Parsed '+esc(fmtDate(_keywordsParsedAt))+'</div>':'')
     +'<span class="resume-status">OK</span>'
+    +kwChips
     +'</div>'
-    +'<div class="resume-explain">We\'ll use your resume to extract skills and improve search accuracy.</div>';
+    +'<div class="resume-explain">These keywords are pulled from your resume and drive the qualification Score on each job. They update when your resume is re-parsed.</div>';
 }
 
 /* ═══════════════════════════════════
@@ -1211,77 +1293,10 @@ function loadKeywordsPanel(){
     });
 }
 
+// Résumé keywords are now read-only and shown inside the Resume card; they still drive the Score.
 function renderKeywordsPanel(){
-  var chipsEl  = document.getElementById('keywords-chips');
-  var parsedEl = document.getElementById('keywords-parsed');
-  var dirtyEl  = document.getElementById('keywords-dirty');
-  var saveBtn  = document.getElementById('keywords-save-btn');
-  var countEl  = document.getElementById('keywords-count');
-  if(!chipsEl) return;
-
-  if(!_keywords.length){
-    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No keywords yet. Add up to '+MAX_KEYWORDS+' below, or ask Claude to parse your resume. These drive job ranking — jobs are scored by how many of these appear in the posting.</span>';
-  } else {
-    chipsEl.innerHTML = _keywords.map(function(kw, i){
-      return '<span class="chip">'+esc(kw)
-        +'<button class="chip-remove" onclick="removeKeyword('+i+')" title="Remove">&#10005;</button>'
-        +'</span>';
-    }).join('');
-  }
-
-  if(parsedEl){
-    parsedEl.textContent = _keywordsParsedFrom
-      ? 'Parsed from: '+_keywordsParsedFrom+(_keywordsParsedAt?' · '+fmtDate(_keywordsParsedAt):'')
-      : '';
-  }
-  if(countEl){
-    countEl.textContent = _keywords.length+'/'+MAX_KEYWORDS;
-    countEl.style.color = _keywords.length > MAX_KEYWORDS ? 'var(--danger, #c0392b)' : '';
-  }
-  if(dirtyEl)  dirtyEl.classList[_keywordsDirty?'add':'remove']('visible');
-  if(saveBtn)  saveBtn.classList[_keywordsDirty?'add':'remove']('visible');
-
-  // Disable add button if at limit (existing rows over the limit can still be removed, just not added to)
-  var addBtn = document.querySelector('#keywords-panel-wrap .btn-add-chip');
-  var inp    = document.getElementById('keyword-input');
-  if(addBtn) addBtn.disabled = _keywords.length >= MAX_KEYWORDS;
-  if(inp)    inp.disabled    = _keywords.length >= MAX_KEYWORDS;
-
   renderResumeCard();
 }
-
-window.removeKeyword = function(idx){
-  _keywords.splice(idx, 1);
-  _keywordsDirty = true;
-  renderKeywordsPanel();
-};
-
-window.addKeyword = function(){
-  if(_keywords.length >= MAX_KEYWORDS) return;
-  var inp = document.getElementById('keyword-input');
-  var val = (inp.value||'').trim();
-  if(!val) return;
-  if(_keywords.indexOf(val) === -1) _keywords.push(val);
-  inp.value = '';
-  _keywordsDirty = true;
-  renderKeywordsPanel();
-  inp.focus();
-};
-
-window.saveKeywords = function(){
-  if(!_authUser) return;
-  var btn = document.getElementById('keywords-save-btn');
-  if(btn){ btn.disabled=true; btn.textContent='Saving…'; }
-  _sb.from('user_keywords').upsert(
-    {user_id:_authUser.id, keywords:_keywords, updated_at:new Date().toISOString()},
-    {onConflict:'user_id'}
-  ).then(function(r){
-    if(r.error){ console.error('save keywords:', r.error); }
-    _keywordsDirty = false;
-    if(btn){ btn.disabled=false; btn.textContent='Save'; }
-    renderKeywordsPanel();
-  });
-};
 
 /* ═══════════════════════════════════
    PREFERENCES PANEL  ("What you're looking for")
@@ -1340,19 +1355,84 @@ function extractKeywordsFromText(text){
 function loadPreferencesPanel(){
   if(!_authUser) return;
   _sb.from('user_preferences')
-    .select('pref_text, keywords')
+    .select('pref_text, keywords, learned_keywords')
     .eq('user_id', _authUser.id)
     .maybeSingle()
     .then(function(r){
-      if(r.error){ console.error('load user_preferences:', r.error); renderPreferencesPanel(); return; }
+      if(r.error){ console.error('load user_preferences:', r.error); renderPreferencesPanel(); renderLearnedPanel(); return; }
       var row = r.data || {};
       _prefText = row.pref_text || '';
       _prefs    = row.keywords  || [];
+      _learned  = row.learned_keywords || [];
       var ta = document.getElementById('prefs-text');
       if(ta) ta.value = _prefText;
       renderPreferencesPanel();
+      renderLearnedPanel();
     });
 }
+
+/* ═══════════════════════════════════
+   LEARNED-FROM-ACTIVITY PANEL
+   Words the system has picked up from jobs you save (added) and
+   thumbs-down (removed). Stored in user_preferences.learned_keywords.
+   Written to the DB on every action so the next search run uses them.
+   ═══════════════════════════════════ */
+var _learned = [];
+var MAX_LEARNED = 40;
+
+// Pull the distinctive words out of a job title (the strongest role-type signal).
+function mineJobWords(title){
+  var words = extractKeywordsFromText(title || '');
+  // keep it tight: title phrases + notable single tokens, cap per job
+  return words.slice(0, 6);
+}
+
+function renderLearnedPanel(){
+  var chipsEl = document.getElementById('learned-chips');
+  var countEl = document.getElementById('learned-count');
+  if(!chipsEl) return;
+  if(!_learned.length){
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">Nothing learned yet. Save jobs you like and thumbs-down ones you don\'t — the words build up here.</span>';
+  } else {
+    chipsEl.innerHTML = _learned.map(function(kw, i){
+      return '<span class="chip">'+esc(kw)
+        +'<button class="chip-remove" onclick="removeLearned('+i+')" title="Remove">&#10005;</button>'
+        +'</span>';
+    }).join('');
+  }
+  if(countEl) countEl.textContent = _learned.length+(_learned.length?'':'');
+}
+
+// Persist the current _learned list to the DB (upsert so it survives into the next search run).
+function saveLearnedToDb(){
+  if(!_authUser) return;
+  _sb.from('user_preferences').upsert(
+    {user_id:_authUser.id, learned_keywords:_learned, updated_at:new Date().toISOString()},
+    {onConflict:'user_id'}
+  ).then(function(r){ if(r.error) console.error('save learned_keywords:', r.error); });
+}
+
+function addLearnedFromTitle(title){
+  var words = mineJobWords(title);
+  var changed = false;
+  words.forEach(function(w){
+    if(_learned.indexOf(w) === -1 && _learned.length < MAX_LEARNED){ _learned.push(w); changed = true; }
+  });
+  if(changed){ renderLearnedPanel(); saveLearnedToDb(); }
+}
+
+function removeLearnedFromTitle(title){
+  var words = mineJobWords(title);
+  var before = _learned.length;
+  _learned = _learned.filter(function(w){ return words.indexOf(w) === -1; });
+  if(_learned.length !== before){ renderLearnedPanel(); saveLearnedToDb(); }
+}
+
+window.removeLearned = function(idx){
+  _learned.splice(idx, 1);
+  renderLearnedPanel();
+  saveLearnedToDb();
+};
 
 function renderPreferencesPanel(){
   var chipsEl = document.getElementById('prefs-chips');
