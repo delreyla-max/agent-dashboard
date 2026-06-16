@@ -98,8 +98,9 @@ body {
 .stat-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:20px; }
 .stat-card {
   background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card);
-  padding:10px 16px; display:flex; align-items:center; gap:11px;
+  padding:10px 16px; display:flex; align-items:flex-start; gap:11px;
 }
+.stat-body .pill { margin-top:8px; padding:4px 11px; font-size:11px; }
 .stat-icon { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .stat-icon svg { width:18px; height:18px; }
 .stat-icon.search  { background:var(--indigo-bg); color:#4f46e5; }
@@ -112,22 +113,39 @@ body {
 .stat-value.text-val { font-size:13px; font-weight:700; }
 .stat-sub { font-size:11px; color:var(--muted2); margin-top:1px; }
 
-/* ── INFO BANNER ── */
-
-/* ── SETTINGS (collapsible) ── */
-.settings-section { margin-top:16px; }
-.settings-header {
-  width:100%; display:flex; align-items:center; gap:8px; cursor:pointer;
-  background:var(--blue-bg); border:1px solid var(--blue-border); border-radius:var(--radius-card);
-  padding:11px 18px; font:inherit; color:#1d4ed8; text-align:left;
-}
-.settings-header:hover { filter:brightness(0.98); }
-.settings-title { font-size:15px; font-weight:600; flex:1 1 auto; }
-.settings-chevron { color:#1d4ed8; font-size:12px; transition:transform .25s ease; }
-.settings-header.collapsed .settings-chevron { transform:rotate(-90deg); }
-.settings-body { overflow:hidden; transition:max-height .4s ease, opacity .2s ease, margin-top .3s ease; max-height:6000px; opacity:1; margin-top:14px; }
+/* ── SETTINGS (hidden; opened from user menu) ── */
+.settings-section { margin-top:0; }
+.settings-body { overflow:hidden; transition:max-height .4s ease, opacity .2s ease, margin-top .3s ease; max-height:6000px; opacity:1; margin-top:16px; }
 .settings-body.collapsed { max-height:0; opacity:0; margin-top:0; pointer-events:none; }
-.settings-body .bottom-panels { margin-top:0; }
+.settings-body .bottom-panels { margin-top:12px; }
+.settings-bar {
+  display:flex; align-items:center; gap:8px;
+  background:var(--blue-bg); border:1px solid var(--blue-border); border-radius:var(--radius-card);
+  padding:10px 16px;
+}
+.settings-bar-title { font-size:15px; font-weight:600; color:#1d4ed8; flex:1 1 auto; }
+.settings-bar-close {
+  background:#fff; border:1px solid var(--blue-border); color:#1d4ed8; cursor:pointer;
+  border-radius:6px; padding:5px 14px; font-size:12px; font-weight:600;
+}
+.settings-bar-close:hover { background:#eff6ff; }
+
+/* ── USER MENU (avatar dropdown, top-right) ── */
+.user-menu { position:relative; }
+.user-dropdown {
+  position:absolute; right:0; top:42px; min-width:200px; z-index:30;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12); padding:6px; display:none;
+}
+.user-dropdown.open { display:block; }
+.user-dropdown-email { padding:8px 10px 9px; font-size:12px; color:var(--muted); border-bottom:1px solid var(--border); margin-bottom:4px; word-break:break-all; }
+.user-dropdown-item {
+  width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  padding:8px 10px; font-size:13px; color:var(--text); border-radius:6px; font:inherit;
+}
+.user-dropdown-item:hover { background:var(--bg); }
+.user-dropdown-item.signout { color:var(--red); }
+.auth-avatar.is-button { cursor:pointer; border:none; }
 
 /* ── PANELS (generic white card) ── */
 .panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); overflow:hidden; }
@@ -534,24 +552,18 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <div class="nav-title" id="dash-title">Job Search Dashboard</div>
   </div>
   <div class="nav-right">
-    <div class="pill-wrap">
-      <button class="pill" id="toggle-pill" onclick="toggleDashboard()">
-        <span class="pill-dot"></span><span id="pill-label">ON</span>
-      </button>
-      <span class="pill-hint">Toggle tracking</span>
-    </div>
     <div id="auth-user" class="auth-user"></div>
   </div>
 </div>
 <div id="save-banner">Dashboard toggled — tell Claude to persist this setting.</div>
 
-  <!-- Settings (collapsible) -->
-  <div class="settings-section">
-    <button class="settings-header collapsed" id="settings-toggle" onclick="toggleSettings()" aria-expanded="false">
-      <span class="settings-title">&#9881; Settings</span>
-      <span class="settings-chevron">&#9660;</span>
-    </button>
+  <!-- Settings (hidden; opened from the user menu, top-right) -->
+  <div class="settings-section" id="settings-section">
     <div class="settings-body collapsed" id="settings-body">
+      <div class="settings-bar">
+        <span class="settings-bar-title">&#9881; Settings</span>
+        <button class="settings-bar-close" onclick="closeSettings()">Done</button>
+      </div>
       <div class="bottom-panels">
         <div class="panel">
           <div class="panel-header"><span class="panel-title">Resume</span></div>
@@ -625,12 +637,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     </div>
   </div>
 
-  <!-- Saved Jobs -->
-  <div class="section-header">&#11088; Saved Jobs</div>
-  <div class="panel" id="saved-jobs-list">
-    <div class="saved-empty">Sign in to see saved jobs.</div>
-  </div>
-
   <!-- Stat Cards -->
   <div class="stat-cards">
     <div class="stat-card">
@@ -663,8 +669,17 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <div class="stat-label">Scheduled Pipelines</div>
         <div class="stat-value text-val" id="stat-pipeline-value">—</div>
         <div class="stat-sub" id="stat-pipeline-sub"></div>
+        <button class="pill" id="toggle-pill" onclick="toggleDashboard()" title="Pause or resume tracking">
+          <span class="pill-dot"></span><span id="pill-label">ON</span>
+        </button>
       </div>
     </div>
+  </div>
+
+  <!-- Saved Jobs -->
+  <div class="section-header">&#11088; Saved Jobs</div>
+  <div class="panel" id="saved-jobs-list">
+    <div class="saved-empty">Sign in to see saved jobs.</div>
   </div>
 
   <!-- Job Board -->
@@ -674,7 +689,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
       <div class="job-board-toprow">
         <span class="job-board-title">Job Board</span>
         <span class="job-board-meta" id="board-synced"></span>
-        <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
       </div>
       <div class="filter-bar">
         <div class="filter-group">
@@ -792,11 +806,45 @@ function updateAuthUI(){
   if(!_authUser){ el.classList.remove('visible'); return; }
   var email = _authUser.email || '';
   var initials = email.slice(0,2).toUpperCase();
-  el.innerHTML = '<div class="auth-info"><span class="auth-name">'+esc(email)+'</span></div>'
-    +'<div class="auth-avatar">'+esc(initials)+'</div>'
-    +'<button class="auth-signout" onclick="doSignOut()">Sign out</button>';
+  el.innerHTML =
+    '<div class="user-menu">'
+    + '<button class="auth-avatar is-button" id="avatar-btn" onclick="toggleUserMenu(event)" aria-haspopup="true" aria-expanded="false" title="Account">'+esc(initials)+'</button>'
+    + '<div class="user-dropdown" id="user-dropdown">'
+    +   '<div class="user-dropdown-email">'+esc(email)+'</div>'
+    +   '<button class="user-dropdown-item" onclick="openSettings()">&#9881;&#65039; Settings</button>'
+    +   '<button class="user-dropdown-item signout" onclick="doSignOut()">Sign out</button>'
+    + '</div>'
+    + '</div>';
   el.classList.add('visible');
 }
+window.toggleUserMenu = function(e){
+  if(e) e.stopPropagation();
+  var dd = document.getElementById('user-dropdown'), btn = document.getElementById('avatar-btn');
+  if(!dd) return;
+  var open = dd.classList.toggle('open');
+  if(btn) btn.setAttribute('aria-expanded', String(open));
+};
+function closeUserMenu(){
+  var dd = document.getElementById('user-dropdown'), btn = document.getElementById('avatar-btn');
+  if(dd) dd.classList.remove('open');
+  if(btn) btn.setAttribute('aria-expanded','false');
+}
+document.addEventListener('click', function(e){
+  var dd = document.getElementById('user-dropdown');
+  if(dd && dd.classList.contains('open') && !e.target.closest('.user-menu')) closeUserMenu();
+});
+window.openSettings = function(){
+  closeUserMenu();
+  var body = document.getElementById('settings-body');
+  if(!body) return;
+  body.classList.remove('collapsed');
+  var sec = document.getElementById('settings-section');
+  if(sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+};
+window.closeSettings = function(){
+  var body = document.getElementById('settings-body');
+  if(body) body.classList.add('collapsed');
+};
 
 /* ── BOOT DASHBOARD ── */
 function bootDashboard(){
@@ -825,13 +873,6 @@ var enabled = true;
 function applyEnabled(){ document.getElementById('disabled-overlay').classList[enabled?'remove':'add']('visible'); }
 function updatePill(){ var p=document.getElementById('toggle-pill'); p.className='pill '+(enabled?'on':'off'); document.getElementById('pill-label').textContent=enabled?'ON':'OFF'; }
 window.toggleDashboard = function(){ enabled=!enabled; updatePill(); applyEnabled(); document.getElementById('save-banner').classList.add('visible'); };
-window.toggleSettings = function(){
-  var body=document.getElementById('settings-body'), hdr=document.getElementById('settings-toggle');
-  if(!body||!hdr) return;
-  var collapsed = body.classList.toggle('collapsed');
-  hdr.classList.toggle('collapsed', collapsed);
-  hdr.setAttribute('aria-expanded', String(!collapsed));
-};
 
 /* ═══════════════════════════════════
    INIT — called after config fetch
@@ -841,7 +882,7 @@ function init(d){
   enabled = d.enabled !== false;
   var name = d.name || ((_authUser&&_authUser.user_metadata||{}).username||'');
   document.title = name + ' – Job Search Dashboard';
-  document.getElementById('dash-title').textContent = name + ' – Job Search Dashboard';
+  document.getElementById('dash-title').textContent = name ? ('Today could be your day, ' + name) : 'Today could be your day';
   var fp = document.getElementById('footer-docs-path');
   if(fp) fp.textContent = _docsPrefix;
   updatePill(); applyEnabled();
