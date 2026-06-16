@@ -113,22 +113,17 @@ body {
 .stat-sub { font-size:11px; color:var(--muted2); margin-top:1px; }
 
 /* ── INFO BANNER ── */
-.info-banner {
-  background:var(--blue-bg); border:1px solid var(--blue-border); color:#1d4ed8;
-  border-radius:var(--radius-sm); padding:10px 16px; font-size:12.5px; margin-top:16px;
-  line-height:1.5;
-}
 
 /* ── SETTINGS (collapsible) ── */
 .settings-section { margin-top:16px; }
 .settings-header {
   width:100%; display:flex; align-items:center; gap:8px; cursor:pointer;
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card);
-  padding:11px 18px; font:inherit; color:var(--text); text-align:left;
+  background:var(--blue-bg); border:1px solid var(--blue-border); border-radius:var(--radius-card);
+  padding:11px 18px; font:inherit; color:#1d4ed8; text-align:left;
 }
-.settings-header:hover { background:var(--bg); }
+.settings-header:hover { filter:brightness(0.98); }
 .settings-title { font-size:15px; font-weight:600; flex:1 1 auto; }
-.settings-chevron { color:var(--muted); font-size:12px; transition:transform .25s ease; }
+.settings-chevron { color:#1d4ed8; font-size:12px; transition:transform .25s ease; }
 .settings-header.collapsed .settings-chevron { transform:rotate(-90deg); }
 .settings-body { overflow:hidden; transition:max-height .4s ease, opacity .2s ease, margin-top .3s ease; max-height:6000px; opacity:1; margin-top:14px; }
 .settings-body.collapsed { max-height:0; opacity:0; margin-top:0; pointer-events:none; }
@@ -550,42 +545,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
 </div>
 <div id="save-banner">Dashboard toggled — tell Claude to persist this setting.</div>
 
-  <!-- Stat Cards -->
-  <div class="stat-cards">
-    <div class="stat-card">
-      <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
-      <div class="stat-body">
-        <div class="stat-label">Active Search</div>
-        <div class="stat-value" id="stat-active-value">—</div>
-        <div class="stat-sub" id="stat-active-sub"></div>
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
-      <div class="stat-body">
-        <div class="stat-label">Results Found</div>
-        <div class="stat-value" id="stat-results-value">—</div>
-        <div class="stat-sub" id="stat-results-sub">Top results from LinkedIn &amp; Indeed</div>
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></div>
-      <div class="stat-body">
-        <div class="stat-label">Saved Jobs</div>
-        <div class="stat-value" id="stat-saved-value">0</div>
-        <div class="stat-sub">Jobs you've saved</div>
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-      <div class="stat-body">
-        <div class="stat-label">Scheduled Pipelines</div>
-        <div class="stat-value text-val" id="stat-pipeline-value">—</div>
-        <div class="stat-sub" id="stat-pipeline-sub"></div>
-      </div>
-    </div>
-  </div>
-
   <!-- Settings (collapsible) -->
   <div class="settings-section">
     <button class="settings-header collapsed" id="settings-toggle" onclick="toggleSettings()" aria-expanded="false">
@@ -666,14 +625,48 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     </div>
   </div>
 
-  <!-- Info Banner -->
-  <div class="info-banner" id="info-banner"></div>
-
   <!-- Saved Jobs -->
   <div class="section-header">&#11088; Saved Jobs</div>
   <div class="panel" id="saved-jobs-list">
     <div class="saved-empty">Sign in to see saved jobs.</div>
   </div>
+
+  <!-- Stat Cards -->
+  <div class="stat-cards">
+    <div class="stat-card">
+      <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Active Search</div>
+        <div class="stat-value" id="stat-active-value">—</div>
+        <div class="stat-sub" id="stat-active-sub"></div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Results Found</div>
+        <div class="stat-value" id="stat-results-value">—</div>
+        <div class="stat-sub" id="stat-results-sub">Top results from LinkedIn &amp; Indeed</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Saved Jobs</div>
+        <div class="stat-value" id="stat-saved-value">0</div>
+        <div class="stat-sub">Jobs you've saved</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Scheduled Pipelines</div>
+        <div class="stat-value text-val" id="stat-pipeline-value">—</div>
+        <div class="stat-sub" id="stat-pipeline-sub"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Job Board -->
   <div class="section-header">&#128269; Job Board</div>
   <div class="panel" id="panel-merged">
@@ -877,16 +870,6 @@ function init(d){
     if(p.lastRun) subParts.push('Last run '+fmtDate(p.lastRun)+(p.lastRunStatus?' · '+p.lastRunStatus.replace('_',' '):''));
     else subParts.push(p.enabled===false ? 'Disabled' : 'Enabled');
     if(subEl) subEl.textContent = subParts.join(' · ');
-  })();
-
-  /* ── INFO BANNER ── */
-  (function(){
-    var el = document.getElementById('info-banner');
-    if(!el) return;
-    if(!pips.length){ el.textContent = 'No automated search pipeline is configured yet.'; return; }
-    var p = pips[0];
-    var schedTxt = p.schedule ? p.schedule.toLowerCase() : 'on a schedule';
-    el.textContent = 'An automated search ('+(p.title||'pipeline')+') runs '+schedTxt+' and fetches the latest jobs from LinkedIn and Indeed.';
   })();
 
   /* ═══════════════════════════════════
