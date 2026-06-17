@@ -91,6 +91,20 @@ body {
 }
 .stat-cta:hover { text-decoration:underline; }
 
+/* ── ENGINE HEADER (personalized intro above pillars) ── */
+.engine-head { margin-top:4px; margin-bottom:14px; }
+.engine-title { font-size:20px; font-weight:700; color:var(--text); letter-spacing:-0.01em; }
+.engine-sub { font-size:12.5px; color:var(--muted); margin-top:2px; }
+
+/* ── COUNT BADGES (next to section titles) ── */
+.count-badge {
+  display:inline-flex; align-items:center; font-size:12px; font-weight:600;
+  color:var(--muted); background:var(--bg); border:1px solid var(--border);
+  border-radius:999px; padding:1px 9px; margin-left:6px; vertical-align:middle;
+}
+.count-badge:empty { display:none; }
+.count-badge.today { color:#1d4ed8; background:var(--blue-bg); border-color:var(--blue-border); }
+
 /* ── SETTINGS (hidden; opened from user menu) ── */
 .settings-section { margin-top:0; }
 .settings-body { overflow:hidden; transition:max-height .4s ease, opacity .2s ease, margin-top .3s ease; max-height:6000px; opacity:1; margin-top:16px; }
@@ -218,6 +232,7 @@ body {
 .jb-row:last-child { border-bottom:none; }
 .jb-row.alt { background:#fafbfc; }
 .jb-row:hover { background:var(--blue-bg); }
+.jb-row.jb-row-new { box-shadow: inset 3px 0 0 0 var(--blue); }
 .jb-cell { min-width:0; }
 .jb-score { font-family:'SF Mono',Menlo,monospace; font-weight:700; padding-top:1px; }
 .jb-score.score-high { color:var(--green); }
@@ -609,32 +624,13 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     </div>
   </div>
 
-  <!-- Stat Cards -->
+  <!-- Personal Job Search Engine -->
+  <div class="engine-head">
+    <div class="engine-title">Your Personal Job Search Engine</div>
+    <div class="engine-sub">The four signals we use to tailor your results</div>
+  </div>
   <div class="stat-cards">
-    <div class="stat-card">
-      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-      <div class="stat-body">
-        <div class="stat-label">Scheduled Pipelines</div>
-        <div class="stat-value text-val" id="stat-pipeline-value">—</div>
-        <div class="stat-sub" id="stat-pipeline-sub"></div>
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
-      <div class="stat-body">
-        <div class="stat-label">Today's Results</div>
-        <div class="stat-value" id="stat-results-value">—</div>
-        <div class="stat-sub" id="stat-results-sub">New listings from latest search</div>
-      </div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></div>
-      <div class="stat-body">
-        <div class="stat-label">Saved Jobs</div>
-        <div class="stat-value" id="stat-saved-value">0</div>
-        <div class="stat-sub">Jobs you've saved</div>
-      </div>
-    </div>
+    <!-- 1. Resume -->
     <div class="stat-card">
       <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg></div>
       <div class="stat-body">
@@ -644,10 +640,39 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <button class="stat-cta" id="resume-review-cta" onclick="openSettings()">Review Keywords &#8594;</button>
       </div>
     </div>
+    <!-- 2. Preferences -->
+    <div class="stat-card">
+      <div class="stat-icon saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Preferences</div>
+        <div class="stat-value text-val"><span id="pref-saved">0</span> saved &middot; <span id="pref-passed">0</span> passed</div>
+        <div class="stat-sub">Jobs you &#9733; and &#128078;</div>
+      </div>
+    </div>
+    <!-- 3. Learnings -->
+    <div class="stat-card">
+      <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.5.4.8 1 .9 1.6l.1.7h6l.1-.7c.1-.6.4-1.2.9-1.6A7 7 0 0 0 12 2z"></path></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Learnings</div>
+        <div class="stat-value text-val" id="learn-summary">—</div>
+        <div class="stat-sub" id="learn-terms">What we've learned from your activity</div>
+        <button class="stat-cta" onclick="openSettings()">View in Settings &#8594;</button>
+      </div>
+    </div>
+    <!-- 4. Outlook -->
+    <div class="stat-card">
+      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Outlook</div>
+        <div class="stat-value text-val" id="outlook-summary">—</div>
+        <div class="stat-sub" id="outlook-terms">What we think you're looking for</div>
+        <button class="stat-cta" onclick="openSettings()">Edit &#8594;</button>
+      </div>
+    </div>
   </div>
 
   <!-- Saved Jobs -->
-  <div class="section-header">&#11088; Saved Jobs</div>
+  <div class="section-header">&#11088; Saved Jobs <span class="count-badge" id="saved-count-badge"></span></div>
   <div class="panel" id="saved-jobs-list">
     <div class="saved-empty">Sign in to see saved jobs.</div>
   </div>
@@ -658,6 +683,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <div class="job-board-header">
       <div class="job-board-toprow">
         <span class="job-board-title">Job Board</span>
+        <span class="count-badge today" id="board-today-badge"></span>
         <span class="job-board-meta" id="board-synced"></span>
       </div>
       <div class="filter-bar">
@@ -853,38 +879,24 @@ function init(d){
 
   var pips = d.scheduledPipelines||[];
 
-  /* ── STAT CARD: Today's Results (new listings from the latest search run) ── */
+  /* ── Latest search → IDs of jobs found in the last run.
+        Drives the "N new today" badge by the Job Board title and the colored
+        left border on those rows. ── */
+  var _latestIds = null;
   (function(){
-    var valEl = document.getElementById('stat-results-value');
-    var subEl = document.getElementById('stat-results-sub');
-    if(!valEl) return;
     Promise.all([
       fetch(_docsPrefix+'li_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
       fetch(_docsPrefix+'in_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
     ]).then(function(res){
-      var li=res[0], inn=res[1];
-      var liN = li ? (typeof li.count==='number'?li.count:(li.jobs||[]).length) : 0;
-      var inN = inn ? (typeof inn.count==='number'?inn.count:(inn.jobs||[]).length) : 0;
-      valEl.textContent = String(liN+inN);
-      var when = (li&&li.generated) || (inn&&inn.generated) || null;
-      if(subEl) subEl.textContent = liN+' LinkedIn · '+inN+' Indeed'+(when?' · '+fmtDate(when):'');
+      var ids = {}, n = 0;
+      res.forEach(function(f){
+        if(f && f.jobs) f.jobs.forEach(function(j){ if(j.id!=null && !ids[String(j.id)]){ ids[String(j.id)]=true; n++; } });
+      });
+      _latestIds = ids;
+      var badge = document.getElementById('board-today-badge');
+      if(badge) badge.textContent = n ? (n+' new today') : '';
+      _rerenderBoard();
     });
-  })();
-
-  /* ── STAT CARD: Scheduled Pipelines ── */
-  (function(){
-    var valEl = document.getElementById('stat-pipeline-value');
-    var subEl = document.getElementById('stat-pipeline-sub');
-    if(!valEl) return;
-    if(!pips.length){ valEl.textContent='—'; if(subEl) subEl.textContent='No pipelines configured.'; return; }
-    var p = pips[0];
-    valEl.textContent = p.schedule || p.title || '—';
-    var subParts = [];
-    if(pips.length > 1) subParts.push(pips.length+' pipelines');
-    else if(p.title) subParts.push(p.title);
-    if(p.lastRun) subParts.push('Last run '+fmtDate(p.lastRun)+(p.lastRunStatus?' · '+p.lastRunStatus.replace('_',' '):''));
-    else subParts.push(p.enabled===false ? 'Disabled' : 'Enabled');
-    if(subEl) subEl.textContent = subParts.join(' · ');
   })();
 
   /* ═══════════════════════════════════
@@ -977,7 +989,8 @@ function init(d){
     var srcKey = (j._source||'').toLowerCase().indexOf('indeed') >= 0 ? 'indeed' : 'li';
     var srcLabel = srcKey === 'indeed' ? 'Indeed' : 'LinkedIn';
 
-    return '<div class="jb-row'+(alt?' alt':'')+'">'
+    var isNew = _latestIds && j.id!=null && _latestIds[String(j.id)];
+    return '<div class="jb-row'+(alt?' alt':'')+(isNew?' jb-row-new':'')+'">'
       +'<div class="jb-cell jb-score '+scoreCls+'" data-label="Score">'+esc(scoreTxt)+'</div>'
       +'<div class="jb-cell jb-tier-cell" data-label="Tier">'+tierBadgeHtml(j.tier)+'</div>'
       +'<div class="jb-cell jb-title-cell" data-label="">'
@@ -1114,8 +1127,7 @@ function isJobSaved(link){
 
 function renderSavedJobs(){
   var el = document.getElementById('saved-jobs-list');
-  var statEl = document.getElementById('stat-saved-value');
-  if(statEl) statEl.textContent = String(_saved.length);
+  renderPreferencesPillar();
   if(!el) return;
   if(!_authUser){
     el.innerHTML='<div class="saved-empty">Sign in to save jobs.</div>';
@@ -1185,6 +1197,7 @@ function loadDismissedJobs(){
     .then(function(r){
       if(r.error){ console.error('load dismissed_jobs:', r.error); return; }
       _dismissed = (r.data||[]).map(function(d){ return d.link; });
+      renderPreferencesPillar();
       _rerenderBoard();
     });
 }
@@ -1308,6 +1321,28 @@ function renderResumeHeader(){
   if(cta) cta.style.display = '';
 }
 
+/* ── PILLAR CARDS (summary versions of the settings) ── */
+// Preferences pillar: how many jobs saved + thumbs-downed. Also feeds the Saved Jobs title badge.
+function renderPreferencesPillar(){
+  var s = document.getElementById('pref-saved');  if(s) s.textContent = String(_saved.length);
+  var p = document.getElementById('pref-passed'); if(p) p.textContent = String(_dismissed.length);
+  var b = document.getElementById('saved-count-badge'); if(b) b.textContent = _saved.length ? String(_saved.length) : '';
+}
+// Learnings pillar: summary of what we've learned from activity, CTA to Settings.
+function renderLearningsPillar(){
+  var sum = document.getElementById('learn-summary');
+  var terms = document.getElementById('learn-terms');
+  if(sum) sum.textContent = _learned.length ? (_learned.length + ' term' + (_learned.length===1?'':'s') + ' learned') : 'Nothing yet';
+  if(terms) terms.textContent = _learned.length ? _learned.slice(0,4).join(', ') : 'Save & pass jobs to teach it';
+}
+// Outlook pillar: top extracted keywords for what you're looking for, CTA to edit.
+function renderOutlookPillar(){
+  var sum = document.getElementById('outlook-summary');
+  var terms = document.getElementById('outlook-terms');
+  if(sum) sum.textContent = _prefs.length ? (_prefs.length + ' keyword' + (_prefs.length===1?'':'s')) : 'Not set yet';
+  if(terms) terms.textContent = _prefs.length ? _prefs.slice(0,4).join(', ') : 'Tell us what you want';
+}
+
 /* ═══════════════════════════════════
    PREFERENCES PANEL  ("What you're looking for")
    Free-text intent → extracted preference keywords.
@@ -1411,6 +1446,7 @@ function renderLearnedPanel(){
     }).join('');
   }
   if(countEl) countEl.textContent = _learned.length+(_learned.length?'':'');
+  renderLearningsPillar();
 }
 
 // Persist the current _learned list to the DB (upsert so it survives into the next search run).
@@ -1471,6 +1507,7 @@ function renderPreferencesPanel(){
   var inp    = document.getElementById('pref-input');
   if(addBtn) addBtn.disabled = _prefs.length >= MAX_PREFS;
   if(inp)    inp.disabled    = _prefs.length >= MAX_PREFS;
+  renderOutlookPillar();
 }
 
 window.markPrefsDirty = function(){
