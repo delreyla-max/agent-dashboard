@@ -812,6 +812,9 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
       <div>Score</div><div>Tier</div><div>Job Title</div><div>Company</div><div>Location</div><div>Source</div><div>Posted</div><div>Job Type</div><div>Save</div>
     </div>
     <div id="merged-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
+    <div id="jb-load-more-wrap" style="text-align:center;padding:10px 18px;">
+      <button id="jb-load-more" class="btn-refresh" onclick="loadMoreJobs()" style="display:none;">Load 20 more</button>
+    </div>
     <div class="jb-footer">
       <span id="merged-count"></span>
       <span id="jb-footer-note">Auto-refreshes every 5 minutes</span>
@@ -1163,6 +1166,10 @@ function init(d){
       +'</div>';
   }
 
+  var PAGE_SIZE = 20;
+  var _filteredJobs = [];
+  var _shownCount = PAGE_SIZE;
+
   function renderMergedJobList(jobs){
     _cachedJobs = jobs || [];
     var tagged = _cachedJobs.map(function(j){
@@ -1173,16 +1180,36 @@ function init(d){
       if(db > da) return 1; if(da > db) return -1;
       return (b.score||0) - (a.score||0);
     });
-    var filtered = applyFilters(tagged);
+    _filteredJobs = applyFilters(tagged);
+    _shownCount = PAGE_SIZE;
+    renderJobRows();
+  }
+
+  function renderJobRows(){
     var countEl = document.getElementById('merged-count');
     var listEl  = document.getElementById('merged-list');
-    var shown = Math.min(filtered.length, 20);
-    if(countEl) countEl.textContent = filtered.length ? 'Showing 1 to '+shown+' of '+filtered.length+' jobs' : '';
+    var moreBtn = document.getElementById('jb-load-more');
+    var total = _filteredJobs.length;
+    var shown = Math.min(total, _shownCount);
+    if(countEl) countEl.textContent = total ? 'Showing 1 to '+shown+' of '+total+' jobs' : '';
 
     if(!listEl) return;
-    if(!filtered.length){ listEl.innerHTML='<div class="panel-state">No results match filters.</div>'; return; }
-    listEl.innerHTML = filtered.slice(0,20).map(function(j,i){ return jobItemHtml(j, i%2===1); }).join('');
+    if(!total){
+      listEl.innerHTML='<div class="panel-state">No results match filters.</div>';
+      if(moreBtn) moreBtn.style.display='none';
+      return;
+    }
+    listEl.innerHTML = _filteredJobs.slice(0,shown).map(function(j,i){ return jobItemHtml(j, i%2===1); }).join('');
+    if(moreBtn){
+      moreBtn.style.display = shown < total ? '' : 'none';
+      moreBtn.textContent = 'Load '+Math.min(PAGE_SIZE, total-shown)+' more';
+    }
   }
+
+  window.loadMoreJobs = function(){
+    _shownCount += PAGE_SIZE;
+    renderJobRows();
+  };
 
   window.applyJobFilter = function(e){
     var s50 = document.getElementById('f-score50');
