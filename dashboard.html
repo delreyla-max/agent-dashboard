@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Search Dashboard</title>
+<!-- Load local config (token + repo overrides). Gitignored — never pushed. Silently skipped on GitHub Pages. -->
+<script src="config.js" onerror="void 0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#f3f4f6; --surface:#ffffff; --surface2:#f9fafb; --border:#e5e7eb;
+  --text:#111827; --muted:#6b7280; --muted2:#9ca3af;
+  --blue:#2563eb; --blue-bg:#eff6ff; --blue-border:#bfdbfe;
+  --green:#16a34a; --green-bg:#dcfce7;
+  --indigo:#4338ca; --indigo-bg:#e0e7ff;
+  --coral:#f2594a; --coral-bg:#fde6e2;
+  --amber:#d97706; --amber-bg:#fef3c7;
+  --red:#dc2626; --red-bg:#fee2e2;
+  --radius-card:12px; --radius-sm:8px; --radius-pill:999px;
+}
+body {
+  background:var(--bg); color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:14px; line-height:1.5; min-height:100vh;
+}
+.page { max-width:1440px; margin:0 auto; padding:0 32px 60px; }
+
+/* ── NAVBAR ── */
+.navbar {
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  background:var(--surface); border-bottom:1px solid var(--border);
+  padding:7px 32px; margin:0 -32px 20px;
+}
+.nav-logo { display:flex; align-items:center; flex:0 0 auto; }
+.nav-logo img { height:24px; width:auto; display:block; }
+.nav-center { flex:1 1 auto; min-width:160px; text-align:left; }
+.nav-title { font-weight:600; font-size:16px; color:var(--text); }
+.nav-right { display:flex; align-items:center; gap:12px; flex:0 0 auto; }
+
+/* ── AUTH USER ── */
+.auth-user { display:none; align-items:center; gap:10px; }
+.auth-user.visible { display:flex; }
+.auth-info { text-align:right; line-height:1.3; }
+.auth-name { font-size:12px; font-weight:600; color:var(--text); display:block; }
+.auth-email { font-size:11px; color:var(--muted); display:block; }
+.auth-avatar {
+  width:32px; height:32px; border-radius:50%; background:#dbeafe; color:var(--blue);
+  display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;
+  flex-shrink:0;
+}
+.auth-signout {
+  background:none; border:1px solid var(--border); color:var(--muted);
+  border-radius:5px; padding:4px 10px; font-size:11px; cursor:pointer; transition:border-color .15s,color .15s;
+}
+.auth-signout:hover { border-color:var(--red); color:var(--red); }
+
+/* ── SECTION HEADERS ── */
+.section-header {
+  font-size:20px; font-weight:700; letter-spacing:-0.01em; margin:30px 0 4px; color:var(--text);
+  display:flex; align-items:center; gap:8px;
+}
+
+/* ── STAT CARDS ── */
+.stat-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:20px; }
+.stat-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card);
+  padding:10px 16px; display:flex; align-items:flex-start; gap:11px;
+}
+.stat-icon { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.stat-icon svg { width:18px; height:18px; }
+.stat-icon.search  { background:var(--indigo-bg); color:#4f46e5; }
+.stat-icon.results { background:#f3e8ff; color:#9333ea; }
+.stat-icon.saved   { background:var(--green-bg); color:var(--green); }
+.stat-icon.pipeline{ background:#ffedd5; color:#ea580c; }
+.stat-body { min-width:0; }
+.stat-label { font-size:12px; color:var(--muted); font-weight:500; margin-bottom:1px; }
+.stat-value { font-size:18px; font-weight:700; color:var(--text); line-height:1.15; }
+.stat-value.text-val { font-size:13px; font-weight:700; }
+.stat-sub { font-size:11px; color:var(--muted2); margin-top:1px; }
+.stat-cta {
+  margin-top:7px; background:none; border:none; padding:0; cursor:pointer;
+  font:inherit; font-size:11.5px; font-weight:600; color:var(--blue);
+}
+.stat-cta:hover { text-decoration:underline; }
+
+/* ── ENGINE HEADER (personalized intro above pillars) ── */
+.engine-head { margin-top:4px; margin-bottom:14px; }
+.engine-title { font-size:20px; font-weight:700; color:var(--text); letter-spacing:-0.01em; }
+.engine-sub { font-size:12.5px; color:var(--muted); margin-top:2px; }
+
+/* ── COUNT BADGES (next to section titles) ── */
+.count-badge {
+  display:inline-flex; align-items:center; font-size:12px; font-weight:600;
+  color:var(--muted); background:var(--bg); border:1px solid var(--border);
+  border-radius:999px; padding:1px 9px; margin-left:6px; vertical-align:middle;
+}
+.count-badge:empty { display:none; }
+.count-badge.today { color:#1d4ed8; background:var(--blue-bg); border-color:var(--blue-border); }
+
+/* ── JOB BOARD hierarchy: parent subtitle + subsection headers ── */
+.board-subtitle { display:flex; flex-wrap:wrap; align-items:center; gap:2px; font-size:12px; color:var(--muted); margin:2px 0 4px; }
+.subsection-header { font-size:13.5px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin:18px 0 9px; display:flex; align-items:center; gap:6px; }
+.subsection-header:first-of-type { margin-top:14px; }
+
+/* ── PILLAR DRAWER (expands under the cards, connected to the clicked card) ── */
+.stat-card { position:relative; transition:border-color .15s, box-shadow .15s; }
+.stat-card.pillar-active { border-color:var(--blue); box-shadow:0 0 0 1px var(--blue); }
+.pillar-drawer { position:relative; margin-top:12px; animation:pillar-in .22s ease; }
+@keyframes pillar-in { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+.pillar-arrow {
+  position:absolute; top:-7px; left:50%; transform:translateX(-50%);
+  width:14px; height:14px; background:var(--surface);
+  border-left:1px solid var(--blue); border-top:1px solid var(--blue);
+  border-top-left-radius:3px; rotate:45deg; z-index:1;
+}
+.pillar-drawer-inner {
+  background:var(--surface); border:1px solid var(--blue); border-radius:var(--radius-card);
+  padding:14px 18px 16px;
+}
+.pillar-drawer-head { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.pillar-drawer-title { font-size:14px; font-weight:700; color:var(--text); flex:1 1 auto; }
+.pillar-drawer-close {
+  background:none; border:1px solid var(--border); color:var(--muted); cursor:pointer;
+  border-radius:6px; width:26px; height:26px; font-size:13px; line-height:1;
+}
+.pillar-drawer-close:hover { border-color:var(--red); color:var(--red); }
+.pillar-panel .chip-panel-wrap { border:none; }
+.chip-panel-toolbar { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.chip-panel-toolbar .chip-count { margin-right:auto; }
+
+/* ── USER MENU (avatar dropdown, top-right) ── */
+.user-menu { position:relative; }
+.user-dropdown {
+  position:absolute; right:0; top:42px; min-width:200px; z-index:30;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12); padding:6px; display:none;
+}
+.user-dropdown.open { display:block; }
+.user-dropdown-email { padding:8px 10px 9px; font-size:12px; color:var(--muted); border-bottom:1px solid var(--border); margin-bottom:4px; word-break:break-all; }
+.user-dropdown-item {
+  width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  padding:8px 10px; font-size:13px; color:var(--text); border-radius:6px; font:inherit;
+}
+.user-dropdown-item:hover { background:var(--bg); }
+.user-dropdown-item.signout { color:var(--red); }
+.auth-avatar.is-button { cursor:pointer; border:none; }
+
+/* ── PANELS (generic white card) ── */
+.panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); overflow:hidden; }
+.panel-header { display:flex; align-items:center; gap:8px; padding:14px 18px; border-bottom:1px solid var(--border); }
+.panel-title { font-size:15px; font-weight:600; color:var(--text); flex:1 1 auto; }
+.panel-link { font-size:12px; color:var(--blue); }
+
+/* ── SAVED JOBS ── */
+.star-btn {
+  background:none; border:none; cursor:pointer; font-size:17px;
+  color:var(--muted2); padding:0 3px; line-height:1; transition:color .15s; flex-shrink:0;
+}
+.star-btn:hover  { color:#f59e0b; }
+.star-btn.starred { color:#f59e0b; }
+.dismiss-btn {
+  background:none; border:none; cursor:pointer; font-size:13px;
+  color:var(--muted2); padding:0 2px; line-height:1; transition:opacity .15s, filter .15s;
+  flex-shrink:0; opacity:.45;
+}
+.dismiss-btn:hover { opacity:1; }
+.jb-save { display:flex; align-items:center; gap:4px; }
+.undo-btn {
+  background:none; border:1px solid var(--border); cursor:pointer; font-size:10.5px;
+  color:var(--muted); padding:2px 7px; border-radius:5px; line-height:1.2; white-space:nowrap;
+}
+.undo-btn:hover { background:var(--surface2); color:var(--text); }
+.saved-job-item {
+  display:flex; align-items:center; gap:10px;
+  padding:11px 18px; border-bottom:1px solid var(--border);
+}
+.saved-job-item:last-child { border-bottom:none; }
+.saved-job-info { flex:1; min-width:0; }
+.saved-job-title {
+  font-size:13px; font-weight:600; color:var(--text); text-decoration:none;
+  display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.saved-job-title:hover { color:var(--blue); text-decoration:underline; }
+.saved-job-company { font-size:11.5px; color:var(--muted); display:block; margin-top:2px; }
+.saved-job-date { font-size:10.5px; color:var(--muted2); margin-left:auto; flex-shrink:0; white-space:nowrap; }
+.saved-remove-btn {
+  background:none; border:none; color:var(--muted2); cursor:pointer;
+  font-size:13px; padding:4px 6px; border-radius:4px; transition:color .15s,background .15s; flex-shrink:0;
+}
+.saved-remove-btn:hover { color:var(--red); background:var(--red-bg); }
+.saved-empty { font-size:12.5px; color:var(--muted); font-style:italic; padding:18px; }
+.saved-saving { font-size:11px; color:var(--muted); padding:6px 18px; }
+
+/* ── JOB BOARD ── */
+.job-board-header { padding:14px 18px; border-bottom:1px solid var(--border); }
+.btn-refresh {
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--surface); color:var(--text); border:1px solid var(--border);
+  border-radius:6px; padding:6px 12px; font-size:12px; font-weight:600; cursor:pointer;
+  transition:background .2s;
+}
+.btn-refresh:hover { background:var(--surface2); }
+.btn-refresh:disabled { opacity:.5; cursor:not-allowed; }
+.spin { display:inline-block; animation:spin .65s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ── FILTER BAR (horizontal, in job board header) ── */
+.filter-bar {
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  padding:10px 14px;
+}
+.filter-group { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.filter-group-label { font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted2); font-weight:700; margin-right:2px; }
+.filter-chk { display:inline-flex; align-items:center; gap:5px; cursor:pointer; font-size:12px; user-select:none; color:var(--text); white-space:nowrap; }
+.filter-chk input[type="checkbox"],
+.filter-chk input[type="radio"] { accent-color:var(--blue); width:13px; height:13px; cursor:pointer; flex-shrink:0; }
+.filter-sep { width:1px; height:18px; background:var(--border); flex-shrink:0; }
+
+.src-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; display:inline-block; }
+.src-dot.li        { background:#0a66c2; }
+.src-dot.indeed    { background:#2557a7; }
+.src-dot.glassdoor { background:#0caa41; }
+.src-dot.zip       { background:#0f766e; }
+
+/* ── JOB TABLE ── */
+.jb-head-row, .jb-row {
+  display:grid;
+  grid-template-columns: 46px 96px minmax(180px,1fr) 130px 150px 80px 90px 96px 36px;
+  gap:10px; align-items:start; padding:10px 18px;
+}
+.jb-head-row {
+  font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; font-weight:700;
+  color:var(--muted2); border-bottom:1px solid var(--border); background:var(--surface2);
+}
+.jb-row { border-bottom:1px solid var(--border); font-size:12.5px; }
+.jb-row:last-child { border-bottom:none; }
+.jb-row.alt { background:#fafbfc; }
+.jb-row:hover { background:var(--blue-bg); }
+.jb-row.jb-row-new { box-shadow: inset 3px 0 0 0 var(--blue); }
+.jb-cell { min-width:0; }
+.jb-score { font-family:'SF Mono',Menlo,monospace; font-weight:700; padding-top:1px; }
+.jb-score.score-high { color:var(--green); }
+.jb-score.score-mid  { color:var(--amber); }
+.jb-score.score-low  { color:var(--muted2); }
+.jb-tier-badge {
+  display:inline-block; padding:2px 8px; border-radius:999px; font-size:10.5px; font-weight:700;
+  white-space:nowrap; cursor:default;
+}
+.jb-tier-badge.tier-1 { background:var(--green-bg); color:var(--green); }
+.jb-tier-badge.tier-2 { background:var(--indigo-bg); color:var(--indigo); }
+.jb-tier-badge.tier-3 { background:#f3f4f6; color:var(--muted); }
+.jb-tier-dash { color:var(--muted2); }
+.jb-pref-badge {
+  display:inline-block; margin-top:5px; padding:2px 8px; border-radius:999px;
+  font-size:10px; font-weight:700; white-space:nowrap; letter-spacing:.02em;
+}
+.jb-pref-badge.pref-high { background:var(--green-bg); color:var(--green); }
+.jb-pref-badge.pref-mid  { background:var(--amber-bg); color:var(--amber); }
+.jb-pref-badge.pref-low  { background:#f3f4f6; color:var(--muted2); }
+.jb-title-link { color:var(--text); font-weight:600; text-decoration:none; }
+.jb-title-link:hover { color:var(--blue); text-decoration:underline; }
+.jb-why { font-size:11px; color:var(--muted); line-height:1.5; margin-top:4px; }
+.jb-pay { font-size:11px; color:var(--green); margin-top:3px; font-weight:500; }
+.jb-company { color:var(--text); }
+.jb-location { color:var(--muted); }
+.jb-source.li { color:var(--blue); font-weight:500; }
+.jb-source.indeed { color:#374151; font-weight:500; }
+.jb-source.glassdoor { color:#0caa41; font-weight:500; }
+.jb-source.zip { color:#0f766e; font-weight:500; }
+.jb-posted { color:var(--muted); white-space:nowrap; }
+.jb-type-pill {
+  display:inline-block; padding:2px 9px; border-radius:999px; font-size:10.5px; font-weight:600; white-space:nowrap;
+}
+.jb-type-pill.remote { background:#dbeafe; color:#1655a3; }
+.jb-type-pill.fulltime { background:var(--green-bg); color:var(--green); }
+.jb-type-pill.parttime { background:var(--amber-bg); color:var(--amber); }
+.jb-type-pill.other { background:#f3f4f6; color:var(--muted); }
+.jb-save { text-align:center; }
+
+.jb-cell[data-label]::before { content:none; }
+@media (max-width:920px){
+  .jb-head-row { display:none; }
+  .jb-row { display:flex; flex-direction:column; gap:4px; padding:14px 18px; }
+  .jb-cell[data-label]::before {
+    content:attr(data-label); color:var(--muted2); font-weight:700; font-size:10px;
+    text-transform:uppercase; letter-spacing:.05em; margin-right:6px;
+  }
+  .jb-score,.jb-tier-cell { order:-1; display:inline-block; margin-right:10px; }
+  .jb-score[data-label]::before, .jb-tier-cell[data-label]::before { display:inline; }
+  .jb-title-cell { order:-2; }
+  .jb-save { order:-3; position:absolute; top:14px; right:18px; text-align:right; }
+  .jb-row { position:relative; }
+}
+
+.panel-state { padding:28px 18px; text-align:center; font-size:12.5px; color:var(--muted); }
+.mini-spin { display:inline-block; width:14px; height:14px; border:2px solid var(--border); border-top-color:var(--blue); border-radius:50%; animation:spin .65s linear infinite; vertical-align:middle; margin-right:6px; }
+.panel-err { background:var(--red-bg); border:1px solid #fecaca; border-radius:6px; padding:10px 14px; margin:12px 18px; font-size:12px; color:var(--red); }
+.jb-footer { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:12px 18px; font-size:11.5px; color:var(--muted); border-top:1px solid var(--border); background:var(--surface2); }
+
+/* ── LOGIN MODAL ── */
+.login-modal {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:rgba(17,24,39,0.6); justify-content:center; align-items:center;
+}
+.login-modal.visible { display:flex; }
+.login-box {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:16px; max-width:780px; width:94%; overflow:hidden;
+  box-shadow:0 18px 60px rgba(0,0,0,.22);
+  display:flex; max-height:94vh;
+}
+/* Left pitch panel */
+.login-pitch { flex:1 1 56%; background:var(--bg); padding:26px 26px 22px; overflow-y:auto; border-right:1px solid var(--border); }
+.login-brand-img { display:block; width:200px; height:auto; margin-bottom:18px; }
+.login-pitch-title { font-size:21px; font-weight:800; line-height:1.15; letter-spacing:-0.01em; color:var(--text); }
+.login-pitch-sub { font-size:13px; color:var(--muted); margin:7px 0 18px; }
+.login-pillars { display:flex; flex-direction:column; gap:11px; }
+.login-pillar {
+  display:flex; gap:13px; align-items:flex-start;
+  background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:13px 14px;
+}
+.login-pillar-ico { width:46px; height:46px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.login-pillar-ico svg { width:23px; height:23px; }
+.login-pillar-ico.blue   { background:var(--indigo-bg); color:#2563eb; }
+.login-pillar-ico.purple { background:#f3e8ff; color:#9333ea; }
+.login-pillar-ico.green  { background:var(--green-bg); color:#16a34a; }
+.login-pillar-ico.coral  { background:var(--coral-bg); color:var(--coral); }
+.login-pillar-h { font-size:14.5px; font-weight:700; color:var(--text); display:flex; align-items:center; gap:8px; }
+.login-pillar-num { width:20px; height:20px; border-radius:5px; font-size:11px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; }
+.login-pillar-num.blue   { background:var(--indigo-bg); color:#2563eb; }
+.login-pillar-num.purple { background:#f3e8ff; color:#9333ea; }
+.login-pillar-num.green  { background:var(--green-bg); color:#16a34a; }
+.login-pillar-num.coral  { background:var(--coral-bg); color:var(--coral); }
+.login-pillar-d { font-size:12.5px; color:var(--muted); line-height:1.5; margin-top:4px; }
+.login-secure { display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--muted2); margin-top:16px; }
+.login-secure svg { width:14px; height:14px; flex-shrink:0; }
+/* Right form panel */
+.login-form { flex:1 1 44%; padding:30px 28px; display:flex; flex-direction:column; justify-content:center; min-width:280px; }
+.login-title { font-size:19px; font-weight:700; margin-bottom:4px; color:var(--text); }
+.login-sub { font-size:12.5px; color:var(--muted); margin-bottom:20px; }
+@media (max-width:680px){
+  .login-box { flex-direction:column; max-width:420px; }
+  .login-pitch { border-right:none; border-bottom:1px solid var(--border); flex:0 0 auto; }
+  .login-form { flex:0 0 auto; padding:22px 24px 24px; }
+}
+.login-label { font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; display:block; }
+.login-input {
+  width:100%; background:var(--surface2); border:1px solid var(--border);
+  border-radius:6px; padding:9px 11px; font-size:13px; color:var(--text);
+  margin-bottom:14px; outline:none; transition:border-color .15s;
+}
+.login-input:focus { border-color:var(--coral); }
+.login-error { font-size:12px; color:var(--red); margin-bottom:12px; display:none; }
+.login-error.visible { display:block; }
+.btn-primary {
+  width:100%; background:var(--coral); color:#fff; border:none; border-radius:6px;
+  padding:9px 18px; font-size:13px; font-weight:600; cursor:pointer; transition:opacity .15s;
+}
+.btn-primary:hover { opacity:.88; }
+.btn-primary:disabled { opacity:.5; cursor:not-allowed; }
+
+/* ── CHIP PANELS ── */
+.chip-panel-wrap { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); overflow:hidden; }
+.chip-panel-header { display:flex; align-items:center; gap:8px; padding:14px 18px; border-bottom:1px solid var(--border); }
+.chip-panel-title { font-size:15px; font-weight:600; flex:1; color:var(--text); }
+.chip-panel-dirty { font-size:11px; color:var(--amber); display:none; }
+.chip-panel-dirty.visible { display:inline; }
+.chip-panel-meta { font-size:11px; color:var(--muted); }
+.btn-save-chips {
+  background:var(--blue); color:#fff; border:none; border-radius:5px;
+  padding:4px 12px; font-size:12px; font-weight:600; cursor:pointer;
+  transition:opacity .15s; display:none;
+}
+.btn-save-chips.visible { display:inline-block; }
+.btn-save-chips:hover { opacity:.85; }
+.chip-panel-body-inner { padding:14px 18px; }
+.chips-area { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:11px; min-height:28px; }
+.chip {
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:999px; padding:4px 10px 4px 12px;
+  font-size:12px; color:#374151;
+}
+.chip-remove {
+  background:none; border:none; color:var(--muted2); cursor:pointer;
+  font-size:13px; line-height:1; padding:0; transition:color .15s;
+}
+.chip-remove:hover { color:var(--red); }
+.chip-add-row { display:flex; gap:8px; align-items:center; }
+.chip-input {
+  flex:1; background:var(--surface); border:1px solid var(--border);
+  border-radius:6px; padding:6px 10px; font-size:12px; color:var(--text);
+  outline:none; transition:border-color .15s;
+}
+.chip-input:focus { border-color:var(--blue); }
+.btn-add-chip {
+  background:var(--surface2); color:var(--text); border:1px solid var(--border);
+  border-radius:6px; padding:6px 14px; font-size:12px; font-weight:600;
+  cursor:pointer; transition:background .15s; white-space:nowrap;
+}
+.btn-add-chip:hover { background:var(--border); }
+.chip-count { font-size:11px; color:var(--muted); white-space:nowrap; }
+.chip-parsed { font-size:11px; color:var(--muted); margin-top:8px; }
+.pref-textarea {
+  width:100%; box-sizing:border-box; background:var(--surface); border:1px solid var(--border);
+  border-radius:6px; padding:8px 10px; font-size:12px; color:var(--text); outline:none;
+  resize:vertical; min-height:70px; font-family:inherit; line-height:1.5; margin-bottom:11px;
+  transition:border-color .15s;
+}
+.pref-textarea:focus { border-color:var(--blue); }
+.chip-panel-toggle {
+  background:none; border:none; color:var(--muted2); cursor:pointer;
+  font-size:13px; padding:0 2px; line-height:1; transition:transform .2s, color .15s;
+  flex-shrink:0;
+}
+.chip-panel-toggle:hover { color:var(--text); }
+.chip-panel-toggle.collapsed { transform:rotate(-90deg); }
+.chip-panel-body { overflow:hidden; transition:max-height .4s ease, opacity .2s ease; max-height:9999px; opacity:1; }
+.chip-panel-body.collapsed { max-height:0; opacity:0; pointer-events:none; }
+
+/* ── RECOMMENDATIONS / RESUME ── */
+.rec-box, .resume-box {
+  background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm);
+  padding:12px 14px;
+}
+.rec-item { margin-bottom:10px; }
+.rec-item:last-child { margin-bottom:0; }
+.rec-item-title { font-size:12.5px; font-weight:600; color:var(--text); margin-bottom:3px; }
+.rec-item-desc { font-size:12px; color:var(--muted); line-height:1.5; }
+.resume-filename { font-size:13px; font-weight:600; color:var(--text); margin-bottom:3px; }
+.resume-meta { font-size:11.5px; color:var(--muted); }
+.resume-status { display:inline-block; margin-top:8px; padding:2px 9px; border-radius:999px; font-size:10.5px; font-weight:700; background:var(--green-bg); color:var(--green); }
+.resume-status.empty { background:#f3f4f6; color:var(--muted); }
+.resume-explain { font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:10px; }
+.resume-kw-wrap { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+.resume-kw { display:inline-block; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:2px 9px; font-size:11px; color:var(--muted); }
+
+/* ── BOTTOM PANEL ROW ── */
+.bottom-panels { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:24px; }
+.bottom-panel-body { padding:14px 18px; }
+
+/* ── MISC ── */
+footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center; line-height:1.6; }
+.empty-state { font-size:12.5px; color:var(--muted); padding:14px 0; font-style:italic; }
+
+@media (max-width:1180px){
+  .stat-cards { gap:10px; }
+  .bottom-panels { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:760px){
+  .page { padding:0 16px 50px; }
+  .navbar { padding:12px 16px; margin:0 -16px 18px; }
+  .nav-center { order:3; flex:1 1 100%; text-align:left; margin-top:6px; }
+  .stat-cards { gap:7px; }
+  .stat-card { flex-direction:column; align-items:flex-start; gap:6px; padding:9px 10px; }
+  .bottom-panels { grid-template-columns:1fr; }
+  .job-board-meta { margin-left:0; text-align:left; flex:1 1 100%; }
+}
+</style>
+</head>
+<body>
+<!-- Inline job data — fallback for file:// local testing (garman only) -->
+<script id="li-data" type="application/json">
+{
+  "generated": "2026-06-14T23:15:44-07:00",
+  "source": "LinkedIn",
+  "searches": [
+    "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead — Los Angeles 24h",
+    "Creative Director OR ACD OR Product Design Lead OR AI Creative Lead OR CRM Creative Director — US Remote 24h"
+  ],
+  "count": 3,
+  "jobs": [
+    {
+      "id": "LI:4353051446",
+      "title": "Lead Product Designer, Arc Platform",
+      "company": "Circle",
+      "location": "Los Angeles Metropolitan Area",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353051446",
+      "score": 54,
+      "tier": "Tier 2 — Good fit with tailoring",
+      "why": "Circle is a well-funded fintech platform and Lead Product Designer in LA aligns with Garman's Storyfire, Xome, and Toyota Garage product design work. Strongest proof points are end-to-end platform ownership and fintech adjacency via Mr. Cooper. Risk: 'Lead' title is a step-down from ACD and crypto-specific knowledge gap."
+    },
+    {
+      "id": "LI:4368776287",
+      "title": "Director of Product Design",
+      "company": "Hiive",
+      "location": "Seattle, WA",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/director-of-product-design-at-hiive-4368776287",
+      "score": 51,
+      "tier": "Tier 2 — Good fit with tailoring",
+      "why": "Director of Product Design title fits Garman's level. Hiive is a private-market securities marketplace; Garman's Xome (real estate marketplace) and Mr. Cooper (fintech) provide relevant proof. Risk: early-stage startup in Seattle, Garman's creative-director framing may need repositioning as product-first."
+    },
+    {
+      "id": "LI:4428621391",
+      "title": "Art Director, E-Commerce",
+      "company": "Steve Madden",
+      "location": "New York, NY",
+      "posted": "2026-06-14",
+      "type": "Full-time",
+      "pay": "",
+      "link": "https://www.linkedin.com/jobs/view/art-director-e-commerce-at-steve-madden-4428621391",
+      "score": 35,
+      "tier": "",
+      "why": "Art Director is two levels below Garman's current ACD role; NY location is another barrier. Some e-commerce/retail creative overlap (Taco Bell, Adidas Golf digital) but the role level and domain fit are both weak relative to Garman's profile."
+    }
+  ]
+}
+</script>
+<script id="in-data" type="application/json">
+{
+  "generated": "2026-06-14T23:15:44-07:00",
+  "source": "Indeed",
+  "searches": [
+    "Creative Director Associate Creative Director — Los Angeles fulltime",
+    "Brand Design Director AI Creative Lead — Los Angeles fulltime",
+    "Creative Director Associate Creative Director — Remote fulltime",
+    "Product Design Lead CRM Creative Director — Remote fulltime"
+  ],
+  "count": 2,
+  "jobs": [
+    {
+      "id": "IN:JOBSEARCH_407",
+      "title": "Associate Creative Director, Ring Retail & Marketing",
+      "company": "Amazon.com",
+      "location": "Hawthorne, CA",
+      "posted": "2026-02-28",
+      "type": "Full-time",
+      "pay": "$141,000 - $190,700/yr",
+      "link": "https://to.indeed.com/aa2pl2pgrxnk",
+      "score": 64,
+      "tier": "Tier 1 — Apply with confidence",
+      "why": "ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 — role is 3.5 months old and may already be filled or in late-stage hiring."
+    },
+    {
+      "id": "IN:JOBSEARCH_413",
+      "title": "Associate Creative Director, Art",
+      "company": "Princeton10",
+      "location": "Montclair, NJ",
+      "posted": "2026-04-20",
+      "type": "Full-time",
+      "pay": "$140,000 - $180,000/yr",
+      "link": "https://to.indeed.com/aapy62zblky7",
+      "score": 48,
+      "tier": "",
+      "why": "ACD Art title matches Garman's level and the pay range is just above his $140K baseline. Agency environment aligns with his background. Risk: NJ location is not LA or remote; Princeton10 is a smaller unknown agency; pay at baseline with NJ cost of living is not a clear step up for Garman."
+    }
+  ]
+}
+</script>
+
+<!-- Login Modal -->
+<div id="login-modal" class="login-modal">
+  <div class="login-box">
+
+    <!-- Left: how it works (four steps) -->
+    <div class="login-pitch">
+      <img class="login-brand-img" src="images/jobmatch-logo.png" alt="jobmatch — a match made in career heaven">
+      <div class="login-pitch-title">How Jobmatch powers better matches</div>
+      <div class="login-pitch-sub">Four simple steps help us find stronger-fit opportunities for you.</div>
+
+      <div class="login-pillars">
+        <div class="login-pillar">
+          <div class="login-pillar-ico blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z"></path><path d="M14 2v6h6"></path><path d="M12 12v6"></path><path d="m9 15 3-3 3 3"></path></svg></div>
+          <div class="login-pillar-body">
+            <div class="login-pillar-h"><span class="login-pillar-num blue">1</span> Upload Resume</div>
+            <div class="login-pillar-d">Start with your resume. We pull out your experience, skills, titles, and keywords that matter.</div>
+          </div>
+        </div>
+        <div class="login-pillar">
+          <div class="login-pillar-ico purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="4" x2="14" y2="4"></line><line x1="10" y1="4" x2="3" y2="4"></line><line x1="21" y1="12" x2="12" y2="12"></line><line x1="8" y1="12" x2="3" y2="12"></line><line x1="21" y1="20" x2="16" y2="20"></line><line x1="12" y1="20" x2="3" y2="20"></line><line x1="14" y1="2" x2="14" y2="6"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="16" y1="18" x2="16" y2="22"></line></svg></div>
+          <div class="login-pillar-body">
+            <div class="login-pillar-h"><span class="login-pillar-num purple">2</span> Adjust Profile</div>
+            <div class="login-pillar-d">Review what we found and refine your goals, preferences, roles, and locations.</div>
+          </div>
+        </div>
+        <div class="login-pillar">
+          <div class="login-pillar-ico green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+          <div class="login-pillar-body">
+            <div class="login-pillar-h"><span class="login-pillar-num green">3</span> Scan Job Boards</div>
+            <div class="login-pillar-d">We scan top job boards and analyze live listings for fit, skills, and requirements.</div>
+          </div>
+        </div>
+        <div class="login-pillar">
+          <div class="login-pillar-ico coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+          <div class="login-pillar-body">
+            <div class="login-pillar-h"><span class="login-pillar-num coral">4</span> Find Matches</div>
+            <div class="login-pillar-d">We compare your profile against live job data to surface stronger-fit opportunities.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Your data is private and secure. We never share it.</div>
+    </div>
+
+    <!-- Right: sign in -->
+    <div class="login-form">
+      <div class="login-title">Welcome back</div>
+      <div class="login-sub">Sign in to access your dashboard</div>
+      <label class="login-label" for="login-email">Email</label>
+      <input id="login-email" class="login-input" type="email" placeholder="you@example.com" autocomplete="email" />
+      <label class="login-label" for="login-password">Password</label>
+      <input id="login-password" class="login-input" type="password" placeholder="••••••••" autocomplete="current-password" />
+      <div id="login-error" class="login-error"></div>
+      <button id="login-btn" class="btn-primary" onclick="doLogin()">Sign in</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="page">
+<!-- Navbar (nested in .page so its negative margin bleeds exactly to page's own padding, not past the viewport) -->
+<div class="navbar">
+  <div class="nav-logo">
+    <img src="images/logo.png" alt="Jobmatch">
+  </div>
+  <div class="nav-center">
+    <div class="nav-title" id="dash-title">Job Search Dashboard</div>
+  </div>
+  <div class="nav-right">
+    <div id="auth-user" class="auth-user"></div>
+  </div>
+</div>
+
+  <!-- Personal Job Search Engine -->
+  <div class="engine-head">
+    <div class="engine-title">Your Personal Job Search Engine</div>
+    <div class="engine-sub">The four signals we use to tailor your results</div>
+  </div>
+  <div class="stat-cards">
+    <!-- 1. Resume -->
+    <div class="stat-card">
+      <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Resume</div>
+        <div class="stat-value text-val" id="stat-resume-name">—</div>
+        <div class="stat-sub" id="stat-resume-date"></div>
+        <button class="stat-cta" id="resume-review-cta" onclick="openPillar('resume', this)">Review Keywords &#8594;</button>
+      </div>
+    </div>
+    <!-- 2. Preferences -->
+    <div class="stat-card">
+      <div class="stat-icon saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Preferences</div>
+        <div class="stat-value text-val"><span id="pref-saved">0</span> saved &middot; <span id="pref-passed">0</span> passed</div>
+        <div class="stat-sub">Jobs you &#9733; and &#128078;</div>
+        <button class="stat-cta" onclick="openPillar('titles', this)">Edit job titles &#8594;</button>
+      </div>
+    </div>
+    <!-- 3. Learnings -->
+    <div class="stat-card">
+      <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.5.4.8 1 .9 1.6l.1.7h6l.1-.7c.1-.6.4-1.2.9-1.6A7 7 0 0 0 12 2z"></path></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Learnings</div>
+        <div class="stat-value text-val" id="learn-summary">—</div>
+        <div class="stat-sub" id="learn-terms">What we've learned from your activity</div>
+        <button class="stat-cta" onclick="openPillar('learned', this)">View details &#8594;</button>
+      </div>
+    </div>
+    <!-- 4. Outlook -->
+    <div class="stat-card">
+      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+      <div class="stat-body">
+        <div class="stat-label">Outlook</div>
+        <div class="stat-value text-val" id="outlook-summary">—</div>
+        <div class="stat-sub" id="outlook-terms">What we think you're looking for</div>
+        <button class="stat-cta" onclick="openPillar('prefs', this)">Edit &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pillar detail drawer — expands from a card's CTA, with an arrow pointing back to that card -->
+  <div class="pillar-drawer" id="pillar-drawer" hidden>
+    <div class="pillar-arrow" id="pillar-arrow"></div>
+    <div class="pillar-drawer-inner">
+      <div class="pillar-drawer-head">
+        <span class="pillar-drawer-title" id="pillar-drawer-title">Resume</span>
+        <button class="pillar-drawer-close" onclick="closePillar()" title="Close">&#10005;</button>
+      </div>
+
+      <!-- Resume -->
+      <div class="pillar-panel" id="pillar-panel-resume" hidden>
+        <div class="bottom-panel-body" id="resume-card"></div>
+      </div>
+
+      <!-- Job Titles -->
+      <div class="pillar-panel" id="pillar-panel-titles" hidden>
+        <div class="chip-panel-wrap" id="titles-panel-wrap">
+          <div class="chip-panel-body" id="titles-body">
+            <div class="chip-panel-body-inner">
+              <div class="chip-panel-toolbar">
+                <span class="chip-count" id="titles-count"></span>
+                <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
+                <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
+              </div>
+              <div class="chips-area" id="titles-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-add-row">
+                <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
+                  onkeydown="if(event.key==='Enter') addTitle()" />
+                <button class="btn-add-chip" onclick="addTitle()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learned From Your Activity -->
+      <div class="pillar-panel" id="pillar-panel-learned" hidden>
+        <div class="chip-panel-wrap" id="learned-panel-wrap">
+          <div class="chip-panel-body" id="learned-body">
+            <div class="chip-panel-body-inner">
+              <span class="chip-count" id="learned-count"></span>
+              <div class="chips-area" id="learned-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-parsed" id="learned-note">Save a job (&#9734;) to teach the system its words. Thumbs-down (&#128078;) a job to drop them. This list feeds your Pref-fit score on the next search run.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What You're Looking For -->
+      <div class="pillar-panel" id="pillar-panel-prefs" hidden>
+        <div class="chip-panel-wrap" id="prefs-panel-wrap">
+          <div class="chip-panel-body" id="prefs-body">
+            <div class="chip-panel-body-inner">
+              <textarea class="pref-textarea" id="prefs-text" oninput="markPrefsDirty()"
+                placeholder="Describe the role you want in a few sentences — type of company, seniority, what excites you, dealbreakers. e.g. 'Remote or LA ACD/CD role at a design-led tech or entertainment brand. I want to lead AI-assisted production and brand systems. Not interested in pure social or automotive dealership work.'"></textarea>
+              <div class="chip-add-row" style="margin-bottom:11px;">
+                <button class="btn-add-chip" onclick="extractPreferences()">Extract keywords &#8595;</button>
+                <span class="chip-count" id="prefs-extract-note"></span>
+                <span class="chip-panel-dirty" id="prefs-dirty">Unsaved changes</span>
+                <span class="chip-count" id="prefs-count"></span>
+                <button class="btn-save-chips" id="prefs-save-btn" onclick="savePreferences()">Save</button>
+              </div>
+              <div class="chips-area" id="prefs-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-add-row">
+                <input class="chip-input" id="pref-input" type="text" placeholder="Add preference keyword…"
+                  onkeydown="if(event.key==='Enter') addPreference()" />
+                <button class="btn-add-chip" onclick="addPreference()">Add</button>
+              </div>
+              <div class="chip-parsed" id="prefs-parsed">These drive a separate "Pref fit" badge on each job — they don't change your resume keyword score.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ JOB BOARD (parent section: covers Saved + New listings) ══ -->
+  <div class="section-header">&#128269; Job Board</div>
+  <div class="board-subtitle">
+    <span id="board-schedule"></span>
+    <span id="board-synced"></span>
+  </div>
+
+  <!-- Saved Jobs (subsection) -->
+  <div class="subsection-header">&#11088; Saved <span class="count-badge" id="saved-count-badge"></span></div>
+  <div class="panel" id="saved-jobs-list">
+    <div class="saved-empty">Sign in to see saved jobs.</div>
+  </div>
+
+  <!-- New & All Listings (subsection) -->
+  <div class="subsection-header">&#128269; New &amp; All Listings <span class="count-badge today" id="board-today-badge"></span></div>
+  <div class="panel" id="panel-merged">
+    <div class="job-board-header">
+      <div class="filter-bar">
+        <div class="filter-group">
+          <span class="filter-group-label">Score</span>
+          <label class="filter-chk"><input type="checkbox" id="f-score50" onchange="applyJobFilter(event)"> <span>50+</span></label>
+          <label class="filter-chk"><input type="checkbox" id="f-score80" onchange="applyJobFilter(event)"> <span>80+</span></label>
+        </div>
+        <div class="filter-sep"></div>
+        <div class="filter-group">
+          <span class="filter-group-label">Source</span>
+          <label class="filter-chk"><input type="checkbox" id="f-li" checked onchange="applyJobFilter(event)"> <span><span class="src-dot li"></span> LinkedIn</span></label>
+          <label class="filter-chk"><input type="checkbox" id="f-indeed" checked onchange="applyJobFilter(event)"> <span><span class="src-dot indeed"></span> Indeed</span></label>
+          <label class="filter-chk"><input type="checkbox" id="f-glassdoor" checked onchange="applyJobFilter(event)"> <span><span class="src-dot glassdoor"></span> Glassdoor</span></label>
+          <label class="filter-chk"><input type="checkbox" id="f-zip" checked onchange="applyJobFilter(event)"> <span><span class="src-dot zip"></span> ZipRecruiter</span></label>
+        </div>
+        <div class="filter-sep"></div>
+        <div class="filter-group">
+          <span class="filter-group-label">Date Posted</span>
+          <label class="filter-chk"><input type="radio" name="f-date" value="all" checked onchange="applyJobFilter(event)"> <span>All</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="1" onchange="applyJobFilter(event)"> <span>24h</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="3" onchange="applyJobFilter(event)"> <span>3d</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="7" onchange="applyJobFilter(event)"> <span>7d</span></label>
+          <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>30d</span></label>
+        </div>
+        <div class="filter-sep"></div>
+        <div class="filter-group">
+          <label class="filter-chk"><input type="checkbox" id="f-show-dismissed" onchange="toggleShowDismissed()"> <span>&#128078; Show dismissed</span></label>
+        </div>
+      </div>
+    </div>
+    <div class="jb-head-row">
+      <div>Score</div><div>Tier</div><div>Job Title</div><div>Company</div><div>Location</div><div>Source</div><div>Posted</div><div>Job Type</div><div>Save</div>
+    </div>
+    <div id="merged-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
+    <div class="jb-footer">
+      <span id="merged-count"></span>
+      <span id="jb-footer-note">Auto-refreshes every 5 minutes</span>
+    </div>
+  </div>
+
+  <footer>Job Search Dashboard &middot; Job board auto-refreshes from <code id="footer-docs-path">docs/</code> JSON &middot; GitHub Pages ready</footer>
+</div>
+<script>
+(function(){
+'use strict';
+
+/* ── UTILS ── */
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmtDate(s){ if(!s) return '—'; var dt=new Date(s); return isNaN(dt)?s:dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'2-digit'}); }
+function fmtTime(s){ if(!s) return ''; var dt=new Date(s); return isNaN(dt)?s:dt.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}); }
+function badge(s){ var m={pending:'badge-pending',in_progress:'badge-in_progress',done:'badge-done',blocked:'badge-blocked',ok:'badge-ok',failed:'badge-failed'}; return '<span class="badge '+(m[s]||'badge-pending')+'">'+esc(s.replace('_',' '))+'</span>'; }
+
+/* ── SUPABASE ── */
+var SUPABASE_URL = 'https://olteamqjgekiuymydloz.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdGVhbXFqZ2VraXV5bXlkbG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0ODY4NDYsImV4cCI6MjA5NzA2Mjg0Nn0.Qnt89ErUAJ6yHF0T7V-7bjsHJD9n5R00abKhTMhsfIM';
+var _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ── AUTH STATE ── */
+var _authUser = null;
+
+/* ═══════════════════════════════════
+   BOOT — check session on load
+   ═══════════════════════════════════ */
+_sb.auth.getSession().then(function(res){
+  var session = res.data && res.data.session;
+  if(session){
+    _authUser = session.user;
+    bootDashboard();
+  } else {
+    showLoginModal();
+  }
+});
+
+/* ── LOGIN MODAL ── */
+function showLoginModal(){
+  document.getElementById('login-modal').classList.add('visible');
+  setTimeout(function(){ document.getElementById('login-email').focus(); }, 50);
+}
+
+function hideLoginModal(){
+  document.getElementById('login-modal').classList.remove('visible');
+}
+
+// Allow Enter key on password field
+document.getElementById('login-password').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') doLogin();
+});
+
+window.doLogin = function(){
+  var email = document.getElementById('login-email').value.trim();
+  var pass  = document.getElementById('login-password').value;
+  var btn   = document.getElementById('login-btn');
+  var errEl = document.getElementById('login-error');
+  if(!email || !pass) return;
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  errEl.classList.remove('visible');
+  _sb.auth.signInWithPassword({email:email, password:pass}).then(function(res){
+    if(res.error){
+      errEl.textContent = res.error.message;
+      errEl.classList.add('visible');
+      btn.disabled = false; btn.textContent = 'Sign in';
+      return;
+    }
+    _authUser = res.data.user;
+    hideLoginModal();
+    bootDashboard();
+  });
+};
+
+window.doSignOut = function(){
+  _sb.auth.signOut().then(function(){ location.reload(); });
+};
+
+/* ── AUTH UI ── */
+function updateAuthUI(){
+  var el = document.getElementById('auth-user');
+  if(!_authUser){ el.classList.remove('visible'); return; }
+  var email = _authUser.email || '';
+  var uname = (_authUser.user_metadata && _authUser.user_metadata.username) || (email.split('@')[0]) || '';
+  var letter = (uname.trim().charAt(0) || '?').toUpperCase();
+  // Stable unique color per user, derived from their name.
+  var hue = 0; for(var i=0;i<uname.length;i++){ hue = (hue*31 + uname.charCodeAt(i)) % 360; }
+  var avatarStyle = 'background:hsl('+hue+',70%,88%);color:hsl('+hue+',60%,30%);';
+  el.innerHTML =
+    '<div class="user-menu">'
+    + '<button class="auth-avatar is-button" id="avatar-btn" style="'+avatarStyle+'" onclick="toggleUserMenu(event)" aria-haspopup="true" aria-expanded="false" title="'+esc(uname)+'">'+esc(letter)+'</button>'
+    + '<div class="user-dropdown" id="user-dropdown">'
+    +   '<div class="user-dropdown-email">'+esc(email)+'</div>'
+    +   '<button class="user-dropdown-item signout" onclick="doSignOut()">Sign out</button>'
+    + '</div>'
+    + '</div>';
+  el.classList.add('visible');
+}
+window.toggleUserMenu = function(e){
+  if(e) e.stopPropagation();
+  var dd = document.getElementById('user-dropdown'), btn = document.getElementById('avatar-btn');
+  if(!dd) return;
+  var open = dd.classList.toggle('open');
+  if(btn) btn.setAttribute('aria-expanded', String(open));
+};
+function closeUserMenu(){
+  var dd = document.getElementById('user-dropdown'), btn = document.getElementById('avatar-btn');
+  if(dd) dd.classList.remove('open');
+  if(btn) btn.setAttribute('aria-expanded','false');
+}
+document.addEventListener('click', function(e){
+  var dd = document.getElementById('user-dropdown');
+  if(dd && dd.classList.contains('open') && !e.target.closest('.user-menu')) closeUserMenu();
+});
+/* ── PILLAR DRAWER: expands under the cards, arrow points to the clicked card ── */
+var _activePillar = null;
+var PILLAR_TITLES = { resume:'Resume keywords', titles:'Job titles', learned:'Learned from your activity', prefs:"What you're looking for" };
+function positionPillarArrow(cardEl){
+  var arrow = document.getElementById('pillar-arrow');
+  var drawer = document.getElementById('pillar-drawer');
+  if(!arrow || !drawer || !cardEl) return;
+  var c = cardEl.getBoundingClientRect();
+  var d = drawer.getBoundingClientRect();
+  var left = (c.left + c.width/2) - d.left;
+  arrow.style.left = Math.max(16, Math.min(d.width-16, left)) + 'px';
+}
+window.openPillar = function(key, fromEl){
+  var drawer = document.getElementById('pillar-drawer');
+  if(!drawer) return;
+  var cardEl = fromEl && fromEl.closest ? fromEl.closest('.stat-card') : null;
+  // Clicking the active card's CTA again closes the drawer.
+  if(_activePillar === key && !drawer.hasAttribute('hidden')){ closePillar(); return; }
+  _activePillar = key;
+  ['resume','titles','learned','prefs'].forEach(function(k){
+    var p = document.getElementById('pillar-panel-'+k);
+    if(p){ if(k===key) p.removeAttribute('hidden'); else p.setAttribute('hidden',''); }
+    var card = document.getElementById('pillar-card-'+k); // (optional highlight hook)
+  });
+  var titleEl = document.getElementById('pillar-drawer-title');
+  if(titleEl) titleEl.textContent = PILLAR_TITLES[key] || 'Details';
+  // highlight the active source card
+  document.querySelectorAll('.stat-card.pillar-active').forEach(function(el){ el.classList.remove('pillar-active'); });
+  if(cardEl) cardEl.classList.add('pillar-active');
+  drawer.removeAttribute('hidden');
+  positionPillarArrow(cardEl);
+  drawer.scrollIntoView({behavior:'smooth', block:'nearest'});
+};
+window.closePillar = function(){
+  var drawer = document.getElementById('pillar-drawer');
+  if(drawer) drawer.setAttribute('hidden','');
+  document.querySelectorAll('.stat-card.pillar-active').forEach(function(el){ el.classList.remove('pillar-active'); });
+  _activePillar = null;
+};
+// Keep the arrow aligned if the window resizes while open.
+window.addEventListener('resize', function(){
+  var drawer = document.getElementById('pillar-drawer');
+  if(drawer && !drawer.hasAttribute('hidden')){
+    var card = document.querySelector('.stat-card.pillar-active');
+    if(card) positionPillarArrow(card);
+  }
+});
+
+/* ── BOOT DASHBOARD ── */
+function bootDashboard(){
+  updateAuthUI();
+  loadSavedJobs();
+  loadKeywordsPanel();
+  loadTitlesPanel();
+  loadPreferencesPanel();
+  loadDismissedJobs();
+
+  var username = (_authUser.user_metadata||{}).username || 'garman';
+  fetch('users/'+username+'/config.json?t='+Date.now())
+    .then(function(r){
+      if(!r.ok) throw new Error('No config for user: '+username);
+      return r.json();
+    })
+    .then(function(d){ init(d); })
+    .catch(function(e){
+      document.querySelector('.page').innerHTML =
+        '<div style="padding:40px;color:var(--red);font-size:14px;">&#9888; '+esc(e.message)+'</div>';
+    });
+}
+
+/* ── ON/OFF ── */
+
+/* ═══════════════════════════════════
+   INIT — called after config fetch
+   ═══════════════════════════════════ */
+function init(d){
+  var _docsPrefix = d.docsPrefix || 'docs/';
+  var name = d.name || ((_authUser&&_authUser.user_metadata||{}).username||'');
+  document.title = name + ' – Job Search Dashboard';
+  document.getElementById('dash-title').textContent = name ? ('Today could be your day, ' + name) : 'Today could be your day';
+  var fp = document.getElementById('footer-docs-path');
+  if(fp) fp.textContent = _docsPrefix;
+
+  var pips = d.scheduledPipelines||[];
+
+  /* ── Job Board subtitle: when the automated search runs ── */
+  (function(){
+    var el = document.getElementById('board-schedule');
+    if(!el) return;
+    if(!pips.length){ el.textContent = 'No automated search configured yet.'; return; }
+    var p = pips[0];
+    var sched = p.schedule ? p.schedule.toLowerCase() : 'on a schedule';
+    el.textContent = 'Searches LinkedIn & Indeed ' + sched
+      + (pips.length > 1 ? ' (+' + (pips.length-1) + ' more)' : '');
+  })();
+
+  /* ── Latest search → IDs of jobs found in the last run.
+        Drives the "N new today" badge by the Job Board title and the colored
+        left border on those rows. ── */
+  var _latestIds = null;
+  (function(){
+    Promise.all([
+      fetch(_docsPrefix+'li_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
+      fetch(_docsPrefix+'in_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
+      fetch(_docsPrefix+'gd_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
+      fetch(_docsPrefix+'zr_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
+    ]).then(function(res){
+      var ids = {}, n = 0;
+      res.forEach(function(f){
+        if(f && f.jobs) f.jobs.forEach(function(j){ if(j.id!=null && !ids[String(j.id)]){ ids[String(j.id)]=true; n++; } });
+      });
+      _latestIds = ids;
+      var badge = document.getElementById('board-today-badge');
+      if(badge) badge.textContent = n ? (n+' new today') : '';
+      _rerenderBoard();
+    });
+  })();
+
+  /* ═══════════════════════════════════
+     JOB BOARD
+     ═══════════════════════════════════ */
+  var _lastUpdated = null;
+  var _cachedJobs = [];
+  _rerenderBoard = function(){ renderMergedJobList(_cachedJobs); };
+  var _filters = { score50:false, score80:false, showLI:true, showIndeed:true, showGlassdoor:true, showZip:true, daysAgo:0 };
+
+  /* Map a job's source string to a stable {key,label} used for the colored
+     Source cell and the source filter. New sources go here. */
+  function srcInfo(source){
+    var s = (source||'').toLowerCase();
+    if(s.indexOf('indeed') >= 0)       return { key:'indeed',    label:'Indeed' };
+    if(s.indexOf('glassdoor') >= 0)    return { key:'glassdoor', label:'Glassdoor' };
+    if(s.indexOf('zip') >= 0)          return { key:'zip',       label:'ZipRecruiter' };
+    return { key:'li', label:'LinkedIn' };
+  }
+
+  function applyFilters(jobs){
+    var minScore = _filters.score80 ? 80 : (_filters.score50 ? 50 : 0);
+    var cutoff = null;
+    if(_filters.daysAgo > 0){
+      cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - _filters.daysAgo);
+      cutoff = cutoff.toISOString().slice(0,10);
+    }
+    var srcShow = { li:_filters.showLI, indeed:_filters.showIndeed, glassdoor:_filters.showGlassdoor, zip:_filters.showZip };
+    return jobs.filter(function(j){
+      if(!_showDismissed && isJobDismissed(j.link||'')) return false;
+      if(minScore > 0 && (j.score == null || j.score < minScore)) return false;
+      if(srcShow[srcInfo(j._source).key] === false) return false;
+      if(cutoff && (j.posted||'') < cutoff) return false;
+      return true;
+    });
+  }
+
+  function tierBadgeHtml(tier){
+    if(!tier) return '<span class="jb-tier-dash">—</span>';
+    var m = /^Tier\s*(\d+)/i.exec(tier);
+    var n = m ? m[1] : '';
+    var cls = n==='1' ? 'tier-1' : n==='2' ? 'tier-2' : 'tier-3';
+    var label = n ? 'Tier '+n : tier;
+    return '<span class="jb-tier-badge '+cls+'" title="'+esc(tier)+'">'+esc(label)+'</span>';
+  }
+
+  function typePillHtml(type){
+    if(!type) return '';
+    var t = type.toLowerCase();
+    var cls = /remote/.test(t) ? 'remote' : /full.?time/.test(t) ? 'fulltime' : /part.?time/.test(t) ? 'parttime' : 'other';
+    return '<span class="jb-type-pill '+cls+'">'+esc(type)+'</span>';
+  }
+
+  function jobItemHtml(j, alt){
+    // normalize field name variants from different pipeline outputs
+    var company = j.company || j.companyName || '';
+    var pay     = j.pay     || j.salary      || '';
+    var why     = j.why     || j.scoreNotes  || '';
+    var type    = j.type    || j.employmentType || '';
+
+    var titleHtml = j.link
+      ? '<a class="jb-title-link" href="'+esc(j.link)+'" target="_blank" rel="noopener">'+esc(j.title)+'</a>'
+      : '<span class="jb-title-link">'+esc(j.title)+'</span>';
+
+    var scoreCls = '';
+    var scoreTxt = '—';
+    if(j.score != null){
+      scoreCls = j.score >= 60 ? 'score-high' : j.score >= 40 ? 'score-mid' : 'score-low';
+      scoreTxt = String(j.score);
+    }
+
+    var prefHtml = '';
+    if(j.prefScore != null){
+      var pCls = j.prefScore >= 60 ? 'pref-high' : j.prefScore >= 30 ? 'pref-mid' : 'pref-low';
+      var pm = (j.prefMatched && j.prefMatched.length) ? j.prefMatched.join(', ') : 'no preference matches';
+      prefHtml = '<span class="jb-pref-badge '+pCls+'" title="Matches your preferences: '+esc(pm)+'">&#9733; Pref fit '+esc(String(j.prefScore))+'%</span>';
+    }
+
+    var saved = isJobSaved(j.link||'');
+    var dismissed = isJobDismissed(j.link||'');
+    var dataAttrs = ' data-link="'+esc(j.link||'')+'"'
+      +' data-title="'+esc(j.title||'')+'"'
+      +' data-company="'+esc(company)+'"';
+    var actionBtns;
+    if(dismissed){
+      actionBtns = '<button class="undo-btn" onclick="undismissJob(\''+esc(j.link||'')+'\')" title="Restore to board">&#8634; undo</button>';
+    } else {
+      var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'+dataAttrs
+        +' onclick="handleStar(this)"'
+        +' title="'+(saved?'Remove from saved':'Save job')+'">'
+        +(saved?'&#9733;':'&#9734;')+'</button>';
+      var dismissBtn = '<button class="dismiss-btn"'+dataAttrs
+        +' onclick="handleDismiss(this)"'
+        +' title="Not interested — hide and stop learning its words">&#128078;</button>';
+      actionBtns = starBtn + dismissBtn;
+    }
+
+    var si = srcInfo(j._source);
+    var srcKey = si.key, srcLabel = si.label;
+
+    var isNew = _latestIds && j.id!=null && _latestIds[String(j.id)];
+    return '<div class="jb-row'+(alt?' alt':'')+(isNew?' jb-row-new':'')+'">'
+      +'<div class="jb-cell jb-score '+scoreCls+'" data-label="Score">'+esc(scoreTxt)+'</div>'
+      +'<div class="jb-cell jb-tier-cell" data-label="Tier">'+tierBadgeHtml(j.tier)+'</div>'
+      +'<div class="jb-cell jb-title-cell" data-label="">'
+        +titleHtml
+        +(pay?'<div class="jb-pay">&#128176; '+esc(pay)+'</div>':'')
+        +(why?'<div class="jb-why">'+esc(why)+'</div>':'')
+        +(prefHtml?'<div>'+prefHtml+'</div>':'')
+      +'</div>'
+      +'<div class="jb-cell jb-company" data-label="Company">'+esc(company)+'</div>'
+      +'<div class="jb-cell jb-location" data-label="Location">'+esc(j.location||'')+'</div>'
+      +'<div class="jb-cell jb-source '+srcKey+'" data-label="Source">'+esc(srcLabel)+'</div>'
+      +'<div class="jb-cell jb-posted" data-label="Posted">'+esc(j.posted||'')+'</div>'
+      +'<div class="jb-cell" data-label="Type">'+typePillHtml(type)+'</div>'
+      +'<div class="jb-cell jb-save" data-label="">'+actionBtns+'</div>'
+      +'</div>';
+  }
+
+  function renderMergedJobList(jobs){
+    _cachedJobs = jobs || [];
+    var tagged = _cachedJobs.map(function(j){
+      return Object.assign({}, j, {_source: j.source || 'LinkedIn'});
+    });
+    tagged.sort(function(a,b){
+      var da = a.posted||'', db = b.posted||'';
+      if(db > da) return 1; if(da > db) return -1;
+      return (b.score||0) - (a.score||0);
+    });
+    var filtered = applyFilters(tagged);
+    var countEl = document.getElementById('merged-count');
+    var listEl  = document.getElementById('merged-list');
+    var shown = Math.min(filtered.length, 20);
+    if(countEl) countEl.textContent = filtered.length ? 'Showing 1 to '+shown+' of '+filtered.length+' jobs' : '';
+
+    if(!listEl) return;
+    if(!filtered.length){ listEl.innerHTML='<div class="panel-state">No results match filters.</div>'; return; }
+    listEl.innerHTML = filtered.slice(0,20).map(function(j,i){ return jobItemHtml(j, i%2===1); }).join('');
+  }
+
+  window.applyJobFilter = function(e){
+    var s50 = document.getElementById('f-score50');
+    var s80 = document.getElementById('f-score80');
+    if(e && e.target){
+      if(e.target.id === 'f-score80' && s80 && s80.checked && s50) s50.checked = false;
+      if(e.target.id === 'f-score50' && s50 && s50.checked && s80) s80.checked = false;
+    }
+    _filters.score50    = !!(s50 && s50.checked);
+    _filters.score80    = !!(s80 && s80.checked);
+    var liEl = document.getElementById('f-li');
+    var inEl = document.getElementById('f-indeed');
+    var gdEl = document.getElementById('f-glassdoor');
+    var zrEl = document.getElementById('f-zip');
+    _filters.showLI        = liEl ? liEl.checked : true;
+    _filters.showIndeed    = inEl ? inEl.checked : true;
+    _filters.showGlassdoor = gdEl ? gdEl.checked : true;
+    _filters.showZip       = zrEl ? zrEl.checked : true;
+    var dateRadio = document.querySelector('input[name="f-date"]:checked');
+    _filters.daysAgo = dateRadio && dateRadio.value !== 'all' ? parseInt(dateRadio.value) : 0;
+    renderMergedJobList(_cachedJobs);
+  };
+
+  function updateSyncLabel(){
+    var el = document.getElementById('board-synced');
+    if(!el || !_lastUpdated) return;
+    el.textContent = ' · Updated '+fmtTime(_lastUpdated);
+  }
+
+  function loadBoard(showSpinner){
+    var btn = document.getElementById('refresh-btn');
+    if(btn && showSpinner){ btn.disabled=true; btn.innerHTML='<span class="spin">&#8635;</span> Refreshing…'; }
+    if(showSpinner){
+      var ml = document.getElementById('merged-list');
+      var mc = document.getElementById('merged-count');
+      if(ml) ml.innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
+      if(mc) mc.textContent='';
+    }
+    fetch(_docsPrefix + 'all_jobs.json?t='+Date.now())
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(data){
+        if(data.updated !== _lastUpdated || showSpinner){
+          _lastUpdated = data.updated;
+          renderMergedJobList(data.jobs||[]);
+        }
+        if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
+        updateSyncLabel();
+      })
+      .catch(function(e){
+        var ml = document.getElementById('merged-list');
+        if(ml) ml.innerHTML='<div class="panel-err">&#9888; Could not load jobs: '+esc(e.message)+'</div>';
+        if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
+      });
+  }
+
+  window.refreshBoard = function(){ loadBoard(true); };
+  loadBoard(true);
+  setInterval(function(){ loadBoard(false); }, 5 * 60 * 1000);
+
+} // end init()
+
+/* ═══════════════════════════════════
+   SAVED JOBS — Supabase, user_id auth
+   ═══════════════════════════════════ */
+var _saved = [];
+
+function loadSavedJobs(){
+  if(!_authUser){ renderSavedJobs(); return; }
+  _sb.from('saved_jobs')
+    .select('title, company, link, saved_at')
+    .eq('user_id', _authUser.id)
+    .order('saved_at', {ascending:false})
+    .then(function(r){
+      if(r.error){ console.error('load saved_jobs:', r.error); renderSavedJobs(); return; }
+      _saved = (r.data||[]).map(function(j){
+        return {title:j.title, company:j.company, link:j.link, savedAt:j.saved_at};
+      });
+      renderSavedJobs();
+      updateAllStars();
+    });
+}
+
+function dbInsert(job){
+  if(!_authUser) return;
+  _sb.from('saved_jobs').upsert(
+    {user_id:_authUser.id, title:job.title, company:job.company, link:job.link},
+    {onConflict:'user_id,link'}
+  ).then(function(r){ if(r.error) console.error('insert saved_job:', r.error); });
+}
+
+function dbDelete(link){
+  if(!_authUser) return;
+  _sb.from('saved_jobs').delete()
+    .eq('user_id', _authUser.id).eq('link', link)
+    .then(function(r){ if(r.error) console.error('delete saved_job:', r.error); });
+}
+
+function isJobSaved(link){
+  return _saved.some(function(j){ return j.link === link; });
+}
+
+function renderSavedJobs(){
+  var el = document.getElementById('saved-jobs-list');
+  renderPreferencesPillar();
+  if(!el) return;
+  if(!_authUser){
+    el.innerHTML='<div class="saved-empty">Sign in to save jobs.</div>';
+    return;
+  }
+  if(!_saved.length){
+    el.innerHTML='<div class="saved-empty">No saved jobs yet — click &#9734; on any listing.</div>';
+    return;
+  }
+  el.innerHTML = _saved.map(function(j){
+    return '<div class="saved-job-item">'
+      +'<div class="saved-job-info">'
+      +'<a href="'+esc(j.link)+'" target="_blank" class="saved-job-title">'+esc(j.title)+'</a>'
+      +'<span class="saved-job-company">'+esc(j.company)+'</span>'
+      +'</div>'
+      +(j.savedAt?'<span class="saved-job-date">'+esc(fmtDate(j.savedAt))+'</span>':'')
+      +'<button class="saved-remove-btn" onclick="removeSavedJob(\''+esc(j.link)+'\')" title="Remove">&#10005;</button>'
+      +'</div>';
+  }).join('');
+}
+
+function updateAllStars(){
+  document.querySelectorAll('.star-btn').forEach(function(btn){
+    var saved = isJobSaved(btn.dataset.link||'');
+    btn.classList.toggle('starred', saved);
+    btn.innerHTML = saved ? '&#9733;' : '&#9734;';
+    btn.title = saved ? 'Remove from saved' : 'Save job';
+  });
+}
+
+window.removeSavedJob = function(link){
+  _saved = _saved.filter(function(j){ return j.link !== link; });
+  dbDelete(link);
+  renderSavedJobs();
+  updateAllStars();
+};
+
+window.handleStar = function(btn){
+  if(!_authUser) return;
+  var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
+  if(isJobSaved(job.link)){
+    _saved = _saved.filter(function(j){ return j.link !== job.link; });
+    dbDelete(job.link);
+  } else {
+    _saved.unshift({title:job.title, company:job.company, link:job.link, savedAt:new Date().toISOString()});
+    dbInsert(job);
+    addLearnedFromTitle(job.title);   // saving a job teaches the system its words
+  }
+  renderSavedJobs();
+  updateAllStars();
+};
+
+/* ═══════════════════════════════════
+   DISMISSED JOBS  (thumbs-down)
+   Hides the job from the board AND removes its words from the learned list.
+   Persisted to dismissed_jobs so the job won't come back on the next search.
+   ═══════════════════════════════════ */
+var _dismissed = [];          // array of links
+var _showDismissed = false;
+var _rerenderBoard = function(){};   // set inside init() so out-of-scope handlers can redraw the board
+
+function loadDismissedJobs(){
+  if(!_authUser){ return; }
+  _sb.from('dismissed_jobs')
+    .select('link')
+    .eq('user_id', _authUser.id)
+    .then(function(r){
+      if(r.error){ console.error('load dismissed_jobs:', r.error); return; }
+      _dismissed = (r.data||[]).map(function(d){ return d.link; });
+      renderPreferencesPillar();
+      _rerenderBoard();
+    });
+}
+
+function isJobDismissed(link){
+  return _dismissed.indexOf(link) !== -1;
+}
+
+window.handleDismiss = function(btn){
+  if(!_authUser) return;
+  var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
+  if(!job.link || isJobDismissed(job.link)) return;
+  _dismissed.push(job.link);
+  // If it was saved, unsave it too (you changed your mind).
+  if(isJobSaved(job.link)){ _saved = _saved.filter(function(j){ return j.link !== job.link; }); dbDelete(job.link); renderSavedJobs(); }
+  removeLearnedFromTitle(job.title);   // thumbs-down drops the job's words
+  _sb.from('dismissed_jobs').upsert(
+    {user_id:_authUser.id, link:job.link, title:job.title, company:job.company},
+    {onConflict:'user_id,link'}
+  ).then(function(r){ if(r.error) console.error('insert dismissed_job:', r.error); });
+  _rerenderBoard();
+};
+
+window.undismissJob = function(link){
+  _dismissed = _dismissed.filter(function(l){ return l !== link; });
+  _sb.from('dismissed_jobs').delete()
+    .eq('user_id', _authUser.id).eq('link', link)
+    .then(function(r){ if(r.error) console.error('delete dismissed_job:', r.error); });
+  _rerenderBoard();
+};
+
+window.toggleShowDismissed = function(){
+  _showDismissed = !_showDismissed;
+  _rerenderBoard();
+};
+
+/* ═══════════════════════════════════
+   COLLAPSIBLE PANELS
+   ═══════════════════════════════════ */
+var _panelState = { learned: true, titles: true, prefs: true }; // true = expanded
+
+window.togglePanel = function(name){
+  _panelState[name] = !_panelState[name];
+  var body   = document.getElementById(name+'-body');
+  var toggle = document.getElementById(name+'-toggle');
+  if(body)   body.classList.toggle('collapsed', !_panelState[name]);
+  if(toggle) toggle.classList.toggle('collapsed', !_panelState[name]);
+};
+
+/* ═══════════════════════════════════
+   RESUME CARD (derived from parsed_from/parsed_at on user_keywords)
+   ═══════════════════════════════════ */
+function renderResumeCard(){
+  var el = document.getElementById('resume-card');
+  if(!el) return;
+  if(!_keywordsParsedFrom){
+    el.innerHTML = '<div class="resume-box">'
+      +'<div class="resume-filename">No resume parsed yet</div>'
+      +'<span class="resume-status empty">—</span>'
+      +'</div>'
+      +'<div class="resume-explain">We\'ll use your resume to extract skills and improve search accuracy.</div>';
+    return;
+  }
+  var kwChips = _keywords.length
+    ? '<div class="resume-kw-wrap">'+_keywords.map(function(kw){ return '<span class="resume-kw">'+esc(kw)+'</span>'; }).join('')+'</div>'
+    : '';
+  el.innerHTML = '<div class="resume-box">'
+    +'<div class="resume-filename">'+esc(_keywordsParsedFrom)+'</div>'
+    +(_keywordsParsedAt?'<div class="resume-meta">Parsed '+esc(fmtDate(_keywordsParsedAt))+'</div>':'')
+    +'<span class="resume-status">OK</span>'
+    +kwChips
+    +'</div>'
+    +'<div class="resume-explain">These keywords are pulled from your resume and drive the qualification Score on each job. They update when your resume is re-parsed.</div>';
+}
+
+/* ═══════════════════════════════════
+   KEYWORDS PANEL
+   ═══════════════════════════════════ */
+var _keywords = [];
+var _keywordsDirty = false;
+var _keywordsParsedFrom = '';
+var _keywordsParsedAt = '';
+var MAX_KEYWORDS = 15;
+
+function loadKeywordsPanel(){
+  if(!_authUser) return;
+  _sb.from('user_keywords')
+    .select('keywords, parsed_from, parsed_at')
+    .eq('user_id', _authUser.id)
+    .maybeSingle()
+    .then(function(r){
+      if(r.error){ console.error('load user_keywords:', r.error); renderKeywordsPanel(); return; }
+      var row = r.data || {};
+      _keywords = row.keywords || [];
+      _keywordsParsedFrom = row.parsed_from || '';
+      _keywordsParsedAt   = row.parsed_at   || '';
+      renderKeywordsPanel();
+    });
+}
+
+// Résumé keywords are now read-only and shown inside the Resume card; they still drive the Score.
+function renderKeywordsPanel(){
+  renderResumeCard();
+  renderResumeHeader();
+}
+
+// Header stat card: resume name + date added, with a CTA to the Settings page. No keywords shown here.
+function renderResumeHeader(){
+  var nameEl = document.getElementById('stat-resume-name');
+  var dateEl = document.getElementById('stat-resume-date');
+  var cta    = document.getElementById('resume-review-cta');
+  if(!nameEl) return;
+  if(!_keywordsParsedFrom){
+    nameEl.textContent = 'Not added';
+    if(dateEl) dateEl.textContent = 'No resume parsed yet';
+    if(cta) cta.style.display = 'none';
+    return;
+  }
+  nameEl.textContent = _keywordsParsedFrom;
+  if(dateEl) dateEl.textContent = _keywordsParsedAt ? ('Added ' + fmtDate(_keywordsParsedAt)) : '';
+  if(cta) cta.style.display = '';
+}
+
+/* ── PILLAR CARDS (summary versions of the settings) ── */
+// Preferences pillar: how many jobs saved + thumbs-downed. Also feeds the Saved Jobs title badge.
+function renderPreferencesPillar(){
+  var s = document.getElementById('pref-saved');  if(s) s.textContent = String(_saved.length);
+  var p = document.getElementById('pref-passed'); if(p) p.textContent = String(_dismissed.length);
+  var b = document.getElementById('saved-count-badge'); if(b) b.textContent = _saved.length ? String(_saved.length) : '';
+}
+// Learnings pillar: summary of what we've learned from activity, CTA to Settings.
+function renderLearningsPillar(){
+  var sum = document.getElementById('learn-summary');
+  var terms = document.getElementById('learn-terms');
+  if(sum) sum.textContent = _learned.length ? (_learned.length + ' term' + (_learned.length===1?'':'s') + ' learned') : 'Nothing yet';
+  if(terms) terms.textContent = _learned.length ? _learned.slice(0,4).join(', ') : 'Save & pass jobs to teach it';
+}
+// Outlook pillar: top extracted keywords for what you're looking for, CTA to edit.
+function renderOutlookPillar(){
+  var sum = document.getElementById('outlook-summary');
+  var terms = document.getElementById('outlook-terms');
+  if(sum) sum.textContent = _prefs.length ? (_prefs.length + ' keyword' + (_prefs.length===1?'':'s')) : 'Not set yet';
+  if(terms) terms.textContent = _prefs.length ? _prefs.slice(0,4).join(', ') : 'Tell us what you want';
+}
+
+/* ═══════════════════════════════════
+   PREFERENCES PANEL  ("What you're looking for")
+   Free-text intent → extracted preference keywords.
+   Scored separately from resume keywords; surfaced as a "Pref fit" badge.
+   ═══════════════════════════════════ */
+var _prefs = [];        // extracted/edited preference keywords (chips)
+var _prefText = '';     // raw free-text the user wrote
+var _prefsDirty = false;
+var MAX_PREFS = 15;
+
+// Stopwords + filler dropped during client-side extraction.
+var _PREF_STOP = {};
+('a an the and or but to of in on for with at by from as is are be been being this that these those i my me we our you your it its their there here ' +
+ 'role roles job jobs position positions work working want wanting looking like would prefer prefer ideally really very just also able open interested ' +
+ 'into not no none any some more most much many few less least into about around over under than then so such only own same other another each every ' +
+ 'company companies brand brands team teams place places thing things etc e g eg ie new good great strong nice big small large high low full time ' +
+ 'who what when where why how which while because if while can could should will shall may might must do does did done get got make makes made ' +
+ 'they them he she his her people someone something anything everything nothing somewhere anywhere everywhere')
+  .split(' ').forEach(function(w){ if(w) _PREF_STOP[w] = true; });
+
+// Extract candidate phrases (1–3 word runs of non-stopwords) from free text.
+function extractKeywordsFromText(text){
+  var out = [], seen = {};
+  // Split into clauses on sentence/comma boundaries, keep hyphenated words intact.
+  var clauses = String(text||'').toLowerCase().split(/[.,;:!?\n()]+|\bnot\b|\bno\b|\bbut\b|\band\b|\bor\b/);
+  clauses.forEach(function(cl){
+    var toks = cl.split(/[^a-z0-9+\-]+/).filter(Boolean);
+    var run = [];
+    function flush(){
+      if(!run.length) return;
+      // emit the whole run (capped at 3 words) and also notable single tokens
+      for(var len = Math.min(run.length,3); len >= 1; len--){
+        for(var s = 0; s + len <= run.length; s++){
+          var phrase = run.slice(s, s+len).join(' ');
+          if(phrase.length < 3) continue;
+          if(len===1 && run.length>1 && phrase.length<4) continue; // skip tiny lone tokens inside a phrase
+          if(!seen[phrase]){ seen[phrase] = true; out.push(phrase); }
+        }
+      }
+      run = [];
+    }
+    toks.forEach(function(t){
+      t = t.replace(/^[\-+]+|[\-+]+$/g,'');
+      if(!t || t.length < 2 || _PREF_STOP[t] || /^\d+$/.test(t)) { flush(); return; }
+      run.push(t);
+      if(run.length >= 3) flush();
+    });
+    flush();
+  });
+  // Prefer multi-word phrases first, then fill with singles, cap at MAX_PREFS.
+  out.sort(function(a,b){ return b.split(' ').length - a.split(' ').length; });
+  return out.slice(0, MAX_PREFS);
+}
+
+function loadPreferencesPanel(){
+  if(!_authUser) return;
+  _sb.from('user_preferences')
+    .select('pref_text, keywords, learned_keywords')
+    .eq('user_id', _authUser.id)
+    .maybeSingle()
+    .then(function(r){
+      if(r.error){ console.error('load user_preferences:', r.error); renderPreferencesPanel(); renderLearnedPanel(); return; }
+      var row = r.data || {};
+      _prefText = row.pref_text || '';
+      _prefs    = row.keywords  || [];
+      _learned  = row.learned_keywords || [];
+      var ta = document.getElementById('prefs-text');
+      if(ta) ta.value = _prefText;
+      renderPreferencesPanel();
+      renderLearnedPanel();
+    });
+}
+
+/* ═══════════════════════════════════
+   LEARNED-FROM-ACTIVITY PANEL
+   Words the system has picked up from jobs you save (added) and
+   thumbs-down (removed). Stored in user_preferences.learned_keywords.
+   Written to the DB on every action so the next search run uses them.
+   ═══════════════════════════════════ */
+var _learned = [];
+var MAX_LEARNED = 40;
+
+// Pull the distinctive words out of a job title (the strongest role-type signal).
+function mineJobWords(title){
+  var words = extractKeywordsFromText(title || '');
+  // keep it tight: title phrases + notable single tokens, cap per job
+  return words.slice(0, 6);
+}
+
+function renderLearnedPanel(){
+  var chipsEl = document.getElementById('learned-chips');
+  var countEl = document.getElementById('learned-count');
+  if(!chipsEl) return;
+  if(!_learned.length){
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">Nothing learned yet. Save jobs you like and thumbs-down ones you don\'t — the words build up here.</span>';
+  } else {
+    chipsEl.innerHTML = _learned.map(function(kw, i){
+      return '<span class="chip">'+esc(kw)
+        +'<button class="chip-remove" onclick="removeLearned('+i+')" title="Remove">&#10005;</button>'
+        +'</span>';
+    }).join('');
+  }
+  if(countEl) countEl.textContent = _learned.length+(_learned.length?'':'');
+  renderLearningsPillar();
+}
+
+// Persist the current _learned list to the DB (upsert so it survives into the next search run).
+function saveLearnedToDb(){
+  if(!_authUser) return;
+  _sb.from('user_preferences').upsert(
+    {user_id:_authUser.id, learned_keywords:_learned, updated_at:new Date().toISOString()},
+    {onConflict:'user_id'}
+  ).then(function(r){ if(r.error) console.error('save learned_keywords:', r.error); });
+}
+
+function addLearnedFromTitle(title){
+  var words = mineJobWords(title);
+  var changed = false;
+  words.forEach(function(w){
+    if(_learned.indexOf(w) === -1 && _learned.length < MAX_LEARNED){ _learned.push(w); changed = true; }
+  });
+  if(changed){ renderLearnedPanel(); saveLearnedToDb(); }
+}
+
+function removeLearnedFromTitle(title){
+  var words = mineJobWords(title);
+  var before = _learned.length;
+  _learned = _learned.filter(function(w){ return words.indexOf(w) === -1; });
+  if(_learned.length !== before){ renderLearnedPanel(); saveLearnedToDb(); }
+}
+
+window.removeLearned = function(idx){
+  _learned.splice(idx, 1);
+  renderLearnedPanel();
+  saveLearnedToDb();
+};
+
+function renderPreferencesPanel(){
+  var chipsEl = document.getElementById('prefs-chips');
+  var dirtyEl = document.getElementById('prefs-dirty');
+  var saveBtn = document.getElementById('prefs-save-btn');
+  var countEl = document.getElementById('prefs-count');
+  if(!chipsEl) return;
+
+  if(!_prefs.length){
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No preference keywords yet. Write a few sentences above, then hit "Extract keywords" — or add your own below.</span>';
+  } else {
+    chipsEl.innerHTML = _prefs.map(function(kw, i){
+      return '<span class="chip">'+esc(kw)
+        +'<button class="chip-remove" onclick="removePreference('+i+')" title="Remove">&#10005;</button>'
+        +'</span>';
+    }).join('');
+  }
+  if(countEl){
+    countEl.textContent = _prefs.length+'/'+MAX_PREFS;
+    countEl.style.color = _prefs.length > MAX_PREFS ? 'var(--danger, #c0392b)' : '';
+  }
+  if(dirtyEl) dirtyEl.classList[_prefsDirty?'add':'remove']('visible');
+  if(saveBtn) saveBtn.classList[_prefsDirty?'add':'remove']('visible');
+
+  var addBtn = document.querySelector('#prefs-panel-wrap .chip-add-row .btn-add-chip[onclick="addPreference()"]');
+  var inp    = document.getElementById('pref-input');
+  if(addBtn) addBtn.disabled = _prefs.length >= MAX_PREFS;
+  if(inp)    inp.disabled    = _prefs.length >= MAX_PREFS;
+  renderOutlookPillar();
+}
+
+window.markPrefsDirty = function(){
+  _prefsDirty = true;
+  renderPreferencesPanel();
+};
+
+window.extractPreferences = function(){
+  var ta = document.getElementById('prefs-text');
+  var note = document.getElementById('prefs-extract-note');
+  var text = ta ? (ta.value||'') : '';
+  if(!text.trim()){ if(note) note.textContent = 'Write a sentence or two first.'; return; }
+  var extracted = extractKeywordsFromText(text);
+  // Merge with any existing chips the user kept, dedup, cap.
+  var merged = _prefs.slice();
+  extracted.forEach(function(k){ if(merged.indexOf(k) === -1) merged.push(k); });
+  _prefs = merged.slice(0, MAX_PREFS);
+  _prefText = text;
+  _prefsDirty = true;
+  if(note) note.textContent = extracted.length+' found — edit freely, then Save.';
+  renderPreferencesPanel();
+};
+
+window.addPreference = function(){
+  if(_prefs.length >= MAX_PREFS) return;
+  var inp = document.getElementById('pref-input');
+  var val = (inp.value||'').trim().toLowerCase();
+  if(!val) return;
+  if(_prefs.indexOf(val) === -1) _prefs.push(val);
+  inp.value = '';
+  _prefsDirty = true;
+  renderPreferencesPanel();
+  inp.focus();
+};
+
+window.removePreference = function(idx){
+  _prefs.splice(idx, 1);
+  _prefsDirty = true;
+  renderPreferencesPanel();
+};
+
+window.savePreferences = function(){
+  if(!_authUser) return;
+  var ta = document.getElementById('prefs-text');
+  if(ta) _prefText = ta.value || '';
+  var btn = document.getElementById('prefs-save-btn');
+  if(btn){ btn.disabled=true; btn.textContent='Saving…'; }
+  _sb.from('user_preferences').upsert(
+    {user_id:_authUser.id, pref_text:_prefText, keywords:_prefs, updated_at:new Date().toISOString()},
+    {onConflict:'user_id'}
+  ).then(function(r){
+    if(r.error){ console.error('save preferences:', r.error); }
+    _prefsDirty = false;
+    if(btn){ btn.disabled=false; btn.textContent='Save'; }
+    renderPreferencesPanel();
+  });
+};
+
+/* ═══════════════════════════════════
+   JOB TITLES PANEL
+   ═══════════════════════════════════ */
+var _titles = [];
+var _titlesDirty = false;
+var MAX_TITLES = 4;
+
+function loadTitlesPanel(){
+  if(!_authUser) return;
+  _sb.from('user_job_titles')
+    .select('titles')
+    .eq('user_id', _authUser.id)
+    .maybeSingle()
+    .then(function(r){
+      if(r.error){ console.error('load user_job_titles:', r.error); renderTitlesPanel(); return; }
+      _titles = (r.data && r.data.titles) || [];
+      renderTitlesPanel();
+    });
+}
+
+function renderTitlesPanel(){
+  var chipsEl  = document.getElementById('titles-chips');
+  var countEl  = document.getElementById('titles-count');
+  var dirtyEl  = document.getElementById('titles-dirty');
+  var saveBtn  = document.getElementById('titles-save-btn');
+  if(!chipsEl) return;
+
+  if(!_titles.length){
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No job titles yet. Add up to '+MAX_TITLES+' — these are the exact terms searched on LinkedIn and Indeed.</span>';
+  } else {
+    chipsEl.innerHTML = _titles.map(function(t, i){
+      return '<span class="chip">'+esc(t)
+        +'<button class="chip-remove" onclick="removeTitle('+i+')" title="Remove">&#10005;</button>'
+        +'</span>';
+    }).join('');
+  }
+
+  if(countEl) countEl.textContent = _titles.length+'/'+MAX_TITLES;
+  if(dirtyEl)  dirtyEl.classList[_titlesDirty?'add':'remove']('visible');
+  if(saveBtn)  saveBtn.classList[_titlesDirty?'add':'remove']('visible');
+
+  // Disable add button if at limit
+  var addBtn = document.querySelector('#titles-panel-wrap .btn-add-chip');
+  var inp    = document.getElementById('title-input');
+  if(addBtn) addBtn.disabled = _titles.length >= MAX_TITLES;
+  if(inp)    inp.disabled    = _titles.length >= MAX_TITLES;
+}
+
+window.removeTitle = function(idx){
+  _titles.splice(idx, 1);
+  _titlesDirty = true;
+  renderTitlesPanel();
+};
+
+window.addTitle = function(){
+  if(_titles.length >= MAX_TITLES) return;
+  var inp = document.getElementById('title-input');
+  var val = (inp.value||'').trim();
+  if(!val) return;
+  if(_titles.indexOf(val) === -1) _titles.push(val);
+  inp.value = '';
+  _titlesDirty = true;
+  renderTitlesPanel();
+  inp.focus();
+};
+
+window.saveTitles = function(){
+  if(!_authUser) return;
+  var btn = document.getElementById('titles-save-btn');
+  if(btn){ btn.disabled=true; btn.textContent='Saving…'; }
+  _sb.from('user_job_titles').upsert(
+    {user_id:_authUser.id, titles:_titles, updated_at:new Date().toISOString()},
+    {onConflict:'user_id'}
+  ).then(function(r){
+    if(r.error){ console.error('save titles:', r.error); }
+    _titlesDirty = false;
+    if(btn){ btn.disabled=false; btn.textContent='Save'; }
+    renderTitlesPanel();
+  });
+};
+
+})();
+</script>
+</body>
+</html>
