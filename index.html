@@ -36,6 +36,7 @@
   a{color:inherit;text-decoration:none;}
   .container{max-width:960px;margin:0 auto;padding:0 32px;}
   @media (max-width:560px){.container{padding:0 20px;}}
+  @media (max-width:400px){.hero h1{font-size:8vw;}}
 
   /* ---------- buttons ---------- */
   .btn{
@@ -67,12 +68,13 @@
     letter-spacing:-.5px;
     max-width:560px;
   }
+  .hero h1 span{display:block;white-space:nowrap;}
   .hero p.lede{
     font-size:16px;line-height:1.5;color:var(--gray);
     max-width:430px;margin:0 0 32px;
   }
-  .hero-art{position:relative;height:320px;}
-  .hero-art img{width:100%;height:100%;object-fit:cover;border-radius:24px;}
+  .hero-art{position:relative;height:280px;display:flex;align-items:center;justify-content:center;}
+  .hero-art img{max-width:88%;max-height:88%;width:auto;height:auto;object-fit:contain;border-radius:24px;}
 
   /* ---------- section headers ---------- */
   .section{padding:56px 0;}
@@ -119,9 +121,9 @@
   .engine-card h3{font-size:18px;font-weight:700;margin:0 0 4px;}
   .engine-card p{font-size:13px;color:var(--gray);margin:0;line-height:1.4;}
 
-  .connector-tail{width:1px;height:20px;background:var(--border2);margin:0 auto;}
+  .connector-tail{width:1px;height:8px;background:var(--border2);margin:0 auto;}
   @media (max-width:760px){.connector-tail{display:none;}}
-  .section.how{padding-bottom:8px;}
+  .section.how{padding-bottom:0;}
   .section.scans{padding-top:8px;}
 
   /* ---------- scans listings ---------- */
@@ -201,7 +203,6 @@
   .login-pillar-ico{width:46px;height:46px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--pink-bg);color:var(--red);}
   .login-pillar-ico svg{width:23px;height:23px;}
   .login-pillar-h{font-size:14.5px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;}
-  .login-pillar-num{width:20px;height:20px;border-radius:5px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;background:var(--pink-bg);color:var(--red);}
   .login-pillar-d{font-size:12.5px;color:var(--gray);line-height:1.5;margin-top:4px;}
   .login-secure{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--gray-light);margin-top:16px;}
   .login-secure svg{width:14px;height:14px;flex-shrink:0;}
@@ -240,28 +241,28 @@
         <div class="login-pillar">
           <div class="login-pillar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z"></path><path d="M14 2v6h6"></path><path d="M12 12v6"></path><path d="m9 15 3-3 3 3"></path></svg></div>
           <div class="login-pillar-body">
-            <div class="login-pillar-h"><span class="login-pillar-num">1</span> Upload Resume</div>
+            <div class="login-pillar-h">Upload Resume</div>
             <div class="login-pillar-d">Start with your resume. We pull out your experience, skills, titles, and keywords that matter.</div>
           </div>
         </div>
         <div class="login-pillar">
           <div class="login-pillar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="4" x2="14" y2="4"></line><line x1="10" y1="4" x2="3" y2="4"></line><line x1="21" y1="12" x2="12" y2="12"></line><line x1="8" y1="12" x2="3" y2="12"></line><line x1="21" y1="20" x2="16" y2="20"></line><line x1="12" y1="20" x2="3" y2="20"></line><line x1="14" y1="2" x2="14" y2="6"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="16" y1="18" x2="16" y2="22"></line></svg></div>
           <div class="login-pillar-body">
-            <div class="login-pillar-h"><span class="login-pillar-num">2</span> Adjust Profile</div>
+            <div class="login-pillar-h">Adjust Profile</div>
             <div class="login-pillar-d">Review what we found and refine your goals, preferences, roles, and locations.</div>
           </div>
         </div>
         <div class="login-pillar">
           <div class="login-pillar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
           <div class="login-pillar-body">
-            <div class="login-pillar-h"><span class="login-pillar-num">3</span> Scan Job Boards</div>
+            <div class="login-pillar-h">Scan Job Boards</div>
             <div class="login-pillar-d">We scan top job boards and analyze live listings for fit, skills, and requirements.</div>
           </div>
         </div>
         <div class="login-pillar">
           <div class="login-pillar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
           <div class="login-pillar-body">
-            <div class="login-pillar-h"><span class="login-pillar-num">4</span> Find Matches</div>
+            <div class="login-pillar-h">Find Matches</div>
             <div class="login-pillar-d">We compare your profile against live job data to surface stronger-fit opportunities.</div>
           </div>
         </div>
@@ -297,9 +298,9 @@
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <h1>A match made in<br>career heaven.</h1>
+      <h1><span>A match made in</span><span>career heaven.</span></h1>
       <p class="lede">Submit your resume. We'll use AI to understand and refine your profile, scan the top job boards, and surface stronger interview matches—faster.</p>
-      <button class="btn btn-primary btn-lg">get started free</button>
+      <button class="btn btn-primary btn-lg" onclick="showLoginModal()">get started free</button>
     </div>
     <div class="hero-art">
       <img src="images/home.jpg" alt="Jobmatch">
@@ -410,7 +411,7 @@
       <svg class="pin-deco right" viewBox="0 0 100 130" fill="currentColor"><path d="M50 5C28 5 12 22 12 44c0 30 38 76 38 76s38-46 38-76C88 22 72 5 50 5z"/></svg>
       <h2>Ready to meet your next opportunity?</h2>
       <p class="sub">Join Jobmatch and get matched with roles where you stand out.</p>
-      <button class="btn btn-primary btn-lg">get started free</button>
+      <button class="btn btn-primary btn-lg" onclick="showLoginModal()">get started free</button>
       <p class="privacy">🔒 Your data is private and secure. We never share it.</p>
     </div>
   </div>
