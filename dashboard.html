@@ -86,6 +86,9 @@ body {
   font:inherit; font-size:11.5px; font-weight:600; color:var(--blue);
 }
 .stat-cta:hover { text-decoration:underline; }
+.stat-cta + .stat-cta { margin-left:14px; }
+.relevance-slider { width:100%; margin-top:8px; accent-color:var(--blue); cursor:pointer; }
+.relevance-slider-labels { display:flex; justify-content:space-between; font-size:10px; color:var(--muted2); margin-top:2px; }
 
 /* ── ENGINE HEADER (personalized intro above pillars) ── */
 .engine-head { margin-top:4px; margin-bottom:14px; }
@@ -673,6 +676,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <div class="stat-value text-val"><span id="pref-saved">0</span> saved &middot; <span id="pref-passed">0</span> passed</div>
         <div class="stat-sub">Jobs you &#9733; and &#128078;</div>
         <button class="stat-cta" onclick="openPillar('titles', this)">Edit job titles &#8594;</button>
+        <button class="stat-cta" onclick="openPillar('prefs', this)">Edit preferences &#8594;</button>
       </div>
     </div>
     <!-- 3. Learnings -->
@@ -688,11 +692,12 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <!-- 4. Outlook -->
     <div class="stat-card">
       <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
-      <div class="stat-body">
+      <div class="stat-body" style="flex:1;">
         <div class="stat-label">Outlook</div>
-        <div class="stat-value text-val" id="outlook-summary">—</div>
-        <div class="stat-sub" id="outlook-terms">What we think you're looking for</div>
-        <button class="stat-cta" onclick="openPillar('prefs', this)">Edit &#8594;</button>
+        <div class="stat-value text-val" id="relevance-readout">All results</div>
+        <input type="range" class="relevance-slider" id="relevance-slider" min="0" max="100" step="5" value="0"
+          oninput="handleRelevanceSlider(this.value)">
+        <div class="relevance-slider-labels"><span>More results</span><span>More relevant</span></div>
       </div>
     </div>
   </div>
@@ -797,12 +802,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
   <div class="panel" id="panel-merged">
     <div class="job-board-header">
       <div class="filter-bar">
-        <div class="filter-group">
-          <span class="filter-group-label">Score</span>
-          <label class="filter-chk"><input type="checkbox" id="f-score50" onchange="applyJobFilter(event)"> <span>50+</span></label>
-          <label class="filter-chk"><input type="checkbox" id="f-score80" onchange="applyJobFilter(event)"> <span>80+</span></label>
-        </div>
-        <div class="filter-sep"></div>
         <div class="filter-group">
           <span class="filter-group-label">Source</span>
           <label class="filter-chk"><input type="checkbox" id="f-li" checked onchange="applyJobFilter(event)"> <span><span class="src-dot li"></span> LinkedIn</span></label>
@@ -1075,7 +1074,17 @@ function init(d){
   var _lastUpdated = null;
   var _cachedJobs = [];
   _rerenderBoard = function(){ renderMergedJobList(_cachedJobs); };
-  var _filters = { score50:false, score80:false, showLI:true, showIndeed:true, showGlassdoor:true, showZip:true, daysAgo:0, localOnly:true };
+  var _filters = { minRelevance:0, showLI:true, showIndeed:true, showGlassdoor:true, showZip:true, daysAgo:0, localOnly:true };
+
+  // Outlook relevance slider: restore last value (personal display preference, not synced to Supabase).
+  (function(){
+    var saved = 0;
+    try{ saved = parseInt(localStorage.getItem('relevanceMin'), 10) || 0; }catch(e){}
+    _filters.minRelevance = saved;
+    var slider = document.getElementById('relevance-slider');
+    if(slider) slider.value = saved;
+    updateRelevanceReadout(saved);
+  })();
 
   // Greater LA-area place names seen in this board's actual job data (LinkedIn/Indeed/Glassdoor/ZipRecruiter
   // all return loosely-matched results despite the pipeline's location params, so a literal "Los Angeles"
@@ -1097,6 +1106,17 @@ function init(d){
     return false;
   }
 
+  // Blended relevance: average of resume Score and Pref Fit. If a job is missing one signal
+  // (e.g. no preference keywords set yet), fall back to whichever signal it has rather than
+  // punishing it for a signal that was never computed.
+  function blendedRelevance(j){
+    var s = j.score, p = j.prefScore;
+    if(s == null && p == null) return null;
+    if(s == null) return p;
+    if(p == null) return s;
+    return Math.round((s + p) / 2);
+  }
+
   /* Map a job's source string to a stable {key,label} used for the colored
      Source cell and the source filter. New sources go here. */
   function srcInfo(source){
@@ -1108,7 +1128,7 @@ function init(d){
   }
 
   function applyFilters(jobs){
-    var minScore = _filters.score80 ? 80 : (_filters.score50 ? 50 : 0);
+    var minRel = _filters.minRelevance || 0;
     var cutoff = null;
     if(_filters.daysAgo > 0){
       cutoff = new Date();
@@ -1120,7 +1140,7 @@ function init(d){
       if(!_showDismissed && isJobDismissed(j.link||'')) return false;
       if(isJobSaved(j.link||'')) return false;
       if(_filters.localOnly && !isLocalOrRemote(j)) return false;
-      if(minScore > 0 && (j.score == null || j.score < minScore)) return false;
+      if(minRel > 0){ var rel = blendedRelevance(j); if(rel == null || rel < minRel) return false; }
       if(srcShow[srcInfo(j._source).key] === false) return false;
       if(cutoff && (j.posted||'') < cutoff) return false;
       return true;
@@ -1254,15 +1274,21 @@ function init(d){
     renderJobRows();
   };
 
+  function updateRelevanceReadout(val){
+    var el = document.getElementById('relevance-readout');
+    if(!el) return;
+    el.textContent = val > 0 ? (val + '+ relevance') : 'All results';
+  }
+
+  window.handleRelevanceSlider = function(val){
+    val = parseInt(val, 10) || 0;
+    _filters.minRelevance = val;
+    try{ localStorage.setItem('relevanceMin', String(val)); }catch(e){}
+    updateRelevanceReadout(val);
+    renderMergedJobList(_cachedJobs);
+  };
+
   window.applyJobFilter = function(e){
-    var s50 = document.getElementById('f-score50');
-    var s80 = document.getElementById('f-score80');
-    if(e && e.target){
-      if(e.target.id === 'f-score80' && s80 && s80.checked && s50) s50.checked = false;
-      if(e.target.id === 'f-score50' && s50 && s50.checked && s80) s80.checked = false;
-    }
-    _filters.score50    = !!(s50 && s50.checked);
-    _filters.score80    = !!(s80 && s80.checked);
     var liEl = document.getElementById('f-li');
     var inEl = document.getElementById('f-indeed');
     var gdEl = document.getElementById('f-glassdoor');
@@ -1568,13 +1594,6 @@ function renderLearningsPillar(){
   if(sum) sum.textContent = _learned.length ? (_learned.length + ' term' + (_learned.length===1?'':'s') + ' learned') : 'Nothing yet';
   if(terms) terms.textContent = _learned.length ? _learned.slice(0,4).join(', ') : 'Save & pass jobs to teach it';
 }
-// Outlook pillar: top extracted keywords for what you're looking for, CTA to edit.
-function renderOutlookPillar(){
-  var sum = document.getElementById('outlook-summary');
-  var terms = document.getElementById('outlook-terms');
-  if(sum) sum.textContent = _prefs.length ? (_prefs.length + ' keyword' + (_prefs.length===1?'':'s')) : 'Not set yet';
-  if(terms) terms.textContent = _prefs.length ? _prefs.slice(0,4).join(', ') : 'Tell us what you want';
-}
 
 /* ═══════════════════════════════════
    PREFERENCES PANEL  ("What you're looking for")
@@ -1740,7 +1759,6 @@ function renderPreferencesPanel(){
   var inp    = document.getElementById('pref-input');
   if(addBtn) addBtn.disabled = _prefs.length >= MAX_PREFS;
   if(inp)    inp.disabled    = _prefs.length >= MAX_PREFS;
-  renderOutlookPillar();
 }
 
 window.markPrefsDirty = function(){
