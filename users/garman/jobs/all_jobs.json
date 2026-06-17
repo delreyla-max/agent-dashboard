@@ -16,7 +16,9 @@
       "score": 62,
       "tier": "Tier 2",
       "scoreNotes": "Strong CD-level role at iconic American brand. Brand systems (25/25 role level), core skill overlap strong: campaigns, photo direction, retail, digital, brand identity (21/30). Domain is workwear not automotive/tech (8/15). AI efficiency angle applies (8/15). -10 location: Dearborn MI requires relocation from LA.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": 0,
+      "prefMatched": []
     },
     {
       "id": "4378678850",
@@ -31,8 +33,10 @@
       "descriptionText": "Creative Director CGI at Amazon Devices Brand Studio. Shape visual future of Amazon device portfolio via photorealistic CGI renders, AI image tools, key art, brand consistency. Partner with industrial designers on CAD/STP file to render pipelines. Also mentions AI generative image/video tools.",
       "score": 46,
       "tier": "Below Threshold",
-      "scoreNotes": "CD level (20/25), Amazon Devices brand studio is compelling domain (12/15). AI tools angle aligns with Garman's pipeline (10/15). But role requires deep 3D CGI rendering from CAD files—Garman's AI pipeline is 2D/compositing (Firefly, Photoshop), not 3D CGI. Significant gap (-12). Core skill overlap limited to AI/brand direction aspects (12/30).",
-      "source": "LinkedIn"
+      "scoreNotes": "CD level (20/25), Amazon Devices brand studio is compelling domain (12/15). AI tools angle aligns with Garman's pipeline (10/15). But role requires deep 3D CGI rendering from CAD files\u2014Garman's AI pipeline is 2D/compositing (Firefly, Photoshop), not 3D CGI. Significant gap (-12). Core skill overlap limited to AI/brand direction aspects (12/30).",
+      "source": "LinkedIn",
+      "prefScore": 0,
+      "prefMatched": []
     },
     {
       "id": "4429125676",
@@ -48,7 +52,12 @@
       "score": 44,
       "tier": "Below Threshold",
       "scoreNotes": "Art Director title is below ACD target but comp ($150-190K) clears $140K baseline per profile rule. Remote is ideal. Core skills overlap in art direction/brand (16/30). Health supplements is not a domain strength (6/15). Differentiator leverage limited (7/15). Risk: smaller brand, supplements domain far from automotive/tech/entertainment (-10).",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": 14,
+      "prefMatched": [
+        "art direction",
+        "remote"
+      ]
     },
     {
       "id": "4428691511",
@@ -64,7 +73,11 @@
       "score": 40,
       "tier": "Below Threshold",
       "scoreNotes": "CD title matches (20/25). 'Storyteller' title suggests narrative focus not visual brand systems. Immersive experience domain tangentially interesting (8/15). Differentiator leverage unclear (7/15). Boulder CO location is a negative for LA-based candidate (-10). Insufficient info on company's creative scope.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": 7,
+      "prefMatched": [
+        "entertainment"
+      ]
     },
     {
       "id": "4375922646",
@@ -80,7 +93,11 @@
       "score": 32,
       "tier": "Below Threshold",
       "scoreNotes": "Gaming franchise art direction; Respawn/EA qualifies by special rule but role is game-specific and doesn't leverage brand systems, CRM, or AI pipeline strengths. Garman's gaming background (PlayStation 3, Saints Row IV) is execution-level, not franchise art direction.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": 7,
+      "prefMatched": [
+        "entertainment"
+      ]
     },
     {
       "id": "LI:4353051446",
@@ -92,9 +109,11 @@
       "pay": "",
       "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353051446",
       "score": 54,
-      "tier": "Tier 2 — Good fit with tailoring",
+      "tier": "Tier 2 \u2014 Good fit with tailoring",
       "why": "Circle is a well-funded fintech platform and Lead Product Designer in LA aligns with Garman's Storyfire, Xome, and Toyota Garage product design work. Strongest proof points are end-to-end platform ownership and fintech adjacency via Mr. Cooper. Risk: 'Lead' title is a step-down from ACD and crypto-specific knowledge gap.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "4352991507",
@@ -106,9 +125,11 @@
       "pay": "Not listed",
       "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4352991507?position=24&pageNum=0&refId=Y3j2YtNhfzgudJKbTtZO3Q%3D%3D&trackingId=eInSCAVsqqqMklD85fr96g%3D%3D",
       "score": 53,
-      "tier": "Tier 3 — Possible",
-      "why": "Lead Product Designer at Circle (Arc crypto/payments platform) — Tier 3 candidate given Garman's strong platform UX portfolio. Strong overlap with Storyfire (solo platform lead) and Mr. Cooper (fintech UX), but crypto domain is non-core and no salary listed. Title is below ACD level.",
-      "source": "LinkedIn"
+      "tier": "Tier 3 \u2014 Possible",
+      "why": "Lead Product Designer at Circle (Arc crypto/payments platform) \u2014 Tier 3 candidate given Garman's strong platform UX portfolio. Strong overlap with Storyfire (solo platform lead) and Mr. Cooper (fintech UX), but crypto domain is non-core and no salary listed. Title is below ACD level.",
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4368776287",
@@ -120,9 +141,11 @@
       "pay": "",
       "link": "https://www.linkedin.com/jobs/view/director-of-product-design-at-hiive-4368776287",
       "score": 51,
-      "tier": "Tier 2 — Good fit with tailoring",
+      "tier": "Tier 2 \u2014 Good fit with tailoring",
       "why": "Director of Product Design title fits Garman's level. Hiive is a private-market securities marketplace; Garman's Xome (real estate marketplace) and Mr. Cooper (fintech) provide relevant proof. Risk: early-stage startup in Seattle, Garman's creative-director framing may need repositioning as product-first.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4398146518",
@@ -136,7 +159,9 @@
       "score": 38,
       "tier": "",
       "why": "ECD at a major CPG brand is a reach from Garman's ACD level. Brand systems thinking and AI pipeline are relevant differentiators, but CPG domain is thin (only Jeffry's at small scale) and Chicago relocation would be required.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4428621391",
@@ -150,7 +175,9 @@
       "score": 35,
       "tier": "",
       "why": "Art Director is two levels below Garman's current ACD role; NY location is another barrier. Some e-commerce/retail creative overlap (Taco Bell, Adidas Golf digital) but the role level and domain fit are both weak relative to Garman's profile.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4407226475",
@@ -164,7 +191,9 @@
       "score": 32,
       "tier": "",
       "why": "Design Operations is a process/infrastructure role that does not leverage Garman's creative direction, art direction, or brand-systems strengths. Chime is a notable fintech brand but the role is misaligned with Garman's profile.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4428147043",
@@ -178,7 +207,9 @@
       "score": 30,
       "tier": "",
       "why": "Pay range is strong ($200-250K) but 'Performance Creative' is performance-marketing oriented (paid media, direct response, A/B testing creative) rather than brand systems or product design direction. Pet brand domain and pure DTC performance focus do not align with Garman's strengths.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "4335871167",
@@ -192,7 +223,9 @@
       "score": 24,
       "tier": "",
       "why": "",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "4386971740",
@@ -206,7 +239,9 @@
       "score": 22,
       "tier": "",
       "why": "",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "JOBSEARCH_479",
@@ -220,7 +255,12 @@
       "score": 51,
       "tier": "Below Threshold",
       "scoreNotes": "ACD Art is perfect title match (25/25). Agency work aligns with Garman's background (18/30 core skills). Unknown specific clients limit domain/brand fit score (7/15). AI pipeline and brand systems are genuine differentiators for agency (10/15). Location penalty: NJ requires relocation from LA (-9). Comp is competitive.",
-      "source": "Indeed"
+      "source": "Indeed",
+      "prefScore": 14,
+      "prefMatched": [
+        "art direction",
+        "team leadership"
+      ]
     },
     {
       "id": "IN:JOBSEARCH_413",
@@ -234,7 +274,9 @@
       "score": 48,
       "tier": "",
       "why": "ACD Art title matches Garman's level and the pay range is just above his $140K baseline. Agency environment aligns with his background. Risk: NJ location is not LA or remote; Princeton10 is a smaller unknown agency; pay at baseline with NJ cost of living is not a clear step up for Garman.",
-      "source": "Indeed"
+      "source": "Indeed",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "JOBSEARCH_424",
@@ -246,9 +288,11 @@
       "pay": "$141,000 - $190,700 a year",
       "link": "https://to.indeed.com/aa9wybgjs7fj",
       "score": 71,
-      "tier": "Tier 1 — Apply with confidence",
-      "why": "ACD-level role at Amazon Ring in Hawthorne, CA (LA area) with pay up to $190K — a meaningful step up from current $140K. Ring retail & marketing creative direction maps directly to Garman's Toyota/Lexus retail CRM and integrated brand campaigns at Rapp. Risk: large Amazon org structure can be process-heavy; Ring is a subsidiary rather than a flagship Amazon brand team.",
-      "source": "Indeed"
+      "tier": "Tier 1 \u2014 Apply with confidence",
+      "why": "ACD-level role at Amazon Ring in Hawthorne, CA (LA area) with pay up to $190K \u2014 a meaningful step up from current $140K. Ring retail & marketing creative direction maps directly to Garman's Toyota/Lexus retail CRM and integrated brand campaigns at Rapp. Risk: large Amazon org structure can be process-heavy; Ring is a subsidiary rather than a flagship Amazon brand team.",
+      "source": "Indeed",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "JOBSEARCH_477",
@@ -262,7 +306,11 @@
       "score": 65,
       "tier": "Tier 2",
       "scoreNotes": "ACD is Tier 1 level (25/25). Amazon Ring is consumer tech/smart home brand with strong design culture (12/15). Core skill overlap: brand direction, campaigns, product launches, CRM/lifecycle possible (22/30). AI pipeline and Apple consumer-electronics credibility are differentiators (11/15). Slight comp risk (Ring retail scope narrower than full brand systems) (-5). Strong LA location match.",
-      "source": "Indeed"
+      "source": "Indeed",
+      "prefScore": 7,
+      "prefMatched": [
+        "creative direction"
+      ]
     },
     {
       "id": "IN:JOBSEARCH_407",
@@ -274,9 +322,11 @@
       "pay": "$141,000 - $190,700/yr",
       "link": "https://to.indeed.com/aa2pl2pgrxnk",
       "score": 64,
-      "tier": "Tier 1 — Apply with confidence",
-      "why": "ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 — role is 3.5 months old and may already be filled or in late-stage hiring.",
-      "source": "Indeed"
+      "tier": "Tier 1 \u2014 Apply with confidence",
+      "why": "ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 \u2014 role is 3.5 months old and may already be filled or in late-stage hiring.",
+      "source": "Indeed",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4315468663",
@@ -288,9 +338,11 @@
       "pay": "Not listed",
       "link": "https://www.linkedin.com/jobs/view/lead-ai-designer-apex-legends-at-respawn-entertainment-4315468663",
       "score": 61,
-      "tier": "Tier 1 — Apply with confidence",
-      "why": "Lead AI Designer role at Respawn/EA for Apex Legends — direct match to Garman's AI Creative Lead positioning and his proprietary AI production pipeline (engineering sketches to product-correct campaign imagery at scale). Gaming credibility from Saints Row IV and the PlayStation 3 launch. Risk: live-service studios typically want game-specific AI/tooling experience (real-time engine, in-game assets) that his marketing-campaign AI work doesn't directly demonstrate; no pay listed.",
-      "source": "LinkedIn"
+      "tier": "Tier 1 \u2014 Apply with confidence",
+      "why": "Lead AI Designer role at Respawn/EA for Apex Legends \u2014 direct match to Garman's AI Creative Lead positioning and his proprietary AI production pipeline (engineering sketches to product-correct campaign imagery at scale). Gaming credibility from Saints Row IV and the PlayStation 3 launch. Risk: live-service studios typically want game-specific AI/tooling experience (real-time engine, in-game assets) that his marketing-campaign AI work doesn't directly demonstrate; no pay listed.",
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4405392078",
@@ -302,9 +354,11 @@
       "pay": "Not listed",
       "link": "https://www.linkedin.com/jobs/view/art-director-waterparks-fec-s-at-lucky-strike-entertainment-4405392078",
       "score": 48,
-      "tier": "Tier 3 — Possible",
-      "why": "Art Director, Waterparks & FECs at Lucky Strike Entertainment (bowling/FEC chain) — in-park/experiential design overlap with Disney Habit Heroes (Imagineering). Single-AD title is a level below Garman's ACD/CD target and no salary is listed.",
-      "source": "LinkedIn"
+      "tier": "Tier 3 \u2014 Possible",
+      "why": "Art Director, Waterparks & FECs at Lucky Strike Entertainment (bowling/FEC chain) \u2014 in-park/experiential design overlap with Disney Habit Heroes (Imagineering). Single-AD title is a level below Garman's ACD/CD target and no salary is listed.",
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4429105284",
@@ -316,9 +370,11 @@
       "pay": "Not listed",
       "link": "https://www.linkedin.com/jobs/view/senior-director-brand-and-content-100%25-remote-usa-or-emea-at-hostaway-4429105284",
       "score": 42,
-      "tier": "Tier 3 — Possible",
+      "tier": "Tier 3 \u2014 Possible",
       "why": "Senior Director, Brand and Content at Hostaway (property-management SaaS). Brand-systems overlap, but reads as content/marketing-strategy leadership rather than design/creative-systems direction, and B2B proptech SaaS is outside Garman's target domains.",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4416425894",
@@ -330,9 +386,11 @@
       "pay": "$130,000.00/yr - $150,000.00/yr",
       "link": "https://www.linkedin.com/jobs/view/art-director-at-azazie-inc-4416425894",
       "score": 35,
-      "tier": "Tier 3 — Possible",
-      "why": "Art Director at Azazie (DTC bridal/fashion e-tailer) — single-AD scope in a fashion/bridal vertical outside Garman's automotive/entertainment/tech focus; comp is only a modest step up from his $140K baseline.",
-      "source": "LinkedIn"
+      "tier": "Tier 3 \u2014 Possible",
+      "why": "Art Director at Azazie (DTC bridal/fashion e-tailer) \u2014 single-AD scope in a fashion/bridal vertical outside Garman's automotive/entertainment/tech focus; comp is only a modest step up from his $140K baseline.",
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4369866605",
@@ -346,7 +404,9 @@
       "score": 22,
       "tier": "",
       "why": "",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4403555486",
@@ -360,7 +420,9 @@
       "score": 20,
       "tier": "",
       "why": "",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4429170255",
@@ -374,7 +436,9 @@
       "score": 19,
       "tier": "",
       "why": "",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4427206277",
@@ -388,7 +452,9 @@
       "score": 16,
       "tier": "",
       "why": "",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     },
     {
       "id": "LI:4429204570",
@@ -402,7 +468,9 @@
       "score": 11,
       "tier": "",
       "why": "",
-      "source": "LinkedIn"
+      "source": "LinkedIn",
+      "prefScore": null,
+      "prefMatched": []
     }
   ]
 }

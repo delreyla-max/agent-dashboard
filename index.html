@@ -17,6 +17,7 @@
   --blue:#2563eb; --blue-bg:#eff6ff; --blue-border:#bfdbfe;
   --green:#16a34a; --green-bg:#dcfce7;
   --indigo:#4338ca; --indigo-bg:#e0e7ff;
+  --coral:#f2594a; --coral-bg:#fde6e2;
   --amber:#d97706; --amber-bg:#fef3c7;
   --red:#dc2626; --red-bg:#fee2e2;
   --radius-card:12px; --radius-sm:8px; --radius-pill:999px;
@@ -32,51 +33,11 @@ body {
 .navbar {
   display:flex; align-items:center; gap:16px; flex-wrap:wrap;
   background:var(--surface); border-bottom:1px solid var(--border);
-  padding:12px 32px; margin:0 -32px 24px;
+  padding:7px 32px; margin:0 -32px 20px;
 }
-.nav-brand { display:flex; align-items:center; gap:10px; flex:0 0 auto; }
-.nav-logo {
-  width:32px; height:32px; border-radius:8px; background:var(--blue-bg);
-  color:var(--blue); display:flex; align-items:center; justify-content:center;
-  font-weight:700; font-size:15px; flex-shrink:0;
-}
-.nav-brand-text { font-weight:700; font-size:15px; color:var(--text); white-space:nowrap; }
-.nav-center { flex:1 1 auto; min-width:160px; text-align:center; }
-.nav-title { font-weight:600; font-size:18px; color:var(--text); }
-.nav-subline { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:2px; flex-wrap:wrap; }
-.plan-badge {
-  display:inline-block; padding:2px 10px; border-radius:999px;
-  font-size:10px; font-weight:700; letter-spacing:0.05em;
-  background:var(--indigo-bg); color:var(--indigo); border:1px solid #c7d2fe;
-}
-.updated { color:var(--muted); font-size:11px; white-space:nowrap; }
+.nav-center { flex:1 1 auto; min-width:160px; text-align:left; }
+.nav-title { font-weight:600; font-size:16px; color:var(--text); }
 .nav-right { display:flex; align-items:center; gap:12px; flex:0 0 auto; }
-.pill-wrap { display:flex; align-items:center; gap:6px; }
-.pill {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:5px 12px; border-radius:999px; font-size:12px; font-weight:600;
-  cursor:pointer; border:none; transition:background .2s,color .2s; user-select:none;
-}
-.pill.on  { background:var(--green-bg); color:var(--green); }
-.pill.off { background:#f3f4f6; color:#9ca3af; border:1px solid var(--border); }
-.pill-dot { width:7px; height:7px; border-radius:50%; }
-.pill.on  .pill-dot { background:var(--green); }
-.pill.off .pill-dot { background:#9ca3af; }
-.pill-hint { font-size:10px; color:var(--muted2); display:none; }
-@media (min-width:1100px){ .pill-hint{ display:inline; } }
-#save-banner {
-  display:none; background:var(--blue-bg); border:1px solid var(--blue-border); color:#1d4ed8;
-  font-size:12px; padding:7px 14px; border-radius:6px; margin-bottom:14px;
-}
-#save-banner.visible { display:block; }
-#disabled-overlay {
-  display:none; position:fixed; inset:0; z-index:10;
-  background:rgba(17,24,39,0.85); justify-content:center; align-items:center;
-  flex-direction:column; gap:12px;
-}
-#disabled-overlay.visible { display:flex; }
-#disabled-overlay .off-icon { font-size:48px; opacity:.6; color:#fff; }
-#disabled-overlay p { font-size:18px; color:#e5e7eb; }
 
 /* ── AUTH USER ── */
 .auth-user { display:none; align-items:center; gap:10px; }
@@ -97,7 +58,7 @@ body {
 
 /* ── SECTION HEADERS ── */
 .section-header {
-  font-size:16px; font-weight:600; margin:24px 0 12px; color:var(--text);
+  font-size:20px; font-weight:700; letter-spacing:-0.01em; margin:30px 0 4px; color:var(--text);
   display:flex; align-items:center; gap:8px;
 }
 
@@ -105,26 +66,86 @@ body {
 .stat-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:20px; }
 .stat-card {
   background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card);
-  padding:16px 18px; display:flex; align-items:flex-start; gap:12px;
+  padding:10px 16px; display:flex; align-items:flex-start; gap:11px;
 }
-.stat-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.stat-icon svg { width:20px; height:20px; }
+.stat-icon { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.stat-icon svg { width:18px; height:18px; }
 .stat-icon.search  { background:var(--indigo-bg); color:#4f46e5; }
 .stat-icon.results { background:#f3e8ff; color:#9333ea; }
 .stat-icon.saved   { background:var(--green-bg); color:var(--green); }
 .stat-icon.pipeline{ background:#ffedd5; color:#ea580c; }
 .stat-body { min-width:0; }
-.stat-label { font-size:12px; color:var(--muted); font-weight:500; margin-bottom:2px; }
-.stat-value { font-size:22px; font-weight:700; color:var(--text); line-height:1.2; }
-.stat-value.text-val { font-size:14px; font-weight:700; }
-.stat-sub { font-size:11px; color:var(--muted2); margin-top:3px; }
-
-/* ── INFO BANNER ── */
-.info-banner {
-  background:var(--blue-bg); border:1px solid var(--blue-border); color:#1d4ed8;
-  border-radius:var(--radius-sm); padding:10px 16px; font-size:12.5px; margin-top:16px;
-  line-height:1.5;
+.stat-label { font-size:12px; color:var(--muted); font-weight:500; margin-bottom:1px; }
+.stat-value { font-size:18px; font-weight:700; color:var(--text); line-height:1.15; }
+.stat-value.text-val { font-size:13px; font-weight:700; }
+.stat-sub { font-size:11px; color:var(--muted2); margin-top:1px; }
+.stat-cta {
+  margin-top:7px; background:none; border:none; padding:0; cursor:pointer;
+  font:inherit; font-size:11.5px; font-weight:600; color:var(--blue);
 }
+.stat-cta:hover { text-decoration:underline; }
+
+/* ── ENGINE HEADER (personalized intro above pillars) ── */
+.engine-head { margin-top:4px; margin-bottom:14px; }
+.engine-title { font-size:20px; font-weight:700; color:var(--text); letter-spacing:-0.01em; }
+.engine-sub { font-size:12.5px; color:var(--muted); margin-top:2px; }
+
+/* ── COUNT BADGES (next to section titles) ── */
+.count-badge {
+  display:inline-flex; align-items:center; font-size:12px; font-weight:600;
+  color:var(--muted); background:var(--bg); border:1px solid var(--border);
+  border-radius:999px; padding:1px 9px; margin-left:6px; vertical-align:middle;
+}
+.count-badge:empty { display:none; }
+.count-badge.today { color:#1d4ed8; background:var(--blue-bg); border-color:var(--blue-border); }
+
+/* ── JOB BOARD hierarchy: parent subtitle + subsection headers ── */
+.board-subtitle { display:flex; flex-wrap:wrap; align-items:center; gap:2px; font-size:12px; color:var(--muted); margin:2px 0 4px; }
+.subsection-header { font-size:13.5px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin:18px 0 9px; display:flex; align-items:center; gap:6px; }
+.subsection-header:first-of-type { margin-top:14px; }
+
+/* ── PILLAR DRAWER (expands under the cards, connected to the clicked card) ── */
+.stat-card { position:relative; transition:border-color .15s, box-shadow .15s; }
+.stat-card.pillar-active { border-color:var(--blue); box-shadow:0 0 0 1px var(--blue); }
+.pillar-drawer { position:relative; margin-top:12px; animation:pillar-in .22s ease; }
+@keyframes pillar-in { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+.pillar-arrow {
+  position:absolute; top:-7px; left:50%; transform:translateX(-50%);
+  width:14px; height:14px; background:var(--surface);
+  border-left:1px solid var(--blue); border-top:1px solid var(--blue);
+  border-top-left-radius:3px; rotate:45deg; z-index:1;
+}
+.pillar-drawer-inner {
+  background:var(--surface); border:1px solid var(--blue); border-radius:var(--radius-card);
+  padding:14px 18px 16px;
+}
+.pillar-drawer-head { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.pillar-drawer-title { font-size:14px; font-weight:700; color:var(--text); flex:1 1 auto; }
+.pillar-drawer-close {
+  background:none; border:1px solid var(--border); color:var(--muted); cursor:pointer;
+  border-radius:6px; width:26px; height:26px; font-size:13px; line-height:1;
+}
+.pillar-drawer-close:hover { border-color:var(--red); color:var(--red); }
+.pillar-panel .chip-panel-wrap { border:none; }
+.chip-panel-toolbar { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.chip-panel-toolbar .chip-count { margin-right:auto; }
+
+/* ── USER MENU (avatar dropdown, top-right) ── */
+.user-menu { position:relative; }
+.user-dropdown {
+  position:absolute; right:0; top:42px; min-width:200px; z-index:30;
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12); padding:6px; display:none;
+}
+.user-dropdown.open { display:block; }
+.user-dropdown-email { padding:8px 10px 9px; font-size:12px; color:var(--muted); border-bottom:1px solid var(--border); margin-bottom:4px; word-break:break-all; }
+.user-dropdown-item {
+  width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  padding:8px 10px; font-size:13px; color:var(--text); border-radius:6px; font:inherit;
+}
+.user-dropdown-item:hover { background:var(--bg); }
+.user-dropdown-item.signout { color:var(--red); }
+.auth-avatar.is-button { cursor:pointer; border:none; }
 
 /* ── PANELS (generic white card) ── */
 .panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-card); overflow:hidden; }
@@ -139,6 +160,18 @@ body {
 }
 .star-btn:hover  { color:#f59e0b; }
 .star-btn.starred { color:#f59e0b; }
+.dismiss-btn {
+  background:none; border:none; cursor:pointer; font-size:13px;
+  color:var(--muted2); padding:0 2px; line-height:1; transition:opacity .15s, filter .15s;
+  flex-shrink:0; opacity:.45;
+}
+.dismiss-btn:hover { opacity:1; }
+.jb-save { display:flex; align-items:center; gap:4px; }
+.undo-btn {
+  background:none; border:1px solid var(--border); cursor:pointer; font-size:10.5px;
+  color:var(--muted); padding:2px 7px; border-radius:5px; line-height:1.2; white-space:nowrap;
+}
+.undo-btn:hover { background:var(--surface2); color:var(--text); }
 .saved-job-item {
   display:flex; align-items:center; gap:10px;
   padding:11px 18px; border-bottom:1px solid var(--border);
@@ -161,10 +194,7 @@ body {
 .saved-saving { font-size:11px; color:var(--muted); padding:6px 18px; }
 
 /* ── JOB BOARD ── */
-.job-board-header { padding:16px 18px 14px; border-bottom:1px solid var(--border); }
-.job-board-toprow { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
-.job-board-title { font-size:16px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:6px; }
-.job-board-meta  { font-size:11.5px; color:var(--muted); margin-left:auto; text-align:right; }
+.job-board-header { padding:14px 18px; border-bottom:1px solid var(--border); }
 .btn-refresh {
   display:inline-flex; align-items:center; gap:5px;
   background:var(--surface); color:var(--text); border:1px solid var(--border);
@@ -190,8 +220,10 @@ body {
 .filter-sep { width:1px; height:18px; background:var(--border); flex-shrink:0; }
 
 .src-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; display:inline-block; }
-.src-dot.li      { background:#0a66c2; }
-.src-dot.indeed  { background:#2557a7; }
+.src-dot.li        { background:#0a66c2; }
+.src-dot.indeed    { background:#2557a7; }
+.src-dot.glassdoor { background:#0caa41; }
+.src-dot.zip       { background:#0f766e; }
 
 /* ── JOB TABLE ── */
 .jb-head-row, .jb-row {
@@ -207,6 +239,7 @@ body {
 .jb-row:last-child { border-bottom:none; }
 .jb-row.alt { background:#fafbfc; }
 .jb-row:hover { background:var(--blue-bg); }
+.jb-row.jb-row-new { box-shadow: inset 3px 0 0 0 var(--blue); }
 .jb-cell { min-width:0; }
 .jb-score { font-family:'SF Mono',Menlo,monospace; font-weight:700; padding-top:1px; }
 .jb-score.score-high { color:var(--green); }
@@ -220,6 +253,13 @@ body {
 .jb-tier-badge.tier-2 { background:var(--indigo-bg); color:var(--indigo); }
 .jb-tier-badge.tier-3 { background:#f3f4f6; color:var(--muted); }
 .jb-tier-dash { color:var(--muted2); }
+.jb-pref-badge {
+  display:inline-block; margin-top:5px; padding:2px 8px; border-radius:999px;
+  font-size:10px; font-weight:700; white-space:nowrap; letter-spacing:.02em;
+}
+.jb-pref-badge.pref-high { background:var(--green-bg); color:var(--green); }
+.jb-pref-badge.pref-mid  { background:var(--amber-bg); color:var(--amber); }
+.jb-pref-badge.pref-low  { background:#f3f4f6; color:var(--muted2); }
 .jb-title-link { color:var(--text); font-weight:600; text-decoration:none; }
 .jb-title-link:hover { color:var(--blue); text-decoration:underline; }
 .jb-why { font-size:11px; color:var(--muted); line-height:1.5; margin-top:4px; }
@@ -228,6 +268,8 @@ body {
 .jb-location { color:var(--muted); }
 .jb-source.li { color:var(--blue); font-weight:500; }
 .jb-source.indeed { color:#374151; font-weight:500; }
+.jb-source.glassdoor { color:#0caa41; font-weight:500; }
+.jb-source.zip { color:#0f766e; font-weight:500; }
 .jb-posted { color:var(--muted); white-space:nowrap; }
 .jb-type-pill {
   display:inline-block; padding:2px 9px; border-radius:999px; font-size:10.5px; font-weight:600; white-space:nowrap;
@@ -266,22 +308,58 @@ body {
 .login-modal.visible { display:flex; }
 .login-box {
   background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-card); padding:28px 28px 24px; max-width:380px; width:92%;
-  box-shadow:0 10px 40px rgba(0,0,0,.15);
+  border-radius:16px; max-width:780px; width:94%; overflow:hidden;
+  box-shadow:0 18px 60px rgba(0,0,0,.22);
+  display:flex; max-height:94vh;
 }
-.login-title { font-size:17px; font-weight:700; margin-bottom:4px; color:var(--text); }
+/* Left pitch panel */
+.login-pitch { flex:1 1 56%; background:var(--bg); padding:26px 26px 22px; overflow-y:auto; border-right:1px solid var(--border); }
+.login-brand { display:flex; align-items:center; gap:7px; margin-bottom:2px; }
+.login-brand svg { width:18px; height:18px; color:var(--coral); flex-shrink:0; }
+.login-brand-name { font-size:22px; font-weight:800; color:var(--coral); letter-spacing:-0.01em; }
+.login-tagline { font-size:12px; color:var(--muted); margin-bottom:18px; }
+.login-pitch-title { font-size:21px; font-weight:800; line-height:1.15; letter-spacing:-0.01em; color:var(--text); }
+.login-pitch-sub { font-size:13px; color:var(--muted); margin:7px 0 18px; }
+.login-pillars { display:flex; flex-direction:column; gap:11px; }
+.login-pillar {
+  display:flex; gap:13px; align-items:flex-start;
+  background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:13px 14px;
+}
+.login-pillar-ico { width:46px; height:46px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.login-pillar-ico svg { width:23px; height:23px; }
+.login-pillar-ico.blue   { background:var(--indigo-bg); color:#2563eb; }
+.login-pillar-ico.purple { background:#f3e8ff; color:#9333ea; }
+.login-pillar-ico.green  { background:var(--green-bg); color:#16a34a; }
+.login-pillar-ico.coral  { background:var(--coral-bg); color:var(--coral); }
+.login-pillar-h { font-size:14.5px; font-weight:700; color:var(--text); display:flex; align-items:center; gap:8px; }
+.login-pillar-num { width:20px; height:20px; border-radius:5px; font-size:11px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; }
+.login-pillar-num.blue   { background:var(--indigo-bg); color:#2563eb; }
+.login-pillar-num.purple { background:#f3e8ff; color:#9333ea; }
+.login-pillar-num.green  { background:var(--green-bg); color:#16a34a; }
+.login-pillar-num.coral  { background:var(--coral-bg); color:var(--coral); }
+.login-pillar-d { font-size:12.5px; color:var(--muted); line-height:1.5; margin-top:4px; }
+.login-secure { display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--muted2); margin-top:16px; }
+.login-secure svg { width:14px; height:14px; flex-shrink:0; }
+/* Right form panel */
+.login-form { flex:1 1 44%; padding:30px 28px; display:flex; flex-direction:column; justify-content:center; min-width:280px; }
+.login-title { font-size:19px; font-weight:700; margin-bottom:4px; color:var(--text); }
 .login-sub { font-size:12.5px; color:var(--muted); margin-bottom:20px; }
+@media (max-width:680px){
+  .login-box { flex-direction:column; max-width:420px; }
+  .login-pitch { border-right:none; border-bottom:1px solid var(--border); flex:0 0 auto; }
+  .login-form { flex:0 0 auto; padding:22px 24px 24px; }
+}
 .login-label { font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; display:block; }
 .login-input {
   width:100%; background:var(--surface2); border:1px solid var(--border);
   border-radius:6px; padding:9px 11px; font-size:13px; color:var(--text);
   margin-bottom:14px; outline:none; transition:border-color .15s;
 }
-.login-input:focus { border-color:var(--blue); }
+.login-input:focus { border-color:var(--coral); }
 .login-error { font-size:12px; color:var(--red); margin-bottom:12px; display:none; }
 .login-error.visible { display:block; }
 .btn-primary {
-  width:100%; background:var(--blue); color:#fff; border:none; border-radius:6px;
+  width:100%; background:var(--coral); color:#fff; border:none; border-radius:6px;
   padding:9px 18px; font-size:13px; font-weight:600; cursor:pointer; transition:opacity .15s;
 }
 .btn-primary:hover { opacity:.88; }
@@ -329,6 +407,13 @@ body {
 .btn-add-chip:hover { background:var(--border); }
 .chip-count { font-size:11px; color:var(--muted); white-space:nowrap; }
 .chip-parsed { font-size:11px; color:var(--muted); margin-top:8px; }
+.pref-textarea {
+  width:100%; box-sizing:border-box; background:var(--surface); border:1px solid var(--border);
+  border-radius:6px; padding:8px 10px; font-size:12px; color:var(--text); outline:none;
+  resize:vertical; min-height:70px; font-family:inherit; line-height:1.5; margin-bottom:11px;
+  transition:border-color .15s;
+}
+.pref-textarea:focus { border-color:var(--blue); }
 .chip-panel-toggle {
   background:none; border:none; color:var(--muted2); cursor:pointer;
   font-size:13px; padding:0 2px; line-height:1; transition:transform .2s, color .15s;
@@ -353,6 +438,8 @@ body {
 .resume-status { display:inline-block; margin-top:8px; padding:2px 9px; border-radius:999px; font-size:10.5px; font-weight:700; background:var(--green-bg); color:var(--green); }
 .resume-status.empty { background:#f3f4f6; color:var(--muted); }
 .resume-explain { font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:10px; }
+.resume-kw-wrap { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+.resume-kw { display:inline-block; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:2px 9px; font-size:11px; color:var(--muted); }
 
 /* ── BOTTOM PANEL ROW ── */
 .bottom-panels { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:24px; }
@@ -363,15 +450,15 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
 .empty-state { font-size:12.5px; color:var(--muted); padding:14px 0; font-style:italic; }
 
 @media (max-width:1180px){
-  .stat-cards { grid-template-columns:repeat(2,1fr); }
+  .stat-cards { gap:10px; }
   .bottom-panels { grid-template-columns:repeat(2,1fr); }
 }
 @media (max-width:760px){
   .page { padding:0 16px 50px; }
   .navbar { padding:12px 16px; margin:0 -16px 18px; }
   .nav-center { order:3; flex:1 1 100%; text-align:left; margin-top:6px; }
-  .nav-subline { justify-content:flex-start; }
-  .stat-cards { grid-template-columns:1fr; }
+  .stat-cards { gap:7px; }
+  .stat-card { flex-direction:column; align-items:flex-start; gap:6px; padding:9px 10px; }
   .bottom-panels { grid-template-columns:1fr; }
   .job-board-meta { margin-left:0; text-align:left; flex:1 1 100%; }
 }
@@ -476,101 +563,224 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
 <!-- Login Modal -->
 <div id="login-modal" class="login-modal">
   <div class="login-box">
-    <div class="login-title">Job Search Dashboard</div>
-    <div class="login-sub">Sign in to access your dashboard</div>
-    <label class="login-label" for="login-email">Email</label>
-    <input id="login-email" class="login-input" type="email" placeholder="you@example.com" autocomplete="email" />
-    <label class="login-label" for="login-password">Password</label>
-    <input id="login-password" class="login-input" type="password" placeholder="••••••••" autocomplete="current-password" />
-    <div id="login-error" class="login-error"></div>
-    <button id="login-btn" class="btn-primary" onclick="doLogin()">Sign in</button>
-  </div>
-</div>
 
-<div id="disabled-overlay">
-  <div class="off-icon">&#9899;</div>
-  <p>Dashboard is disabled</p>
+    <!-- Left: how it works (four steps) -->
+    <div class="login-pitch">
+      <div class="login-brand">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.35-10.4-9.6C-0.2 7.7 1.8 4 5.4 4c2 0 3.4 1.1 4.6 2.7C11.2 5.1 12.6 4 14.6 4c3.6 0 5.6 3.7 3.8 7.4C19.5 16.65 12 21 12 21z"></path></svg>
+        <span class="login-brand-name">jobmatch</span>
+      </div>
+      <div class="login-tagline">a match made in career heaven</div>
+      <div class="login-pitch-title">How Jobmatch powers better matches</div>
+      <div class="login-pitch-sub">Four simple steps help us find stronger-fit opportunities for you.</div>
+
+      <div class="login-pillars">
+        <div class="login-pillar">
+          <div class="login-pillar-ico blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z"></path><path d="M14 2v6h6"></path><path d="M12 12v6"></path><path d="m9 15 3-3 3 3"></path></svg></div>
+          <div class="login-pillar-body">
+            <div class="login-pillar-h"><span class="login-pillar-num blue">1</span> Upload Resume</div>
+            <div class="login-pillar-d">Start with your resume. We pull out your experience, skills, titles, and keywords that matter.</div>
+          </div>
+        </div>
+        <div class="login-pillar">
+          <div class="login-pillar-ico purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="4" x2="14" y2="4"></line><line x1="10" y1="4" x2="3" y2="4"></line><line x1="21" y1="12" x2="12" y2="12"></line><line x1="8" y1="12" x2="3" y2="12"></line><line x1="21" y1="20" x2="16" y2="20"></line><line x1="12" y1="20" x2="3" y2="20"></line><line x1="14" y1="2" x2="14" y2="6"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="16" y1="18" x2="16" y2="22"></line></svg></div>
+          <div class="login-pillar-body">
+            <div class="login-pillar-h"><span class="login-pillar-num purple">2</span> Adjust Profile</div>
+            <div class="login-pillar-d">Review what we found and refine your goals, preferences, roles, and locations.</div>
+          </div>
+        </div>
+        <div class="login-pillar">
+          <div class="login-pillar-ico green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+          <div class="login-pillar-body">
+            <div class="login-pillar-h"><span class="login-pillar-num green">3</span> Scan Job Boards</div>
+            <div class="login-pillar-d">We scan top job boards and analyze live listings for fit, skills, and requirements.</div>
+          </div>
+        </div>
+        <div class="login-pillar">
+          <div class="login-pillar-ico coral"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+          <div class="login-pillar-body">
+            <div class="login-pillar-h"><span class="login-pillar-num coral">4</span> Find Matches</div>
+            <div class="login-pillar-d">We compare your profile against live job data to surface stronger-fit opportunities.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Your data is private and secure. We never share it.</div>
+    </div>
+
+    <!-- Right: sign in -->
+    <div class="login-form">
+      <div class="login-title">Welcome back</div>
+      <div class="login-sub">Sign in to access your dashboard</div>
+      <label class="login-label" for="login-email">Email</label>
+      <input id="login-email" class="login-input" type="email" placeholder="you@example.com" autocomplete="email" />
+      <label class="login-label" for="login-password">Password</label>
+      <input id="login-password" class="login-input" type="password" placeholder="••••••••" autocomplete="current-password" />
+      <div id="login-error" class="login-error"></div>
+      <button id="login-btn" class="btn-primary" onclick="doLogin()">Sign in</button>
+    </div>
+
+  </div>
 </div>
 
 <div class="page">
 <!-- Navbar (nested in .page so its negative margin bleeds exactly to page's own padding, not past the viewport) -->
 <div class="navbar">
-  <div class="nav-brand">
-    <div class="nav-logo">J</div>
-    <span class="nav-brand-text">Jobbyjob</span>
-  </div>
   <div class="nav-center">
     <div class="nav-title" id="dash-title">Job Search Dashboard</div>
-    <div class="nav-subline">
-      <span class="plan-badge" id="plan-badge"></span>
-      <span class="updated" id="dash-updated"></span>
-    </div>
   </div>
   <div class="nav-right">
-    <div class="pill-wrap">
-      <button class="pill" id="toggle-pill" onclick="toggleDashboard()">
-        <span class="pill-dot"></span><span id="pill-label">ON</span>
-      </button>
-      <span class="pill-hint">Toggle tracking</span>
-    </div>
     <div id="auth-user" class="auth-user"></div>
   </div>
 </div>
-<div id="save-banner">Dashboard toggled — tell Claude to persist this setting.</div>
 
-  <!-- Stat Cards -->
+  <!-- Personal Job Search Engine -->
+  <div class="engine-head">
+    <div class="engine-title">Your Personal Job Search Engine</div>
+    <div class="engine-sub">The four signals we use to tailor your results</div>
+  </div>
   <div class="stat-cards">
+    <!-- 1. Resume -->
     <div class="stat-card">
-      <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+      <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Active Search</div>
-        <div class="stat-value" id="stat-active-value">—</div>
-        <div class="stat-sub" id="stat-active-sub"></div>
+        <div class="stat-label">Resume</div>
+        <div class="stat-value text-val" id="stat-resume-name">—</div>
+        <div class="stat-sub" id="stat-resume-date"></div>
+        <button class="stat-cta" id="resume-review-cta" onclick="openPillar('resume', this)">Review Keywords &#8594;</button>
       </div>
     </div>
+    <!-- 2. Preferences -->
     <div class="stat-card">
-      <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+      <div class="stat-icon saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Results Found</div>
-        <div class="stat-value" id="stat-results-value">—</div>
-        <div class="stat-sub" id="stat-results-sub">Top results from LinkedIn &amp; Indeed</div>
+        <div class="stat-label">Preferences</div>
+        <div class="stat-value text-val"><span id="pref-saved">0</span> saved &middot; <span id="pref-passed">0</span> passed</div>
+        <div class="stat-sub">Jobs you &#9733; and &#128078;</div>
+        <button class="stat-cta" onclick="openPillar('titles', this)">Edit job titles &#8594;</button>
       </div>
     </div>
+    <!-- 3. Learnings -->
     <div class="stat-card">
-      <div class="stat-icon saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></div>
+      <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.5.4.8 1 .9 1.6l.1.7h6l.1-.7c.1-.6.4-1.2.9-1.6A7 7 0 0 0 12 2z"></path></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Saved Jobs</div>
-        <div class="stat-value" id="stat-saved-value">0</div>
-        <div class="stat-sub">Jobs you've saved</div>
+        <div class="stat-label">Learnings</div>
+        <div class="stat-value text-val" id="learn-summary">—</div>
+        <div class="stat-sub" id="learn-terms">What we've learned from your activity</div>
+        <button class="stat-cta" onclick="openPillar('learned', this)">View details &#8594;</button>
       </div>
     </div>
+    <!-- 4. Outlook -->
     <div class="stat-card">
-      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+      <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Scheduled Pipelines</div>
-        <div class="stat-value text-val" id="stat-pipeline-value">—</div>
-        <div class="stat-sub" id="stat-pipeline-sub"></div>
+        <div class="stat-label">Outlook</div>
+        <div class="stat-value text-val" id="outlook-summary">—</div>
+        <div class="stat-sub" id="outlook-terms">What we think you're looking for</div>
+        <button class="stat-cta" onclick="openPillar('prefs', this)">Edit &#8594;</button>
       </div>
     </div>
   </div>
 
-  <!-- Info Banner -->
-  <div class="info-banner" id="info-banner"></div>
+  <!-- Pillar detail drawer — expands from a card's CTA, with an arrow pointing back to that card -->
+  <div class="pillar-drawer" id="pillar-drawer" hidden>
+    <div class="pillar-arrow" id="pillar-arrow"></div>
+    <div class="pillar-drawer-inner">
+      <div class="pillar-drawer-head">
+        <span class="pillar-drawer-title" id="pillar-drawer-title">Resume</span>
+        <button class="pillar-drawer-close" onclick="closePillar()" title="Close">&#10005;</button>
+      </div>
 
-  <!-- Saved Jobs -->
-  <div class="section-header">&#11088; Saved Jobs</div>
+      <!-- Resume -->
+      <div class="pillar-panel" id="pillar-panel-resume" hidden>
+        <div class="bottom-panel-body" id="resume-card"></div>
+      </div>
+
+      <!-- Job Titles -->
+      <div class="pillar-panel" id="pillar-panel-titles" hidden>
+        <div class="chip-panel-wrap" id="titles-panel-wrap">
+          <div class="chip-panel-body" id="titles-body">
+            <div class="chip-panel-body-inner">
+              <div class="chip-panel-toolbar">
+                <span class="chip-count" id="titles-count"></span>
+                <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
+                <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
+              </div>
+              <div class="chips-area" id="titles-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-add-row">
+                <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
+                  onkeydown="if(event.key==='Enter') addTitle()" />
+                <button class="btn-add-chip" onclick="addTitle()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learned From Your Activity -->
+      <div class="pillar-panel" id="pillar-panel-learned" hidden>
+        <div class="chip-panel-wrap" id="learned-panel-wrap">
+          <div class="chip-panel-body" id="learned-body">
+            <div class="chip-panel-body-inner">
+              <span class="chip-count" id="learned-count"></span>
+              <div class="chips-area" id="learned-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-parsed" id="learned-note">Save a job (&#9734;) to teach the system its words. Thumbs-down (&#128078;) a job to drop them. This list feeds your Pref-fit score on the next search run.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What You're Looking For -->
+      <div class="pillar-panel" id="pillar-panel-prefs" hidden>
+        <div class="chip-panel-wrap" id="prefs-panel-wrap">
+          <div class="chip-panel-body" id="prefs-body">
+            <div class="chip-panel-body-inner">
+              <textarea class="pref-textarea" id="prefs-text" oninput="markPrefsDirty()"
+                placeholder="Describe the role you want in a few sentences — type of company, seniority, what excites you, dealbreakers. e.g. 'Remote or LA ACD/CD role at a design-led tech or entertainment brand. I want to lead AI-assisted production and brand systems. Not interested in pure social or automotive dealership work.'"></textarea>
+              <div class="chip-add-row" style="margin-bottom:11px;">
+                <button class="btn-add-chip" onclick="extractPreferences()">Extract keywords &#8595;</button>
+                <span class="chip-count" id="prefs-extract-note"></span>
+                <span class="chip-panel-dirty" id="prefs-dirty">Unsaved changes</span>
+                <span class="chip-count" id="prefs-count"></span>
+                <button class="btn-save-chips" id="prefs-save-btn" onclick="savePreferences()">Save</button>
+              </div>
+              <div class="chips-area" id="prefs-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-add-row">
+                <input class="chip-input" id="pref-input" type="text" placeholder="Add preference keyword…"
+                  onkeydown="if(event.key==='Enter') addPreference()" />
+                <button class="btn-add-chip" onclick="addPreference()">Add</button>
+              </div>
+              <div class="chip-parsed" id="prefs-parsed">These drive a separate "Pref fit" badge on each job — they don't change your resume keyword score.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ JOB BOARD (parent section: covers Saved + New listings) ══ -->
+  <div class="section-header">&#128269; Job Board</div>
+  <div class="board-subtitle">
+    <span id="board-schedule"></span>
+    <span id="board-synced"></span>
+  </div>
+
+  <!-- Saved Jobs (subsection) -->
+  <div class="subsection-header">&#11088; Saved <span class="count-badge" id="saved-count-badge"></span></div>
   <div class="panel" id="saved-jobs-list">
     <div class="saved-empty">Sign in to see saved jobs.</div>
   </div>
-  <!-- Job Board -->
-  <div class="section-header">&#128269; Job Board</div>
+
+  <!-- New & All Listings (subsection) -->
+  <div class="subsection-header">&#128269; New &amp; All Listings <span class="count-badge today" id="board-today-badge"></span></div>
   <div class="panel" id="panel-merged">
     <div class="job-board-header">
-      <div class="job-board-toprow">
-        <span class="job-board-title">Job Board</span>
-        <span class="job-board-meta" id="board-synced"></span>
-        <button class="btn-refresh" id="refresh-btn" onclick="refreshBoard()">&#8635; Refresh</button>
-      </div>
       <div class="filter-bar">
         <div class="filter-group">
           <span class="filter-group-label">Score</span>
@@ -582,6 +792,8 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
           <span class="filter-group-label">Source</span>
           <label class="filter-chk"><input type="checkbox" id="f-li" checked onchange="applyJobFilter(event)"> <span><span class="src-dot li"></span> LinkedIn</span></label>
           <label class="filter-chk"><input type="checkbox" id="f-indeed" checked onchange="applyJobFilter(event)"> <span><span class="src-dot indeed"></span> Indeed</span></label>
+          <label class="filter-chk"><input type="checkbox" id="f-glassdoor" checked onchange="applyJobFilter(event)"> <span><span class="src-dot glassdoor"></span> Glassdoor</span></label>
+          <label class="filter-chk"><input type="checkbox" id="f-zip" checked onchange="applyJobFilter(event)"> <span><span class="src-dot zip"></span> ZipRecruiter</span></label>
         </div>
         <div class="filter-sep"></div>
         <div class="filter-group">
@@ -592,6 +804,10 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
           <label class="filter-chk"><input type="radio" name="f-date" value="7" onchange="applyJobFilter(event)"> <span>7d</span></label>
           <label class="filter-chk"><input type="radio" name="f-date" value="30" onchange="applyJobFilter(event)"> <span>30d</span></label>
         </div>
+        <div class="filter-sep"></div>
+        <div class="filter-group">
+          <label class="filter-chk"><input type="checkbox" id="f-show-dismissed" onchange="toggleShowDismissed()"> <span>&#128078; Show dismissed</span></label>
+        </div>
       </div>
     </div>
     <div class="jb-head-row">
@@ -601,60 +817,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <div class="jb-footer">
       <span id="merged-count"></span>
       <span id="jb-footer-note">Auto-refreshes every 5 minutes</span>
-    </div>
-  </div>
-
-  <!-- Bottom panel row -->
-  <div class="bottom-panels">
-    <div class="panel">
-      <div class="panel-header"><span class="panel-title">&#128161; Recommendations</span></div>
-      <div class="bottom-panel-body" id="recs-card"></div>
-    </div>
-    <div class="panel">
-      <div class="panel-header"><span class="panel-title">Resume</span></div>
-      <div class="bottom-panel-body" id="resume-card"></div>
-    </div>
-    <div class="chip-panel-wrap" id="titles-panel-wrap">
-      <div class="chip-panel-header">
-        <span class="chip-panel-title">Job Titles</span>
-        <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
-        <span class="chip-count" id="titles-count"></span>
-        <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
-        <button class="chip-panel-toggle" id="titles-toggle" onclick="togglePanel('titles')" title="Collapse">&#9660;</button>
-      </div>
-      <div class="chip-panel-body" id="titles-body">
-        <div class="chip-panel-body-inner">
-          <div class="chips-area" id="titles-chips">
-            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-          </div>
-          <div class="chip-add-row">
-            <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
-              onkeydown="if(event.key==='Enter') addTitle()" />
-            <button class="btn-add-chip" onclick="addTitle()">Add</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="chip-panel-wrap" id="keywords-panel-wrap">
-      <div class="chip-panel-header">
-        <span class="chip-panel-title">Resume Keywords</span>
-        <span class="chip-panel-dirty" id="keywords-dirty">Unsaved changes</span>
-        <button class="btn-save-chips" id="keywords-save-btn" onclick="saveKeywords()">Save</button>
-        <button class="chip-panel-toggle" id="keywords-toggle" onclick="togglePanel('keywords')" title="Collapse">&#9660;</button>
-      </div>
-      <div class="chip-panel-body" id="keywords-body">
-        <div class="chip-panel-body-inner">
-          <div class="chips-area" id="keywords-chips">
-            <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-          </div>
-          <div class="chip-add-row">
-            <input class="chip-input" id="keyword-input" type="text" placeholder="Add keyword…"
-              onkeydown="if(event.key==='Enter') addKeyword()" />
-            <button class="btn-add-chip" onclick="addKeyword()">Add</button>
-          </div>
-          <div class="chip-parsed" id="keywords-parsed"></div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -736,12 +898,84 @@ function updateAuthUI(){
   var el = document.getElementById('auth-user');
   if(!_authUser){ el.classList.remove('visible'); return; }
   var email = _authUser.email || '';
-  var initials = email.slice(0,2).toUpperCase();
-  el.innerHTML = '<div class="auth-info"><span class="auth-name">'+esc(email)+'</span></div>'
-    +'<div class="auth-avatar">'+esc(initials)+'</div>'
-    +'<button class="auth-signout" onclick="doSignOut()">Sign out</button>';
+  var uname = (_authUser.user_metadata && _authUser.user_metadata.username) || (email.split('@')[0]) || '';
+  var letter = (uname.trim().charAt(0) || '?').toUpperCase();
+  // Stable unique color per user, derived from their name.
+  var hue = 0; for(var i=0;i<uname.length;i++){ hue = (hue*31 + uname.charCodeAt(i)) % 360; }
+  var avatarStyle = 'background:hsl('+hue+',70%,88%);color:hsl('+hue+',60%,30%);';
+  el.innerHTML =
+    '<div class="user-menu">'
+    + '<button class="auth-avatar is-button" id="avatar-btn" style="'+avatarStyle+'" onclick="toggleUserMenu(event)" aria-haspopup="true" aria-expanded="false" title="'+esc(uname)+'">'+esc(letter)+'</button>'
+    + '<div class="user-dropdown" id="user-dropdown">'
+    +   '<div class="user-dropdown-email">'+esc(email)+'</div>'
+    +   '<button class="user-dropdown-item signout" onclick="doSignOut()">Sign out</button>'
+    + '</div>'
+    + '</div>';
   el.classList.add('visible');
 }
+window.toggleUserMenu = function(e){
+  if(e) e.stopPropagation();
+  var dd = document.getElementById('user-dropdown'), btn = document.getElementById('avatar-btn');
+  if(!dd) return;
+  var open = dd.classList.toggle('open');
+  if(btn) btn.setAttribute('aria-expanded', String(open));
+};
+function closeUserMenu(){
+  var dd = document.getElementById('user-dropdown'), btn = document.getElementById('avatar-btn');
+  if(dd) dd.classList.remove('open');
+  if(btn) btn.setAttribute('aria-expanded','false');
+}
+document.addEventListener('click', function(e){
+  var dd = document.getElementById('user-dropdown');
+  if(dd && dd.classList.contains('open') && !e.target.closest('.user-menu')) closeUserMenu();
+});
+/* ── PILLAR DRAWER: expands under the cards, arrow points to the clicked card ── */
+var _activePillar = null;
+var PILLAR_TITLES = { resume:'Resume keywords', titles:'Job titles', learned:'Learned from your activity', prefs:"What you're looking for" };
+function positionPillarArrow(cardEl){
+  var arrow = document.getElementById('pillar-arrow');
+  var drawer = document.getElementById('pillar-drawer');
+  if(!arrow || !drawer || !cardEl) return;
+  var c = cardEl.getBoundingClientRect();
+  var d = drawer.getBoundingClientRect();
+  var left = (c.left + c.width/2) - d.left;
+  arrow.style.left = Math.max(16, Math.min(d.width-16, left)) + 'px';
+}
+window.openPillar = function(key, fromEl){
+  var drawer = document.getElementById('pillar-drawer');
+  if(!drawer) return;
+  var cardEl = fromEl && fromEl.closest ? fromEl.closest('.stat-card') : null;
+  // Clicking the active card's CTA again closes the drawer.
+  if(_activePillar === key && !drawer.hasAttribute('hidden')){ closePillar(); return; }
+  _activePillar = key;
+  ['resume','titles','learned','prefs'].forEach(function(k){
+    var p = document.getElementById('pillar-panel-'+k);
+    if(p){ if(k===key) p.removeAttribute('hidden'); else p.setAttribute('hidden',''); }
+    var card = document.getElementById('pillar-card-'+k); // (optional highlight hook)
+  });
+  var titleEl = document.getElementById('pillar-drawer-title');
+  if(titleEl) titleEl.textContent = PILLAR_TITLES[key] || 'Details';
+  // highlight the active source card
+  document.querySelectorAll('.stat-card.pillar-active').forEach(function(el){ el.classList.remove('pillar-active'); });
+  if(cardEl) cardEl.classList.add('pillar-active');
+  drawer.removeAttribute('hidden');
+  positionPillarArrow(cardEl);
+  drawer.scrollIntoView({behavior:'smooth', block:'nearest'});
+};
+window.closePillar = function(){
+  var drawer = document.getElementById('pillar-drawer');
+  if(drawer) drawer.setAttribute('hidden','');
+  document.querySelectorAll('.stat-card.pillar-active').forEach(function(el){ el.classList.remove('pillar-active'); });
+  _activePillar = null;
+};
+// Keep the arrow aligned if the window resizes while open.
+window.addEventListener('resize', function(){
+  var drawer = document.getElementById('pillar-drawer');
+  if(drawer && !drawer.hasAttribute('hidden')){
+    var card = document.querySelector('.stat-card.pillar-active');
+    if(card) positionPillarArrow(card);
+  }
+});
 
 /* ── BOOT DASHBOARD ── */
 function bootDashboard(){
@@ -749,6 +983,8 @@ function bootDashboard(){
   loadSavedJobs();
   loadKeywordsPanel();
   loadTitlesPanel();
+  loadPreferencesPanel();
+  loadDismissedJobs();
 
   var username = (_authUser.user_metadata||{}).username || 'garman';
   fetch('users/'+username+'/config.json?t='+Date.now())
@@ -764,70 +1000,51 @@ function bootDashboard(){
 }
 
 /* ── ON/OFF ── */
-var enabled = true;
-function applyEnabled(){ document.getElementById('disabled-overlay').classList[enabled?'remove':'add']('visible'); }
-function updatePill(){ var p=document.getElementById('toggle-pill'); p.className='pill '+(enabled?'on':'off'); document.getElementById('pill-label').textContent=enabled?'ON':'OFF'; }
-window.toggleDashboard = function(){ enabled=!enabled; updatePill(); applyEnabled(); document.getElementById('save-banner').classList.add('visible'); };
 
 /* ═══════════════════════════════════
    INIT — called after config fetch
    ═══════════════════════════════════ */
 function init(d){
   var _docsPrefix = d.docsPrefix || 'docs/';
-  enabled = d.enabled !== false;
   var name = d.name || ((_authUser&&_authUser.user_metadata||{}).username||'');
   document.title = name + ' – Job Search Dashboard';
-  document.getElementById('dash-title').textContent = name + ' – Job Search Dashboard';
+  document.getElementById('dash-title').textContent = name ? ('Today could be your day, ' + name) : 'Today could be your day';
   var fp = document.getElementById('footer-docs-path');
   if(fp) fp.textContent = _docsPrefix;
-  document.getElementById('plan-badge').textContent = d.plan||'Pro';
-  document.getElementById('dash-updated').textContent = 'Updated '+fmtDate(d.updated);
-  updatePill(); applyEnabled();
 
   var pips = d.scheduledPipelines||[];
 
-  /* ── STAT CARD: Active Search ── */
+  /* ── Job Board subtitle: when the automated search runs ── */
   (function(){
-    var valEl = document.getElementById('stat-active-value');
-    var subEl = document.getElementById('stat-active-sub');
-    if(valEl) valEl.textContent = String(pips.length);
-    if(subEl) subEl.textContent = pips.length===1 ? (pips[0].schedule || 'Runs automatically') : (pips.length ? pips.length+' pipelines configured' : 'No pipelines configured');
-  })();
-
-  /* ── STAT CARD: Scheduled Pipelines (repurposed 4th card) ── */
-  (function(){
-    var valEl = document.getElementById('stat-pipeline-value');
-    var subEl = document.getElementById('stat-pipeline-sub');
-    if(!valEl) return;
-    if(!pips.length){ valEl.textContent='—'; if(subEl) subEl.textContent='No pipelines configured.'; return; }
-    var p = pips[0];
-    valEl.textContent = p.schedule || p.title || '—';
-    var subParts = [];
-    if(pips.length > 1) subParts.push(pips.length+' pipelines');
-    else if(p.title) subParts.push(p.title);
-    if(p.lastRun) subParts.push('Last run '+fmtDate(p.lastRun)+(p.lastRunStatus?' · '+p.lastRunStatus.replace('_',' '):''));
-    else subParts.push(p.enabled===false ? 'Disabled' : 'Enabled');
-    if(subEl) subEl.textContent = subParts.join(' · ');
-  })();
-
-  /* ── INFO BANNER ── */
-  (function(){
-    var el = document.getElementById('info-banner');
+    var el = document.getElementById('board-schedule');
     if(!el) return;
-    if(!pips.length){ el.textContent = 'No automated search pipeline is configured yet.'; return; }
+    if(!pips.length){ el.textContent = 'No automated search configured yet.'; return; }
     var p = pips[0];
-    var schedTxt = p.schedule ? p.schedule.toLowerCase() : 'on a schedule';
-    el.textContent = 'An automated search ('+(p.title||'pipeline')+') runs '+schedTxt+' and fetches the latest jobs from LinkedIn and Indeed.';
+    var sched = p.schedule ? p.schedule.toLowerCase() : 'on a schedule';
+    el.textContent = 'Searches LinkedIn & Indeed ' + sched
+      + (pips.length > 1 ? ' (+' + (pips.length-1) + ' more)' : '');
   })();
 
-  /* ── RECOMMENDATIONS ── */
+  /* ── Latest search → IDs of jobs found in the last run.
+        Drives the "N new today" badge by the Job Board title and the colored
+        left border on those rows. ── */
+  var _latestIds = null;
   (function(){
-    var recs=(d.emailDigest||{}).recommendations||[], el=document.getElementById('recs-card');
-    if(!el) return;
-    if(!recs.length){ el.innerHTML='<div class="empty-state">No recommendations yet.</div>'; return; }
-    el.innerHTML='<div class="rec-box">'+recs.map(function(r){
-      return '<div class="rec-item"><div class="rec-item-desc">'+esc(r)+'</div></div>';
-    }).join('')+'</div>';
+    Promise.all([
+      fetch(_docsPrefix+'li_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
+      fetch(_docsPrefix+'in_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
+      fetch(_docsPrefix+'gd_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
+      fetch(_docsPrefix+'zr_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
+    ]).then(function(res){
+      var ids = {}, n = 0;
+      res.forEach(function(f){
+        if(f && f.jobs) f.jobs.forEach(function(j){ if(j.id!=null && !ids[String(j.id)]){ ids[String(j.id)]=true; n++; } });
+      });
+      _latestIds = ids;
+      var badge = document.getElementById('board-today-badge');
+      if(badge) badge.textContent = n ? (n+' new today') : '';
+      _rerenderBoard();
+    });
   })();
 
   /* ═══════════════════════════════════
@@ -835,7 +1052,18 @@ function init(d){
      ═══════════════════════════════════ */
   var _lastUpdated = null;
   var _cachedJobs = [];
-  var _filters = { score50:false, score80:false, showLI:true, showIndeed:true, daysAgo:0 };
+  _rerenderBoard = function(){ renderMergedJobList(_cachedJobs); };
+  var _filters = { score50:false, score80:false, showLI:true, showIndeed:true, showGlassdoor:true, showZip:true, daysAgo:0 };
+
+  /* Map a job's source string to a stable {key,label} used for the colored
+     Source cell and the source filter. New sources go here. */
+  function srcInfo(source){
+    var s = (source||'').toLowerCase();
+    if(s.indexOf('indeed') >= 0)       return { key:'indeed',    label:'Indeed' };
+    if(s.indexOf('glassdoor') >= 0)    return { key:'glassdoor', label:'Glassdoor' };
+    if(s.indexOf('zip') >= 0)          return { key:'zip',       label:'ZipRecruiter' };
+    return { key:'li', label:'LinkedIn' };
+  }
 
   function applyFilters(jobs){
     var minScore = _filters.score80 ? 80 : (_filters.score50 ? 50 : 0);
@@ -845,11 +1073,11 @@ function init(d){
       cutoff.setDate(cutoff.getDate() - _filters.daysAgo);
       cutoff = cutoff.toISOString().slice(0,10);
     }
+    var srcShow = { li:_filters.showLI, indeed:_filters.showIndeed, glassdoor:_filters.showGlassdoor, zip:_filters.showZip };
     return jobs.filter(function(j){
+      if(!_showDismissed && isJobDismissed(j.link||'')) return false;
       if(minScore > 0 && (j.score == null || j.score < minScore)) return false;
-      var isIndeed = (j._source||'').toLowerCase().indexOf('indeed') >= 0;
-      if(isIndeed && !_filters.showIndeed) return false;
-      if(!isIndeed && !_filters.showLI) return false;
+      if(srcShow[srcInfo(j._source).key] === false) return false;
       if(cutoff && (j.posted||'') < cutoff) return false;
       return true;
     });
@@ -889,32 +1117,51 @@ function init(d){
       scoreTxt = String(j.score);
     }
 
+    var prefHtml = '';
+    if(j.prefScore != null){
+      var pCls = j.prefScore >= 60 ? 'pref-high' : j.prefScore >= 30 ? 'pref-mid' : 'pref-low';
+      var pm = (j.prefMatched && j.prefMatched.length) ? j.prefMatched.join(', ') : 'no preference matches';
+      prefHtml = '<span class="jb-pref-badge '+pCls+'" title="Matches your preferences: '+esc(pm)+'">&#9733; Pref fit '+esc(String(j.prefScore))+'%</span>';
+    }
+
     var saved = isJobSaved(j.link||'');
-    var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'
-      +' data-link="'+esc(j.link||'')+'"'
+    var dismissed = isJobDismissed(j.link||'');
+    var dataAttrs = ' data-link="'+esc(j.link||'')+'"'
       +' data-title="'+esc(j.title||'')+'"'
-      +' data-company="'+esc(company)+'"'
-      +' onclick="handleStar(this)"'
-      +' title="'+(saved?'Remove from saved':'Save job')+'">'
-      +(saved?'&#9733;':'&#9734;')+'</button>';
+      +' data-company="'+esc(company)+'"';
+    var actionBtns;
+    if(dismissed){
+      actionBtns = '<button class="undo-btn" onclick="undismissJob(\''+esc(j.link||'')+'\')" title="Restore to board">&#8634; undo</button>';
+    } else {
+      var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'+dataAttrs
+        +' onclick="handleStar(this)"'
+        +' title="'+(saved?'Remove from saved':'Save job')+'">'
+        +(saved?'&#9733;':'&#9734;')+'</button>';
+      var dismissBtn = '<button class="dismiss-btn"'+dataAttrs
+        +' onclick="handleDismiss(this)"'
+        +' title="Not interested — hide and stop learning its words">&#128078;</button>';
+      actionBtns = starBtn + dismissBtn;
+    }
 
-    var srcKey = (j._source||'').toLowerCase().indexOf('indeed') >= 0 ? 'indeed' : 'li';
-    var srcLabel = srcKey === 'indeed' ? 'Indeed' : 'LinkedIn';
+    var si = srcInfo(j._source);
+    var srcKey = si.key, srcLabel = si.label;
 
-    return '<div class="jb-row'+(alt?' alt':'')+'">'
+    var isNew = _latestIds && j.id!=null && _latestIds[String(j.id)];
+    return '<div class="jb-row'+(alt?' alt':'')+(isNew?' jb-row-new':'')+'">'
       +'<div class="jb-cell jb-score '+scoreCls+'" data-label="Score">'+esc(scoreTxt)+'</div>'
       +'<div class="jb-cell jb-tier-cell" data-label="Tier">'+tierBadgeHtml(j.tier)+'</div>'
       +'<div class="jb-cell jb-title-cell" data-label="">'
         +titleHtml
         +(pay?'<div class="jb-pay">&#128176; '+esc(pay)+'</div>':'')
         +(why?'<div class="jb-why">'+esc(why)+'</div>':'')
+        +(prefHtml?'<div>'+prefHtml+'</div>':'')
       +'</div>'
       +'<div class="jb-cell jb-company" data-label="Company">'+esc(company)+'</div>'
       +'<div class="jb-cell jb-location" data-label="Location">'+esc(j.location||'')+'</div>'
       +'<div class="jb-cell jb-source '+srcKey+'" data-label="Source">'+esc(srcLabel)+'</div>'
       +'<div class="jb-cell jb-posted" data-label="Posted">'+esc(j.posted||'')+'</div>'
       +'<div class="jb-cell" data-label="Type">'+typePillHtml(type)+'</div>'
-      +'<div class="jb-cell jb-save" data-label="">'+starBtn+'</div>'
+      +'<div class="jb-cell jb-save" data-label="">'+actionBtns+'</div>'
       +'</div>';
   }
 
@@ -934,15 +1181,6 @@ function init(d){
     var shown = Math.min(filtered.length, 20);
     if(countEl) countEl.textContent = filtered.length ? 'Showing 1 to '+shown+' of '+filtered.length+' jobs' : '';
 
-    var resVal = document.getElementById('stat-results-value');
-    var resSub = document.getElementById('stat-results-sub');
-    if(resVal) resVal.textContent = String(tagged.length);
-    if(resSub){
-      var liCount = tagged.filter(function(j){ return (j._source||'').toLowerCase().indexOf('indeed')<0; }).length;
-      var inCount = tagged.length - liCount;
-      resSub.textContent = liCount+' LinkedIn · '+inCount+' Indeed';
-    }
-
     if(!listEl) return;
     if(!filtered.length){ listEl.innerHTML='<div class="panel-state">No results match filters.</div>'; return; }
     listEl.innerHTML = filtered.slice(0,20).map(function(j,i){ return jobItemHtml(j, i%2===1); }).join('');
@@ -959,8 +1197,12 @@ function init(d){
     _filters.score80    = !!(s80 && s80.checked);
     var liEl = document.getElementById('f-li');
     var inEl = document.getElementById('f-indeed');
-    _filters.showLI     = liEl ? liEl.checked : true;
-    _filters.showIndeed = inEl ? inEl.checked : true;
+    var gdEl = document.getElementById('f-glassdoor');
+    var zrEl = document.getElementById('f-zip');
+    _filters.showLI        = liEl ? liEl.checked : true;
+    _filters.showIndeed    = inEl ? inEl.checked : true;
+    _filters.showGlassdoor = gdEl ? gdEl.checked : true;
+    _filters.showZip       = zrEl ? zrEl.checked : true;
     var dateRadio = document.querySelector('input[name="f-date"]:checked');
     _filters.daysAgo = dateRadio && dateRadio.value !== 'all' ? parseInt(dateRadio.value) : 0;
     renderMergedJobList(_cachedJobs);
@@ -969,7 +1211,7 @@ function init(d){
   function updateSyncLabel(){
     var el = document.getElementById('board-synced');
     if(!el || !_lastUpdated) return;
-    el.textContent = 'Sources: LinkedIn, Indeed · Updated '+fmtTime(_lastUpdated);
+    el.textContent = ' · Updated '+fmtTime(_lastUpdated);
   }
 
   function loadBoard(showSpinner){
@@ -1046,8 +1288,7 @@ function isJobSaved(link){
 
 function renderSavedJobs(){
   var el = document.getElementById('saved-jobs-list');
-  var statEl = document.getElementById('stat-saved-value');
-  if(statEl) statEl.textContent = String(_saved.length);
+  renderPreferencesPillar();
   if(!el) return;
   if(!_authUser){
     el.innerHTML='<div class="saved-empty">Sign in to save jobs.</div>';
@@ -1094,15 +1335,70 @@ window.handleStar = function(btn){
   } else {
     _saved.unshift({title:job.title, company:job.company, link:job.link, savedAt:new Date().toISOString()});
     dbInsert(job);
+    addLearnedFromTitle(job.title);   // saving a job teaches the system its words
   }
   renderSavedJobs();
   updateAllStars();
 };
 
 /* ═══════════════════════════════════
+   DISMISSED JOBS  (thumbs-down)
+   Hides the job from the board AND removes its words from the learned list.
+   Persisted to dismissed_jobs so the job won't come back on the next search.
+   ═══════════════════════════════════ */
+var _dismissed = [];          // array of links
+var _showDismissed = false;
+var _rerenderBoard = function(){};   // set inside init() so out-of-scope handlers can redraw the board
+
+function loadDismissedJobs(){
+  if(!_authUser){ return; }
+  _sb.from('dismissed_jobs')
+    .select('link')
+    .eq('user_id', _authUser.id)
+    .then(function(r){
+      if(r.error){ console.error('load dismissed_jobs:', r.error); return; }
+      _dismissed = (r.data||[]).map(function(d){ return d.link; });
+      renderPreferencesPillar();
+      _rerenderBoard();
+    });
+}
+
+function isJobDismissed(link){
+  return _dismissed.indexOf(link) !== -1;
+}
+
+window.handleDismiss = function(btn){
+  if(!_authUser) return;
+  var job = {title:btn.dataset.title, company:btn.dataset.company, link:btn.dataset.link};
+  if(!job.link || isJobDismissed(job.link)) return;
+  _dismissed.push(job.link);
+  // If it was saved, unsave it too (you changed your mind).
+  if(isJobSaved(job.link)){ _saved = _saved.filter(function(j){ return j.link !== job.link; }); dbDelete(job.link); renderSavedJobs(); }
+  removeLearnedFromTitle(job.title);   // thumbs-down drops the job's words
+  _sb.from('dismissed_jobs').upsert(
+    {user_id:_authUser.id, link:job.link, title:job.title, company:job.company},
+    {onConflict:'user_id,link'}
+  ).then(function(r){ if(r.error) console.error('insert dismissed_job:', r.error); });
+  _rerenderBoard();
+};
+
+window.undismissJob = function(link){
+  _dismissed = _dismissed.filter(function(l){ return l !== link; });
+  _sb.from('dismissed_jobs').delete()
+    .eq('user_id', _authUser.id).eq('link', link)
+    .then(function(r){ if(r.error) console.error('delete dismissed_job:', r.error); });
+  _rerenderBoard();
+};
+
+window.toggleShowDismissed = function(){
+  _showDismissed = !_showDismissed;
+  _rerenderBoard();
+};
+
+/* ═══════════════════════════════════
    COLLAPSIBLE PANELS
    ═══════════════════════════════════ */
-var _panelState = { keywords: true, titles: true }; // true = expanded
+var _panelState = { learned: true, titles: true, prefs: true }; // true = expanded
 
 window.togglePanel = function(name){
   _panelState[name] = !_panelState[name];
@@ -1126,12 +1422,16 @@ function renderResumeCard(){
       +'<div class="resume-explain">We\'ll use your resume to extract skills and improve search accuracy.</div>';
     return;
   }
+  var kwChips = _keywords.length
+    ? '<div class="resume-kw-wrap">'+_keywords.map(function(kw){ return '<span class="resume-kw">'+esc(kw)+'</span>'; }).join('')+'</div>'
+    : '';
   el.innerHTML = '<div class="resume-box">'
     +'<div class="resume-filename">'+esc(_keywordsParsedFrom)+'</div>'
     +(_keywordsParsedAt?'<div class="resume-meta">Parsed '+esc(fmtDate(_keywordsParsedAt))+'</div>':'')
     +'<span class="resume-status">OK</span>'
+    +kwChips
     +'</div>'
-    +'<div class="resume-explain">We\'ll use your resume to extract skills and improve search accuracy.</div>';
+    +'<div class="resume-explain">These keywords are pulled from your resume and drive the qualification Score on each job. They update when your resume is re-parsed.</div>';
 }
 
 /* ═══════════════════════════════════
@@ -1141,6 +1441,7 @@ var _keywords = [];
 var _keywordsDirty = false;
 var _keywordsParsedFrom = '';
 var _keywordsParsedAt = '';
+var MAX_KEYWORDS = 15;
 
 function loadKeywordsPanel(){
   if(!_authUser) return;
@@ -1158,62 +1459,271 @@ function loadKeywordsPanel(){
     });
 }
 
+// Résumé keywords are now read-only and shown inside the Resume card; they still drive the Score.
 function renderKeywordsPanel(){
-  var chipsEl  = document.getElementById('keywords-chips');
-  var parsedEl = document.getElementById('keywords-parsed');
-  var dirtyEl  = document.getElementById('keywords-dirty');
-  var saveBtn  = document.getElementById('keywords-save-btn');
-  if(!chipsEl) return;
+  renderResumeCard();
+  renderResumeHeader();
+}
 
-  if(!_keywords.length){
-    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No keywords yet. Add one below or ask Claude to parse your resume.</span>';
+// Header stat card: resume name + date added, with a CTA to the Settings page. No keywords shown here.
+function renderResumeHeader(){
+  var nameEl = document.getElementById('stat-resume-name');
+  var dateEl = document.getElementById('stat-resume-date');
+  var cta    = document.getElementById('resume-review-cta');
+  if(!nameEl) return;
+  if(!_keywordsParsedFrom){
+    nameEl.textContent = 'Not added';
+    if(dateEl) dateEl.textContent = 'No resume parsed yet';
+    if(cta) cta.style.display = 'none';
+    return;
+  }
+  nameEl.textContent = _keywordsParsedFrom;
+  if(dateEl) dateEl.textContent = _keywordsParsedAt ? ('Added ' + fmtDate(_keywordsParsedAt)) : '';
+  if(cta) cta.style.display = '';
+}
+
+/* ── PILLAR CARDS (summary versions of the settings) ── */
+// Preferences pillar: how many jobs saved + thumbs-downed. Also feeds the Saved Jobs title badge.
+function renderPreferencesPillar(){
+  var s = document.getElementById('pref-saved');  if(s) s.textContent = String(_saved.length);
+  var p = document.getElementById('pref-passed'); if(p) p.textContent = String(_dismissed.length);
+  var b = document.getElementById('saved-count-badge'); if(b) b.textContent = _saved.length ? String(_saved.length) : '';
+}
+// Learnings pillar: summary of what we've learned from activity, CTA to Settings.
+function renderLearningsPillar(){
+  var sum = document.getElementById('learn-summary');
+  var terms = document.getElementById('learn-terms');
+  if(sum) sum.textContent = _learned.length ? (_learned.length + ' term' + (_learned.length===1?'':'s') + ' learned') : 'Nothing yet';
+  if(terms) terms.textContent = _learned.length ? _learned.slice(0,4).join(', ') : 'Save & pass jobs to teach it';
+}
+// Outlook pillar: top extracted keywords for what you're looking for, CTA to edit.
+function renderOutlookPillar(){
+  var sum = document.getElementById('outlook-summary');
+  var terms = document.getElementById('outlook-terms');
+  if(sum) sum.textContent = _prefs.length ? (_prefs.length + ' keyword' + (_prefs.length===1?'':'s')) : 'Not set yet';
+  if(terms) terms.textContent = _prefs.length ? _prefs.slice(0,4).join(', ') : 'Tell us what you want';
+}
+
+/* ═══════════════════════════════════
+   PREFERENCES PANEL  ("What you're looking for")
+   Free-text intent → extracted preference keywords.
+   Scored separately from resume keywords; surfaced as a "Pref fit" badge.
+   ═══════════════════════════════════ */
+var _prefs = [];        // extracted/edited preference keywords (chips)
+var _prefText = '';     // raw free-text the user wrote
+var _prefsDirty = false;
+var MAX_PREFS = 15;
+
+// Stopwords + filler dropped during client-side extraction.
+var _PREF_STOP = {};
+('a an the and or but to of in on for with at by from as is are be been being this that these those i my me we our you your it its their there here ' +
+ 'role roles job jobs position positions work working want wanting looking like would prefer prefer ideally really very just also able open interested ' +
+ 'into not no none any some more most much many few less least into about around over under than then so such only own same other another each every ' +
+ 'company companies brand brands team teams place places thing things etc e g eg ie new good great strong nice big small large high low full time ' +
+ 'who what when where why how which while because if while can could should will shall may might must do does did done get got make makes made ' +
+ 'they them he she his her people someone something anything everything nothing somewhere anywhere everywhere')
+  .split(' ').forEach(function(w){ if(w) _PREF_STOP[w] = true; });
+
+// Extract candidate phrases (1–3 word runs of non-stopwords) from free text.
+function extractKeywordsFromText(text){
+  var out = [], seen = {};
+  // Split into clauses on sentence/comma boundaries, keep hyphenated words intact.
+  var clauses = String(text||'').toLowerCase().split(/[.,;:!?\n()]+|\bnot\b|\bno\b|\bbut\b|\band\b|\bor\b/);
+  clauses.forEach(function(cl){
+    var toks = cl.split(/[^a-z0-9+\-]+/).filter(Boolean);
+    var run = [];
+    function flush(){
+      if(!run.length) return;
+      // emit the whole run (capped at 3 words) and also notable single tokens
+      for(var len = Math.min(run.length,3); len >= 1; len--){
+        for(var s = 0; s + len <= run.length; s++){
+          var phrase = run.slice(s, s+len).join(' ');
+          if(phrase.length < 3) continue;
+          if(len===1 && run.length>1 && phrase.length<4) continue; // skip tiny lone tokens inside a phrase
+          if(!seen[phrase]){ seen[phrase] = true; out.push(phrase); }
+        }
+      }
+      run = [];
+    }
+    toks.forEach(function(t){
+      t = t.replace(/^[\-+]+|[\-+]+$/g,'');
+      if(!t || t.length < 2 || _PREF_STOP[t] || /^\d+$/.test(t)) { flush(); return; }
+      run.push(t);
+      if(run.length >= 3) flush();
+    });
+    flush();
+  });
+  // Prefer multi-word phrases first, then fill with singles, cap at MAX_PREFS.
+  out.sort(function(a,b){ return b.split(' ').length - a.split(' ').length; });
+  return out.slice(0, MAX_PREFS);
+}
+
+function loadPreferencesPanel(){
+  if(!_authUser) return;
+  _sb.from('user_preferences')
+    .select('pref_text, keywords, learned_keywords')
+    .eq('user_id', _authUser.id)
+    .maybeSingle()
+    .then(function(r){
+      if(r.error){ console.error('load user_preferences:', r.error); renderPreferencesPanel(); renderLearnedPanel(); return; }
+      var row = r.data || {};
+      _prefText = row.pref_text || '';
+      _prefs    = row.keywords  || [];
+      _learned  = row.learned_keywords || [];
+      var ta = document.getElementById('prefs-text');
+      if(ta) ta.value = _prefText;
+      renderPreferencesPanel();
+      renderLearnedPanel();
+    });
+}
+
+/* ═══════════════════════════════════
+   LEARNED-FROM-ACTIVITY PANEL
+   Words the system has picked up from jobs you save (added) and
+   thumbs-down (removed). Stored in user_preferences.learned_keywords.
+   Written to the DB on every action so the next search run uses them.
+   ═══════════════════════════════════ */
+var _learned = [];
+var MAX_LEARNED = 40;
+
+// Pull the distinctive words out of a job title (the strongest role-type signal).
+function mineJobWords(title){
+  var words = extractKeywordsFromText(title || '');
+  // keep it tight: title phrases + notable single tokens, cap per job
+  return words.slice(0, 6);
+}
+
+function renderLearnedPanel(){
+  var chipsEl = document.getElementById('learned-chips');
+  var countEl = document.getElementById('learned-count');
+  if(!chipsEl) return;
+  if(!_learned.length){
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">Nothing learned yet. Save jobs you like and thumbs-down ones you don\'t — the words build up here.</span>';
   } else {
-    chipsEl.innerHTML = _keywords.map(function(kw, i){
+    chipsEl.innerHTML = _learned.map(function(kw, i){
       return '<span class="chip">'+esc(kw)
-        +'<button class="chip-remove" onclick="removeKeyword('+i+')" title="Remove">&#10005;</button>'
+        +'<button class="chip-remove" onclick="removeLearned('+i+')" title="Remove">&#10005;</button>'
         +'</span>';
     }).join('');
   }
-
-  if(parsedEl){
-    parsedEl.textContent = _keywordsParsedFrom
-      ? 'Parsed from: '+_keywordsParsedFrom+(_keywordsParsedAt?' · '+fmtDate(_keywordsParsedAt):'')
-      : '';
-  }
-  if(dirtyEl)  dirtyEl.classList[_keywordsDirty?'add':'remove']('visible');
-  if(saveBtn)  saveBtn.classList[_keywordsDirty?'add':'remove']('visible');
-  renderResumeCard();
+  if(countEl) countEl.textContent = _learned.length+(_learned.length?'':'');
+  renderLearningsPillar();
 }
 
-window.removeKeyword = function(idx){
-  _keywords.splice(idx, 1);
-  _keywordsDirty = true;
-  renderKeywordsPanel();
+// Persist the current _learned list to the DB (upsert so it survives into the next search run).
+function saveLearnedToDb(){
+  if(!_authUser) return;
+  _sb.from('user_preferences').upsert(
+    {user_id:_authUser.id, learned_keywords:_learned, updated_at:new Date().toISOString()},
+    {onConflict:'user_id'}
+  ).then(function(r){ if(r.error) console.error('save learned_keywords:', r.error); });
+}
+
+function addLearnedFromTitle(title){
+  var words = mineJobWords(title);
+  var changed = false;
+  words.forEach(function(w){
+    if(_learned.indexOf(w) === -1 && _learned.length < MAX_LEARNED){ _learned.push(w); changed = true; }
+  });
+  if(changed){ renderLearnedPanel(); saveLearnedToDb(); }
+}
+
+function removeLearnedFromTitle(title){
+  var words = mineJobWords(title);
+  var before = _learned.length;
+  _learned = _learned.filter(function(w){ return words.indexOf(w) === -1; });
+  if(_learned.length !== before){ renderLearnedPanel(); saveLearnedToDb(); }
+}
+
+window.removeLearned = function(idx){
+  _learned.splice(idx, 1);
+  renderLearnedPanel();
+  saveLearnedToDb();
 };
 
-window.addKeyword = function(){
-  var inp = document.getElementById('keyword-input');
-  var val = (inp.value||'').trim();
+function renderPreferencesPanel(){
+  var chipsEl = document.getElementById('prefs-chips');
+  var dirtyEl = document.getElementById('prefs-dirty');
+  var saveBtn = document.getElementById('prefs-save-btn');
+  var countEl = document.getElementById('prefs-count');
+  if(!chipsEl) return;
+
+  if(!_prefs.length){
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No preference keywords yet. Write a few sentences above, then hit "Extract keywords" — or add your own below.</span>';
+  } else {
+    chipsEl.innerHTML = _prefs.map(function(kw, i){
+      return '<span class="chip">'+esc(kw)
+        +'<button class="chip-remove" onclick="removePreference('+i+')" title="Remove">&#10005;</button>'
+        +'</span>';
+    }).join('');
+  }
+  if(countEl){
+    countEl.textContent = _prefs.length+'/'+MAX_PREFS;
+    countEl.style.color = _prefs.length > MAX_PREFS ? 'var(--danger, #c0392b)' : '';
+  }
+  if(dirtyEl) dirtyEl.classList[_prefsDirty?'add':'remove']('visible');
+  if(saveBtn) saveBtn.classList[_prefsDirty?'add':'remove']('visible');
+
+  var addBtn = document.querySelector('#prefs-panel-wrap .chip-add-row .btn-add-chip[onclick="addPreference()"]');
+  var inp    = document.getElementById('pref-input');
+  if(addBtn) addBtn.disabled = _prefs.length >= MAX_PREFS;
+  if(inp)    inp.disabled    = _prefs.length >= MAX_PREFS;
+  renderOutlookPillar();
+}
+
+window.markPrefsDirty = function(){
+  _prefsDirty = true;
+  renderPreferencesPanel();
+};
+
+window.extractPreferences = function(){
+  var ta = document.getElementById('prefs-text');
+  var note = document.getElementById('prefs-extract-note');
+  var text = ta ? (ta.value||'') : '';
+  if(!text.trim()){ if(note) note.textContent = 'Write a sentence or two first.'; return; }
+  var extracted = extractKeywordsFromText(text);
+  // Merge with any existing chips the user kept, dedup, cap.
+  var merged = _prefs.slice();
+  extracted.forEach(function(k){ if(merged.indexOf(k) === -1) merged.push(k); });
+  _prefs = merged.slice(0, MAX_PREFS);
+  _prefText = text;
+  _prefsDirty = true;
+  if(note) note.textContent = extracted.length+' found — edit freely, then Save.';
+  renderPreferencesPanel();
+};
+
+window.addPreference = function(){
+  if(_prefs.length >= MAX_PREFS) return;
+  var inp = document.getElementById('pref-input');
+  var val = (inp.value||'').trim().toLowerCase();
   if(!val) return;
-  if(_keywords.indexOf(val) === -1) _keywords.push(val);
+  if(_prefs.indexOf(val) === -1) _prefs.push(val);
   inp.value = '';
-  _keywordsDirty = true;
-  renderKeywordsPanel();
+  _prefsDirty = true;
+  renderPreferencesPanel();
   inp.focus();
 };
 
-window.saveKeywords = function(){
+window.removePreference = function(idx){
+  _prefs.splice(idx, 1);
+  _prefsDirty = true;
+  renderPreferencesPanel();
+};
+
+window.savePreferences = function(){
   if(!_authUser) return;
-  var btn = document.getElementById('keywords-save-btn');
+  var ta = document.getElementById('prefs-text');
+  if(ta) _prefText = ta.value || '';
+  var btn = document.getElementById('prefs-save-btn');
   if(btn){ btn.disabled=true; btn.textContent='Saving…'; }
-  _sb.from('user_keywords').upsert(
-    {user_id:_authUser.id, keywords:_keywords, updated_at:new Date().toISOString()},
+  _sb.from('user_preferences').upsert(
+    {user_id:_authUser.id, pref_text:_prefText, keywords:_prefs, updated_at:new Date().toISOString()},
     {onConflict:'user_id'}
   ).then(function(r){
-    if(r.error){ console.error('save keywords:', r.error); }
-    _keywordsDirty = false;
+    if(r.error){ console.error('save preferences:', r.error); }
+    _prefsDirty = false;
     if(btn){ btn.disabled=false; btn.textContent='Save'; }
-    renderKeywordsPanel();
+    renderPreferencesPanel();
   });
 };
 
@@ -1222,7 +1732,7 @@ window.saveKeywords = function(){
    ═══════════════════════════════════ */
 var _titles = [];
 var _titlesDirty = false;
-var MAX_TITLES = 10;
+var MAX_TITLES = 4;
 
 function loadTitlesPanel(){
   if(!_authUser) return;
@@ -1245,7 +1755,7 @@ function renderTitlesPanel(){
   if(!chipsEl) return;
 
   if(!_titles.length){
-    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No job titles yet. Add up to '+MAX_TITLES+' titles to search.</span>';
+    chipsEl.innerHTML = '<span style="font-size:12px;color:var(--muted);font-style:italic;">No job titles yet. Add up to '+MAX_TITLES+' — these are the exact terms searched on LinkedIn and Indeed.</span>';
   } else {
     chipsEl.innerHTML = _titles.map(function(t, i){
       return '<span class="chip">'+esc(t)
