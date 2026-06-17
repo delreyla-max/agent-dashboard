@@ -1,0 +1,80 @@
+{
+  "generated_note": "raw fetch, pre-filter/dedup/score",
+  "jobs": [
+    {
+      "indeed_job_id": "JOBSEARCH_556",
+      "title": "Head of Product",
+      "company": "Tapouts",
+      "companyName": "Tapouts",
+      "location": "Venice, CA",
+      "posted": "2026-03-31",
+      "source": "Indeed",
+      "link": "https://to.indeed.com/aackcfgqwlwd",
+      "descriptionText": "Head of Product",
+      "salary": "$135,985.41 - $220,214.03 a year",
+      "pay": "$135,985.41 - $220,214.03 a year",
+      "employmentType": "Full-time",
+      "type": "Full-time"
+    },
+    {
+      "indeed_job_id": "JOBSEARCH_557",
+      "title": "VP, Clinical Trials Operations",
+      "company": "City of Hope",
+      "companyName": "City of Hope",
+      "location": "Duarte, CA",
+      "posted": "2026-03-10",
+      "source": "Indeed",
+      "link": "https://to.indeed.com/aawq72brhkbk",
+      "descriptionText": "VP, Clinical Trials Operations",
+      "salary": "$132.19 - $220.32 an hour",
+      "pay": "$132.19 - $220.32 an hour",
+      "employmentType": "Full-time",
+      "type": "Full-time"
+    },
+    {
+      "indeed_job_id": "JOBSEARCH_558",
+      "title": "Vice President, Regulatory Affairs, Clinical Operations & Medical Affairs",
+      "company": "Dendreon",
+      "companyName": "Dendreon",
+      "location": "Seal Beach, CA",
+      "posted": "2026-06-13",
+      "source": "Indeed",
+      "link": "https://to.indeed.com/aa467s2xxrq9",
+      "descriptionText": "Vice President, Regulatory Affairs, Clinical Operations & Medical Affairs",
+      "salary": "$255,983 - $294,000 a year",
+      "pay": "$255,983 - $294,000 a year",
+      "employmentType": "Full-time",
+      "type": "Full-time"
+    },
+    {
+      "indeed_job_id": "JOBSEARCH_559",
+      "title": "Senior Product Designer (Canada East)",
+      "company": "Loot Labs",
+      "companyName": "Loot Labs",
+      "location": "Seattle, WA",
+      "posted": "2026-04-09",
+      "source": "Indeed",
+      "link": "https://to.indeed.com/aajwjz9mv6gl",
+      "descriptionText": "Senior Product Designer (Canada East)",
+      "salary": "$80,000 - $190,000 a year",
+      "pay": "$80,000 - $190,000 a year",
+      "employmentType": "Full-time",
+      "type": "Full-time"
+    },
+    {
+      "indeed_job_id": "JOBSEARCH_560",
+      "title": "Vice President, Head Clinical Development-Respiratory",
+      "company": "Uniquity Bio",
+      "companyName": "Uniquity Bio",
+      "location": "Malvern, PA",
+      "posted": "2026-06-02",
+      "source": "Indeed",
+      "link": "https://to.indeed.com/aa8yvhwkf46q",
+      "descriptionText": "Vice President, Head Clinical Development-Respiratory",
+      "salary": "$95,396.35 - $158,693.34 a year",
+      "pay": "$95,396.35 - $158,693.34 a year",
+      "employmentType": "Full-time",
+      "type": "Full-time"
+    }
+  ]
+}

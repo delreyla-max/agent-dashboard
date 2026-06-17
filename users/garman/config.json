@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "updated": "2026-06-16T04:21:04-07:00",
+  "updated": "2026-06-17T07:25:42-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-16T04:21:04-07:00",
+      "lastRun": "2026-06-17T07:25:42-07:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "9 new jobs added (1 Tier 1, 0 Tier 2, 3 Tier 3) — 28 total cumulative. 3 of today's 13 raw results excluded as content-duplicates of already-tracked postings under new connector-issued IDs: Circle \"Lead Product Designer, Arc Platform\" (re-surfaced as LinkedIn id 4353121371, already tracked as 4353051446/4352991507), Amazon Ring ACD (Indeed id 494, already tracked as 424/477/IN:JOBSEARCH_407), and Princeton10 ACD Art (Indeed id 496, already tracked as JOBSEARCH_479).",
+      "lastRunNote": "Titles: Associate Creative Director, Creative Director, Brand Creative Director, AI Creative Director \u2014 24 new (0 Tier 1) \u2014 LI 18, IN 3, GD 2, ZR 1 \u2014 52 total",
       "outputFolder": "/Users/gy/Documents/ClaudeCowork/GitHub/agent-dashboard/users/garman/jobs/",
       "documents": []
     }
@@ -20,8 +20,8 @@
     "summary": null,
     "items": [],
     "recommendations": [
-      "The Amazon Ring ACD in today's Indeed results was posted February 28 — nearly 4 months ago. Indeed isn't filtering by recency, so stale roles are mixing in with fresh ones. Worth adding a \"past 14 days\" filter to Indeed searches so what surfaces is actually new.",
-      "2026-06-16: Confirmed the same job-ID-instability problem also affects LinkedIn, not just Indeed — Circle's \"Lead Product Designer, Arc Platform\" has now hit the pipeline under at least 3 different LinkedIn job IDs across separate days/tag-variants. all_jobs.json already carries 3 separate entries for the same Amazon Ring posting (ids 424/477/407) and nearly got a 4th today. Recommend a one-time cleanup pass on all_jobs.json to merge known duplicate clusters, plus switching dedup to a normalized title+company content hash going forward instead of relying on source-assigned IDs."
+      "The Amazon Ring ACD in today's Indeed results was posted February 28 \u2014 nearly 4 months ago. Indeed isn't filtering by recency, so stale roles are mixing in with fresh ones. Worth adding a \"past 14 days\" filter to Indeed searches so what surfaces is actually new.",
+      "2026-06-16: Confirmed the same job-ID-instability problem also affects LinkedIn, not just Indeed \u2014 Circle's \"Lead Product Designer, Arc Platform\" has now hit the pipeline under at least 3 different LinkedIn job IDs across separate days/tag-variants. all_jobs.json already carries 3 separate entries for the same Amazon Ring posting (ids 424/477/407) and nearly got a 4th today. Recommend a one-time cleanup pass on all_jobs.json to merge known duplicate clusters, plus switching dedup to a normalized title+company content hash going forward instead of relying on source-assigned IDs."
     ]
   },
   "name": "Garman",
