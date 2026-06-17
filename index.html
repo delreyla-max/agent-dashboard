@@ -103,22 +103,31 @@ body {
 .subsection-header { font-size:13.5px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin:18px 0 9px; display:flex; align-items:center; gap:6px; }
 .subsection-header:first-of-type { margin-top:14px; }
 
-/* ── SETTINGS (hidden; opened from user menu) ── */
-.settings-section { margin-top:0; }
-.settings-body { overflow:hidden; transition:max-height .4s ease, opacity .2s ease, margin-top .3s ease; max-height:6000px; opacity:1; margin-top:16px; }
-.settings-body.collapsed { max-height:0; opacity:0; margin-top:0; pointer-events:none; }
-.settings-body .bottom-panels { margin-top:12px; }
-.settings-bar {
-  display:flex; align-items:center; gap:8px;
-  background:var(--blue-bg); border:1px solid var(--blue-border); border-radius:var(--radius-card);
-  padding:10px 16px;
+/* ── PILLAR DRAWER (expands under the cards, connected to the clicked card) ── */
+.stat-card { position:relative; transition:border-color .15s, box-shadow .15s; }
+.stat-card.pillar-active { border-color:var(--blue); box-shadow:0 0 0 1px var(--blue); }
+.pillar-drawer { position:relative; margin-top:12px; animation:pillar-in .22s ease; }
+@keyframes pillar-in { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+.pillar-arrow {
+  position:absolute; top:-7px; left:50%; transform:translateX(-50%);
+  width:14px; height:14px; background:var(--surface);
+  border-left:1px solid var(--blue); border-top:1px solid var(--blue);
+  border-top-left-radius:3px; rotate:45deg; z-index:1;
 }
-.settings-bar-title { font-size:15px; font-weight:600; color:#1d4ed8; flex:1 1 auto; }
-.settings-bar-close {
-  background:#fff; border:1px solid var(--blue-border); color:#1d4ed8; cursor:pointer;
-  border-radius:6px; padding:5px 14px; font-size:12px; font-weight:600;
+.pillar-drawer-inner {
+  background:var(--surface); border:1px solid var(--blue); border-radius:var(--radius-card);
+  padding:14px 18px 16px;
 }
-.settings-bar-close:hover { background:#eff6ff; }
+.pillar-drawer-head { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.pillar-drawer-title { font-size:14px; font-weight:700; color:var(--text); flex:1 1 auto; }
+.pillar-drawer-close {
+  background:none; border:1px solid var(--border); color:var(--muted); cursor:pointer;
+  border-radius:6px; width:26px; height:26px; font-size:13px; line-height:1;
+}
+.pillar-drawer-close:hover { border-color:var(--red); color:var(--red); }
+.pillar-panel .chip-panel-wrap { border:none; }
+.chip-panel-toolbar { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.chip-panel-toolbar .chip-count { margin-right:auto; }
 
 /* ── USER MENU (avatar dropdown, top-right) ── */
 .user-menu { position:relative; }
@@ -535,86 +544,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
   </div>
 </div>
 
-  <!-- Settings (hidden; opened from the user menu, top-right) -->
-  <div class="settings-section" id="settings-section">
-    <div class="settings-body collapsed" id="settings-body">
-      <div class="settings-bar">
-        <span class="settings-bar-title">&#9881; Settings</span>
-        <button class="settings-bar-close" onclick="closeSettings()">Done</button>
-      </div>
-      <div class="bottom-panels">
-        <div class="panel">
-          <div class="panel-header"><span class="panel-title">Resume</span></div>
-          <div class="bottom-panel-body" id="resume-card"></div>
-        </div>
-        <div class="chip-panel-wrap" id="titles-panel-wrap">
-          <div class="chip-panel-header">
-            <span class="chip-panel-title">Job Titles</span>
-            <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
-            <span class="chip-count" id="titles-count"></span>
-            <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
-            <button class="chip-panel-toggle" id="titles-toggle" onclick="togglePanel('titles')" title="Collapse">&#9660;</button>
-          </div>
-          <div class="chip-panel-body" id="titles-body">
-            <div class="chip-panel-body-inner">
-              <div class="chips-area" id="titles-chips">
-                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-              </div>
-              <div class="chip-add-row">
-                <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
-                  onkeydown="if(event.key==='Enter') addTitle()" />
-                <button class="btn-add-chip" onclick="addTitle()">Add</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="chip-panel-wrap" id="learned-panel-wrap">
-          <div class="chip-panel-header">
-            <span class="chip-panel-title">Learned From Your Activity</span>
-            <span class="chip-count" id="learned-count"></span>
-            <button class="chip-panel-toggle" id="learned-toggle" onclick="togglePanel('learned')" title="Collapse">&#9660;</button>
-          </div>
-          <div class="chip-panel-body" id="learned-body">
-            <div class="chip-panel-body-inner">
-              <div class="chips-area" id="learned-chips">
-                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-              </div>
-              <div class="chip-parsed" id="learned-note">Save a job (&#9734;) to teach the system its words. Thumbs-down (&#128078;) a job to drop them. This list feeds your Pref-fit score on the next search run.</div>
-            </div>
-          </div>
-        </div>
-        <div class="chip-panel-wrap" id="prefs-panel-wrap">
-          <div class="chip-panel-header">
-            <span class="chip-panel-title">What You're Looking For</span>
-            <span class="chip-panel-dirty" id="prefs-dirty">Unsaved changes</span>
-            <span class="chip-count" id="prefs-count"></span>
-            <button class="btn-save-chips" id="prefs-save-btn" onclick="savePreferences()">Save</button>
-            <button class="chip-panel-toggle" id="prefs-toggle" onclick="togglePanel('prefs')" title="Collapse">&#9660;</button>
-          </div>
-          <div class="chip-panel-body" id="prefs-body">
-            <div class="chip-panel-body-inner">
-              <textarea class="pref-textarea" id="prefs-text" oninput="markPrefsDirty()"
-                placeholder="Describe the role you want in a few sentences — type of company, seniority, what excites you, dealbreakers. e.g. 'Remote or LA ACD/CD role at a design-led tech or entertainment brand. I want to lead AI-assisted production and brand systems. Not interested in pure social or automotive dealership work.'"></textarea>
-              <div class="chip-add-row" style="margin-bottom:11px;">
-                <button class="btn-add-chip" onclick="extractPreferences()">Extract keywords &#8595;</button>
-                <span class="chip-count" id="prefs-extract-note"></span>
-              </div>
-              <div class="chips-area" id="prefs-chips">
-                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
-              </div>
-              <div class="chip-add-row">
-                <input class="chip-input" id="pref-input" type="text" placeholder="Add preference keyword…"
-                  onkeydown="if(event.key==='Enter') addPreference()" />
-                <button class="btn-add-chip" onclick="addPreference()">Add</button>
-              </div>
-              <div class="chip-parsed" id="prefs-parsed">These drive a separate "Pref fit" badge on each job — they don't change your resume keyword score.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Personal Job Search Engine -->
   <div class="engine-head">
     <div class="engine-title">Your Personal Job Search Engine</div>
@@ -628,7 +557,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <div class="stat-label">Resume</div>
         <div class="stat-value text-val" id="stat-resume-name">—</div>
         <div class="stat-sub" id="stat-resume-date"></div>
-        <button class="stat-cta" id="resume-review-cta" onclick="openSettings()">Review Keywords &#8594;</button>
+        <button class="stat-cta" id="resume-review-cta" onclick="openPillar('resume', this)">Review Keywords &#8594;</button>
       </div>
     </div>
     <!-- 2. Preferences -->
@@ -638,6 +567,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <div class="stat-label">Preferences</div>
         <div class="stat-value text-val"><span id="pref-saved">0</span> saved &middot; <span id="pref-passed">0</span> passed</div>
         <div class="stat-sub">Jobs you &#9733; and &#128078;</div>
+        <button class="stat-cta" onclick="openPillar('titles', this)">Edit job titles &#8594;</button>
       </div>
     </div>
     <!-- 3. Learnings -->
@@ -647,7 +577,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <div class="stat-label">Learnings</div>
         <div class="stat-value text-val" id="learn-summary">—</div>
         <div class="stat-sub" id="learn-terms">What we've learned from your activity</div>
-        <button class="stat-cta" onclick="openSettings()">View in Settings &#8594;</button>
+        <button class="stat-cta" onclick="openPillar('learned', this)">View details &#8594;</button>
       </div>
     </div>
     <!-- 4. Outlook -->
@@ -657,7 +587,89 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <div class="stat-label">Outlook</div>
         <div class="stat-value text-val" id="outlook-summary">—</div>
         <div class="stat-sub" id="outlook-terms">What we think you're looking for</div>
-        <button class="stat-cta" onclick="openSettings()">Edit &#8594;</button>
+        <button class="stat-cta" onclick="openPillar('prefs', this)">Edit &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pillar detail drawer — expands from a card's CTA, with an arrow pointing back to that card -->
+  <div class="pillar-drawer" id="pillar-drawer" hidden>
+    <div class="pillar-arrow" id="pillar-arrow"></div>
+    <div class="pillar-drawer-inner">
+      <div class="pillar-drawer-head">
+        <span class="pillar-drawer-title" id="pillar-drawer-title">Resume</span>
+        <button class="pillar-drawer-close" onclick="closePillar()" title="Close">&#10005;</button>
+      </div>
+
+      <!-- Resume -->
+      <div class="pillar-panel" id="pillar-panel-resume" hidden>
+        <div class="bottom-panel-body" id="resume-card"></div>
+      </div>
+
+      <!-- Job Titles -->
+      <div class="pillar-panel" id="pillar-panel-titles" hidden>
+        <div class="chip-panel-wrap" id="titles-panel-wrap">
+          <div class="chip-panel-body" id="titles-body">
+            <div class="chip-panel-body-inner">
+              <div class="chip-panel-toolbar">
+                <span class="chip-count" id="titles-count"></span>
+                <span class="chip-panel-dirty" id="titles-dirty">Unsaved changes</span>
+                <button class="btn-save-chips" id="titles-save-btn" onclick="saveTitles()">Save</button>
+              </div>
+              <div class="chips-area" id="titles-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-add-row">
+                <input class="chip-input" id="title-input" type="text" placeholder="Add job title…"
+                  onkeydown="if(event.key==='Enter') addTitle()" />
+                <button class="btn-add-chip" onclick="addTitle()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learned From Your Activity -->
+      <div class="pillar-panel" id="pillar-panel-learned" hidden>
+        <div class="chip-panel-wrap" id="learned-panel-wrap">
+          <div class="chip-panel-body" id="learned-body">
+            <div class="chip-panel-body-inner">
+              <span class="chip-count" id="learned-count"></span>
+              <div class="chips-area" id="learned-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-parsed" id="learned-note">Save a job (&#9734;) to teach the system its words. Thumbs-down (&#128078;) a job to drop them. This list feeds your Pref-fit score on the next search run.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What You're Looking For -->
+      <div class="pillar-panel" id="pillar-panel-prefs" hidden>
+        <div class="chip-panel-wrap" id="prefs-panel-wrap">
+          <div class="chip-panel-body" id="prefs-body">
+            <div class="chip-panel-body-inner">
+              <textarea class="pref-textarea" id="prefs-text" oninput="markPrefsDirty()"
+                placeholder="Describe the role you want in a few sentences — type of company, seniority, what excites you, dealbreakers. e.g. 'Remote or LA ACD/CD role at a design-led tech or entertainment brand. I want to lead AI-assisted production and brand systems. Not interested in pure social or automotive dealership work.'"></textarea>
+              <div class="chip-add-row" style="margin-bottom:11px;">
+                <button class="btn-add-chip" onclick="extractPreferences()">Extract keywords &#8595;</button>
+                <span class="chip-count" id="prefs-extract-note"></span>
+                <span class="chip-panel-dirty" id="prefs-dirty">Unsaved changes</span>
+                <span class="chip-count" id="prefs-count"></span>
+                <button class="btn-save-chips" id="prefs-save-btn" onclick="savePreferences()">Save</button>
+              </div>
+              <div class="chips-area" id="prefs-chips">
+                <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
+              </div>
+              <div class="chip-add-row">
+                <input class="chip-input" id="pref-input" type="text" placeholder="Add preference keyword…"
+                  onkeydown="if(event.key==='Enter') addPreference()" />
+                <button class="btn-add-chip" onclick="addPreference()">Add</button>
+              </div>
+              <div class="chip-parsed" id="prefs-parsed">These drive a separate "Pref fit" badge on each job — they don't change your resume keyword score.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -804,7 +816,6 @@ function updateAuthUI(){
     + '<button class="auth-avatar is-button" id="avatar-btn" style="'+avatarStyle+'" onclick="toggleUserMenu(event)" aria-haspopup="true" aria-expanded="false" title="'+esc(uname)+'">'+esc(letter)+'</button>'
     + '<div class="user-dropdown" id="user-dropdown">'
     +   '<div class="user-dropdown-email">'+esc(email)+'</div>'
-    +   '<button class="user-dropdown-item" onclick="openSettings()">&#9881;&#65039; Settings</button>'
     +   '<button class="user-dropdown-item signout" onclick="doSignOut()">Sign out</button>'
     + '</div>'
     + '</div>';
@@ -826,18 +837,53 @@ document.addEventListener('click', function(e){
   var dd = document.getElementById('user-dropdown');
   if(dd && dd.classList.contains('open') && !e.target.closest('.user-menu')) closeUserMenu();
 });
-window.openSettings = function(){
-  closeUserMenu();
-  var body = document.getElementById('settings-body');
-  if(!body) return;
-  body.classList.remove('collapsed');
-  var sec = document.getElementById('settings-section');
-  if(sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+/* ── PILLAR DRAWER: expands under the cards, arrow points to the clicked card ── */
+var _activePillar = null;
+var PILLAR_TITLES = { resume:'Resume keywords', titles:'Job titles', learned:'Learned from your activity', prefs:"What you're looking for" };
+function positionPillarArrow(cardEl){
+  var arrow = document.getElementById('pillar-arrow');
+  var drawer = document.getElementById('pillar-drawer');
+  if(!arrow || !drawer || !cardEl) return;
+  var c = cardEl.getBoundingClientRect();
+  var d = drawer.getBoundingClientRect();
+  var left = (c.left + c.width/2) - d.left;
+  arrow.style.left = Math.max(16, Math.min(d.width-16, left)) + 'px';
+}
+window.openPillar = function(key, fromEl){
+  var drawer = document.getElementById('pillar-drawer');
+  if(!drawer) return;
+  var cardEl = fromEl && fromEl.closest ? fromEl.closest('.stat-card') : null;
+  // Clicking the active card's CTA again closes the drawer.
+  if(_activePillar === key && !drawer.hasAttribute('hidden')){ closePillar(); return; }
+  _activePillar = key;
+  ['resume','titles','learned','prefs'].forEach(function(k){
+    var p = document.getElementById('pillar-panel-'+k);
+    if(p){ if(k===key) p.removeAttribute('hidden'); else p.setAttribute('hidden',''); }
+    var card = document.getElementById('pillar-card-'+k); // (optional highlight hook)
+  });
+  var titleEl = document.getElementById('pillar-drawer-title');
+  if(titleEl) titleEl.textContent = PILLAR_TITLES[key] || 'Details';
+  // highlight the active source card
+  document.querySelectorAll('.stat-card.pillar-active').forEach(function(el){ el.classList.remove('pillar-active'); });
+  if(cardEl) cardEl.classList.add('pillar-active');
+  drawer.removeAttribute('hidden');
+  positionPillarArrow(cardEl);
+  drawer.scrollIntoView({behavior:'smooth', block:'nearest'});
 };
-window.closeSettings = function(){
-  var body = document.getElementById('settings-body');
-  if(body) body.classList.add('collapsed');
+window.closePillar = function(){
+  var drawer = document.getElementById('pillar-drawer');
+  if(drawer) drawer.setAttribute('hidden','');
+  document.querySelectorAll('.stat-card.pillar-active').forEach(function(el){ el.classList.remove('pillar-active'); });
+  _activePillar = null;
 };
+// Keep the arrow aligned if the window resizes while open.
+window.addEventListener('resize', function(){
+  var drawer = document.getElementById('pillar-drawer');
+  if(drawer && !drawer.hasAttribute('hidden')){
+    var card = document.querySelector('.stat-card.pillar-active');
+    if(card) positionPillarArrow(card);
+  }
+});
 
 /* ── BOOT DASHBOARD ── */
 function bootDashboard(){
