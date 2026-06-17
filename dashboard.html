@@ -817,6 +817,10 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         </div>
         <div class="filter-sep"></div>
         <div class="filter-group">
+          <label class="filter-chk"><input type="checkbox" id="f-local-only" checked onchange="applyJobFilter(event)"> <span>&#128205; LA or Remote only</span></label>
+        </div>
+        <div class="filter-sep"></div>
+        <div class="filter-group">
           <label class="filter-chk"><input type="checkbox" id="f-show-dismissed" onchange="toggleShowDismissed()"> <span>&#128078; Show dismissed</span></label>
         </div>
       </div>
@@ -1067,7 +1071,27 @@ function init(d){
   var _lastUpdated = null;
   var _cachedJobs = [];
   _rerenderBoard = function(){ renderMergedJobList(_cachedJobs); };
-  var _filters = { score50:false, score80:false, showLI:true, showIndeed:true, showGlassdoor:true, showZip:true, daysAgo:0 };
+  var _filters = { score50:false, score80:false, showLI:true, showIndeed:true, showGlassdoor:true, showZip:true, daysAgo:0, localOnly:true };
+
+  // Greater LA-area place names seen in this board's actual job data (LinkedIn/Indeed/Glassdoor/ZipRecruiter
+  // all return loosely-matched results despite the pipeline's location params, so a literal "Los Angeles"
+  // substring match would wrongly exclude real local jobs like Burbank or Santa Monica).
+  var LA_AREA = ['los angeles','santa monica','burbank','glendale','pasadena','culver city','venice',
+    'el segundo','hawthorne','cerritos','rosemead','sherman oaks','gardena','buena park','valencia',
+    'long beach','inglewood','torrance','manhattan beach','marina del rey','west hollywood',
+    'beverly hills','north hollywood','van nuys','downey','whittier','norwalk','pomona',
+    'santa clarita','compton','carson','redondo beach','hermosa beach','encino','tarzana',
+    'woodland hills','studio city','northridge','reseda'];
+
+  function isLocalOrRemote(j){
+    var loc = (j.location||'').toLowerCase();
+    var type = (j.type || j.employmentType || '').toLowerCase();
+    if(/remote/.test(loc) || /remote/.test(type) || /anywhere/.test(loc)) return true;
+    // bare "United States" with no city almost always comes from this pipeline's remote search leg
+    if(loc.replace(/[.,]/g,'').trim() === 'united states') return true;
+    for(var i=0;i<LA_AREA.length;i++){ if(loc.indexOf(LA_AREA[i]) !== -1) return true; }
+    return false;
+  }
 
   /* Map a job's source string to a stable {key,label} used for the colored
      Source cell and the source filter. New sources go here. */
@@ -1090,6 +1114,8 @@ function init(d){
     var srcShow = { li:_filters.showLI, indeed:_filters.showIndeed, glassdoor:_filters.showGlassdoor, zip:_filters.showZip };
     return jobs.filter(function(j){
       if(!_showDismissed && isJobDismissed(j.link||'')) return false;
+      if(isJobSaved(j.link||'')) return false;
+      if(_filters.localOnly && !isLocalOrRemote(j)) return false;
       if(minScore > 0 && (j.score == null || j.score < minScore)) return false;
       if(srcShow[srcInfo(j._source).key] === false) return false;
       if(cutoff && (j.posted||'') < cutoff) return false;
@@ -1243,6 +1269,8 @@ function init(d){
     _filters.showZip       = zrEl ? zrEl.checked : true;
     var dateRadio = document.querySelector('input[name="f-date"]:checked');
     _filters.daysAgo = dateRadio && dateRadio.value !== 'all' ? parseInt(dateRadio.value) : 0;
+    var localEl = document.getElementById('f-local-only');
+    _filters.localOnly = localEl ? localEl.checked : true;
     renderMergedJobList(_cachedJobs);
   };
 
@@ -1362,6 +1390,7 @@ window.removeSavedJob = function(link){
   dbDelete(link);
   renderSavedJobs();
   updateAllStars();
+  _rerenderBoard();   // unsaving brings the job back onto the main board
 };
 
 window.handleStar = function(btn){
@@ -1377,6 +1406,7 @@ window.handleStar = function(btn){
   }
   renderSavedJobs();
   updateAllStars();
+  _rerenderBoard();   // saving moves the job off the main board (one-way move into Saved)
 };
 
 /* ═══════════════════════════════════
