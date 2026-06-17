@@ -34,14 +34,7 @@ body {
   background:var(--surface); border-bottom:1px solid var(--border);
   padding:7px 32px; margin:0 -32px 20px;
 }
-.nav-brand { display:flex; align-items:center; gap:10px; flex:0 0 auto; }
-.nav-logo {
-  width:32px; height:32px; border-radius:8px; background:var(--blue-bg);
-  color:var(--blue); display:flex; align-items:center; justify-content:center;
-  font-weight:700; font-size:15px; flex-shrink:0;
-}
-.nav-brand-text { font-weight:700; font-size:15px; color:var(--text); white-space:nowrap; }
-.nav-center { flex:1 1 auto; min-width:160px; text-align:center; }
+.nav-center { flex:1 1 auto; min-width:160px; text-align:left; }
 .nav-title { font-weight:600; font-size:16px; color:var(--text); }
 .nav-right { display:flex; align-items:center; gap:12px; flex:0 0 auto; }
 
@@ -64,7 +57,7 @@ body {
 
 /* ── SECTION HEADERS ── */
 .section-header {
-  font-size:16px; font-weight:600; margin:24px 0 12px; color:var(--text);
+  font-size:20px; font-weight:700; letter-spacing:-0.01em; margin:30px 0 4px; color:var(--text);
   display:flex; align-items:center; gap:8px;
 }
 
@@ -106,9 +99,9 @@ body {
 .count-badge.today { color:#1d4ed8; background:var(--blue-bg); border-color:var(--blue-border); }
 
 /* ── JOB BOARD hierarchy: parent subtitle + subsection headers ── */
-.board-subtitle { display:flex; flex-wrap:wrap; align-items:center; gap:2px; font-size:12px; color:var(--muted); margin:-4px 0 14px; }
-.subsection-header { font-size:13.5px; font-weight:600; color:var(--text); margin:20px 0 10px; display:flex; align-items:center; gap:6px; }
-.subsection-header:first-of-type { margin-top:6px; }
+.board-subtitle { display:flex; flex-wrap:wrap; align-items:center; gap:2px; font-size:12px; color:var(--muted); margin:2px 0 4px; }
+.subsection-header { font-size:13.5px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin:18px 0 9px; display:flex; align-items:center; gap:6px; }
+.subsection-header:first-of-type { margin-top:14px; }
 
 /* ── SETTINGS (hidden; opened from user menu) ── */
 .settings-section { margin-top:0; }
@@ -534,10 +527,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
 <div class="page">
 <!-- Navbar (nested in .page so its negative margin bleeds exactly to page's own padding, not past the viewport) -->
 <div class="navbar">
-  <div class="nav-brand">
-    <div class="nav-logo">J</div>
-    <span class="nav-brand-text">Jobbyjob</span>
-  </div>
   <div class="nav-center">
     <div class="nav-title" id="dash-title">Job Search Dashboard</div>
   </div>
@@ -805,10 +794,14 @@ function updateAuthUI(){
   var el = document.getElementById('auth-user');
   if(!_authUser){ el.classList.remove('visible'); return; }
   var email = _authUser.email || '';
-  var initials = email.slice(0,2).toUpperCase();
+  var uname = (_authUser.user_metadata && _authUser.user_metadata.username) || (email.split('@')[0]) || '';
+  var letter = (uname.trim().charAt(0) || '?').toUpperCase();
+  // Stable unique color per user, derived from their name.
+  var hue = 0; for(var i=0;i<uname.length;i++){ hue = (hue*31 + uname.charCodeAt(i)) % 360; }
+  var avatarStyle = 'background:hsl('+hue+',70%,88%);color:hsl('+hue+',60%,30%);';
   el.innerHTML =
     '<div class="user-menu">'
-    + '<button class="auth-avatar is-button" id="avatar-btn" onclick="toggleUserMenu(event)" aria-haspopup="true" aria-expanded="false" title="Account">'+esc(initials)+'</button>'
+    + '<button class="auth-avatar is-button" id="avatar-btn" style="'+avatarStyle+'" onclick="toggleUserMenu(event)" aria-haspopup="true" aria-expanded="false" title="'+esc(uname)+'">'+esc(letter)+'</button>'
     + '<div class="user-dropdown" id="user-dropdown">'
     +   '<div class="user-dropdown-email">'+esc(email)+'</div>'
     +   '<button class="user-dropdown-item" onclick="openSettings()">&#9881;&#65039; Settings</button>'
