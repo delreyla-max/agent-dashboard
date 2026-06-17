@@ -32,7 +32,7 @@ body {
 /* ── NAVBAR ── */
 .navbar {
   display:flex; align-items:center; gap:16px; flex-wrap:wrap;
-  background:var(--surface); border-bottom:1px solid var(--border);
+  background:#f3f4f6; border-bottom:1px solid var(--border);
   padding:7px 32px; margin:0 -32px 20px;
 }
 .nav-logo { display:flex; align-items:center; flex:0 0 auto; }
@@ -264,7 +264,8 @@ body {
 .jb-pref-badge.pref-low  { background:#f3f4f6; color:var(--muted2); }
 .jb-title-link { color:var(--text); font-weight:600; text-decoration:none; }
 .jb-title-link:hover { color:var(--blue); text-decoration:underline; }
-.jb-why { font-size:11px; color:var(--muted); line-height:1.5; margin-top:4px; }
+.jb-why { grid-column:1/-1; font-size:11px; color:var(--muted); line-height:1.5; margin-top:6px; padding-top:6px; border-top:1px dashed var(--border); }
+.jb-why-label { font-weight:700; color:var(--muted2); text-transform:uppercase; font-size:10px; letter-spacing:.03em; margin-right:5px; }
 .jb-pay { font-size:11px; color:var(--green); margin-top:3px; font-weight:500; }
 .jb-company { color:var(--text); }
 .jb-location { color:var(--muted); }
@@ -301,6 +302,9 @@ body {
 .mini-spin { display:inline-block; width:14px; height:14px; border:2px solid var(--border); border-top-color:var(--blue); border-radius:50%; animation:spin .65s linear infinite; vertical-align:middle; margin-right:6px; }
 .panel-err { background:var(--red-bg); border:1px solid #fecaca; border-radius:6px; padding:10px 14px; margin:12px 18px; font-size:12px; color:var(--red); }
 .jb-footer { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:12px 18px; font-size:11.5px; color:var(--muted); border-top:1px solid var(--border); background:var(--surface2); }
+.refresh-link { color:var(--blue); text-decoration:none; cursor:pointer; }
+.refresh-link:hover { text-decoration:underline; }
+.refresh-link[disabled] { color:var(--muted2); cursor:default; pointer-events:none; text-decoration:none; }
 
 /* ── LOGIN MODAL ── */
 .login-modal {
@@ -834,7 +838,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     </div>
     <div class="jb-footer">
       <span id="merged-count"></span>
-      <span id="jb-footer-note">Auto-refreshes every 5 minutes</span>
+      <span id="jb-footer-note">Auto-refreshes every 5 minutes &middot; <a id="refresh-btn" class="refresh-link" onclick="refreshBoard()">&#8635; Refresh</a></span>
     </div>
   </div>
 
@@ -1193,7 +1197,6 @@ function init(d){
       +'<div class="jb-cell jb-title-cell" data-label="">'
         +titleHtml
         +(pay?'<div class="jb-pay">&#128176; '+esc(pay)+'</div>':'')
-        +(why?'<div class="jb-why">'+esc(why)+'</div>':'')
         +(prefHtml?'<div>'+prefHtml+'</div>':'')
       +'</div>'
       +'<div class="jb-cell jb-company" data-label="Company">'+esc(company)+'</div>'
@@ -1202,6 +1205,7 @@ function init(d){
       +'<div class="jb-cell jb-posted" data-label="Posted">'+esc(j.posted||'')+'</div>'
       +'<div class="jb-cell" data-label="Type">'+typePillHtml(type)+'</div>'
       +'<div class="jb-cell jb-save" data-label="">'+actionBtns+'</div>'
+      +(why?'<div class="jb-why" data-label="">'+'<span class="jb-why-label">AI Summary:</span>'+esc(why)+'</div>':'')
       +'</div>';
   }
 
