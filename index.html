@@ -105,6 +105,11 @@ body {
 .count-badge:empty { display:none; }
 .count-badge.today { color:#1d4ed8; background:var(--blue-bg); border-color:var(--blue-border); }
 
+/* ── JOB BOARD hierarchy: parent subtitle + subsection headers ── */
+.board-subtitle { display:flex; flex-wrap:wrap; align-items:center; gap:2px; font-size:12px; color:var(--muted); margin:-4px 0 14px; }
+.subsection-header { font-size:13.5px; font-weight:600; color:var(--text); margin:20px 0 10px; display:flex; align-items:center; gap:6px; }
+.subsection-header:first-of-type { margin-top:6px; }
+
 /* ── SETTINGS (hidden; opened from user menu) ── */
 .settings-section { margin-top:0; }
 .settings-body { overflow:hidden; transition:max-height .4s ease, opacity .2s ease, margin-top .3s ease; max-height:6000px; opacity:1; margin-top:16px; }
@@ -186,10 +191,7 @@ body {
 .saved-saving { font-size:11px; color:var(--muted); padding:6px 18px; }
 
 /* ── JOB BOARD ── */
-.job-board-header { padding:16px 18px 14px; border-bottom:1px solid var(--border); }
-.job-board-toprow { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
-.job-board-title { font-size:16px; font-weight:600; color:var(--text); display:flex; align-items:center; gap:6px; }
-.job-board-meta  { font-size:11.5px; color:var(--muted); margin-left:auto; text-align:right; }
+.job-board-header { padding:14px 18px; border-bottom:1px solid var(--border); }
 .btn-refresh {
   display:inline-flex; align-items:center; gap:5px;
   background:var(--surface); color:var(--text); border:1px solid var(--border);
@@ -671,21 +673,23 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     </div>
   </div>
 
-  <!-- Saved Jobs -->
-  <div class="section-header">&#11088; Saved Jobs <span class="count-badge" id="saved-count-badge"></span></div>
+  <!-- ══ JOB BOARD (parent section: covers Saved + New listings) ══ -->
+  <div class="section-header">&#128269; Job Board</div>
+  <div class="board-subtitle">
+    <span id="board-schedule"></span>
+    <span id="board-synced"></span>
+  </div>
+
+  <!-- Saved Jobs (subsection) -->
+  <div class="subsection-header">&#11088; Saved <span class="count-badge" id="saved-count-badge"></span></div>
   <div class="panel" id="saved-jobs-list">
     <div class="saved-empty">Sign in to see saved jobs.</div>
   </div>
 
-  <!-- Job Board -->
-  <div class="section-header">&#128269; Job Board</div>
+  <!-- New & All Listings (subsection) -->
+  <div class="subsection-header">&#128269; New &amp; All Listings <span class="count-badge today" id="board-today-badge"></span></div>
   <div class="panel" id="panel-merged">
     <div class="job-board-header">
-      <div class="job-board-toprow">
-        <span class="job-board-title">Job Board</span>
-        <span class="count-badge today" id="board-today-badge"></span>
-        <span class="job-board-meta" id="board-synced"></span>
-      </div>
       <div class="filter-bar">
         <div class="filter-group">
           <span class="filter-group-label">Score</span>
@@ -879,6 +883,17 @@ function init(d){
 
   var pips = d.scheduledPipelines||[];
 
+  /* ── Job Board subtitle: when the automated search runs ── */
+  (function(){
+    var el = document.getElementById('board-schedule');
+    if(!el) return;
+    if(!pips.length){ el.textContent = 'No automated search configured yet.'; return; }
+    var p = pips[0];
+    var sched = p.schedule ? p.schedule.toLowerCase() : 'on a schedule';
+    el.textContent = 'Searches LinkedIn & Indeed ' + sched
+      + (pips.length > 1 ? ' (+' + (pips.length-1) + ' more)' : '');
+  })();
+
   /* ── Latest search → IDs of jobs found in the last run.
         Drives the "N new today" badge by the Job Board title and the colored
         left border on those rows. ── */
@@ -1050,7 +1065,7 @@ function init(d){
   function updateSyncLabel(){
     var el = document.getElementById('board-synced');
     if(!el || !_lastUpdated) return;
-    el.textContent = 'Sources: LinkedIn, Indeed · Updated '+fmtTime(_lastUpdated);
+    el.textContent = ' · Updated '+fmtTime(_lastUpdated);
   }
 
   function loadBoard(showSpinner){
