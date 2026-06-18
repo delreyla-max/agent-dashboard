@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-17T07:25:42-07:00",
-  "count": 52,
+  "updated": "2026-06-17T19:32:53-07:00",
+  "count": 53,
   "jobs": [
     {
       "id": "4429951242",
@@ -737,6 +737,31 @@
       "source": "LinkedIn",
       "prefScore": null,
       "prefMatched": []
+    },
+    {
+      "id": "4426451269",
+      "title": "Inference Specialist, Creative Technology - InterPositive",
+      "companyName": "Netflix",
+      "location": "Los Angeles, CA",
+      "posted": "2026-06-15",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/inference-specialist-creative-technology-interpositive-at-netflix-4426451269",
+      "descriptionText": "(See LinkedIn posting for full description \u2014 AI/ML inference role within Netflix Creative Technology's InterPositive team, focused on AI-assisted film processing and creative production workflows.)",
+      "salary": "",
+      "employmentType": "Full-time",
+      "score": 13,
+      "matchedKeywords": [
+        "AI Creative Lead",
+        "AI Workflows"
+      ],
+      "why": "Netflix Creative Technology + AI angle aligns with AI production experience, but 'Inference Specialist' is an individual contributor/engineering title well below ACD/CD level. Domain fit is excellent (Netflix). Significant level mismatch.",
+      "tier": "Below threshold \u2014 AI/tech domain fit only",
+      "prefScore": 8,
+      "prefMatched": [
+        "ai workflows",
+        "creative technology",
+        "netflix"
+      ]
     },
     {
       "id": "LI:4353051446",
