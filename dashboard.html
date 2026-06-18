@@ -260,6 +260,20 @@ body {
 .jb-tier-badge.tier-2 { background:var(--indigo-bg); color:var(--indigo); }
 .jb-tier-badge.tier-3 { background:#f3f4f6; color:var(--muted); }
 .jb-tier-dash { color:var(--muted2); }
+.jb-score.ml-excellent { color:var(--green); }
+.jb-score.ml-strong    { color:var(--green); }
+.jb-score.ml-good      { color:var(--blue); }
+.jb-score.ml-possible  { color:var(--amber); }
+.jb-score.ml-below, .jb-score.ml-na { color:var(--muted2); }
+.jb-ml-badge {
+  display:inline-block; padding:2px 8px; border-radius:999px; font-size:10.5px; font-weight:700;
+  white-space:nowrap; cursor:default;
+}
+.jb-ml-badge.ml-excellent { background:var(--green-bg); color:var(--green); }
+.jb-ml-badge.ml-strong    { background:var(--green-bg); color:var(--green); }
+.jb-ml-badge.ml-good      { background:var(--indigo-bg); color:var(--indigo); }
+.jb-ml-badge.ml-possible  { background:var(--amber-bg); color:var(--amber); }
+.jb-ml-badge.ml-below, .jb-ml-badge.ml-na { background:#f3f4f6; color:var(--muted2); }
 .jb-pref-badge {
   display:inline-block; margin-top:5px; padding:2px 8px; border-radius:999px;
   font-size:10px; font-weight:700; white-space:nowrap; letter-spacing:.02em;
@@ -809,7 +823,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         </div>
         <div class="filter-sep"></div>
         <div class="filter-group">
-          <label class="filter-chk"><input type="checkbox" id="f-local-only" checked onchange="applyJobFilter(event)"> <span>&#128205; LA or Remote only</span></label>
+          <label class="filter-chk"><input type="checkbox" id="f-local-only" onchange="applyJobFilter(event)"> <span>&#128205; LA or Remote only</span></label>
         </div>
         <div class="filter-sep"></div>
         <div class="filter-group">
@@ -818,7 +832,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
       </div>
     </div>
     <div class="jb-head-row">
-      <div>Score</div><div>Tier</div><div>Job Title</div><div>Company</div><div>Location</div><div>Source</div><div>Posted</div><div>Job Type</div><div>Save</div>
+      <div>Relevance</div><div>Match</div><div>Job Title</div><div>Company</div><div>Location</div><div>Source</div><div>Posted</div><div>Job Type</div><div>Save</div>
     </div>
     <div id="merged-list"><div class="panel-state"><span class="mini-spin"></span>Loading…</div></div>
     <div id="jb-load-more-wrap" style="text-align:center;padding:10px 18px;">
@@ -987,6 +1001,236 @@ window.addEventListener('resize', function(){
   }
 });
 
+/* ═══════════════════════════════════
+   RELEVANCE SCORING ENGINE
+   One number (0–100) the board sorts on. Every constant is tunable from the
+   admin panel and persists in the Supabase scoring_config table.
+     RelevanceScore = clamp( CoreFit × resp × warm × loc + freshness , 0, 100 )
+     CoreFit = weighted blend of normalized résumé / pref / tier, re-weighted
+               over only the signals a job actually has.
+   ═══════════════════════════════════ */
+var ADMIN_EMAILS = ['gyipla@gmail.com'];
+function isAdminUser(){ return !!(_authUser && ADMIN_EMAILS.indexOf((_authUser.email||'').toLowerCase()) >= 0); }
+
+var DEFAULT_SCORING = {
+  w_resume:0.40, w_pref:0.40, w_tier:0.20,
+  resume_max:75, pref_max:40,
+  tier1_pts:100, tier2_pts:60, tier3_pts:30, tier0_pts:0,
+  warm_mult:1.20, affil_mult:1.10,
+  resp_min:0.85, resp_max:1.15, his_years:15,
+  loc_far_mult:0.80,
+  fresh_bonus:6, fresh_window_days:14,
+  floor:60, max_age_days:14,
+  band_excellent:90, band_strong:80, band_good:70, band_possible:60,
+  warm_companies:'toyota,lexus,nissan,disney,google,playstation,apple,saatchi,rapp'
+};
+var _scoringCfg = JSON.parse(JSON.stringify(DEFAULT_SCORING));
+
+function loadScoringConfig(){
+  return _sb.from('scoring_config').select('config').eq('id',1).maybeSingle()
+    .then(function(r){
+      if(r && r.data && r.data.config){
+        Object.keys(DEFAULT_SCORING).forEach(function(k){
+          if(r.data.config[k] !== undefined) _scoringCfg[k] = r.data.config[k];
+        });
+      }
+    })
+    .catch(function(){ /* keep defaults on any error */ });
+}
+
+function _clamp(x,lo,hi){ return Math.max(lo, Math.min(hi, x)); }
+
+function tierPoints(tierStr){
+  var c=_scoringCfg, m=/Tier\s*(\d+)/i.exec(tierStr||'');
+  if(!m) return c.tier0_pts;
+  return m[1]==='1'?c.tier1_pts : m[1]==='2'?c.tier2_pts : m[1]==='3'?c.tier3_pts : c.tier0_pts;
+}
+
+// Weighted blend of normalized components; weights renormalize over only the
+// signals present (so an absent pref score doesn't drag a strong résumé to zero).
+function coreFit(j){
+  var c=_scoringCfg, parts=[], wsum=0;
+  if(j.score != null){ parts.push([c.w_resume, _clamp(j.score/(c.resume_max||1)*100,0,100)]); wsum+=c.w_resume; }
+  if(j.prefScore != null && j.prefScore > 0){ parts.push([c.w_pref, _clamp(j.prefScore/(c.pref_max||1)*100,0,100)]); wsum+=c.w_pref; }
+  parts.push([c.w_tier, tierPoints(j.tier)]); wsum+=c.w_tier;
+  if(wsum<=0) return null;
+  var s=0; for(var i=0;i<parts.length;i++){ s+=parts[i][0]*parts[i][1]; }
+  return s/wsum;
+}
+
+function warmMult(j){
+  var c=_scoringCfg, name=((j.companyName||j.company||'')+'').toLowerCase();
+  if(!name) return 1.0;
+  var list=(c.warm_companies||'').toLowerCase().split(',');
+  for(var i=0;i<list.length;i++){ var t=list[i].trim(); if(t && name.indexOf(t)!==-1) return c.warm_mult; }
+  return 1.0;
+}
+
+// Response likelihood from years-required (parsed from the posting) vs his experience.
+function respMult(j){
+  var c=_scoringCfg, txt=(j.descriptionText||''), best=null, re=/(\d+)\+?\s*years/gi, m;
+  while((m=re.exec(txt))){ var n=parseInt(m[1],10); if(!isNaN(n) && (best==null || n>best)) best=n; }
+  if(best==null) return 1.0;            // no signal → neutral
+  var diff=c.his_years-best;
+  if(diff>=0) return 1.0 + (c.resp_max-1.0)*Math.min(diff/10,1);
+  return 1.0 + (c.resp_min-1.0)*Math.min(-diff/10,1);
+}
+
+function locMult(j, isLocalFn){
+  return (isLocalFn && isLocalFn(j)) ? 1.0 : _scoringCfg.loc_far_mult;
+}
+
+// Additive recency nudge: full bonus if discovered in the latest run, linearly
+// decaying to 0 over fresh_window_days; based on discovery, falling back to posted.
+function freshnessBonus(j, latestIds){
+  var c=_scoringCfg, days;
+  if(latestIds && j.id!=null && latestIds[String(j.id)]) days=0;
+  else {
+    var d=new Date(j.posted);
+    if(isNaN(d)) return 0;
+    days=Math.max(0, Math.floor((Date.now()-d.getTime())/86400000));
+  }
+  return c.fresh_bonus * _clamp(1 - days/(c.fresh_window_days||14), 0, 1);
+}
+
+function relevanceScore(j, latestIds, isLocalFn){
+  var cf=coreFit(j);
+  if(cf==null) return null;
+  var f = cf * respMult(j) * warmMult(j) * locMult(j, isLocalFn) + freshnessBonus(j, latestIds);
+  return _clamp(Math.round(f), 0, 100);
+}
+
+function matchLevel(score){
+  var c=_scoringCfg;
+  if(score==null) return {label:'—', cls:'ml-na'};
+  if(score>=c.band_excellent) return {label:'Excellent', cls:'ml-excellent'};
+  if(score>=c.band_strong)    return {label:'Strong',    cls:'ml-strong'};
+  if(score>=c.band_good)      return {label:'Good',      cls:'ml-good'};
+  if(score>=c.band_possible)  return {label:'Possible',  cls:'ml-possible'};
+  return {label:'Below', cls:'ml-below'};
+}
+
+/* ═══════════════════════════════════
+   ALGORITHM ADMIN PANEL  (admin accounts only)
+   Live sliders/number-boxes for every scoring constant. Edits re-rank the
+   visible board instantly; Save persists to scoring_config for everyone.
+   ═══════════════════════════════════ */
+var ADMIN_FIELDS = [
+  {group:'Blend weights — renormalized per job', fields:[
+    ['w_resume','Résumé weight',0,1,0.05],
+    ['w_pref','Preference weight',0,1,0.05],
+    ['w_tier','Tier weight',0,1,0.05]
+  ]},
+  {group:'Normalize raw scores → 0–100', fields:[
+    ['resume_max','Résumé score reaches 100 at',1,150,1],
+    ['pref_max','Pref score reaches 100 at',1,150,1]
+  ]},
+  {group:'Tier points (quality signal)', fields:[
+    ['tier1_pts','Tier 1',0,100,5],['tier2_pts','Tier 2',0,100,5],
+    ['tier3_pts','Tier 3',0,100,5],['tier0_pts','No tier',0,100,5]
+  ]},
+  {group:'Candidate-strength multipliers', fields:[
+    ['warm_mult','Warm company ×',1,2,0.05],['affil_mult','Affiliated ×',1,2,0.05],
+    ['resp_max','Strong applicant × (max)',1,1.5,0.05],['resp_min','Stretch × (min)',0.5,1,0.05],
+    ['his_years','Your years of experience',0,40,1],['loc_far_mult','Out-of-area ×',0.5,1,0.05]
+  ]},
+  {group:'Recency nudge', fields:[
+    ['fresh_bonus','Freshness bonus (+pts)',0,20,1],
+    ['fresh_window_days','Decay window (days)',1,60,1]
+  ]},
+  {group:'Display gate', fields:[
+    ['floor','Hide jobs below score',0,100,5],
+    ['max_age_days','Max posting age (days)',1,90,1]
+  ]},
+  {group:'Match-level bands', fields:[
+    ['band_excellent','Excellent ≥',0,100,1],['band_strong','Strong ≥',0,100,1],
+    ['band_good','Good ≥',0,100,1],['band_possible','Possible ≥',0,100,1]
+  ]}
+];
+
+function setupAdminPanel(){
+  if(document.getElementById('admin-fab')) return;   // build once
+  var st=document.createElement('style');
+  st.textContent=''
+   +'#admin-fab{position:fixed;right:18px;bottom:18px;z-index:900;width:46px;height:46px;border-radius:50%;'
+   +'border:none;background:#111827;color:#fff;font-size:20px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.25);}'
+   +'#admin-fab:hover{background:#000;}'
+   +'#admin-panel{position:fixed;right:18px;bottom:74px;z-index:900;width:340px;max-height:78vh;overflow-y:auto;'
+   +'background:var(--surface,#fff);border:1px solid var(--border,#e5e7eb);border-radius:14px;'
+   +'box-shadow:0 8px 30px rgba(0,0,0,.18);padding:14px 16px;font-size:13px;}'
+   +'#admin-panel[hidden]{display:none;}'
+   +'.adm-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}'
+   +'.adm-h b{font-size:14px;}'
+   +'.adm-sub{color:var(--muted,#6b7280);font-size:11px;margin-bottom:10px;}'
+   +'.adm-grp{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--muted2,#9ca3af);margin:12px 0 4px;}'
+   +'.adm-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:3px 0;}'
+   +'.adm-row label{flex:1;color:var(--text,#111);}'
+   +'.adm-row input{width:74px;padding:4px 6px;border:1px solid var(--border,#e5e7eb);border-radius:7px;font-size:12px;text-align:right;}'
+   +'.adm-row.adm-text input{width:100%;text-align:left;margin-top:3px;}'
+   +'.adm-row.adm-text{display:block;}'
+   +'.adm-actions{display:flex;gap:8px;margin-top:14px;}'
+   +'.adm-actions button{flex:1;padding:8px;border-radius:8px;border:none;font-weight:700;font-size:12px;cursor:pointer;}'
+   +'#adm-save{background:#111827;color:#fff;}#adm-reset{background:#f3f4f6;color:#374151;}'
+   +'#adm-status{font-size:11px;color:var(--green,#16a34a);text-align:center;margin-top:8px;min-height:14px;}';
+  document.head.appendChild(st);
+
+  var fab=document.createElement('button');
+  fab.id='admin-fab'; fab.title='Algorithm settings'; fab.innerHTML='&#9881;';
+  fab.onclick=function(){ var p=document.getElementById('admin-panel'); if(p) p.hidden=!p.hidden; };
+  document.body.appendChild(fab);
+
+  var rows='';
+  ADMIN_FIELDS.forEach(function(g){
+    rows+='<div class="adm-grp">'+esc(g.group)+'</div>';
+    g.fields.forEach(function(f){
+      rows+='<div class="adm-row"><label>'+esc(f[1])+'</label>'
+        +'<input type="number" data-key="'+f[0]+'" min="'+f[2]+'" max="'+f[3]+'" step="'+f[4]+'"></div>';
+    });
+  });
+  rows+='<div class="adm-grp">Warm companies (comma-separated)</div>'
+     +'<div class="adm-row adm-text"><input type="text" data-key="warm_companies"></div>';
+
+  var panel=document.createElement('div');
+  panel.id='admin-panel'; panel.hidden=true;
+  panel.innerHTML='<div class="adm-h"><b>Relevance algorithm</b>'
+    +'<button onclick="document.getElementById(\'admin-panel\').hidden=true" '
+    +'style="border:none;background:none;font-size:16px;cursor:pointer;color:var(--muted2,#9ca3af);">&#10005;</button></div>'
+    +'<div class="adm-sub">Changes preview live on the board. Save applies for all users.</div>'
+    +rows
+    +'<div class="adm-actions"><button id="adm-reset">Reset defaults</button><button id="adm-save">Save</button></div>'
+    +'<div id="adm-status"></div>';
+  document.body.appendChild(panel);
+
+  function fillInputs(){
+    panel.querySelectorAll('input[data-key]').forEach(function(inp){
+      inp.value = _scoringCfg[inp.getAttribute('data-key')];
+    });
+  }
+  fillInputs();
+
+  panel.querySelectorAll('input[data-key]').forEach(function(inp){
+    inp.addEventListener('input', function(){
+      var key=inp.getAttribute('data-key');
+      if(key==='warm_companies'){ _scoringCfg[key]=inp.value; _rerenderBoard(); return; }
+      var v=parseFloat(inp.value); if(isNaN(v)) return;
+      _scoringCfg[key]=v;
+      if(key==='floor') _setBoardFloor(v); else _rerenderBoard();
+      document.getElementById('adm-status').textContent='';
+    });
+  });
+
+  document.getElementById('adm-reset').onclick=function(){
+    _scoringCfg=JSON.parse(JSON.stringify(DEFAULT_SCORING));
+    fillInputs(); _setBoardFloor(_scoringCfg.floor); _rerenderBoard();
+    document.getElementById('adm-status').textContent='Reset to defaults (not yet saved)';
+  };
+  document.getElementById('adm-save').onclick=function(){
+    var s=document.getElementById('adm-status'); s.textContent='Saving…';
+    _sb.from('scoring_config').upsert({id:1, config:_scoringCfg, updated_at:new Date().toISOString(), updated_by:(_authUser&&_authUser.email)||''})
+      .then(function(r){ s.textContent = r.error ? ('Error: '+r.error.message) : 'Saved ✓'; });
+  };
+}
+
 /* ── BOOT DASHBOARD ── */
 function bootDashboard(){
   updateAuthUI();
@@ -995,9 +1239,13 @@ function bootDashboard(){
   loadTitlesPanel();
   loadPreferencesPanel();
   loadDismissedJobs();
+  if(isAdminUser()) setupAdminPanel();
 
   var username = (_authUser.user_metadata||{}).username || 'garman';
-  fetch('users/'+username+'/config.json?t='+Date.now())
+  // Load the tunable scoring config first so the very first render is already ranked.
+  loadScoringConfig().then(function(){
+    return fetch('users/'+username+'/config.json?t='+Date.now());
+  })
     .then(function(r){
       if(!r.ok) throw new Error('No config for user: '+username);
       return r.json();
@@ -1063,14 +1311,23 @@ function init(d){
   var _lastUpdated = null;
   var _cachedJobs = [];
   _rerenderBoard = function(){ renderMergedJobList(_cachedJobs); };
-  var _filters = { minRelevance:0, showLI:true, showIndeed:true, showGlassdoor:true, showZip:true, daysAgo:0, localOnly:true };
+  // Let the admin panel move the display floor live (also nudges the Outlook slider).
+  _setBoardFloor = function(v){
+    _filters.minRelevance = v;
+    var sl = document.getElementById('relevance-slider'); if(sl) sl.value = v;
+    if(typeof updateRelevanceReadout === 'function') updateRelevanceReadout(v);
+    try{ localStorage.setItem('relevanceMin', String(v)); }catch(e){}
+    renderMergedJobList(_cachedJobs);
+  };
+  var _filters = { minRelevance:_scoringCfg.floor, showLI:true, showIndeed:true, showGlassdoor:true, showZip:true, daysAgo:0, localOnly:false };
 
-  // Outlook relevance slider: restore last value (personal display preference, not synced to Supabase).
-  // Defaults to 50 (the middle) when nothing's been saved yet — an even split between score and pref fit.
+  // Outlook relevance slider = the display floor beneath the relevance-ranked list.
+  // Defaults to the configured floor (60); location is now a soft score multiplier,
+  // not a hard gate, so the "LA or Remote only" checkbox defaults off.
   (function(){
     var stored = null;
     try{ stored = localStorage.getItem('relevanceMin'); }catch(e){}
-    var saved = stored !== null ? (parseInt(stored, 10) || 0) : 50;
+    var saved = stored !== null ? (parseInt(stored, 10) || 0) : _scoringCfg.floor;
     _filters.minRelevance = saved;
     var slider = document.getElementById('relevance-slider');
     if(slider) slider.value = saved;
@@ -1126,14 +1383,22 @@ function init(d){
       cutoff.setDate(cutoff.getDate() - _filters.daysAgo);
       cutoff = cutoff.toISOString().slice(0,10);
     }
+    // Hard age cap: never show postings older than max_age_days (matches the search lookback).
+    var ageCut = null;
+    if(_scoringCfg.max_age_days > 0){
+      ageCut = new Date();
+      ageCut.setDate(ageCut.getDate() - _scoringCfg.max_age_days);
+      ageCut = ageCut.toISOString().slice(0,10);
+    }
     var srcShow = { li:_filters.showLI, indeed:_filters.showIndeed, glassdoor:_filters.showGlassdoor, zip:_filters.showZip };
     return jobs.filter(function(j){
       if(!_showDismissed && isJobDismissed(j.link||'')) return false;
       if(isJobSaved(j.link||'')) return false;
       if(_filters.localOnly && !isLocalOrRemote(j)) return false;
-      if(minRel > 0){ var rel = blendedRelevance(j); if(rel == null || rel < minRel) return false; }
+      if(minRel > 0){ if(j._rel == null || j._rel < minRel) return false; }
       if(srcShow[srcInfo(j._source).key] === false) return false;
       if(cutoff && (j.posted||'') < cutoff) return false;
+      if(ageCut && j.posted && j.posted < ageCut) return false;
       return true;
     });
   }
@@ -1162,15 +1427,18 @@ function init(d){
     var type    = j.type    || j.employmentType || '';
 
     var titleHtml = j.link
-      ? '<a class="jb-title-link" href="'+esc(j.link)+'" target="_blank" rel="noopener">'+esc(j.title)+'</a>'
+      ? '<a class="jb-title-link" href="'+esc(j.link)+'" target="_blank" rel="noopener"'
+        +' data-link="'+esc(j.link)+'" data-title="'+esc(j.title||'')+'" data-company="'+esc(company)+'"'
+        +' onclick="recordJobClick(this)">'+esc(j.title)+'</a>'
       : '<span class="jb-title-link">'+esc(j.title)+'</span>';
 
-    var scoreCls = '';
-    var scoreTxt = '—';
-    if(j.score != null){
-      scoreCls = j.score >= 60 ? 'score-high' : j.score >= 40 ? 'score-mid' : 'score-low';
-      scoreTxt = String(j.score);
-    }
+    // Score cell now shows the final blended RelevanceScore; colour + Match label by band.
+    var ml = matchLevel(j._rel);
+    var scoreCls = ml.cls;
+    var scoreTxt = j._rel != null ? String(j._rel) : '—';
+    var scoreTitle = j._rel != null
+      ? 'Relevance '+j._rel+' — résumé '+(j.score==null?'–':j.score)+', pref '+(j.prefScore==null?'–':j.prefScore)+', '+esc(j.tier||'no tier')
+      : 'Not scored';
 
     var prefHtml = '';
     if(j.prefScore != null){
@@ -1203,8 +1471,8 @@ function init(d){
 
     var isNew = _latestIds && j.id!=null && _latestIds[String(j.id)];
     return '<div class="jb-row'+(alt?' alt':'')+(isNew?' jb-row-new':'')+'">'
-      +'<div class="jb-cell jb-score '+scoreCls+'" data-label="Score">'+esc(scoreTxt)+'</div>'
-      +'<div class="jb-cell jb-tier-cell" data-label="Tier">'+tierBadgeHtml(j.tier)+'</div>'
+      +'<div class="jb-cell jb-score '+scoreCls+'" data-label="Score" title="'+scoreTitle+'">'+esc(scoreTxt)+'</div>'
+      +'<div class="jb-cell jb-tier-cell" data-label="Match"><span class="jb-ml-badge '+ml.cls+'" title="'+esc(j.tier||'')+'">'+esc(ml.label)+'</span></div>'
       +'<div class="jb-cell jb-title-cell" data-label="">'
         +titleHtml
         +(pay?'<div class="jb-pay">&#128176; '+esc(pay)+'</div>':'')
@@ -1227,12 +1495,16 @@ function init(d){
   function renderMergedJobList(jobs){
     _cachedJobs = jobs || [];
     var tagged = _cachedJobs.map(function(j){
-      return Object.assign({}, j, {_source: j.source || 'LinkedIn'});
+      var o = Object.assign({}, j, {_source: j.source || 'LinkedIn'});
+      o._rel = relevanceScore(o, _latestIds, isLocalOrRemote);   // final 0–100 relevance
+      return o;
     });
+    // RELEVANCE first; posting date only breaks ties.
     tagged.sort(function(a,b){
+      var ra = a._rel==null ? -1 : a._rel, rb = b._rel==null ? -1 : b._rel;
+      if(rb !== ra) return rb - ra;
       var da = a.posted||'', db = b.posted||'';
-      if(db > da) return 1; if(da > db) return -1;
-      return (b.score||0) - (a.score||0);
+      return db > da ? 1 : da > db ? -1 : 0;
     });
     _filteredJobs = applyFilters(tagged);
     _shownCount = PAGE_SIZE;
@@ -1430,6 +1702,20 @@ window.handleStar = function(btn){
   _rerenderBoard();   // saving moves the job off the main board (one-way move into Saved)
 };
 
+/* Clicking a job title = a weak positive signal (lighter than a save).
+   Logged to job_clicks, and feeds a small dose (≤2 words) of the title into the
+   learned list — a save contributes its full set, so a click counts for less. */
+window.recordJobClick = function(el){
+  if(!_authUser || !el) return;
+  var link=el.getAttribute('data-link')||'', title=el.getAttribute('data-title')||'', company=el.getAttribute('data-company')||'';
+  if(!link) return;
+  _sb.from('job_clicks').insert({user_id:_authUser.id, link:link, title:title, company:company})
+    .then(function(){}, function(){});
+  var words = mineJobWords(title).slice(0,2), changed=false;
+  words.forEach(function(w){ if(_learned.indexOf(w)===-1 && _learned.length<MAX_LEARNED){ _learned.push(w); changed=true; } });
+  if(changed){ renderLearnedPanel(); saveLearnedToDb(); }
+};
+
 /* ═══════════════════════════════════
    DISMISSED JOBS  (thumbs-down)
    Hides the job from the board AND removes its words from the learned list.
@@ -1438,6 +1724,7 @@ window.handleStar = function(btn){
 var _dismissed = [];          // array of links
 var _showDismissed = false;
 var _rerenderBoard = function(){};   // set inside init() so out-of-scope handlers can redraw the board
+var _setBoardFloor = function(){};   // set inside init() so the admin panel can move the display floor live
 
 function loadDismissedJobs(){
   if(!_authUser){ return; }
