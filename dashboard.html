@@ -1017,7 +1017,7 @@ var DEFAULT_SCORING = {
   resume_max:75, pref_max:40,
   tier1_pts:100, tier2_pts:60, tier3_pts:30, tier0_pts:0,
   warm_mult:1.20, affil_mult:1.10,
-  resp_min:0.85, resp_max:1.15, his_years:15,
+  resp_min:0.85, resp_max:1.15,
   loc_far_mult:0.80,
   fresh_bonus:6, fresh_window_days:14,
   floor:60, max_age_days:14,
@@ -1025,6 +1025,9 @@ var DEFAULT_SCORING = {
   warm_companies:'toyota,lexus,nissan,disney,google,playstation,apple,saatchi,rapp'
 };
 var _scoringCfg = JSON.parse(JSON.stringify(DEFAULT_SCORING));
+// Per-user years of experience, auto-derived from the résumé by the daily pipeline and
+// written into config.json. Drives respMult; NOT an admin knob. Falls back to 15.
+var _userYears = 15;
 
 function loadScoringConfig(){
   return _sb.from('scoring_config').select('config').eq('id',1).maybeSingle()
@@ -1071,7 +1074,7 @@ function respMult(j){
   var c=_scoringCfg, txt=(j.descriptionText||''), best=null, re=/(\d+)\+?\s*years/gi, m;
   while((m=re.exec(txt))){ var n=parseInt(m[1],10); if(!isNaN(n) && (best==null || n>best)) best=n; }
   if(best==null) return 1.0;            // no signal → neutral
-  var diff=c.his_years-best;
+  var diff=_userYears-best;
   if(diff>=0) return 1.0 + (c.resp_max-1.0)*Math.min(diff/10,1);
   return 1.0 + (c.resp_min-1.0)*Math.min(-diff/10,1);
 }
@@ -1132,7 +1135,7 @@ var ADMIN_FIELDS = [
   {group:'Candidate-strength multipliers', fields:[
     ['warm_mult','Warm company ×',1,2,0.05],['affil_mult','Affiliated ×',1,2,0.05],
     ['resp_max','Strong applicant × (max)',1,1.5,0.05],['resp_min','Stretch × (min)',0.5,1,0.05],
-    ['his_years','Your years of experience',0,40,1],['loc_far_mult','Out-of-area ×',0.5,1,0.05]
+    ['loc_far_mult','Out-of-area ×',0.5,1,0.05]
   ]},
   {group:'Recency nudge', fields:[
     ['fresh_bonus','Freshness bonus (+pts)',0,20,1],
@@ -1264,6 +1267,7 @@ function bootDashboard(){
    ═══════════════════════════════════ */
 function init(d){
   var _docsPrefix = d.docsPrefix || 'docs/';
+  if(d.yearsExperience != null) _userYears = d.yearsExperience;   // per-user, from résumé
   var name = d.name || ((_authUser&&_authUser.user_metadata||{}).username||'');
   document.title = name + ' – Job Search Dashboard';
   document.getElementById('dash-title').textContent = name ? ('Today could be your day, ' + name) : 'Today could be your day';
