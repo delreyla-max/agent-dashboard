@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-17T19:14:22-07:00",
-  "count": 56,
+  "updated": "2026-06-17T19:40:57-07:00",
+  "count": 60,
   "jobs": [
     {
       "id": "LI:4428885582",
@@ -73,6 +73,46 @@
       "score": 0,
       "tier": "Tier 3",
       "why": "No keyword matches in posting"
+    },
+    {
+      "id": "4429749147",
+      "title": "(Remote) VP, Research & Development",
+      "companyName": "Harris Computer",
+      "location": "Texas, United States",
+      "posted": "2026-06-17",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/remote-vp-research-development-at-harris-computer-4429749147",
+      "link_full": "https://www.linkedin.com/jobs/view/remote-vp-research-development-at-harris-computer-4429749147",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Not Applicable",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No keyword matches (description unavailable)",
+      "tier": "Tier 3",
+      "prefScore": null,
+      "prefMatched": null
+    },
+    {
+      "id": "4429742605",
+      "title": "(Remote) VP, Research & Development",
+      "companyName": "Harris Computer",
+      "location": "Georgia, United States",
+      "posted": "2026-06-17",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/remote-vp-research-development-at-harris-computer-4429742605",
+      "link_full": "https://www.linkedin.com/jobs/view/remote-vp-research-development-at-harris-computer-4429742605",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Not Applicable",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No keyword matches (description unavailable)",
+      "tier": "Tier 3",
+      "prefScore": null,
+      "prefMatched": null
     },
     {
       "id": "4427797141",
@@ -814,6 +854,26 @@
       "source": "LinkedIn"
     },
     {
+      "id": "4390255601",
+      "title": "Service Design Vice President",
+      "companyName": "hackajob",
+      "location": "United States",
+      "posted": "2026-06-09",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/service-design-vice-president-at-hackajob-4390255601",
+      "link_full": "https://www.linkedin.com/jobs/view/service-design-vice-president-at-hackajob-4390255601",
+      "descriptionText": "",
+      "salary": "$142,500.00/yr - $205,000.00/yr",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Not Applicable",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No keyword matches (description unavailable)",
+      "tier": "Tier 3",
+      "prefScore": null,
+      "prefMatched": null
+    },
+    {
       "id": "4425268802",
       "title": "Director, UX Research, Search Verticals",
       "company": "Google",
@@ -870,6 +930,26 @@
       "matchedKeywords": [],
       "why": "No keyword matches in posting",
       "tier": "Tier 3"
+    },
+    {
+      "id": "4411523120",
+      "title": "VP - Research",
+      "companyName": "Emerald Research Group",
+      "location": "United States",
+      "posted": "2026-06-05",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/vp-research-at-emerald-research-group-4411523120",
+      "link_full": "https://www.linkedin.com/jobs/view/vp-research-at-emerald-research-group-4411523120",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Director",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No keyword matches (description unavailable)",
+      "tier": "Tier 3",
+      "prefScore": null,
+      "prefMatched": null
     }
   ]
 }

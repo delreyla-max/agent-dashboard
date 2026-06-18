@@ -1,27 +1,6 @@
 {
-  "generated": "2026-06-17T19:14:22-07:00",
+  "updated": "2026-06-17T19:40:57-07:00",
   "source": "Indeed",
-  "searches": [
-    "VP of Research Vice President, UX Research Head of Research Director of UX Research \u2014 Los Angeles fulltime",
-    "VP of Research Vice President, UX Research Head of Research Director of UX Research \u2014 Remote fulltime"
-  ],
-  "count": 1,
-  "jobs": [
-    {
-      "id": "IN:JOBSEARCH_561",
-      "title": "Head of Product",
-      "companyName": "Tapouts",
-      "location": "Venice, CA",
-      "posted": "2026-03-31",
-      "source": "Indeed",
-      "link": "https://to.indeed.com/aass2cx9pz7d",
-      "descriptionText": "",
-      "salary": "$135,985\u2013$220,214/yr",
-      "employmentType": "Full-time",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches in posting",
-      "tier": "Tier 3"
-    }
-  ]
+  "count": 0,
+  "jobs": []
 }
