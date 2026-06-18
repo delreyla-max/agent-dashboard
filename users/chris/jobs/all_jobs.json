@@ -1,7 +1,31 @@
 {
-  "updated": "2026-06-17T19:40:57-07:00",
-  "count": 60,
+  "updated": "2026-06-18T08:33:57-07:00",
+  "count": 64,
   "jobs": [
+    {
+      "id": "4393150216",
+      "title": "Director, Research Science - Tech Research",
+      "companyName": "Riot Games",
+      "location": "Los Angeles, CA",
+      "posted": "2026-06-17",
+      "salary": null,
+      "seniorityLevel": "Not Applicable",
+      "employmentType": "Full-time",
+      "link": "https://www.linkedin.com/jobs/view/director-research-science-tech-research-at-riot-games-4393150216",
+      "descriptionText": "Director of Research at Riot Games. Technology Research, Game AI, Research Scientists, Software Engineers. UX Research leadership, team building, cross-functional leadership, research strategy, research leadership, executive partnership.",
+      "source": "LinkedIn",
+      "score": 40,
+      "matchedKeywords": [
+        "UX Research",
+        "Research Strategy",
+        "Research Leadership",
+        "Executive Partnership",
+        "Cross-Functional Leadership",
+        "Team Building"
+      ],
+      "why": "Matches: UX Research, Research Strategy, Research Leadership, Executive Partnership, Cross-Functional Leadership, Team Building",
+      "tier": "Tier 2"
+    },
     {
       "id": "LI:4428885582",
       "title": "Head of Research",
@@ -113,6 +137,23 @@
       "tier": "Tier 3",
       "prefScore": null,
       "prefMatched": null
+    },
+    {
+      "id": "4429733989",
+      "title": "(Remote) VP, Research & Development",
+      "companyName": "Harris Computer",
+      "location": "Virginia, United States",
+      "posted": "2026-06-17",
+      "salary": "",
+      "seniorityLevel": "Not Applicable",
+      "employmentType": "Full-time",
+      "link": "https://www.linkedin.com/jobs/view/remote-vp-research-development-at-harris-computer-4429733989?position=15&pageNum=0&refId=YWc4zdvWXtDmPZLqMduaTQ%3D%3D&trackingId=xYmfCa2i8IcnHg0h5p6J5w%3D%3D",
+      "descriptionText": "Amazing Charts, a division of Harris; is seeking a Vice President of Research &amp; Development who will lead the R&amp;D organization for the business unit.\n\nThis role is responsible for setting the technical and delivery strategy for a mature, mission critical healthcare platform while guiding its evolution toward modern architecture, improved delivery predictability, and long term sustainability.\n\nThe VP of R&amp;D will operate within an established product, team, and customer base, making informed decisions under real constraints. The ideal candidate brings strong technical fluency, strategic thinking, financial acumen, and experience applying AI in practical, business driven ways. While not expected to write code, this leader must be able to engage deeply on architecture, delivery approach, risk, and tradeoffs.\n\nThis remote role welcomes candidates anywhere in the US. Travel is required as needed, approximately 10%. Candidates must hold a current, valid passport and be legally eligible to travel internationally. This includes either passport based visa exemption or possession of any required travel visas for entry into Canada, the United States, and the Caribbean. Preference will be given to candidates who can work in EST timezone.\n\nSalary\n\n120K - 135K\n\nAI &amp; Innovation Mindset\n\nWe are committed to leveraging emerging technologies to improve how we work, serve our customers, and drive business outcomes. The successful candidate will demonstrate curiosity and a willingness to actively adopt and leverage AI tools to improve workflows, solve problems, and increase efficiency. Candidates should be comfortable using AI enabled technologies, including copilots, chat based AI assistants, and automation tools, as part of their everyday work while maintaining appropriate judgment, security, and compliance standards.\n\nWhat Your Impact Will Be\n\n\n\n- Lead and develop a multi-disciplinary R&amp;D organization including Engineering, Quality Assurance, and delivery teams.\n- Translate business strategy and product priorities into executable technical road maps.\n- Provide architectural and technical leadership across the product portfolio.\n- Own delivery outcomes including predictability, quality, and platform stability.\n- Own the R&amp;D budget including forecasting, cost management, and financial tradeoffs.\n- Evaluate and govern the use of AI enabled technologies across development and operations.\n\nWhat Success Looks Like In This Role\n\n\n\n- Establish predictable delivery and accountability.\n- Improve platform stability and regulatory readiness.\n- Introduce thoughtful modernization aligned with business value.\n- Act as a trusted executive partner on technology, investment, and risk.\n\nWhat We Are Looking For\n\n\n\n- 10+ years of leadership experience in software development or technology organizations.\n- 7+ years of experience with cloud platforms, APIs, and modern architecture.\n- 5+ years of strong technical foundation in development (working as a developer).\n- 5+ years of experience working with R&amp;D budgets and financial outcomes.\n- 5+ years' experience implementing best market practice, modern processes and workflow within development teams.\n- 1+ years demonstrated experience evaluating, adopting, and governing AI enabled technologies.\n- 1+ years of experience leading SaaS product development and operations.\n- 1+ years of experience applying AI to improve productivity, delivery efficiency, or decision making.\n- 1+ years of experience assessing AI related tradeoffs including cost, risk, data quality, security, and compliance.\n- Proven ability to lead through ambiguity.\n- Strong executive communication.\n- Ability to understand, navigate, and make effective decisions in business situations to drive results.\n- Able to create strong relationships and gain trust within your team.\n- A strategic and business-focused mindset with the ability to turn complex data into compelling narratives and actionable business insights.\n- Stakeholder management.\n\nWhat Would Make You Stand Out\n\n\n\n- Experience working in development with Microsoft technologies (.net, SQL, Visual Basic).\n- Experience working with Jira for tracking purposes.\n- Knowledge in AI development and implementation (certifications is nice to have).\n- Experience working with React in the front end.\n- Knowledge working in technology Integrations (third party and clients).\n\nWhat We Can Offer\n\n\n\n- 3 weeks\u2019 vacation and 5 personal days\n- Comprehensive Medical, Dental, and Vision benefits starting from your first day of employment\n- Employee stock ownership and RRSP/401k matching programs\n- Lifestyle rewards\n- Remote work and more!\n\nAbout Amazing Charts\n\nAmazing Charts, founded in 2001 by a practicing family physician, offers user-friendly and affordable Electronic Health Record (EHR) solutions tailored for small to medium-sized medical practices. Acquired by Harris Healthcare in 2017, the company provides a comprehensive suite of services, including Practice Management, Medical Billing, Population Health, and Patient Engagement tools, all designed to enhance clinical efficiency and patient care. Learn more at: amazingcharts.com\n\nAbout Harris\n\nHarris is a leading provider of mission critical software to the public sector in North America. As a wholly owned subsidiary of Constellation Software Inc. (\u201cCSI\u201d, symbol CSU on the TSX), Harris has become the cornerstone for CSI\u2019s investment in utility, local government, school districts, public safety, and healthcare software verticals. Our success has been realized through investments in our proprietary software and market expertise. This focus, combined with acquiring businesses that build upon or complement our offerings, has helped drive our success. Harris will continue to growth through reinvestment \u2013 both in the people and products that we offer and making investments in acquiring new businesses.\n\n",
+      "source": "LinkedIn",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No keyword matches",
+      "tier": "Tier 3"
     },
     {
       "id": "4427797141",
@@ -283,6 +324,44 @@
       "score": 7,
       "tier": "Tier 3",
       "why": "Matches: Product Strategy"
+    },
+    {
+      "id": "4428885582",
+      "title": "Head of Research",
+      "companyName": "Pagos Consultants",
+      "location": "United States",
+      "posted": "2026-06-15",
+      "salary": "",
+      "seniorityLevel": "Director",
+      "employmentType": "Full-time",
+      "link": "https://www.linkedin.com/jobs/view/head-of-research-at-pagos-consultants-4428885582?position=1&pageNum=0&refId=YWc4zdvWXtDmPZLqMduaTQ%3D%3D&trackingId=5AKrnRBHR0aWJZEDbK6pyw%3D%3D",
+      "descriptionText": "\nAbout the Firm\nWe are a privately held investment research and trading firm managing approximately $500M across public markets, alternative investments, and private opportunities.\n\n\nOur team is intentionally small, highly experienced, and performance-driven. We operate in a fast-paced environment where independent thinking, intellectual rigor, and sound judgment are highly valued. We seek individuals who thrive in ambiguity, challenge conventional wisdom, and possess a relentless drive to uncover differentiated insights.\n\n\nThe Opportunity\nWe are seeking a senior investment research leader to become a key strategic partner to the firm's leadership team.\n\n\nThis individual will play a critical role in shaping the firm's investment perspective by identifying emerging opportunities, evaluating risks, and building scalable research processes that create a sustainable information advantage.\n\n\nThe successful candidate will combine deep analytical capabilities with strong leadership skills and a demonstrated ability to generate original investment insights across a broad range of markets and industries.\n\n\nKey Responsibilities\n\n\nResearch Leadership\n\n- Build and lead a high-performing investment research function.\n- Develop and oversee teams responsible for market intelligence, research, and opportunity identification.\n- Establish processes and frameworks that improve the quality and speed of investment decision-making.\n- Foster a culture of intellectual curiosity, accountability, and continuous improvement.\nInvestment Research &amp; Intelligence\n\n- Monitor global markets, industries, technologies, and geopolitical developments.\n- Identify emerging themes, structural shifts, and inflection points before they become widely recognized.\n- Separate meaningful signals from market noise and synthesize complex information into actionable insights.\n- Evaluate investment opportunities across public and private markets.\nStrategic Analysis\n\n- Develop independent views on macroeconomic trends, industry developments, technological innovation, and competitive dynamics.\n- Analyze incentives, second-order effects, and hidden dependencies that may influence investment outcomes.\n- Build frameworks that improve opportunity identification and risk assessment.\n- Maintain a forward-looking perspective on key market narratives and investment themes.\nPartnership with Leadership\n\n- Serve as a trusted strategic advisor to senior leadership.\n- Translate research findings into clear investment recommendations and strategic guidance.\n- Collaborate closely on portfolio positioning, thematic research, and long-term investment priorities.\n- Help shape the firm's overall investment worldview and decision-making process.\n\n\nIdeal Background\nWe are interested in candidates who have demonstrated excellence in one or more of the following environments:\n\n- Hedge Funds\n- Family Offices\n- Investment Management Firms\n- Global Macro Funds\n- Alternative Asset Managers\n- Private Investment Firms\n- Strategic Research and Intelligence Organizations\n\n\nQualifications\n\n- 10+ years of experience in investment research, investing, strategy, or related disciplines.\n- Demonstrated ability to generate differentiated investment insights.\n- Experience evaluating opportunities across multiple sectors, asset classes, or geographies.\n- Strong understanding of macroeconomics, financial markets, business models, and competitive dynamics.\n- Experience leading teams and building research capabilities.\n- Exceptional analytical, written, and verbal communication skills.\n- Ability to make sound decisions in environments with incomplete information.\n- High degree of intellectual curiosity, ownership, and independent judgment.\n\n\nPreferred Characteristics\n\n- First-principles thinker.\n- Naturally skeptical and evidence-driven.\n- Strong pattern recognition and synthesis capabilities.\n- Comfortable navigating complex and rapidly evolving information environments.\n- Entrepreneurial mindset with a bias toward action.\n- Capable of influencing investment decisions through insight rather than authority.\n\n\nCompensation\nCompetitive compensation package including base salary, performance incentives, and long-term upside participation. Total compensation will be commensurate with experience, track record, and impact.",
+      "source": "LinkedIn",
+      "score": 7,
+      "matchedKeywords": [
+        "Research Leadership"
+      ],
+      "why": "Matches: Research Leadership",
+      "tier": "Tier 3"
+    },
+    {
+      "id": "4427666211",
+      "title": "Head of Research And Development",
+      "companyName": "Kalon Executive Search for Nutraceuticals, CPG and Wellness",
+      "location": "United States",
+      "posted": "2026-06-15",
+      "salary": "",
+      "seniorityLevel": "Executive",
+      "employmentType": "Full-time",
+      "link": "https://www.linkedin.com/jobs/view/head-of-research-and-development-at-kalon-executive-search-for-nutraceuticals-cpg-and-wellness-4427666211?position=3&pageNum=0&refId=YWc4zdvWXtDmPZLqMduaTQ%3D%3D&trackingId=4q7QRbbDb5Hz2rH6AuowGg%3D%3D",
+      "descriptionText": "\nHead of Research &amp; Development\nOur client, a rapidly growing leader in the consumer health and nutritional supplements industry, is seeking an experienced and visionary Head of Research &amp; Development to lead the organization's scientific strategy, product innovation pipeline, and commercialization efforts.\nThis executive will serve as the driving force behind the development of evidence-based nutritional products, translating scientific discovery into commercially successful solutions that resonate with consumers. The ideal candidate brings a unique combination of scientific expertise, innovation leadership, and commercial acumen, with the ability to partner closely with Marketing, Regulatory, Operations, and Executive Leadership to deliver breakthrough products that drive business growth.\n \n*** This is a remote position\n \nKey Responsibilities:\n\n- Develop and execute the company\u2019s R&amp;D and innovation strategy aligned with growth objectives and consumer trends.\n- Identify and prioritize new product opportunities using scientific research, market intelligence, and AI-driven insights.\n- Lead the innovation pipeline from concept through commercialization using a stage-gate development process.\n- Partner with Marketing and Commercial teams to create scientifically credible, consumer-focused products and claims.\n- Translate complex scientific findings into compelling product positioning, educational content, and launch support materials.\n- Serve as a scientific representative with industry partners, media, and key stakeholders.\n- Oversee formulation development, ingredient strategy, and product optimization across multiple health and wellness categories.\n- Collaborate with Operations, Quality, and Supply Chain teams to ensure successful product commercialization and scalability.\n- Drive the adoption of AI, machine learning, and advanced analytics to enhance research, formulation, and innovation processes.\n- Monitor emerging technologies, consumer trends, and scientific advancements to identify future growth opportunities.\n- Lead clinical research, claims substantiation, and scientific validation initiatives supporting product efficacy.\n- Ensure compliance with regulatory requirements, quality standards, and industry certifications.\n- Partner with Regulatory and Quality teams on product registrations, audits, claims review, and technical documentation.\n- Build, mentor, and lead a high-performing team of scientists and technical professionals.\n- Manage departmental budgets, resources, and innovation investments to maximize business impact.\n- Present innovation strategies, product pipelines, and key initiatives to executive leadership and stakeholders.\n \nQualifications:\n\n- Ph.D. in Nutritional Science, Food Science, Biochemistry, Pharmacology, or a related scientific discipline.\n- 10+ years of progressive leadership experience in R&amp;D, product development, or innovation within dietary supplements, nutraceuticals, functional foods, consumer health products, or related industries.\n- Demonstrated success launching commercially successful products from concept through market introduction.\n- Deep understanding of dietary supplement ingredients, including vitamins, minerals, botanicals, probiotics, amino acids, and specialty bioactives.\n- Strong knowledge of U.S. regulatory requirements, including DSHEA, FDA regulations, and cGMP standards, with exposure to international regulatory frameworks preferred.\n- Proven experience collaborating with commercial and marketing teams on product strategy, positioning, claims, and consumer communications.\n- Experience leveraging technology, data analytics, AI-enabled tools, or digital R&amp;D platforms within the product development process.\n- Background managing external manufacturing, laboratory, ingredient supplier, and quality partnerships.\n- Strong executive presence with the ability to influence cross-functional stakeholders and lead organizational change.\n \nPreferred\n\n- Experience supporting consumer-facing health and wellness brands across direct-to-consumer, retail, e-commerce, or practitioner channels.\n- Hands-on experience utilizing AI or machine learning tools for scientific research, formulation development, competitive intelligence, or consumer insights.\n- Scientific publications, patents, industry presentations, or recognized contributions to nutrition science and product innovation.\n- Experience scaling innovation organizations within high-growth consumer products environments.\nThis is a highly visible executive leadership opportunity for a scientific innovator who is passionate about advancing consumer health through evidence-based products and emerging technologies. The successful candidate will play a critical role in shaping innovation strategy, driving business growth, and building a world-class product development organization.\n \nCompensation: $280,000 salary\nIf this sounds like the position you have been waiting for, please apply using the online application or the link below - all inquiries are strictly confidential. Our focus is to assist you to make your best next career move, and we will not use your information for any other purpose.\nKalon Executive Search is an equal opportunity employer. All applicants will be considered for employment without attention to race, color, religion, sex, sexual orientation, gender identity, national origin, veteran or disability status.\nwww.kalonsearch.com",
+      "source": "LinkedIn",
+      "score": 7,
+      "matchedKeywords": [
+        "Product Strategy"
+      ],
+      "why": "Matches: Product Strategy",
+      "tier": "Tier 3"
     },
     {
       "id": "4424946542",
