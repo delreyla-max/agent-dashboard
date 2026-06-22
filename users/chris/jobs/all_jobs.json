@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-19T15:03:15-07:00",
-  "count": 75,
+  "updated": "2026-06-22T04:21:42-07:00",
+  "count": 74,
   "jobs": [
     {
       "id": "LI:4430006149",
@@ -1185,26 +1185,6 @@
       "matchedKeywords": [],
       "why": "No keyword matches in posting",
       "tier": "Tier 3"
-    },
-    {
-      "id": "4411523120",
-      "title": "VP - Research",
-      "companyName": "Emerald Research Group",
-      "location": "United States",
-      "posted": "2026-06-05",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/vp-research-at-emerald-research-group-4411523120",
-      "link_full": "https://www.linkedin.com/jobs/view/vp-research-at-emerald-research-group-4411523120",
-      "descriptionText": "",
-      "salary": "",
-      "employmentType": "Full-time",
-      "seniorityLevel": "Director",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches (description unavailable)",
-      "tier": "Tier 3",
-      "prefScore": null,
-      "prefMatched": null
     }
   ]
 }

@@ -1,7 +1,98 @@
 {
-  "updated": "2026-06-19T15:03:15-07:00",
-  "count": 168,
+  "updated": "2026-06-22T04:19:32-07:00",
+  "count": 164,
   "jobs": [
+    {
+      "id": "4431189330",
+      "title": "Creative Director",
+      "companyName": "Lux214 Media Group",
+      "location": "Indiana, United States",
+      "posted": "2026-06-20",
+      "salary": "",
+      "employmentType": "Contract",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-at-lux214-media-group-4431189330",
+      "source": "LinkedIn",
+      "descriptionText": "",
+      "score": 7,
+      "matchedKeywords": [
+        "Creative Director"
+      ],
+      "why": "Matches: Creative Director",
+      "tier": "Tier 3",
+      "prefScore": 20,
+      "prefMatched": [
+        "campaign",
+        "advertising",
+        "content",
+        "remote"
+      ]
+    },
+    {
+      "id": "4430055074",
+      "title": "Product Designer",
+      "companyName": "Pogo",
+      "location": "Brooklyn, NY",
+      "posted": "2026-06-20",
+      "salary": "",
+      "employmentType": "Full-time",
+      "link": "https://www.linkedin.com/jobs/view/product-designer-at-pogo-4430055074",
+      "source": "LinkedIn",
+      "descriptionText": "",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No matches",
+      "tier": "Tier 3",
+      "prefScore": 10,
+      "prefMatched": [
+        "creative direction",
+        "product design"
+      ]
+    },
+    {
+      "id": "4400869589",
+      "title": "Staff Product Designer, Games Discovery",
+      "companyName": "Netflix",
+      "location": "United States",
+      "posted": "2026-06-20",
+      "salary": "$460,000 - $710,000",
+      "employmentType": "Full-time",
+      "link": "https://www.linkedin.com/jobs/view/staff-product-designer-games-discovery-at-netflix-4400869589",
+      "source": "LinkedIn",
+      "descriptionText": "",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No matches",
+      "tier": "Tier 3",
+      "prefScore": 15,
+      "prefMatched": [
+        "product design",
+        "entertainment",
+        "remote"
+      ]
+    },
+    {
+      "id": "4429697127",
+      "title": "Social Executive Creative Director",
+      "companyName": "Sasha the Mensch",
+      "location": "United States",
+      "posted": "2026-06-19",
+      "salary": "",
+      "employmentType": "Full-time",
+      "link": "https://www.linkedin.com/jobs/view/social-executive-creative-director-at-sasha-the-mensch-4429697127",
+      "source": "LinkedIn",
+      "descriptionText": "",
+      "score": 7,
+      "matchedKeywords": [
+        "Social-First"
+      ],
+      "why": "Matches: Social-First",
+      "tier": "Tier 3",
+      "prefScore": 10,
+      "prefMatched": [
+        "campaign",
+        "content"
+      ]
+    },
     {
       "id": "LI:4420614722",
       "title": "Product Designer",
@@ -2354,6 +2445,31 @@
       ]
     },
     {
+      "id": "4423639145",
+      "title": "Creative Director",
+      "companyName": "Cleo",
+      "location": "United States",
+      "posted": "2026-06-11",
+      "salary": "$212,000 - $280,000",
+      "employmentType": "Full-time",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-at-cleo-4423639145",
+      "source": "LinkedIn",
+      "descriptionText": "",
+      "score": 13,
+      "matchedKeywords": [
+        "Creative Director",
+        "Brand Identity"
+      ],
+      "why": "Matches: Creative Director, Brand Identity",
+      "tier": "Tier 3",
+      "prefScore": 15,
+      "prefMatched": [
+        "creative strategy",
+        "campaign",
+        "remote"
+      ]
+    },
+    {
       "id": "4427541618",
       "title": "Vice President, Creative Director",
       "companyName": "Highwire",
@@ -2526,6 +2642,34 @@
         "associate creative director",
         "associate creative",
         "content"
+      ]
+    },
+    {
+      "id": "GD:1010163858719",
+      "title": "Associate Creative Director, Design",
+      "companyName": "Apple Inc.",
+      "location": "Culver City, CA",
+      "posted": "2026-06-10",
+      "salary": "$154,000 - $288,000",
+      "employmentType": "Full-time",
+      "link": "https://www.glassdoor.com/job-listing/j?jl=1010163858719",
+      "source": "Glassdoor",
+      "descriptionText": "",
+      "score": 27,
+      "matchedKeywords": [
+        "Associate Creative Director",
+        "Creative Director",
+        "Art Direction",
+        "Brand Systems"
+      ],
+      "why": "Matches: Associate Creative Director, Creative Director, Art Direction, Brand Systems",
+      "tier": "Tier 3",
+      "prefScore": 20,
+      "prefMatched": [
+        "art direction",
+        "brand systems",
+        "creative direction",
+        "advertising"
       ]
     },
     {
@@ -3296,227 +3440,6 @@
       "tier": "Tier 3",
       "prefScore": 0,
       "prefMatched": []
-    },
-    {
-      "id": "LI:4314189953",
-      "title": "Visual Design Lead, UX",
-      "companyName": "Cricut",
-      "location": "South Jordan, UT",
-      "posted": "2026-06-07",
-      "salary": "",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/visual-design-lead-ux-at-cricut-4314189953",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
-    },
-    {
-      "id": "4382185452",
-      "title": "Senior Manager, Social Media & Content Production",
-      "companyName": "Los Angeles Tourism & Convention Board",
-      "location": "Los Angeles, CA",
-      "posted": "2026-06-06",
-      "salary": "",
-      "seniorityLevel": "Not Applicable",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/senior-manager-social-media-content-production-at-los-angeles-tourism-convention-board-4382185452?position=52&pageNum=0&refId=zNFxIfouZviybXXrefclHQ%3D%3D&trackingId=34tBF7fz%2BILHQmyn8Qy5Ag%3D%3D",
-      "descriptionText": "Description\n\nWHO WE ARE\n\nThe mission of the Los Angeles Tourism &amp; Convention Board (Los Angeles Tourism) is to improve the quality of life for all Angelenos through the economic and community benefits of tourism. Representing over 1,000 local tourism-related businesses, Los Angeles Tourism is a non-profit organization responsible for promoting the City of Angels as one of the world\u2019s premier travel destinations through its global brand marketing and sales efforts. Tourism is a cornerstone of Los Angeles County\u2019s economy, ranking among its top five employers. The city welcomed an astonishing 50 million visitors fueling over 543,000 tourism-related jobs and driving more than $45 billion in business sales in 2024. Los Angeles Tourism proudly leads initiatives that celebrate and sustain this vibrant industry, including the renowned Dine LA program designed to showcase LA\u2019s world-class culinary scene while supporting local restaurants and hospitality professionals. Dine LA has become one of the largest restaurant weeks in the nation\u2014featuring nearly 450 restaurants across 88 neighborhoods and 33 global cuisines. As of June 2025, LA County is home to more than 180 Michelin-recognized restaurants, with 32 participating in Dine LA Restaurant Week. As one of the world\u2019s premier sports capitals, Los Angeles is excited to host eight FIFA World Cup 26\u2122 matches \u2013 including the U.S. Men\u2019s National Team opening match \u2013 and welcome back the Super Bowl for the ninth time. With headquarters in Los Angeles and offices spanning London, Mumbai, Chengdu, Shanghai, Beijing, Guangzhou, and Sydney, Los Angeles Tourism operates on a truly global stage, sharing the city\u2019s dynamic spirit with the world.\n\nTHE OPPORTUNITY\n\nThe Senior Manager, Social Media &amp; Content Production creates and manages daily content that showcases the energy, culture, and neighborhoods of Los Angeles across our global channels. This role is hands-on, writing, shooting, editing, and publishing content while staying tapped into what\u2019s happening around the city. You will help maintain the social calendar, partner with agencies and creators, and bring fresh ideas that align with our programs and brand voice. The ideal candidate is creative, organized, culturally aware, and comfortable balancing fieldwork with day-to-day posting and community engagement. You\u2019ll play a key role in growing our audience, keeping our content timely and relevant, and bringing the unique voice of LA to life.\n\nWhat You Will Do\n\n\n\n- Own day-to-day management of LA Tourism\u2019s global social media platforms (6M + followers), including in-market content capture, editing (photo/video), posting, and community management. (20%)\n- Co-develop program-level social strategies with the Creative Director and execute content creation hands-on using a stable of freelancers and influencers year-round (examples: Dine LA, Event Marketing, LA Pride, Mega Sports Events, etc.). Source, recruit, negotiate and draft scope of work for contracts with each individual influencer and freelancer for marketing programs. (20%)\n- Produce and publish original content for all social channels, actively identifying real-time opportunities and driving traffic to the website to meet program and annual goals. (20%)\n- Maintain a bi-weekly social media editorial calendar for all platforms; ensure cultural and current events sensitivity; manage community engagement daily. (15%)\n- Partners with advertising agencies to align paid/organic content, optimize performance globally, and traffic assets as needed. (10%)\n- Support broader brand campaign strategies with Creative Director by translating ideas into social-ready content and publishing plans; offering suggestions on how to make the content work well on each platform. (5%)\n- Executes partner and ad sales deliverables as well as giveaways. Provides key performance metrics and insights for stakeholders as needed. (5%)\n- Perform other duties as assigned. (5%)\n\nSome Other Things You May Do\n\n\n\n- Attend events across Los Angeles (evenings/weekends as needed) to capture content for social media and web content campaigns, with a focus on Tourism Marketing District (TMD) hotels and more.\n- Collaborate with Creative Director to integrate stakeholder efforts in the overall social media editorial calendars; Balance inbound requests and prioritize against brand/program goals.\n- Collaborate with Media department to ensure all key tourism board messages are incorporated into social media outreach and crisis communication appropriately.\n- Manage online relationships with regional, state and national organizations, including but not limited to the tourism industry.\n- Monitor and analyze social conversation about Los Angeles using tools such as Meta and Brandwatch. Report insights and recommend next steps. \n\nWhat You\u2019ll Need To Succeed\n\n\n\n- 4-5 years of hands-on social media/content experience for lifestyle, entertainment, sports, or consumer brands. \n- High school diploma or equivalent.\n- Must possess and maintain a current, valid driver\u2019s license and be able to drive a vehicle for work-related travel as needed and as applicable to the position. \n- Must be willing to partake in a comprehensive background check including a drug test in accordance with applicable laws.\n- Has a proficient knowledge of the Los Angeles community, neighborhoods and events.\n- Creative writing and photo editing skills, as well as an ability to communicate to multiple audiences in a variety of platforms.\n- Strong knowledge of online trends and tactics, influencer communities, usability standards, familiarity with branding and latest digital technologies, tools and best practices.\n- Comfortable working in the field (evenings/weekends as needed). \n- Familiarity with social analytics and ability to translate performance into optimization. \n- Experience collaborating with creative, media, and agency partners; low ego, team-first working style. \n- Must be proficient in MS Office (Word, Excel, PowerPoint).\n- Excellent verbal, written, and interpersonal communication skills. \n- Dependable, great attitude, highly motivated and a team player.\n- Possess strong organizational skills and attention to detail. \n- Ability to multi-task and meet multiple deadlines.\n- Ability to communicate effectively across various departments. \n- Ability to work in a changing environment.\n\nNICE TO HAVES\n\n\n\n- Bachelor\u2019s degree preferred. \n- Lifestyle, brand or entertainment marketing experience. \n\nCompensation Range\n\nExact compensation may vary based on skills and experience.\n\n$80,000 - $103,000\n\nBonus Eligible\n\nWhat\u2019s In It For You\n\nAt Los Angeles Tourism, we believe your best work happens when you have the tools to stay healthy, enjoy the present moment, save for your future, and look forward to coming into work. That\u2019s why we\u2019re committed to providing a competitive and comprehensive benefits program.\n\n\n\n- Hybrid work environment\n- Remote Monday and Friday\n- DTLA Office Tuesday through Thursday\n- Company paid parking in DTLA\n- Early Friday\u2019s \u2013 our office closes every Friday at 2:30 pm\n- Work remotely week of Thanksgiving\n- Holiday Office Closure (December 24th \u2013 January 1st)\n- 15 Paid Company Holidays\n- Paid Vacation Time\n- Paid Sick Time\n- Paid Floating Holidays\n- Paid Family Leave\n- Comprehensive health insurance (both PPO and HMO plans available)\n- Dental and vision plans (100% employer paid for some elections)\n- Pet insurance \n- Employer-paid life insurance, AD&amp;D, short-term disability, and long-term disability, Aflac\n- Employee Assistance Program \n- Flexible Spending Account (Healthcare &amp; Dependent Care)\n- 401(k) Retirement Savings Plan with up to 6% match that vests immediately \n- 401(k) match for qualified student loan payments\n- Monthly internet and phone stipend\n\nLos Angeles Tourism &amp; Convention Board reserves the right to modify the benefit plans and employee services at any time, with or without notice.\n\nPhysical Requirements \u2013 Essential Physical Tasks\n\nThe physical demands are representative of those that must be met by a team member to successfully perform the essential functions of the job. Reasonable accommodations may be made to enable individuals with disabilities to perform essential functions.\n\nWhile performing the duties of this job, the employee is frequently required to stand, walk, move. The employee must occasionally lift, carry, pull, push, transport and/or move up to 40 pounds. Ascends and/or descends stairs. Specific vision abilities required by this job include color vision. Requires prolonged sitting, driving, some bending, some twisting neck and body, some stooping and stretching/reaching (up, down, out), requires grasping, feeling, and detecting, requires eye-hand coordination and manual dexterity sufficient to operate a keyboard, mouse, photocopier, fax machine, telephone, calculator, projector, screen for presentations, and other office equipment on a repetitive basis. Requires normal range of hearing, talking, and eyesight to record, prepare and communicate appropriate reports and information.\n\n\n\n- Fly on an airplane and sit for prolonged periods of time.\n- Able to get in and out of a vehicle on a regular basis while traveling for work.\n- Able to carry, lift, roll luggage or equipment for work-related travel.\n- Reliable transportation.\n\nMandatory Vaccine Requirement: Los Angeles Tourism continues to prioritize the health and safety of our workforce. Consistent with that commitment, in light of the substantial and growing body of evidence that vaccinations remain the most effective protection against the spread the COVID-19, we require that members of our team be fully vaccinated as a condition of employment. For individuals with medical conditions or sincerely held religious beliefs that prevent vaccination, the Company will consider requests for reasonable accommodation consistent with our policy and applicable law.\n\nEEO &amp; DIVERSITY\n\nLos Angeles Tourism and Convention Board is an equal employment opportunity employer. We pride ourselves on welcoming applicants from all backgrounds regardless of race, color, sex, religion, national origin, ancestry, sexual orientation, age, physical or mental disability, medical condition, pregnancy, gender identity, marital status, military or veteran status or any other basis protected by applicable federal, state, or local laws.\n\nWe\u2019re determined to build a workplace based on inclusive behaviors and equitable systems, where all employees can bring their authentic selves, feel engaged, and share their perspectives as a valued member of Los Angeles Tourism.",
-      "source": "LinkedIn",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 25,
-      "prefMatched": [
-        "campaign",
-        "entertainment",
-        "advertising",
-        "remote",
-        "content"
-      ]
-    },
-    {
-      "id": "4415505470",
-      "title": "Creative Director",
-      "companyName": "Northwood",
-      "location": "Torrance, CA",
-      "posted": "2026-06-06",
-      "salary": "",
-      "seniorityLevel": "Not Applicable",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/creative-director-at-northwood-4415505470?position=39&pageNum=0&refId=zNFxIfouZviybXXrefclHQ%3D%3D&trackingId=glrWpOLa0DU%2FKL2dg7u8BA%3D%3D",
-      "descriptionText": "About Northwood Space:\n\nNorthwood is a modern space infrastructure company focused on connecting space and Earth. The world runs on space. Space will run on Northwood. Our global ground network ensures that missions ranging from national security, to global connectivity, to disaster response can unlock their full potential and operate every day without fail. How this takes shape across our brand matters.\n\nRole:\n\nWe are looking for a Head of Design to define how Northwood shows up in the world. You will partner closely with the CEO, founding team, and Head of Communications to build and execute our visual presence from the ground up.\n\nYou\u2019ve taken ideas from first principles through to final production, aligning stakeholders and making tradeoffs without diluting quality. You operate fluidly between hands-on work and creative direction, leading internal efforts and external partners with equal clarity. You set the bar and ensure the work meets it, acting as the creative through-line across everything Northwood puts into the world.\n\nResponsibilities:\n\n\n\n- Define and evolve Northwood\u2019s visual identity, ensuring it reflects the vision, ambition, and clarity of the systems we build.\n- Concept and art direct major external touch points\u2014from investor materials and announcements to customer-facing collateral, recruiting assets, and web presence.\n- Translate complex technical systems into clear, compelling visual narratives that can be understood by diverse audiences, including customers, partners, regulators, and talent.\n- Partner closely with the Head of Communications to bring Northwood\u2019s narrative to life visually, ensuring alignment between what we say and how we show up.\n- Direct photo, video, and design production, working with external creatives (photographers, filmmakers, illustrators, agencies) to execute at a high level of quality.\n- Decide when to build in-house versus through external partners, and lead external engagements as the creative authority\u2014setting direction, giving feedback, and maintaining a consistent standard.\n- Develop repeatable visual systems and frameworks that allow Northwood to scale its output without losing coherence or quality.\n- Act as a creative partner to leadership, shaping how the company communicates in high-stakes moments where clarity and credibility matter.\n- Establish and uphold a high bar for craft across all outputs, from small artifacts to flagship moments.\n\nQualifications:\n\n\n\n- 10+ years of experience in visual design, brand, or art direction, with a portfolio that demonstrates a high bar for quality across different mediums.\n- Experience defining and evolving visual identity systems, not just executing within existing ones.\n- Strong conceptual thinking paired with the ability to carry ideas through to high-quality execution across formats (presentation, web, print, photo, video).\n- Hands-on proficiency in design tools and workflows; you are comfortable making the work yourself when needed.\n- Experience directing external partners (agencies, photographers, filmmakers, etc.) and maintaining creative control through production.\n- Ability to translate complex or technical concepts into clear, credible visual narratives for sophisticated audiences.\n- Strong creative judgment and the confidence to make decisions with incomplete information, especially in high-stakes or ambiguous situations.\n- Experience working closely with senior leadership or founders, with an understanding of how to shape company-level communication and perception.",
-      "source": "LinkedIn",
-      "score": 7,
-      "matchedKeywords": [
-        "Art Direction"
-      ],
-      "why": "Matches: Art Direction",
-      "tier": "Tier 3",
-      "prefScore": 10,
-      "prefMatched": [
-        "creative direction",
-        "art direction"
-      ]
-    },
-    {
-      "id": "4424627787",
-      "title": "Creative Director",
-      "companyName": "AL Media Strategy",
-      "location": "United States",
-      "posted": "2026-06-06",
-      "salary": "",
-      "seniorityLevel": "Director",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/creative-director-at-al-media-strategy-4424627787?position=28&pageNum=0&refId=v1Vet22xe78ezH9rSN5HEQ%3D%3D&trackingId=eetzZjslO5r7MseIrXIUag%3D%3D",
-      "descriptionText": "\nA|L Media is an award-winning political media firm working for political candidates and issue-oriented campaigns across the country. We are hiring a Creative Director to join our talented production team for the mid-term election season. This is a contract position through early November.\n\n\nThe Creative Director position will lead our talented team in creating high quality content for campaigns across multiple platforms. From concept creation to deliverables, the CD will bring new ideas, possess a strong work ethic and propel the creative forward.\n\n\nREQUIRED: SAMPLES OF WORK\n\n\nKey Responsibilities:\n\n- Conceive ideas and execute concepts for advertising campaigns to include linear, digital and social formats\n- Collaborate with team members in creating content upholding client expectations and messaging; write strong, clear and concise scripts\n- Lead creative team of designers and editors in executing concepts thru to completion\n- Work within scope of budgets and timelines\n- Draft visual content; ie storyboards, concepts and decks\n- Articulate creative vision with in-field production crew, and direct motion and/or talent on set\n- Stay ahead of the curve; knowledgeable about new technologies and methods of Storytelling\n\n\nSkills &amp; Qualifications:\n\n- 3 to 5+ years of experience in a Creative Director position or similar\n- Experience in overseeing creative team, directing artists\n- Experience in field directing, casting and working with actors\n- Strong written and oral communication skills\n- Ability to work in a fast- paced environment\n- Strong skill set in Adobe Suite\n- Must be available to work nights and weekends as needed\n- Must be willing to travel\n- Desire to work for progressive values\n\n\nBenefits &amp; Compensation:\n\n- Competitive full-time salary and benefits (Salary range $120k-$150k)\n- Remote-friendly team with flexible working hours\n- Fast-paced, high-impact work that shapes elections and supports meaningful causes\n- A mission-driven environment where your creative work matters\n\n",
-      "source": "LinkedIn",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 15,
-      "prefMatched": [
-        "advertising",
-        "remote",
-        "content"
-      ]
-    },
-    {
-      "id": "4424949178",
-      "title": "Design Lead/Associate Creative Director",
-      "companyName": "Design Citizen",
-      "location": "United States",
-      "posted": "2026-06-06",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/design-lead-associate-creative-director-at-design-citizen-4424949178",
-      "link_full": "https://www.linkedin.com/jobs/view/design-lead-associate-creative-director-at-design-citizen-4424949178",
-      "descriptionText": "",
-      "salary": "$100.00/hr - $115.00/hr",
-      "employmentType": "Contract",
-      "seniorityLevel": "Mid-Senior level",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches (description unavailable)",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
-    },
-    {
-      "id": "GD:1010159632844",
-      "title": "Product Marketing Manager",
-      "companyName": "Oscar Insurance Corporation",
-      "location": "Atlanta, GA",
-      "posted": "2026-06-06",
-      "source": "Glassdoor",
-      "link": "https://www.glassdoor.com/job-listing/j?jl=1010159632844",
-      "link_full": "https://www.glassdoor.com/job-listing/j?jl=1010159632844",
-      "descriptionText": "",
-      "salary": "$105,818 - $138,886/yr",
-      "employmentType": "",
-      "seniorityLevel": "",
-      "_pay_min_annual": 105818,
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches (description unavailable)",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
-    },
-    {
-      "id": "4397505711",
-      "title": "VP Creative Director",
-      "companyName": "GSW, powered by Syneos Health",
-      "location": "Santa Monica, CA",
-      "posted": "2026-06-05",
-      "salary": "",
-      "seniorityLevel": "Not Applicable",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/vp-creative-director-at-gsw-powered-by-syneos-health-4397505711?position=47&pageNum=0&refId=zNFxIfouZviybXXrefclHQ%3D%3D&trackingId=RqmTxR9Uk2MhElG7eD%2FxbQ%3D%3D",
-      "descriptionText": "Description\n\nAre you a creative visionary who inspires and leads with a clear direction? GSW Santa Monica is seeking a VP, Creative Director to set our creative vision and elevate our standards. In this role, you will be responsible for leading a talented team, pushing creative boundaries, and fostering strong client relationships. If you are passionate about creating groundbreaking work in the pharmaceutical advertising space, we want to hear from you.\n\nThis is a hybrid role for those in the Los Angeles area (2 days/week in our Santa Monica office). We are also open to remote candidates located on the West Coast. Please note: We are not considering candidates from the East Coast at this time.\n\nKey Responsibilities:\n\n\n\n- Provide creative leadership and set the standard for excellence for the entire brand.\n- Present and champion groundbreaking creative work, selling ideas internally and to our clients.\n- Partner with clients to develop powerful and effective creative strategies and solutions.\n- Mentor and manage a cross-functional creative team, ensuring timely delivery and fostering professional growth.\n- Oversee the financial health of client relationships, from contracts to billing.\n- Participate in new business pitches to help drive agency growth.\n\nWhat You'll Bring:\n\n\n\n- A powerful portfolio that demonstrates strong conceptual ability.\n- 10+ years of experience in pharma advertising, with at least 5 of those years in a senior management role.\n- Must have launch experience.\n- A deep understanding of our clients' business and a passion for delivering best-in-class creative solutions.\n- Expertise in current communication technologies and media channels, with a strong emphasis on digital strategy.\n- Proven success in strategic concepting and a history of contributing to business development.\n- Excellent mentoring, interpersonal, and communication skills.\n- User Experience (UX) design training or experience is a plus!\n\nEducation:\n\n\n\n- Bachelor\u2019s degree or equivalent experience.\n\nThe annual base salary for this position ranges from $200k to $210k. The base salary range represents the anticipated low and high of the Syneos Health range for this position. Actual salary will vary based on various factors such as the candidate\u2019s qualifications, skills, competencies, and proficiency for the role. In addition, some positions may include eligibility to earn commissions/bonus based on company and / or individual performance.\n\nAt GSW, we are dedicated to building a diverse, inclusive and authentic workplace. If your past experience doesn\u2019t align perfectly, we encourage you to apply anyway. At times, we will consider transferable skills from previous roles. We also encourage you to join our Talent Network to stay connected to additional career opportunities. GSW is a full-service healthcare communications agency that goes beyond advertising to create personalized brand experiences that involve, inspire, educate and activate people through ongoing brand journeys.\n\nWork Here Matters Everywhere | How are you inspired to change lives?\n\nSyneos Health companies are affirmative action/equal opportunity employers (Minorities/Females/Veterans/Disabled)\n\nSyneos Health has a voluntary COVID-19 vaccination policy. We strongly encourage all employees to be fully vaccinated. Additionally, certain local governments or Syneos Health customers may have vaccine requirements that apply to some of our employees. These employees are required to submit proof of vaccination to Syneos Health and maintain compliance with these requirements.\n\nAt Syneos Health, we believe in providing an environment and culture in which Our People can thrive, develop and advance. We reward and recognize our people by providing valuable benefits and a quality-of-life balance. The benefits for this position will include a competitive compensation package, Health benefits to include Medical, Dental and Vision, Company match 401k, flexible paid time off (PTO) and sick time. Because certain states and municipalities have regulated paid sick time requirements, eligibility for paid sick time may vary depending on where you work. Syneos Health complies with all applicable federal, state, and municipal paid sick time requirements.",
-      "source": "LinkedIn",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 10,
-      "prefMatched": [
-        "advertising",
-        "remote"
-      ]
-    },
-    {
-      "id": "4424851439",
-      "title": "Design Director - Fleece",
-      "companyName": "Comfrt",
-      "location": "United States",
-      "posted": "2026-06-05",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/design-director-fleece-at-comfrt-4424851439",
-      "link_full": "https://www.linkedin.com/jobs/view/design-director-fleece-at-comfrt-4424851439",
-      "descriptionText": "",
-      "salary": "",
-      "employmentType": "Full-time",
-      "seniorityLevel": "Not Applicable",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches (description unavailable)",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
-    },
-    {
-      "id": "4394984383",
-      "title": "Director, Customer Experience",
-      "companyName": "Alma",
-      "location": "United States",
-      "posted": "2026-06-05",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/director-customer-experience-at-alma-4394984383",
-      "link_full": "https://www.linkedin.com/jobs/view/director-customer-experience-at-alma-4394984383",
-      "descriptionText": "",
-      "salary": "",
-      "employmentType": "Full-time",
-      "seniorityLevel": "Not Applicable",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches (description unavailable)",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
-    },
-    {
-      "id": "GD:1010158129152",
-      "title": "Associate Director, Data Enablement",
-      "companyName": "WPP plc",
-      "location": "Los Angeles, CA",
-      "posted": "2026-06-05",
-      "salary": "$83,981\u2013$121,933/yr",
-      "seniorityLevel": null,
-      "employmentType": null,
-      "link": "https://www.glassdoor.com/job-listing/j?jl=1010158129152",
-      "descriptionText": "Who We Are  \n \nVML, part of WPP, is a leading creative company that combines brand experience, customer experience, and commerce, creating connected brands to drive growth. VML is celebrated for its innovative and human first, award-winning work for blue chip client partners including AstraZeneca, Colgate-Palmolive, Dell, Ford, Microsoft, Nestl&eacute;, The Coca-Cola Company, and Wendy's. The agency is recognized by the Forrester Wave&trade; Reports, as a Leader among Marketing Creative and Content Service Providers, Commerce Services, Global Digital Experience Services, Global Marketing Services and, most recently, Marketing Measurement &amp; Optimization. In addition, VML's specialist health network, VML Health, is one of the world's largest and most awarded health agencies. VML's global network is powered by 26,000 talented people across 55+ markets, with principal offices in Kansas City, New York, Detroit, London, S&atilde;o Paulo, Shanghai, Singapore, and Sydney. \n  \nAbout WPP  \n \nWPP is the trusted growth partner for the world's leading brands. We unite cutting-edge media intelligence and data solutions, world-class creativity, next-generation production, transformative enterprise solutions and expert strategic counsel in a single company &ndash; powered by exceptional talent and our agentic marketing platform, WPP Open, to help our clients navigate change, capture opportunity and deliver transformational growth. For more information, visit WPP.com.    \nThe Opportunity:  We are seeking a highly skilled and detail-oriented  Analytics Technical Specialist  to join our Data Enablement Team. You will be instrumental in the technical implementation, management, and quality assurance of cutting-edge analytics platforms, with a strong focus on Tealium as well as the Adobe Experience Platform (AEP) and Customer Journey Analytics (CJA). This role requires deep expertise in tag management, data layer design, pixel tracking, server-side implementations and Web/Mobile SDKs, alongside rigorous analytics QA to ensure robust and accurate data collection that informs our customer engagement and marketing strategies. \n  \nResponsibilities:  \n \n  Tagging, Tag Management &amp; Data Layer Design:  \n   Design, implement, and maintain comprehensive data collection strategies within Adobe Experience Platform. \n   Manage and administer our Tealium and Adobe Experience Platform Tags (formerly Launch) instances, including the configuration of tags, triggers, and variables for various analytics, marketing, and advertising platforms. \n   Design, develop, and maintain robust and scalable data layer specifications across all digital properties (web, mobile apps) to ensure consistent and accurate data capture. \n   Provide guidance and support to development teams on proper client-side and server-side (Event Forwarding) implementation and API integrations. \n    Analytics Quality Assurance (QA):  \n   Develop and execute comprehensive analytics QA processes and test plans to validate data layer integrity, tag firing, and data accuracy within AEP and other analytics systems. \n   Perform rigorous testing using debugger tools, network inspectors, and platform interfaces to identify, diagnose, and troubleshoot data collection issues. \n   Collaborate closely with development, product, and QA teams to ensure timely resolution of identified data discrepancies. \n   Document QA findings, test cases, and best practices. \n    Collaboration &amp; Communication:  \n   Serve as a subject matter expert on analytics implementation, providing technical guidance and training to internal stakeholders. \n   Work cross-functionally with product managers, developers, marketing teams, and other data teams to ensure seamless integration and utilization of analytics data. \n   Contribute to the continuous improvement of our data governance, documentation, and analytics infrastructure. \n \n  Requirements:  \n \n 3-5+ years of hands-on experience in digital analytics implementation, technical tag management, and data quality assurance. \n   Proficiency with Tealium (iQ / EventStream) and/or Adobe Experience Platform Tags (formerly Launch). \n   Proven experience implementing and validating data for Adobe Experience Platform (AEP), Customer Journey Analytics (CJA) and Adobe Analytics. \n   Proven experience designing, implementing, and validating robust server-side tracking and API-based data ingestion. \n   Demonstrated experience in analytics Quality Assurance (QA) methodologies, test plan creation, and using debugging tools (e.g., browser developer tools, Charles proxy, Omnibug). \n   Proficiency in JavaScript, HTML, and CSS for web analytics implementation, debugging, and custom scripting. \n   Strong analytical and problem-solving skills with a meticulous attention to detail. \n   Excellent communication skills, both written and verbal, with the ability to explain complex technical concepts clearly to non-technical audiences. \n \n  About the Data Enablement Team within ME&amp;I:  The Data Enablement Team is a critical function within our Marketing, Engagement &amp; Insights (ME&amp;I) department. We are the architects of our data foundation, responsible for ensuring the accuracy, accessibility, and utility of our marketing and customer data across all digital touchpoints. We empower data-driven decision-making by providing robust, reliable, and scalable analytics solutions. This role is pivotal in bridging the gap between business needs and the technical implementation of our analytics infrastructure.   \nWe believe the best work happens when we're together, fostering creativity, collaboration, and connection. That's why we've adopted a hybrid approach, with teams in the office an average of four days a week. If you require accommodations or flexibility, please discuss this with the hiring team during the interview process. \n \nWPP (VML) is an equal opportunity employer and considers applicants for all positions without discrimination or regard to characteristics. We are committed to fostering a culture of respect in which everyone feels they belong and has the same opportunities to progress in their careers. \n \nVML is a WPP agency (NYSE: WPP). For more information, please visit www.vml.com, and follow along on Instagram, LinkedIn, and X. \n \nWhen you click &quot;Submit Application&quot;, this will send any information you add below to VML. Before you do this, we think it's a good idea to read through our Recruitment Privacy Policy. California residents should read our California Recruitment Privacy Notice. This explains what we do with your personal data when you apply for a role with us, and, how you can update the information you have provided us with or how to remove it.",
-      "source": "Glassdoor",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches",
-      "tier": "Tier 3",
-      "prefScore": 10,
-      "prefMatched": [
-        "advertising",
-        "content"
-      ]
     }
   ]
 }

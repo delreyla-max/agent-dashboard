@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "updated": "2026-06-19T15:03:15-07:00",
+  "updated": "2026-06-22T04:21:42-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-19T15:03:15-07:00",
+      "lastRun": "2026-06-22T04:21:42-07:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "Titles: VP of Research, Vice President, UX Research, Head of Research, Director of UX Research \u2014 11 new (0 Tier 1) \u2014 LI 11, IN 0, GD 0 \u2014 75 total",
+      "lastRunNote": "Titles: VP of Research, Vice President, UX Research, Head of Research, Director of UX Research \u2014 0 new (0 Tier 1) \u2014 LI 0, IN 0, GD 0 \u2014 74 total",
       "outputFolder": "C:/Users/gyipl/Documents/Claude/GitHub/agent-dashboard/users/chris/jobs/",
       "documents": []
     }
