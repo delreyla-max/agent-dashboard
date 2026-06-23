@@ -1,395 +1,175 @@
 {
-  "generated": "2026-06-17T07:25:42-07:00",
+  "updated": "2026-06-17T19:40:57-07:00",
   "source": "LinkedIn",
-  "searches": [
-    "Associate Creative Director OR Creative Director OR Brand Creative Director OR AI Creative Director \u2014 Los Angeles 24h",
-    "Associate Creative Director OR Creative Director OR Brand Creative Director OR AI Creative Director \u2014 US Remote 24h"
-  ],
-  "count": 18,
+  "count": 20,
   "jobs": [
     {
-      "id": "4429951242",
+      "id": "4420246397",
+      "title": "Head of Operations",
+      "companyName": "IntelliPro",
+      "location": "Los Angeles Metropolitan Area",
+      "posted": "2026-06-09",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/head-of-operations-at-intellipro-4420246397",
+      "link_full": "https://www.linkedin.com/jobs/view/head-of-operations-at-intellipro-4420246397",
+      "descriptionText": "",
+      "salary": "$170,000.00/yr - $270,000.00/yr",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Executive"
+    },
+    {
+      "id": "4426140518",
+      "title": "Director, Creator Management",
+      "companyName": "VaynerX",
+      "location": "Los Angeles Metropolitan Area",
+      "posted": "2026-06-10",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/director-creator-management-at-vaynerx-4426140518",
+      "link_full": "https://www.linkedin.com/jobs/view/director-creator-management-at-vaynerx-4426140518",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Not Applicable"
+    },
+    {
+      "id": "4425836182",
       "title": "Creative Director",
-      "companyName": "Robert Half",
-      "location": "Denver, CO",
-      "posted": "2026-06-17",
+      "companyName": "Scale Media",
+      "location": "California, United States",
+      "posted": "2026-06-09",
       "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/creative-director-at-robert-half-4429951242?position=2&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=PhtvVBw0Wy5SpJXYcfvSwg%3D%3D",
-      "descriptionText": "\nRobert Half Marketing and Creative has a client looking for a hands-on Creative Director to shape and strengthen creative work across branding, digital experiences, print materials, social content, and integrated campaigns. This opportunity suits a concept-driven visual leader who combines strong design judgment with the ability to present ideas persuasively and guide projects from initial direction to final delivery. Based in Denver, Colorado, this role blends strategic oversight with active creative contribution in a collaborative agency environment. You will help define compelling brand narratives, support the growth of the creative team, and ensure every project reflects a high standard of quality and purpose.\n\n\nResponsibilities:\n\u2022 Direct the development of creative solutions for brand initiatives, multi-channel campaigns, digital assets, print collateral, social content, and experiential work.\n\u2022 Turn client goals and business priorities into original concepts and visually engaging communication that aligns with brand strategy.\n\u2022 Guide assignments through each phase of the creative lifecycle, including briefing, ideation, design direction, review cycles, and final delivery.\n\u2022 Provide thoughtful art direction and actionable feedback to designers, writers, freelance contributors, and external production partners.\n\u2022 Represent the creative perspective in client discussions, formal presentations, and new business opportunities with confidence and clarity.\n\u2022 Work closely with account, strategy, and production teams to keep deliverables aligned with project objectives, timelines, budgets, and brand standards.\n\u2022 Contribute directly to concept development, layout refinement, visual storytelling, and hands-on design support when project needs require it.\n\u2022 Coach and develop early-career and mid-level creatives while reinforcing consistent creative excellence across all accounts.\n\u2022 Support agency growth by helping shape pitch materials, strengthen positioning, and produce standout work suitable for portfolio and case study use.\n\u2022 At least 7 years of experience in design, advertising, or a related creative setting, including advancement into senior creative leadership.\n\u2022 Previous agency experience, ideally in a small or mid-sized environment where adaptability and cross-functional collaboration are important.\n\u2022 A strong portfolio that demonstrates conceptual thinking, refined design execution, and successful work across multiple channels.\n\u2022 Advanced knowledge of branding principles, typography, layout, visual systems, and content development.\n\u2022 Experience presenting creative work to clients and building trust through clear communication and strong rationale.\n\u2022 Proven ability to manage several projects simultaneously in a deadline-driven environment.\n\u2022 Proficiency with Adobe Creative Cloud; familiarity with Figma or comparable digital collaboration platforms is beneficial.\n\u2022 Strong leadership, mentoring, and team partnership skills, with understanding of both print and digital production processes.\nInnovation starts with people.\u00ae\n\n\nRobert Half is the world\u2019s first and largest specialized talent solutions firm that connects highly qualified job seekers to opportunities at great companies. We offer contract, temporary and permanent placement solutions for finance and accounting, technology, marketing and creative, legal, and administrative and customer support roles.\n\n\nRobert Half works to put you in the best position to succeed. We provide access to top jobs, competitive compensation and benefits, and free online training. Stay on top of every opportunity - whenever you choose - even on the go. Download the Robert Half app and get 1-tap apply, notifications of AI-matched jobs, and much more.\n\n\nAll applicants applying for U.S. job openings must be legally authorized to work in the United States. Benefits are available to contract/temporary professionals, including medical, vision, dental, and life and disability insurance. Hired contract/temporary professionals are also eligible to enroll in our company 401(k) plan. Visit roberthalf.gobenefits.net for more information.\n\n\n\u00a9 2025 Robert Half. An Equal Opportunity Employer. M/F/Disability/Veterans. By clicking \u201cApply Now,\u201d you\u2019re agreeing to Robert Half\u2019s Terms of Use and Privacy Notice.",
-      "salary": "$130,000.00/yr - $155,000.00/yr",
-      "employmentType": "Full-time",
-      "score": 20,
-      "matchedKeywords": [
-        "Creative Director",
-        "Art Direction",
-        "Cross-Functional Collaboration"
-      ],
-      "why": "Matches: Creative Director, Art Direction, Cross-Functional Collaboration",
-      "tier": "Tier 3",
-      "prefScore": 21,
-      "prefMatched": [
-        "art direction",
-        "brand strategy",
-        "advertising"
-      ]
-    },
-    {
-      "id": "4428059130",
-      "title": "Strategy Lead",
-      "companyName": "OLIVER | The Brandtech Group",
-      "location": "Minneapolis, MN",
-      "posted": "2026-06-16",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/strategy-lead-at-oliver-the-brandtech-group-4428059130?position=23&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=0v2r5be7tXmv88CxveWuIg%3D%3D",
-      "descriptionText": "\nEstablished in 2004, OLIVER is the world\u2019s first and only specialist in designing, building, and running bespoke in-house agencies and marketing ecosystems for brands. We partner with over 300 clients in 40+ countries and counting. Our unique model drives creativity and efficiency, allowing us to deliver tailored solutions that resonate deeply with audiences.\u00a0\nAs a part of The Brandtech Group, we're at the forefront of leveraging cutting-edge AI technology to revolutionise how we create and deliver work. Our AI solutions enhance efficiency, spark creativity, and drive insightful decision-making, empowering our teams to produce innovative and impactful results.\u00a0 \nRole:\u00a0Strategy Lead \u00a0\nLocation:\u00a0Remote - Minneapolis, MN\n\u00a0The Opportunity:\u00a0\n\u00a0\nThis is an opportunity to join OLIVER's dedicated in-house studio embedded with\u00a0embedded with a leading healthcare education institution\u00a0as Strategy Lead \u2014 the strategic intelligence function for a fully integrated creative production studio serving 100,000+ enrolled students across\u00a0a large, multi-brand portfolio of students, professionals, and enterprise audiences across the healthcare education sector.\u00a0\nThe constraint on the next phase of\u00a0growth is not lack of strategy \u2014 it is content velocity, content relevance, and the ability to test and\u00a0personalize\u00a0at scale. Your role is to make sure the studio is always working from the sharpest possible strategic foundation, turning audience insight, channel performance, and market intelligence into clear direction for creative and CRM execution.\u00a0\nYou will lead the end-to-end strategy for\u00a0email and CRM program \u2014 the studio's most commercially critical workstream \u2014 while also providing strategic input and optimization direction across paid, social, owned, and emerging channels. This is supported by a platform architecture where OMG organizes and orchestrates the\u00a0work;\u00a0Pencil is where the work gets created and\u00a0optimized\u00a0and Share of Model is\u00a0how\u00a0our client will\u00a0stay\u00a0one step ahead in AI-driven discovery. You will be one of the primary users of all three.\u00a0\nWe support flexible working and are open to different arrangements. We offer reasonable adjustments throughout the process.\n\u00a0About the role:\u00a0\nThe Strategy Lead is the strategic backbone of the\u00a0OLIVER\u00a0studio. Approximately 60% of your focus sits on CRM and email \u2014 owning the strategy, audience architecture, and optimization roadmap for\u00a0institution\u00a0enrollment marketing\u00a0programs. The remaining 40% spans the broader channel mix: paid social, organic social, owned content, web, and performance marketing \u2014 providing strategic input, testing frameworks, and optimization direction that ensures the studio is always creating the right content for the right audience in the right channel.\u00a0\nYou are the person who connects insight to execution. You work closely with the Business Director on client strategy, with CRM Campaign Managers on email performance, with the Associate Creative Director on content strategy, and with the Data Analyst on measurement. Three lead SLAs anchor the partnership \u2014 cost per asset, speed to delivery, and creative effectiveness in market \u2014 and your strategic direction should be visibly improving the third.\u00a0\n\u00a0What you will be doing:\u00a0\nCRM &amp; Email Strategy (approx. 60%)\u00a0\n\n- Lead the end-to-end CRM and email marketing strategy for enrollment programs\u00a0across all institutions \u2014 including lead nurture, application, enrolment, and retention journeys\u00a0\n\n- Define and\u00a0maintain\u00a0audience segmentation frameworks,\u00a0personalization\u00a0strategies, and lifecycle contact architectures across\u00a0five\u00a0healthcare education\u00a0institutions.\u00a0\n\n- Build and own the testing and optimization roadmap for email \u2014 A/B frameworks, send cadence strategies, content personalization logic, and subject line performance analysis\u00a0\n\n- Partner with the Data Analyst and CRM Campaign Managers to translate performance data into clear strategic recommendations, and feed those recommendations back into the next campaign cycle\u00a0\n\n- Maintain deep platform fluency across\u00a0CRM and email technology stack; advise on platform\u00a0utilization, automation opportunities, and data quality requirements\u00a0\nCross-Channel Strategy &amp;\u00a0Optimization\u00a0(approx. 40%)\u00a0\n\n- Provide strategic input and\u00a0optimization\u00a0direction across broader channel mix \u2014 paid social, organic social, owned content, web, and performance marketing \u2014 ensuring channel strategies are coherent, audience-relevant, and aligned with institutional goals\u00a0\n\n- Use Share of Model to understand brand visibility in AI-generated answers,\u00a0optimize\u00a0AI search visibility,\u00a0identify\u00a0share of voice across models, and surface brand strengths and weaknesses \u2014 translating these real-time insights into strategy and content creation priorities\u00a0\n\n- Develop content and channel testing frameworks that allow the studio to learn faster,\u00a0optimize\u00a0more efficiently, and prove creative effectiveness across all formats\u00a0\n\n- Partner with the Associate Creative Director to translate strategic insight into creative direction \u2014 ensuring campaigns are rooted in audience understanding and channel intelligence\u00a0\n\n- Lead brand and audience insight work for\u00a0the\u00a0institutions:\u00a0analyze\u00a0conversations, sentiments, audience behavior, and content resonance;\u00a0identify\u00a0barriers (such as cost), motivators (such as career outcomes), and engagement triggers (such as authentic narratives) to prioritize messaging and approach opportunities\u00a0\n\n- Monitor competitor positioning, category trends, and audience signals across higher education to inform ongoing strategic recommendations\u00a0\n\n- Contribute to QBR preparation alongside the Business Director, bringing strategic performance narrative and forward-looking channel recommendations to senior\u00a0client\u00a0stakeholders\u00a0\nAccount-Wide Strategic Leadership\u00a0\n\n- Serve as the studio's primary strategic voice \u2014 connecting client ambitions to studio capability, and ensuring every workstream has a clear, insight-driven strategic foundation\u00a0\n\n- Work across the studio's full team to ensure strategy is embedded in briefing, production, and review \u2014 not just in planning documents\u00a0\n\n- Develop\u00a0optimization\u00a0frameworks that the whole studio can\u00a0use\u00a0from creative testing protocols to content scoring via Pencil's performance intelligence\u00a0\n\u00a0What you need to be great in this role:\u00a0\n\n- Proven experience in a senior strategy, planning, or integrated marketing role \u2014 with a track record of leading strategy across multiple channels, not just one\u00a0\n\n- Deep\u00a0expertise\u00a0in CRM, email marketing strategy, and lifecycle planning in a complex, multi-program\u00a0environment; experience with enterprise CRM platforms (Salesforce Marketing Cloud, HubSpot, Marketo, or equivalent) is essential\u00a0\n\n- Strong working knowledge of paid social, organic social, owned content, and/or performance marketing channels \u2014 with the ability to develop testing and\u00a0optimization\u00a0frameworks across the mix\u00a0\n\n- An understanding of the higher education landscape is a meaningful differentiator: students are increasingly ROI-conscious, looking for clear career pathways; adult learners and working professionals are now central growth strategies; persistent healthcare workforce shortages drive demand for\u00a0specialized\u00a0programs\u00a0\n\n- Strong analytical capability: comfortable with performance data, attribution modelling, A/B testing analysis, and translating insight into clear strategic direction\u00a0\n\n- Experience working with data and analytics teams to build measurement frameworks and performance dashboards\u00a0\n\n- Confident communicator and presenter; able to articulate strategic thinking clearly to senior marketing stakeholders\u00a0\n\n- A proactive, insider mindset: you don't wait for briefs \u2014 you anticipate needs, surface opportunities, and bring the studio's strategic thinking to the table before it's asked for\u00a0\n\n- Collaborative working style with the ability to coordinate effectively across creative, CRM, delivery, and client teams in a distributed, multi-location studio\u00a0\nGen AI &amp; Agentic Thinking\u00a0\n\n- \nStrategic command of the studio's three core platforms: OMG (where the work is\u00a0organized\u00a0and orchestrated), Pencil (where the work is created and\u00a0optimized), and Share of Model (how\u00a0our client\u00a0stays one step ahead in AI-driven discovery)\u00a0\n\n- \nExperience using AI tools to accelerate research, audience insight, content strategy, and campaign planning \u2014 with rigorous human judgment applied to all outputs\u00a0\n\n- \nAbility to\u00a0leverage\u00a0Pencil's direct connection to live ad accounts \u2014 pulling creative performance data back into the production workflow in real time \u2014 with every asset scored, tracked, and fed back into the next brief; this is the intelligence layer most agencies\u00a0don't\u00a0have\u00a0\n\n- \nAgentic leadership: systematic, hypothesis-led thinking applied to complex, multi-channel strategic challenges\u00a0\n\n- \nAbility to set AI-informed quality standards and testing frameworks that the broader studio can adopt\u00a0\n\n- \nAt the time of this\u00a0posting, the base salary for this position may range from\u00a0$127,500.00\u00a0to\u00a0$142,500.00.\u00a0Individual compensation varies based on\u00a0job related\u00a0factors, including location, business needs, level of responsibility, experience, and qualifications. The range listed is just one\u00a0component\u00a0of OLIVER\u2019s total compensation package.\u00a0\n\u00a0Req ID: 17803#LI-director\u00a0 \nOur values shape everything we do:\u00a0\nBe\u202fAmbitious\u202fto succeed\u202f\u00a0\u00a0\nBe\u202fImaginative\u202fto push the boundaries of what\u2019s possible\u202f\u00a0\u00a0\nBe\u202fInspirational\u202fto do groundbreaking work\u202f\u00a0\u00a0\nBe\u202falways learning\u202fand listening to understand\u202f\u00a0\u00a0\nBe\u202fResults-focused\u202f to exceed expectations\u202f\u00a0\u00a0\nBe actively pro-inclusive and anti-racist across our community, clients and creations\u202f\u00a0\n\u00a0\nOLIVER, a part of the Brandtech Group, is an equal opportunity employer committed to creating an inclusive working environment where all employees are encouraged to reach their full potential, and individual differences are valued and respected. All applicants shall be considered for employment without regard to race, ethnicity, religion, gender, sexual orientation, gender identity, age, neurodivergence, disability status, or any other characteristic protected by local laws.\u202f\u00a0\u00a0\n\u202fOLIVER has set ambitious environmental goals around sustainability, with science-based emissions reduction targets. Collectively, we work towards our mission,\u202fembedding sustainability into every department and through every stage of the project lifecycle.",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-at-scale-media-4425836182",
+      "link_full": "https://www.linkedin.com/jobs/view/creative-director-at-scale-media-4425836182",
+      "descriptionText": "",
       "salary": "",
       "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 21,
-      "prefMatched": [
-        "creative direction",
-        "campaign",
-        "remote"
-      ]
+      "seniorityLevel": "Director"
     },
     {
-      "id": "4426896988",
-      "title": "Group Art Supervisor",
-      "companyName": "Inizio Evoke",
-      "location": "San Francisco, CA",
-      "posted": "2026-06-17",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/group-art-supervisor-at-inizio-evoke-4426896988?position=19&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=JhDF7V4Ul2MAANdhzp3VWQ%3D%3D",
-      "descriptionText": "In the journey of your life, your career should make a difference.\n\nAt Inizio Evoke, we come together\u2014to do the best work, in the best possible place. We're all in. Because it's everyone's role to make health more human\u2122.\n\nWho We Are\n\nInizio Evoke is a global health marketing, communications, and transformation platform unlocking growth through data-driven insights and human centricity. We study the 'why' behind health decisions and create creative solutions that inspire meaningful change.\n\nLike the work we do for physicians, patients, and their loved ones, your career should make a difference.\n\nAbout The Role\n\nWe are looking for a Group Art Supervisor who can elevate creative execution while guiding teams to deliver strategically grounded, visually compelling work across brands. This role is ideal for a seasoned designer and emerging leader who thrives in healthcare marketing, balancing hands-on design with mentorship and oversight. At Inizio Evoke, you will collaborate across disciplines to shape cohesive brand storytelling, ensure high creative standards, and support the growth of talent\u2014while contributing to innovative, insight-driven campaigns that make an impact.\n\nYou will report to an Associate Creative Director, Art in this role.\n\nThis role supports a West Coast client, and candidates must be available to work and collaborate during Pacific Time Zone business hours.\n\nWhat You'll Do\n\n\n\n- Take the lead on visual creative development, ensuring all work is strategic, innovative, and effective.\n- Be the design expert and brand steward, maintaining consistency across all creative materials.\n- Oversee a team of Art Directors and Senior Art Directors, providing mentorship, guidance, and feedback.\n- Work closely with Copy, Strategy, and Medical teams, ensuring alignment between messaging and visuals.\n- Manage and refine design execution across multiple channels, including digital, print, video, and social media.\n- Present and defend creative work to our teams, clients, and regulatory reviewers.\n- Contribute to brand strategy and campaign development, bringing fresh creative solutions to complex challenges.\n- Stay ahead of industry trends and emerging technologies, elevating the creative output of the team.\n\nWho You Are\n\n\n\n- An experienced and visionary art director, with expertise in brand storytelling and design strategy.\n- A natural mentor and leader, who fosters creative growth in junior designers.\n- A master of digital and print production, proficient in Adobe Creative Suite, Figma, and AI-driven design tools.\n- A strategic thinker, who balances creative ambition with regulatory requirements in pharma marketing.\n- An adaptable problem solver, comfortable working in a dynamic and regulated environment.\n- A strong presenter and collaborator, a natural advocate for creative work.\n- A good human, bringing professionalism, integrity, and enthusiasm to every project.\n\nWork Environment &amp; Benefits\n\nInizio Evoke offers a fully remote work environment and outstanding company-paid benefits, including medical, dental, 401(k), tuition reimbursement, and flexible time off.\n\nWe are committed to equal employment opportunity regardless of race, color, ancestry, religion, sex, national origin, sexual orientation, age, citizenship, marital status, disability, gender, gender identity or expression, or veteran status. We are proud to be an equal opportunity workplace.\n\nThe base salary range represents the low and high end of the salary range for this position. This range may differ based on your experience and skill set, geographic location, and cost of living considerations. We consider compensation more than just a base salary \u2013 that\u2019s why we also offer an exceptional range of flexible benefits, personal support and tailored learning and development opportunities all designed to help you realize your full potential both in life and at work.\n\nCompensation\n\n$130,000\u2014$150,000 USD\n\nDon't meet every job requirement? That's okay! Our company is dedicated to building a diverse, inclusive, and authentic workplace. If you're excited about this role, but your experience doesn't perfectly fit every qualification, we encourage you to apply anyway. You may be just the right person for this role or others.",
-      "salary": "",
-      "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 21,
-      "prefMatched": [
-        "campaign",
-        "brand strategy",
-        "remote"
-      ]
-    },
-    {
-      "id": "4429798696",
-      "title": "Graphic & Web Designer",
-      "companyName": "Sundayy",
+      "id": "4428633660",
+      "title": "Executive Creative Director",
+      "companyName": "Ramotion",
       "location": "United States",
-      "posted": "2026-06-17",
+      "posted": "2026-06-14",
       "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/graphic-web-designer-at-sundayy-4429798696?position=15&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=VnMiLM5kFJZcOlZtXzoKEQ%3D%3D",
-      "descriptionText": "About The Company\n\nIdea Kraft is a dynamic creative agency dedicated to connecting brands and audiences through purposeful design and innovative digital experiences. With a focus on craftsmanship, collaboration, and meaningful work, we serve a diverse client base ranging from local businesses to larger enterprises. Our team values creativity, attention to detail, and a user-centered approach to deliver impactful visual solutions that elevate brands in both digital and print mediums.\n\nAbout The Role\n\nWe are seeking a versatile and talented Graphic &amp; Web Designer to join our design team. In this role, you will be instrumental in shaping our clients' visual identities and online presence. Whether developing comprehensive brand systems, designing engaging websites, or creating compelling digital collateral, you will work closely with senior designers and the Creative Director to deliver high-quality, user-focused creative solutions. This position offers flexibility to work from our Binghamton, NY office or remotely within New York State, providing an excellent opportunity for growth and professional development in a collaborative environment.\n\nQualifications\n\n\n\n- Degree or diploma in Graphic Design, Web Design, Interaction Design, or a related field\n- Strong portfolio showcasing web design projects, including responsive layouts, landing pages, or full site builds\n- Expert proficiency in Figma for wireframing, prototyping, and UI design\n- Proficiency in Adobe Creative Suite (Photoshop, Illustrator, InDesign)\n- Working knowledge of HTML and CSS for effective communication with developers and minor front-end adjustments\n- Solid understanding of UX/UI principles, responsive design, and web accessibility standards\n- Strong grasp of design fundamentals such as typography, color theory, grid systems, and visual hierarchy\n- Excellent time management skills with the ability to handle multiple projects simultaneously\n\nNice To Have\n\n\n\n- Experience with website platforms like Webflow, WordPress, or Squarespace\n- Skills in motion graphics, animation, or video editing (After Effects, Premiere Pro)\n\nResponsibilities\n\n\n\n- Design and develop responsive, visually engaging websites and landing pages from concept to final delivery\n- Create wireframes, user flows, and interactive prototypes using Figma to facilitate user-centered design\n- Design and iterate on website UI components, email templates, and digital campaign assets\n- Apply UX best practices to enhance usability, hierarchy, and conversion rates across web projects\n- Develop brand identities, logos, and comprehensive visual systems for various clients\n- Design print and digital collateral such as ads, brochures, social media graphics, and presentations\n- Ensure brand consistency across all touchpoints by adhering to client brand guidelines\n- Collaborate with senior designers and cross-departmental teams to produce cohesive creative work\n- Manage and organize design files in Dropbox and track project tasks using Asana to ensure timely delivery\n- Incorporate feedback effectively, making revisions and improvements as needed\n- Stay updated on industry trends, web standards, and emerging tools to bring innovative ideas to projects\n\nBenefits\n\n\n\n- Creative and collaborative work environment where your contributions are valued\n- Mentorship opportunities from experienced senior designers\n- Opportunities for professional growth in web and brand design\n- Exposure to diverse clients and industries, ensuring varied and engaging projects\n- Competitive compensation based on skills and experience\n- Flexible work arrangements, including remote options within New York State\n\nEqual Opportunity\n\nIdea Kraft is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees. We do not discriminate based on race, ethnicity, gender, sexual orientation, age, disability, or any other protected status. We believe that a diverse team fosters creativity, innovation, and a stronger community, and we welcome applicants from all backgrounds to apply.",
-      "salary": "",
-      "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Creative Director",
-        "Brand Systems"
-      ],
-      "why": "Matches: Creative Director, Brand Systems",
-      "tier": "Tier 3",
-      "prefScore": 21,
-      "prefMatched": [
-        "brand systems",
-        "campaign",
-        "remote"
-      ]
-    },
-    {
-      "id": "4427325822",
-      "title": "21GRAMS- Associate Creative Director, Copy",
-      "companyName": "Ladders",
-      "location": "United States",
-      "posted": "2026-06-17",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/21grams-associate-creative-director-copy-at-ladders-4427325822?position=14&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=T3X%2ByOLTz3H51GGSGiNIJg%3D%3D",
-      "descriptionText": "For our client, we are seeking a 21grams- Associate Creative Director Copy to join the team of a leader in the Pharmaceuticals &amp; Biotech space. This role will advance people and talent initiatives that strengthen organizational effectiveness, leadership capability, and employee experience. You will collaborate with business leaders, HR partners, and cross-functional stakeholders to align workforce priorities with business objectives. The position offers the opportunity to influence culture, talent strategy, and scalable people operations within a Pharmaceuticals &amp; Biotech environment.\n\nLocation: Remote - US based candidates only, no visa sponsorship available\n\nCompensation: $160,000 \u2013 $190,000 annually\n\nResponsibilities\n\n\n\n-  Craft compelling narratives tailored to different audiences\n-  Collaborate with Art team to create impactful campaigns\n-  Recruit and interview potential creative talent\n-  Oversee team dynamics, deliverables, and client interactions\n-  Ensure campaign concepts align with client strategies\n-  Manage daily project timelines and outputs efficiently\n-  Mentor internal and external creative teams\n-  Lead award submissions and prepare case studies for branding\n-  Engage in high-level projects and pitches for new business opportunities\n\nQualifications\n\n\n\n-  5-7 years of healthcare/pharma experience in an agency setting\n-  Proven ability in healthcare marketing writing for consumer and HCP audiences\n-  Strong creative judgment and demonstrated creative ability\n-  Experience in managing and mentoring creative teams\n-  Familiarity with campaign execution within client strategies\n\nBenefits\n\n\n\n-  Comprehensive benefits program tailored to regional needs\n-  Generous holiday and paid time off policies\n-  Options for private medical, dental, and vision insurance\n-  Mental wellness coaching and support resources\n-  Access to over 13,000 online courses through LinkedIn Learning\n-  Flexible work arrangements with a hybrid approach based on employee preferences\n-  Free snacks available at office locations\n\nOur client is an equal opportunity employer. We encourage you to apply even if you don\u2019t meet every qualification\u2014your background could be exactly what this team needs.\n\n",
-      "salary": "$160,000.00/yr - $190,000.00/yr",
-      "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 14,
-      "prefMatched": [
-        "campaign",
-        "remote"
-      ]
-    },
-    {
-      "id": "4429946570",
-      "title": "Video Editor",
-      "companyName": "Artisan Council",
-      "location": "New York, NY",
-      "posted": "2026-06-17",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/video-editor-at-artisan-council-4429946570?position=12&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=7O6F7t7NZNMJlTdRP94h3A%3D%3D",
-      "descriptionText": "\nArtisan Council, based in downtown NYC, is a boutique digital marketing agency empowering progressive brands in the constantly evolving social and digital landscape. Our team believes in the power of stans and fans and aims to build brand loyalty through community involvement and engagement. AC believes that having an informed community of diverse voices is the key to making an impact in today\u2019s ever-changing world of social media and content. AC\u2019s team members are passionate about diversity, community, content, culture, innovation, and trying things first! We\u2019re looking for people who share our passion, for people who live and breathe beauty and lifestyle, have exceptional research, communication, and creative thinking skills, and take an empathetic approach to everything they do and enjoy helping others succeed.\n\n\nArtisan Council is seeking a Video Editor (3 month contract, with opportunity to extend or convert to Full Time) with experience in social media content production and design direction. Specifically, you will be a social native who spends your time engaging with, laughing at, and creating TikTok content, and sharing the best branded Twitter moments with your friends and colleagues. You will assist the Creative Team developing digital ad campaign assets, editing motion assets and adding graphics and design to both motion and still assets, as well as assisting in social media content creation, managing delivery timelines, and more.\nReporting to Artisan Council\u2019s Creative Director and with a dotted line to the Senior Producer, you will have opportunities to contribute to process improvements and develop additional skills in motion graphics, animation, and sound design. The position requires balancing multiple priorities, from day-to-day asset optimization to contributing to efficiency-driven projects, while maintaining strict quality standards and timely delivery. The scope extends beyond routine execution to include participation in key strategic discussions, mock creation sessions, and initiatives that enhance our creative production capabilities. Success in this role means delivering consistently high-quality visual assets that meet both creative excellence and operational efficiency standards, directly contributing to Artisan Council\u2019s creative goals.\n\n\nTogether, we as a team are dedicated to building each other up and helping each other grow, and achieving goals together.\n\n\nEqual Opportunity\nWe are an equal-opportunity employer and value diversity at our company. We do not discriminate on the basis of race, religion, color, national origin, gender, sexual orientation, age, marital status, veteran status, or disability status.\n\n\nOur mission is to create a happy, safe, considerate and inspiring work environment for all.\n\n\nWhat will you be responsible for?\n\n- You will support the Creative Director and Senior Producer in bringing internal stakeholder visions to life, while contributing your own concepts on the fly, reporting to the Senior Producer.\n- You will edit, color grade, sound mix and export final deliverables autonomously.\n- You will supervise and implement video edits with external production partners.\n- You will execute trailer cutdowns, H1 videos, multi-title assets, drop-ins and other defined video deliverables.\n- You will deliver high-quality video edits that meet business goals and project requirements within established timelines.\n- You will help organize and deliver production assets, overseeing quality control and file naming conventions from round one to final delivery.\n- You will help coordinate with post-production vendors, providing the required assets, footage, and raw files throughout the post-production process.\n- You will act as point person for internal communication for post production on your video projects\n- You will work with Creative Team to create successful video content while acting as expert for all Post Production needs\n- You will export and re-format video footage to a wide variety of ratios and compression formats autonomously\n- You will have experience with spotting and executing upon editing trends for innovative TikTok and Instagram Reels content\n- You will have excellent communication skills and the ability to work in cooperation with art directors or other outside production/post-production resources\n- You will contribute to the #ACGivesBack program - once a year, you will be asked to train selected non-profits in your area of expertise, utilizing your skills for better.\n\n\nBasic Qualifications\n\n- Have an available online portfolio\n- 3-5+ years\u2019 experience as an editor in a creative agency or similar production environment.\n- Bachelor's degree in Video Editing, Advertising, Marketing, or related field\n- Motion graphics and sound design knowledge\n- Strong attention to detail and quality control mindset.\n- 3+ years working with Adobe Premiere and After Effects.\n\n\nPreferred Qualifications\n\n- Experience with project management\n- Usage of generative AI tools to enhance workflow efficiency, with a willingness to learn effective prompting and evaluation practices.\n- Ability to recognize opportunities where generative AI could enhance products, workflows, or customer experiences.\n- Experience in data asset management, libraries, or digital collections, with ability to research for high quality assets for production.\n- Experience with Adobe Creative Cloud.\n- Understanding of marketing and advertising principles.\n\n\nWhat kind of skills should you have?\nPlease note carefully. Applicants without this experience will not be considered.\n\n- 5+ years relevant experience in Editing with a focus on D2C, beauty brands, and consumer products.\n- 5+ years relevant experience in Video Editing, especially with the softwares Adobe Premiere and DaVinci (After Effects experience a plus, Animation (2D/3D) experience a plus, full Adobe Creative Suite (Photoshop/Illustrator) a plus)\n- Experience in Beauty, Skincare, and/or Lifestyle brands.\n- Proven experience with sound editing, including music tracking and sound effects\n- Ability to take various pieces of content and turn them into a cohesive and engaging video that tells a story or hooks the viewer without a detailed directive\n- Music video editing experience is a plus\n- You will have a working knowledge of Google Docs, Google Sheets, and the Office suite.\n- You will have familiarity with project management and content planning tools such as Trello, Asana, Jira, Basecamp and more, and the ability to learn new systems.\n- You will have excellent written, verbal and visual communication skills.\n- You will be a creative thinker and problem solver, able to generate multiple ideas and fresh creative approaches on the go.\n- You will be a self-starter, possessing the ability to act and operate efficiently and independently to accomplish objectives.\n- You will have optimum time management skills with attention to detail, especially under pressure or time-sensitive deadlines.\n- You will be willing to work nontraditional hours, independently remotely, and go above &amp; beyond where necessary.\n- You will have an understanding of overall commercial business practices, trading terms and conditions.\n- Proven experience managing managing deliverables and file management within Google Drive systems and frame.io, with complex timelines managed by a Producer\n- A passion for creativity and commitment to staying up to date with current and future trends\n- Ability to apply creative thinking to developing engaging concepts and producing web and social media content\n- Ability to lead multiple projects and asset deliveries with calm and ease.\n- Strong portfolio and breadth of knowledge across varying types of content (including motion/video) from small to large campaigns.\n- Passion for creating compelling campaigns for our current and prospective Artisan Council clients\n- Proactive personality with exceptional interpersonal skills\n- Strong capacity for multi-tasking; ability to prioritize and maintain a high level of accuracy completing multiple tasks in a fast paced, dynamic environment.\n- Incredible attention to detail\n- Competency with web-based content management applications\n\n\nContract Pay\n\n- $6,500/month\n\n",
+      "link": "https://www.linkedin.com/jobs/view/executive-creative-director-at-ramotion-4428633660",
+      "link_full": "https://www.linkedin.com/jobs/view/executive-creative-director-at-ramotion-4428633660",
+      "descriptionText": "",
       "salary": "",
       "employmentType": "Contract",
-      "score": 13,
-      "matchedKeywords": [
-        "Creative Director",
-        "Generative AI"
-      ],
-      "why": "Matches: Creative Director, Generative AI",
-      "tier": "Tier 3",
-      "prefScore": 14,
-      "prefMatched": [
-        "campaign",
-        "advertising"
-      ]
+      "seniorityLevel": "Executive"
     },
     {
-      "id": "4427322838",
-      "title": "21GRAMS- Associate Creative Director, Art",
-      "companyName": "Ladders",
+      "id": "4424851439",
+      "title": "Design Director - Fleece",
+      "companyName": "Comfrt",
       "location": "United States",
-      "posted": "2026-06-17",
+      "posted": "2026-06-05",
       "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/21grams-associate-creative-director-art-at-ladders-4427322838?position=10&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=x5H2uA%2BMaDnHFyurAWl5qw%3D%3D",
-      "descriptionText": "For our client, we are seeking a 21grams- Associate Creative Director Art to join the team of a leader in the Pharmaceuticals &amp; Biotech space. This role will shape brand and customer engagement initiatives that strengthen market presence and business impact. You will collaborate with analytics, product, creative, and commercial teams to turn market insights into scalable campaigns, testing strategies, and performance improvements. The position offers the opportunity to directly influence customer engagement, conversion performance, and revenue growth within a Pharmaceuticals &amp; Biotech environment.\n\nLocation: Remote - US based candidates only, no visa sponsorship available\n\nCompensation: $160,000 \u2013 $190,000 annually\n\nResponsibilities\n\n\n\n-  Structure complete narratives tailored to different clients and audiences\n-  Collaborate with ACD, Copy to create impactful, strategy-driven campaigns\n-  Identify and interview potential creative candidates\n-  Manage creative teams and nurture client relationships\n-  Conceptualize and execute campaigns aligned with client strategies\n-  Oversee daily deliverables, ensuring high-quality output under tight deadlines\n-  Mentor internal and external teams\n-  Manage awards submissions and case studies for brand\n-  Engage in high-level projects and participate in new business pitches\n\nQualifications\n\n\n\n-  5-7+ years of healthcare/pharma experience in an agency environment\n-  Healthcare marketing writing experience for consumer/patient and HCP audiences\n-  BA degree in Advertising, Communications, Fine Arts, or related field preferred\n\nBenefits\n\n\n\n-  Comprehensive benefits program tailored to regional needs\n-  Free snacks in the office\n-  Generous holiday and paid time off\n-  Options for private medical, dental, and vision plans\n-  Support for future savings\n-  Mental wellness coaching and support\n-  Access to over 13,000 LinkedIn Learning online classes\n-  Flexible working policy with hybrid office arrangements\n\nOur client is an equal opportunity employer. We encourage you to apply even if you don\u2019t meet every qualification\u2014your background could be exactly what this team needs.\n\n",
-      "salary": "$160,000.00/yr - $190,000.00/yr",
-      "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 14,
-      "prefMatched": [
-        "advertising",
-        "remote"
-      ]
-    },
-    {
-      "id": "4426852578",
-      "title": "Executive Creative Director",
-      "companyName": "Spiro",
-      "location": "United States",
-      "posted": "2026-06-16",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/executive-creative-director-at-spiro-4426852578?position=7&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=yET0VX%2BfL4gqG1mKvi9iOg%3D%3D",
-      "descriptionText": "Join Our Spiro\u00b7Verse\u202f\n\nTHIS IS A REMOTE OPPORTUNITY IN THE US.\n\nCompany Overview\n\nThis is Spiro. A strategically-led, creatively-driven, leading global experiential agency. We exist to cultivate powerful brand connections through the channel of experiential. We believe strong global communities are empowered by diversity, inclusion &amp; belonging.\n\nWhere data-informed creative meets advanced digital solutions, we boldly go where no experience has gone before. As Spiro\n\n\n\n- nauts, we are born storytellers &amp; story makers; fearless dreamers of the \u201cwhat if;\" and pioneers of innovation in our craft. Together, we launch brands into their experiential orbit through the power of Brand Gravity.\n\nLearn more about who we are here!\n\nPosition Overview\n\nDo you consider yourself one heck of a storyteller? Do you thrive on shaping not just ideas, but entire creative organizations? Are you as passionate about building teams and culture as you are about delivering breakthrough work? Do you know how to balance bold creative ambition with real business impact?\n\nThen we want to talk to you!\n\nWe\u2019re looking for our next Executive Creative Director to lead our Creative team: someone who will define the creative standard, inspire our global team, and partner across the business to deliver transformational experiences for our clients.\n\nOur ideal candidate is a visionary leader, a builder of teams, and a driver of creative excellence \u2014 someone who elevates not only the work, but the people and the business around it.\n\nYou are a proven creative leader with a track record of building high-performing teams and delivering world-class work across multiple channels. You are currently leading senior creative talent and are ready to shape the direction of an entire creative organization. You balance vision with execution, creativity with business acumen, and inspiration with accountability.\n\nResponsibilities\n\n\n\n- Lead and oversee the creative direction of the organization across multiple accounts, clients and regions.\n- Define and uphold the creative standard, ensuring all work aligns with Spiro\u2019s brand promise and delivers exceptional quality.\n- Manage, mentor and inspire Creative Directors and senior creative staff, building a strong, scalable creative organization.\n- Serve as a senior partner to executive leadership, influencing company-wide strategy, growth and innovation.\n- Own high-stakes client relationships, representing the creative vision at the most senior levels.\n- Drive new business efforts by shaping big ideas, leading pitches and elevating Spiro\u2019s creative reputation in the market.\n- Ensure alignment between creative vision, business objectives, operational realities and client expectations.\n\nSpecific Functions\n\n\n\n- Set the creative vision across the organization and ensure consistency across all outputs and teams.\n- Partner with Strategy, Production, Sales and Marketing leadership to shape integrated, experience-led solutions.\n- Oversee the conceptual development of large-scale, high-impact programs and initiatives.\n- Provide high-level creative direction and final approval on key work.\n- Lead and evolve creative processes, frameworks and standards to improve efficiency and output quality.\n- Champion innovation \u2014 driving the adoption of new technologies, tools and approaches to elevate creative thinking and execution.\n- Build and nurture a culture of creativity, collaboration and continuous growth across the global team.\n- Guide resource allocation and team structure to support business needs and creative excellence.\n\nExperience Design and Event Expertise\n\n\n\n- Engagement marketing activations\n- Brand Identity\n- Tradeshow programs\n- Launch Events\n- Conferences\n- Environmental \u2013 physical, visual and digital\n\nSupervisory Responsibilities\n\n\n\n- Daily interaction with creative staff (2D, 3D) on your projects.\n- Function as a creative stimulus.\n- Support department head the EVP, ECD, as requested, for feedback on creative team that work most closely with you on account related work.\n\nQualifications\n\nWe understand the importance of transferable skills and a diverse perspective, so if you do not fit all these requirements, we still want to hear from you and encourage you to apply!\n\n\n\n- Minimum of four year degree in Graphic, Architecture or Industrial Design or related creative discipline.\n- Minimum 10 years industry experience or related creative process experience combining strategy, content, message with creative deliverables.\n- Event and experience design expertise highly desirable.\n- Prior supervisory responsibilities.\n- Ability to lead, motivate and inspire the creative and our client teams, while keeping the creative process in alignment with Spiro/Client business goals and objectives.\n- Understanding of all dimensions of communication: business strategy and experience design, with the ability to translate this into effective innovative, but integrated marketing programs.\n- Broad-based exposure to 3D art, design, technology, music, media and content a must.\n- Mac, Adobe Creative Suite, PowerPoint and AI proficiency (Modeling software is a plus).\n- Understanding of all dimensions of communication: business strategy and experience design, with the ability to translate this into effective innovative, but integrated marketing programs.\n\nAttributes\n\n\n\n- Team Player\n- Strong written, verbal, and presentation skills required.\n\nBenefits\u202f\n\n\n\n- Remote Environment\n- Full Benefits Package\n- 401K Vesting Immediately\n- Psychological Safety\n- Diversity, Inclusivity and Belonging Culture\n- Employee Led Resource Groups\n- Spiro\n- YOU Professional Development &amp; Learning Programs\n- Employee Events\n\nOur Process \n\nOur interview process is hand crafted to our roles. In general, you can expect to have an initial phone interview with our talent acquisition team and thereafter video interviews with team members and your future manager. We welcome candidates to view our social medial channels and website to extend the conversation beyond the responsibilities of the role. Once you have completed the interview process, we conduct a criminal background check, where applicable by law.\n\n",
+      "link": "https://www.linkedin.com/jobs/view/design-director-fleece-at-comfrt-4424851439",
+      "link_full": "https://www.linkedin.com/jobs/view/design-director-fleece-at-comfrt-4424851439",
+      "descriptionText": "",
       "salary": "",
       "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Creative Director",
-        "Brand Identity"
-      ],
-      "why": "Matches: Creative Director, Brand Identity",
-      "tier": "Tier 3",
-      "prefScore": 14,
-      "prefMatched": [
-        "creative direction",
-        "remote"
-      ]
+      "seniorityLevel": "Not Applicable"
     },
     {
-      "id": "4426875241",
+      "id": "4424949178",
+      "title": "Design Lead/Associate Creative Director",
+      "companyName": "Design Citizen",
+      "location": "United States",
+      "posted": "2026-06-06",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/design-lead-associate-creative-director-at-design-citizen-4424949178",
+      "link_full": "https://www.linkedin.com/jobs/view/design-lead-associate-creative-director-at-design-citizen-4424949178",
+      "descriptionText": "",
+      "salary": "$100.00/hr - $115.00/hr",
+      "employmentType": "Contract",
+      "seniorityLevel": "Mid-Senior level"
+    },
+    {
+      "id": "4424857596",
+      "title": "Apparel Designer, Athleisure + Outerwear",
+      "companyName": "Comfrt",
+      "location": "United States",
+      "posted": "2026-06-10",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/apparel-designer-athleisure-%2B-outerwear-at-comfrt-4424857596",
+      "link_full": "https://www.linkedin.com/jobs/view/apparel-designer-athleisure-%2B-outerwear-at-comfrt-4424857596",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Not Applicable"
+    },
+    {
+      "id": "4427199339",
       "title": "Creative Director",
-      "companyName": "Dana-Farber Cancer Institute",
-      "location": "Brookline, MA",
-      "posted": "2026-06-16",
+      "companyName": "Cleo",
+      "location": "New York, NY",
+      "posted": "2026-06-11",
       "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/creative-director-at-dana-farber-cancer-institute-4426875241?position=6&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=ajj%2Bg4LqugwIjk2HnMVj7w%3D%3D",
-      "descriptionText": "The Creative Director works with Philanthropy Communications and Integrated Marketing leadership to shape how Dana-Farber Cancer Institute\u2019s philanthropic mission is expressed through compelling storytelling, brand strategy, and integrated creative campaigns that support the Division\u2019s fundraising and donor engagement goals. The Creative Director plays a key role in ensuring Dana-Farber\u2019s philanthropic storytelling connects donors with the transformative impact of their generosity. This position reports to the Assistant Vice President (AVP), Philanthropy Brand Communications.\n\nThis position's work location is fully remote with occasional time on-campus in Brookline, MA. The selected candidate may only work remotely from a New England state (ME, VT, NH, MA, CT, RI).\n\nLocated in Boston and the surrounding communities, Dana-Farber Cancer Institute is a leader in life changing breakthroughs in cancer research and patient care. We are united in our mission of conquering cancer, HIV/AIDS, and related diseases. We strive to create an inclusive, diverse, and equitable environment where we provide compassionate and comprehensive care to patients of all backgrounds, and design programs to promote public health particularly among high-risk and underserved populations. We conduct groundbreaking research that advances treatment, we educate tomorrow's physician/researchers, and we work with amazing partners, including other Harvard Medical School-affiliated hospitals.\n\nPrimary Duties And Responsibilities\n\n\n\n- Serve as the creative lead for the Division of Philanthropy, shaping how Dana-Farber\u2019s mission and impact are communicated through brand storytelling and integrated campaigns. Partner with senior marketing leadership to align creative strategy with fundraising priorities and institutional goals.\n- Develop and lead creative strategies for major fundraising initiatives, including donor communications and integrated marketing across the Division. Translate institutional priorities, fundraising objectives, and audience insights into compelling creative approaches and storytelling frameworks.\n- Oversee end-to-end creative development across channels, from concept through execution for print, digital, video, social, photography, and experiential donor engagement. Ensure integrated creative approaches connect platforms and touchpoints into a cohesive narrative.\n- Use insights to strengthen performance and engagement, applying audience research, performance data, and campaign learnings to refine strategy and improve storytelling and design effectiveness. Balance creative intuition with data-informed decision-making to drive measurable impact.\n- Steward and evolve brand standards within philanthropic communications, maintaining consistency for Dana-Farber and The Jimmy Fund while encouraging thoughtful innovation. Review and guide creative work to uphold high standards of design quality, storytelling, and brand alignment.\n- Collaborate cross-functionally to deliver cohesive campaigns, partnering with Integrated Philanthropy Marketing, Philanthropy Communications, fundraising teams, writers, strategists, and digital teams. Serve as a creative advisor across the Division, including reviewing results with partners and applying learnings to future work.\n- Lead, mentor, and strengthen the creative function and operations, guiding designers and art directors through clear direction, feedback, and development. Improve processes and workflows, ensure on-time/on-budget delivery, manage freelance/vendor relationships, and contribute to planning and strategic discussions that shape philanthropy marketing.\n\nKnowledge, Skills, And Abilities Required\n\n\n\n- Exceptional written and verbal communication skills with the ability to influence and collaborate across a People leadership: Mentoring and growing creative teams, setting direction and standards, managing budgets/timelines/vendors, and improving workflows.\n- Industry and design knowledge: Expertise in design thinking, typography, and layout, as well as other forms of marketing.\n- Data and insights capability: Using research, segmentation, testing, and performance metrics to optimize creative and improve engagement.\n- Cross-functional influence and stakeholder management: Partnering with senior leaders and diverse teams, aligning priorities, navigating feedback, and building consensus.\n\nSUPERVISORY RESPONSIBILITIES: Directly supervise members of the creative team, including designers and art directors, and collaborate closely with cross-functional partners across the Division of Philanthropy.\n\nMinimum Education\n\nMINIMUM JOB QUALIFICATIONS: \n\nBachelor\u2019s degree required preferably in graphic design, visual communication, marketing, or a related field.\n\nMinimum Experience\n\n\n\n- 6+ years of relevant work experience in in creative leadership, brand design, or marketing communications.\n- Strong portfolio demonstrating impactful creative work across multiple channels.\n- Deep understanding of brand systems and integrated marketing campaigns.\n- Exceptional storytelling and visual communication skills with the ability to translate complex ideas into clear, compelling narratives.\n- Experience collaborating with cross-functional teams including marketing, digital, and communications.\n- Strong presentation and communication skills with the ability to articulate creative vision and strategy.\n- Experience developing integrated campaigns across digital, video, and traditional channels.\n- Ability to apply audience insights and performance data to inform creative strategy and campaign development.\n\nLicense/Certification/Registration\n\nNone\n\nAt Dana-Farber Cancer Institute, we work every day to create an innovative, caring, and inclusive environment where every patient, family, and staff member feels they belong. As relentless as we are in our mission to reduce the burden of cancer for all, we are committed to having faculty and staff who offer multifaceted experiences. Cancer knows no boundaries and when it comes to hiring the most dedicated and compassionate professionals, neither do we. If working in this kind of organization inspires you, we encourage you to apply.\n\nDana-Farber Cancer Institute is an equal opportunity employer and affirms the right of every qualified applicant to receive consideration for employment without regard to race, color, religion, sex, gender identity or expression, national origin, sexual orientation, genetic information, disability, age, ancestry, military service, protected veteran status, or other characteristics protected by law.\n\nEEO Poster\n\nPay Transparency Statement\n\nThe hiring range is based on market pay structures, with individual salaries determined by factors such as business needs, market conditions, internal equity, and based on the candidate\u2019s relevant experience, skills and qualifications.\n\nFor union positions, the pay range is determined by the Collective Bargaining Agreement (CBA).\n\n$135,200.00 - $158,200.00",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-at-cleo-4427199339",
+      "link_full": "https://www.linkedin.com/jobs/view/creative-director-at-cleo-4427199339",
+      "descriptionText": "",
       "salary": "",
       "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Creative Director",
-        "Brand Systems"
-      ],
-      "why": "Matches: Creative Director, Brand Systems",
-      "tier": "Tier 3",
-      "prefScore": 36,
-      "prefMatched": [
-        "brand systems",
-        "campaign",
-        "brand strategy",
-        "creative strategy",
-        "remote"
-      ]
+      "seniorityLevel": "Not Applicable"
     },
     {
-      "id": "4426872353",
-      "title": "Principal Tools & Pipeline Technical Artist - Unpublished R&D Product",
-      "companyName": "Riot Games",
-      "location": "Los Angeles, CA",
-      "posted": "2026-06-16",
+      "id": "4426501967",
+      "title": "Product Designer, Studio",
+      "companyName": "Hook",
+      "location": "New York, NY",
+      "posted": "2026-06-09",
       "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/principal-tools-pipeline-technical-artist-unpublished-r-d-product-at-riot-games-4426872353?position=19&pageNum=0&refId=Plq3diG6A3S%2B1loN6gBScA%3D%3D&trackingId=41bDt%2Fkmnyy209i8Z0GBHw%3D%3D",
-      "descriptionText": "As a Technical Artist for Tools/Pipeline, you'll employ your expert-level knowledge of 3D tools to build tools, maintain pipelines, and provide technical support for artists on their most critical missions. You will establish and improve the systems, tools, rigs, assets, and workflows that unleash the creativity of our artists and allow the production of the best possible art content for our players. And you will critique work, mentor fellow Rioters, and foster the long-term growth of a group of artists.\n\nAs a Principal Tools &amp; Pipeline Technical Artist on an unpublished R&amp;D product, you'll focus on building the tools and tech used for content development on an upcoming game project. This will involve building pipelines and workflows for DCC (Digital Content Creation) software, and consulting with art to discover the best possible solutions to the challenges the project team faces. You report directly to the Technical Art Director of the project.\n\nResponsibilities\n\n\n\n- Communicate a cohesive vision and standard for art vision, artistic workflows, and pipelines based on the Art Director and Creative Director\u2019s visions.\n- Assist in evaluating new systems and technology that support the artistic, product, and gameplay goals.\n- Help to identify new opportunities to incorporate technology to increase art workflow efficiency and unlock new creative opportunities.\n- Amplify artistic capabilities while maintaining efficient and sustainable memory and performance\n- Lead the team in identifying new opportunities to incorporate technology to increase art workflow efficiency and unlock new creative opportunities\n- Partner with other Technical Art leaders at the studio to develop a cohesive vision and shared standards across the Technical Art discipline\n\nRequired Qualifications\n\n\n\n- 7+ years of professional experience as a technical artist in games or related industries\n- Professional experience working within the games industry\n- Expertise in industry-standard content creation tools, such as Maya, and commercial game engines (i.e. Unreal, Unity, etc.)\n- Fluency in modern scripting languages and related UI frameworks, such as Python and PyQt/PySide\n- Experience problem-solving and communicating with multiple art disciplines and acting as an ambassador between art and engineering\n\nDesired Qualifications\n\n\n\n- Experience in game development using Unreal\n- Experience writing shaders and working in HLSL\n- Understanding of 3D modeling, efficient UV layouts, and materials\n- Strong understanding of current console art pipelines\n\nWhen submitting your application, please provide a portfolio of your high-quality tech art - including stylized artwork. And as a part of the application process, you may also be asked to complete an art test.\n\nFor this role, you'll find success through craft expertise, a collaborative spirit, and decision-making that prioritizes the delight of players. We will be looking at your past studies, experience, and your personal relationship with games. If you embody player empathy and care about players' experiences, this could be your role!\n\nOur Perks\n\nRiot focuses on work/life balance, shown by our open paid time off policy and other perks such as flexible work schedules. We offer medical, dental, and life insurance, parental leave for you, your spouse/domestic partner, and children, and a 401k with company match. Check out our benefits pages for more information.\n\nAt Riot Games, we put players first. That mission drives every decision in our quest to create games and experiences that make it better to be a player. Whether you\u2019re working directly on a new player-facing experience or you\u2019re supporting the company as a whole, everyone at Riot is part of our mission. And just like in our games, we\u2019re better when we work together. Our goal is to create collaborative teams where you are empowered to bring your unique perspective everyday. If that sounds like the kind of place you want to work, we\u2019re looking forward to your application.\n\nIt\u2019s our policy to provide equal employment opportunity for all applicants and members of Riot Games, Inc. Riot Games makes reasonable accommodations for handicapped and disabled Rioters and does not unlawfully discriminate on the basis of race, color, religion, sex, sexual orientation, gender identity or expression, national origin, age, handicap, veteran status, marital status, criminal history, or any other category protected by applicable federal and state law. We consider for employment all qualified applicants, including those with criminal histories, in a manner consistent with applicable federal, state and local law, including the California Fair Chance Act, the City of Los Angeles Fair Chance Initiative for Hiring Ordinance, the Los Angeles County Fair Chance Ordinance for Employers, the San Francisco Fair Chance Ordinance, and the Washington Fair Chance Act.\n\nDuties\n\nPer the Los Angeles County Fair Chance Ordinance, the following core duties may create a basis for disqualifying candidates with relevant criminal histories:\n\n\n\n- Safeguarding confidential and sensitive Company data \n- Communication with others, including Rioters and third parties such as vendors, and/or players, including minors\n- Accessing Company assets, secure digital systems, and networks\n- Ensuring a safe interactive environment for players and other Rioters\n\nThese duties are directly related to essential operations, safety, trust, and compliance obligations within our organization. Please note that job duties may evolve based on business needs and additional responsibilities may be assigned as necessary to maintain operational efficiency and security.",
+      "link": "https://www.linkedin.com/jobs/view/product-designer-studio-at-hook-4426501967",
+      "link_full": "https://www.linkedin.com/jobs/view/product-designer-studio-at-hook-4426501967",
+      "descriptionText": "",
       "salary": "",
       "employmentType": "Full-time",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
+      "seniorityLevel": "Not Applicable"
     },
     {
-      "id": "4420448718",
-      "title": "Motion Graphics Artist",
-      "companyName": "Daktronics",
-      "location": "United States",
-      "posted": "2026-06-16",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/motion-graphics-artist-at-daktronics-4420448718?position=21&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=9GcFRWtVpZeOjiwiEznWVg%3D%3D",
-      "descriptionText": "\nPosition Summary\nWhen you work at Daktronics, you\u2019ll be part of something amazing. We design, engineer, manufacture and support bold, eye-catching digital LED display technology and audio systems.\nOur products bring excitement to professional, college and high school games. They attract customers for businesses around the world, and even provide direction for people as they travel, work and play.\nAs part of the Daktronics team, you\u2019ll have interesting, impactful work with flexible opportunities. You can learn and grow at a company that provides competitive compensation and meaningful benefits \u2013 and the people are second to none.\nWhat will the work look like for me?\nDaktronics is seeking a highly skilled Motion Graphics Artist to create dynamic 2D and 3D content for large-scale LED displays. Producing work seen in major league stadiums, collegiate athletics, and global brands. In this role, you\u2019ll bring visual storytelling to life, from concept through final delivery. You\u2019ll collaborate closely with the Creative Director, Art Directors, and cross-functional teams to develop high-impact content under tight timelines. This is a hands-on role requiring both strong creative vision and deep technical expertise, with opportunities to lead smaller teams and projects.\nWhat You\u2019ll Do\n\n- Design and produce high-quality 2D and 3D motion graphics for LED display systems.\n- Create motion graphics optimized for a wide variety of screen sizes, shapes, and unique LED configurations, ensuring each piece meets client specifications and real-world display requirements.\n- Leverage knowledge of emerging AI-powered creative tools and platforms to enhance workflows, generate concepts, and unlock new creative opportunities while maintaining high standards of craft and originality.\n- Translate creative direction into compelling visual storytelling.\n- Stay current on motion design trends, tools, and emerging technologies\u2014applying new techniques and workflows to continuously elevate creative output.\n- Solve complex design challenges independently and as part of a team.\n- Lead design efforts on select projects and support/mentor other artists as needed.\n- Partner with editors, producers, and designers to resolve technical and creative challenges.\n- Maintain organized project files and follow best practices for workflows and version control. \nWhy Daktronics\nAt Daktronics, you\u2019ll create content experienced by millions, enhancing live sports, retail environments, and public spaces around the world. For more than 50 years, we\u2019ve delivered innovative LED display and audio solutions to clients ranging from hometown businesses to major league stadiums. You\u2019ll work with cutting-edge technologies and push the boundaries of motion design, including HDR, AR/VR, and immersive visual environments. We foster a culture of collaboration, respect, and continuous improvement, where your work has real impact.\nWhere is this opportunity located? \nPosition has opportunity to work from a US Based home office. This position is open to candidates eligible to work in the United States.\nWhat are the pay and perks?\nThe typical hiring range for this position is $68,000 to $78,000 annually. The high end of this range is reserved for candidates located in high cost of living areas. Candidates in other locations may fall within the lower to midpoint range. The actual offer will consider a wide range of factors, including relevant education, experiences, location, and applicable local legislation.\nInformation about Daktronics benefits can be found on our website Career Opportunities (daktronics.com) . This information is intended to be a general overview and may be modified by Daktronics at any time.\nQualifications\nTo be considered for Motion Graphics Artist, we require the following:\n\n- Bachelor\u2019s degree in design, animation, or a related field, or equivalent experience.\n- 5+ years of motion graphics experience in sports, broadcast, agency, or similar environments.\n- Strong portfolio/demo reel showcasing a wide range of creative styles.\n- Advanced proficiency in:\n- Cinema 4D (modeling, lighting, animation, dynamics, Redshift, etc.).\n- Adobe After Effects (2D/3D design and animation).\n- Familiarity with Unreal Engine is a plus.\n- Strong understanding of sports.\n- Experience creating content for live events, sports, or large-format displays.\n- Excellent communication and collaboration skills.\n- Detail-oriented, deadline-driven, and able to work independently.\n- Experience with broadcast real-time graphics.\n- Basic HTML knowledge.\n- Ability to work with a fast-paced, highly collaborative creative team.\n- Effectively exercise discretion and independent judgment.\n- Fluent in English, written and verbal.\n- Applicants must be 18 years of age or older.\n- Daktronics does not sponsor, renew, or extend immigration visas for this position. \nReady to make an impact? Apply now and start your journey with Daktronics. \nDaktronics is an equal opportunity employer. Qualified applicants will receive consideration for employment without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, disability, protected veteran status or other characteristics protected by law.\n\n\n#LI-Remote",
-      "salary": "",
-      "employmentType": "Full-time",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 14,
-      "prefMatched": [
-        "creative direction",
-        "remote"
-      ]
-    },
-    {
-      "id": "4426851792",
-      "title": "Visual Effects Supervisor (A) - Interactive Content",
-      "companyName": "Cosm",
-      "location": "Los Angeles, CA",
-      "posted": "2026-06-16",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/visual-effects-supervisor-a-interactive-content-at-cosm-4426851792?position=17&pageNum=0&refId=Plq3diG6A3S%2B1loN6gBScA%3D%3D&trackingId=PIw3fjTbADsdFy%2BK8F%2FcPQ%3D%3D",
-      "descriptionText": "Cosm is a global technology company that brings experiences to life in immersive environments. We help our partners create spaces and content that blur the lines of real and virtual across three primary markets: Sports and Entertainment, Science and Education, and Parks and Attractions. Cosm was born from the fusion of some of the greatest innovators in the history of technology. Evans &amp; Sutherland, Spitz, Inc., and Cosm Immersive combined forces to power the immersive experiences of the future as Cosm. Innovation is in our DNA.\n\nIMPORTANT NOTICE FROM THE COSM HUMAN RESOURCES &amp; RECRUITING TEAM REGARDING A RECRUITING SCAM: Your security and trust matter to us. Please note that Cosm Recruiters will ALWAYS communicate with you from an official \"@Cosm.com\" email address or through authorized platforms such as LinkedIn. We will NEVER request payments, banking details, or personal financial information during the recruitment process. If you receive a suspicious communication or job offer claiming to be from Cosm, please do not respond or share personal information. For official Cosm opportunities, always visit www.cosm.com/careers.\n\nSummary\n\nThe Visual Effects Supervisor leads creative execution and technical direction for entertainment content. They are the key point of contact along with the Creative Director and the Producer. The VFX Supervisor is the point person for deciding internal tasking on shots, conducting efficient review of artists\u2019 work, and has overall responsibility for internal sign-off on \u201cfinal\u201d shots.\n\nIn addition to overseeing projects, this role places a strong emphasis on securing new projects through pitching across a wide range of opportunities. Our VFX Supervisor must bring exceptional communication skills along with complete enthusiasm and commitment to every pitch and project they support.\n\nKey to the success of the role is a broader commitment to the success of the company, a genuine willingness to contribute where needed in a wide variety of roles on all projects, and leadership skills to inspire and mentor the next generation of artists.\n\nResponsibilities\n\n\n\n- Work closely with vendor partners to ensure that our shared vision is met, constantly improving each production\n- Provide creative and technical input during pre-production, working with in-house Creative Directors and Producers along with potential production partners to plan show approaches, identify key challenges and propose solutions\n- Work closely with the Producer to ensure an accurate production schedule is defined and maintained\n- Collaboratively lead projects from concept to delivery, ensuring the creative vision aligns with internal expectations and external partners\n- A willingness to assist other projects across the Cosm Entertainment Productions team, which may include working on the box\n- Oversee the technical and creative direction of each shot and sequence for Experiential Cinema and Originals content\n- Daily review of assets and work in progress\n- Manage and handle internal communications with company leadership as well as external vendors and partners for clarity of deliverables, schedules, clearances, and budgets\n- Build and maintain internal and production partner relationships\n- Working alongside the Sr Director Entertainment Production, the Associate Production Director and/or the show Producer to find ways to execute projects within budget and schedule\n- Responsible for forecasting for future show demands\n- Work closely with the Creative Technologies team on pipeline improvements and developments\n- Work with Technical Developers and Pipeline teams to make improvements, focusing on workflow\n- Work out necessary element, technical and R&amp;D requirements\n- Attend shoots to ensure that VFX needs are considered during filming and the appropriate data is captured while providing guidance to the Director, DOP and internal stakeholders\n- Attend artist interviews as needed, and keep an eye out for outstanding talent\n- Mentorship of the next generation of artists by nurturing, guiding and leading by example\n- Some travel may be required\n\nExperience\n\n\n\n- Extensive experience in visual effects including recent supervision experience both studio-based and on location\n- Minimum of 10+ years of experience in VFX with 5+ years supervising complex projects\n- An entrepreneurial spirit, a passion for the company and dedication to delivering all projects to the best ability\n- Expertise in Nuke, Maya, Houdini, Unreal GPU and CPU rendering\n- A thorough understanding of color theory and film application for live-action film including film stock, film grain, color space and look-up tables, film processing and DI processing\n- A great leader with the ability to inspire and lead by example\n- Collaborative skills, ability to work well with others and enthusiasm to be involved in a variety of projects\n\nThe annualized base salary range for this position in California is $140,000 to 190,000. The base salary offered will factor in internal equity and may also vary depending on the candidate's geographic region, job-related knowledge, skills, and relevant experience, among other factors.\n\nAll applicants must be at least 18 years of age at the time of employment. This requirement is in accordance with applicable federal, state, and local labor laws. Cosm is an Equal Opportunity Employer. We celebrate diversity and are committed to creating an inclusive environment for all employees. All qualified applicants will receive consideration for employment without regard to race, color, religion, gender, gender identity or expression, sexual orientation, national origin, genetics, disability, age, or veteran status.",
-      "salary": "",
-      "employmentType": "Full-time",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 14,
-      "prefMatched": [
-        "creative direction",
-        "entertainment"
-      ]
-    },
-    {
-      "id": "4429700486",
-      "title": "Director, Creative Production",
-      "companyName": "Highwire",
-      "location": "Chicago, IL",
-      "posted": "2026-06-16",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/director-creative-production-at-highwire-4429700486?position=18&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=jTKTXirUtEWWJfDKvfTZsA%3D%3D",
-      "descriptionText": "Highwire is reimagining what a Director of Creative Production can be. We are an AI-native, sector-expert, outcome-obsessed partner to the world's most innovative companies. As our Director of Creative Production, you are responsible for overseeing the intake, estimation, negotiation, and staffing of the Creative team across a growing portfolio of complex, multi-scope client engagements. You'll also support the team in ensuring that the processes around all disciplines are executed with a process that starts with a brief and ends with on-time delivery, in partnership with our Account and Project Manager roles. This position reports to the VP and Creative Director and combines Creative and Project Management responsibilities.\n\nAbout you:\n\nYou are ruthlessly organized and motivated by the smooth, efficient competition of tasks against a plan. You understand how creative people work and protect their time and energy as fiercely as you protect deadlines. You navigate ambiguity and change without losing momentum, and you know how to bring a team along as the path is still being built. You look around corners and habitually have alternative options. Your teammates rely on you and know they can trust you to keep them on target, and aware of any potential derailments. You adore spreadsheets, Gantt charts and checklists, and you thrive on process. You're able to think on your toes and be resourceful in finding solutions to problems and answers to questions without strong oversight.\n\nKey Responsibilities\n\n\n\n- Serve as the operational connective tissue between Creative and cross-functional partners\n- Implement consistent creative-first project management processes across key pieces of business\n- Own the project intake and briefing process, ensuring every engagement enters production with a clear, approved creative brief before work begins\n- Lead the development of statements of work (SOWs), project estimates, and production proposals that accurately reflect creative scope, team capacity, and delivery timelines.\n- Manage budgets for project-based work and report budget performance\n- Manage production across concurrent, high-visibility client scopes, including enterprise-level accounts with multiple workstreams running simultaneously\n- Support pre-production, production, and post-production workflows across video, motion, and experiential projects, coordinating with internal teams and potential vendors\n- Partner with Creative leadership to establish intake, briefing, and project kickoff standards that support creative quality from the start\n- Articulate strategic plans, consult at a strategic level with clients, and have an in-depth understanding of the budget-setting process\n- Take ownership of team staffing, working with other staffing representatives across the agency \n- Be prepared to report progress and next steps as required daily, weekly and at project conclusion\n- Continue involvement in the execution of account work while steadily increasing responsibility over teams and client deliverables \n- Identify projects with case study potential early and partner with Creative leadership to ensure documentation planning is considered \n\nCandidate requirements \n\n\n\n- 8+ years above the producer/project management level, and experience leading multiple concurrent, complex, highly visible projects without supervision\n- Agency experience, including planning, scheduling, and coordinating with external partners and clients (i.e., in a client-facing role)\n- Proven ability to manage change, rally teams around new directions, and drive adoption of processes in a fast-moving environment\n- Experience managing cross-functional relationships, including the ability to work assertively and collaboratively across competing priorities\n- Demonstrated experience producing video, motion, and/or experiential projects in an agency environment, including vendor management and multi-market coordination.\n- Experience running print/document production, strategy, digital, pre-production video and/or web development projects\n- Understanding of specific quality assurance requirements for interactive or web-based deliverables, including user experience testing\n- Demonstrated ability to work within AI-native production environments, including the use of AI-assisted tools for project planning, scoping, and workflow optimization\n- Familiarity with CMS, social media platforms, Creative Cloud, Google Workspace/G-suite and Mac preferred\n- Associate's or Bachelor's degree in a related field, or the equivalent combination of education and experience\n\nThe salary range for this position is $110,000 to $135,000, with the final offer based on a combination of factors, including education, relevant experience, skills, prior training, internal equity, and local geographic market data. This role also includes a competitive benefits package with medical, dental, and vision coverage, 401(k) matching, generous paid time off, and additional perks designed to support your overall well-being and growth. \n\nAbout Highwire\n\nHighwire is a strategic marketing communications agency at the intersection of innovation and industry. We partner with ambitious companies and established brands to navigate complexity, lead markets, and grow with purpose. With integrated expertise in strategic marketing and communications, corporate reputation, creative, and insights, we cut through the noise to deliver bold ideas and measurable impact across B2B technology, healthcare, cybersecurity, energy, professional and financial services, and more.\n\nAt Highwire, we believe that storytelling fuels transformation. We know that the most impactful stories represent all voices and perspectives. As a values-driven agency, we foster an inclusive environment where everyone\u2014regardless of age, race/ethnicity, size, shape, gender identity, sexual orientation, religion and different abilities\u2013can feel safe, celebrated and worthy.\n\nWe ensure that every Highwire Walker has the requisite support to soar in their careers. Our commitment to diversity, inclusion and belonging is foundational and embedded in our business and culture. We aspire to change our industry and build a better future for all.\n\nOur people-first culture is driven by four core values:\n\n\n\n- Team Empowerment\n- Growth Mindset\n- Inclusion Always\n- Fierce Distinction\n\nWe're looking for individuals with big ideas, strong opinions, and the energy to bring them to life. If you thrive in an environment that values personal accountability, high standards, and boundless motivation, this is the opportunity for you. Be part of our award-winning culture and contribute to an exciting and growing business where you can make a real impact.\n\nHighwire. Above all.\n\nOur people-first culture is reflected in the meaningful benefits, flexibility, and support we offer:\n\n\n\n- Competitive salary with merit-based opportunities for growth\n- Flexible hybrid work model tailored to your schedule and lifestyle\n- Generous vacation policy, including extended summer and winter breaks\n- Early log-off on Fridays through our Empower Hours program\n- 401(k) plan with employer matching\n- Comprehensive medical, dental, and vision coverage, plus FSA options\n- Paid parental leave benefits\n- Commuter benefits\n- Annual Growth Mindset stipend for books, events, or learning experiences\n- Monthly technology reimbursement\n- Wellness benefit program for mental and physical health\n- 501c3 donation matching program\n- Mentorship and ongoing professional development opportunities\n- Monthly recognition and team celebrations\n- Employee referral and new business referral bonuses\n- Quarterly Highwire events and team gatherings\n- Dog-friendly office environment\n- A supportive, inclusive, and collaborative workplace where you can grow and do your best work\n\nLocation &amp; Work Environment\n\nHighwire offers both remote and hybrid work options, depending on where you live.\n\nHybrid: Candidates located within commuting distance of our New York, NY or San Francisco, CA offices follow a hybrid schedule, with three in-office days per week.\n\nRemote: We hire for fully remote roles in the following states: California, Colorado, Connecticut, Florida, Georgia, Illinois, Iowa, Kansas, Maryland, Massachusetts, Michigan, New Hampshire, New Jersey, New York, North Carolina, Ohio, Oregon, Pennsylvania, Rhode Island, South Carolina, Tennessee, Texas, Utah, Virginia, Washington, and Washington, D.C..\n\nPlease note: We are only able to consider candidates who reside in one of the locations listed above at the time of hire.\n\nJoin the Highwire team\n\nIf you're inspired by the opportunity to shape meaningful stories and grow alongside a team that values innovation, accountability, and inclusion, apply below to start the conversation.\n\nPlease note: This posting may be used to build our talent pipeline, connect with top professionals in the industry, or extend reach across multiple locations. We welcome all interested candidates to apply and explore opportunities at Highwire!\n\n",
-      "salary": "",
-      "employmentType": "Full-time",
-      "alsoOn": [
-        "Glassdoor"
-      ],
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 14,
-      "prefMatched": [
-        "ai-assisted",
-        "remote"
-      ]
-    },
-    {
-      "id": "4428078487",
-      "title": "Head of Copy",
-      "companyName": "24 Seven Talent",
-      "location": "United States",
-      "posted": "2026-06-16",
-      "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/head-of-copy-at-24-seven-talent-4428078487?position=13&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=NmNJaHHInS1KVUdpoZ3P5A%3D%3D",
-      "descriptionText": "\nOur client, a growing name in women's apparel is seeking a Creative Copy Director / Scriptwriter for an upcoming August shoot. This is a unique hybrid opportunity for a writer who can develop sharp, performance-driven scripts and also be on set to help bring the creative vision to life. Creative direction will be led by the founder, with a clear brief and direction provided.\n\n\nThis is a remote part time opportunity starting as soon as next week culminating in the shoot in August in Los Angeles. Candidates must be US based and able to be on location for this shoot in Los Angeles.\nWhat the team is looking for\n\n- Experienced freelance copywriter / creative director with strong scriptwriting ability\n- Prior experience writing direct response TV spots for apparel or CPG brands\n- Ability to translate brand direction into compelling, conversion-minded scripts\n- Comfort working asynchronously with minimal meetings\n- Availability to be on set in Los Angeles for shoot day\nThis could become an ongoing partnership for future scriptwriting and shoot support projects, but the immediate need is for this August production.",
-      "salary": "",
-      "employmentType": "Part-time",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 14,
-      "prefMatched": [
-        "creative direction",
-        "remote"
-      ]
-    },
-    {
-      "id": "4368992287",
-      "title": "Creative Director, Yahoo Search & Yahoo Mail",
-      "companyName": "Yahoo",
-      "location": "United States",
+      "id": "4407799092",
+      "title": "Art Director / Sr. Art Director, Editorial - Hollister (Remote)",
+      "companyName": "Abercrombie & Fitch Co.",
+      "location": "Columbus, OH",
       "posted": "2026-06-17",
       "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/creative-director-yahoo-search-yahoo-mail-at-yahoo-4368992287?position=9&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=NJxQO2HMPhvfk3L9dO1C0g%3D%3D",
-      "descriptionText": "Yahoo Mail is the ultimate consumer inbox with hundreds of millions of users. It\u2019s the best way to access your email and stay organized from a computer, phone or tablet. With its beautiful design and lightning fast speed, Yahoo Mail makes reading, organizing, and sending emails easier than ever.\n\nA Little About Us\n\nThe Yahoo Creative Marketing Studio is a centralized shared services organization that powers the visual and verbal identity of Yahoo\u2019s iconic portfolio. From News and Finance to Sports, Mail, and Search, we create integrated marketing campaigns that drive growth and brand affinity globally. We sit at the intersection of utility and delight, operating as a high-energy hub of strategists, designers, and storytellers.\n\nPosition Summary\n\nAs the Creative Director dedicated to the Yahoo Search and Mail brands, you will define the overarching creative vision and drive the marketing strategies that elevate these essential products within our shared services model. Reporting to the Head of Marketing Studio, you will act as a strategic individual contributor, partnering closely with product and marketing leadership to move from planning to high-impact execution.\n\nYou are a player-coach: a high-level strategic thinker with exceptional creative taste who remains a hands-on designer and storyteller when the work demands it. You will lead by influence, ensuring that our creative output\u2014both visual and verbal\u2014is fresh, on-brand, and highly optimized through modern, AI-augmented workflows.\n\nKey Responsibilities\n\n\n\n- Creative Vision &amp; Architecture: Define and drive the multi-year creative strategy and visual systems for Yahoo Search and Yahoo Mail, establishing scalable creative frameworks that align campaign execution with long-term brand objectives.\n- Campaign Orchestration &amp; Delivery: Oversee the visual and conceptual direction of high-impact, multi-channel campaigns across digital display, social media, video storytelling, and interactive experiences, maintaining the ultimate backstop for creative quality.\n- Cross-Functional &amp; Strategic Partnering: Partner closely with Product Marketing, Product Design, and Engineering to craft actionable, strategic creative briefs. Represent design and branding at the highest strategic levels to build cross-functional consensus. \n- Intelligent Campaign Optimization: Drive campaign pipeline efficiency by utilizing Asana AI to automate administrative workflows, orchestrate squad tasks, and streamline review handoffs.\n- Mentorship &amp; Practice Leadership: Multiply the capability of the design organization by mentoring and empowering senior designers (IC4/IC5), raising the bar for craftsmanship, professional maturity, and creative output.\n- Responsible Innovation: Stay at the forefront of emerging technologies and industry shifts, formulating ethical guidelines for how the creative team leverages AI platforms to maintain brand integrity and avoid market redundancy.\n\nQualifications\n\n\n\n- 10+ years of creative leadership experience in digital media, advertising, or consumer tech, with a proven history of shaping high-level brand visions.\n- A portfolio showing exceptional visual taste, multi-channel campaign leadership, and master-level execution across video, digital, and upper-funnel brand initiatives.\n- Deep experience establishing strategic design and storytelling systems for complex consumer tech products (ideally communication or utility tools).\n- Demonstrated ability to validate, refine, and provide creative governance over AI-generated outputs, ensuring high standards of brand-safety, originality, and visual polish.\n- Proven experience driving cross-team alignment on complex projects, negotiating through conflicting stakeholder feedback to establish clear creative pathways.\n- Skilled in modern design and collaboration environments (Figma, Adobe Creative Suite).\n- Exceptional communication and narrative skills, with the ability to articulate deep strategic rationale behind creative choices to senior business leaders.\n- Bachelor\u2019s degree in Design, Fine Arts, Advertising, or a related field, or equivalent practical experience.\n\nThe material job duties and responsibilities of this role include those listed above as well as adhering to Yahoo policies; exercising sound judgment; working effectively, safely and inclusively with others; exhibiting trustworthiness and meeting expectations; and safeguarding business operations and brand integrity.\n\nAt Yahoo, we offer flexible hybrid work options that our employees love! While most roles don\u2019t require regular office attendance, you may occasionally be asked to attend in-person events or team sessions. You\u2019ll always get notice to make arrangements. Your recruiter will let you know if a specific job requires regular attendance at a Yahoo office or facility. If you have any questions about how this applies to the role, just ask the recruiter!\n\nYahoo is proud to be an equal opportunity workplace. All qualified applicants will receive consideration for employment without regard to, and will not be discriminated against based on age, race, gender, color, religion, national origin, sexual orientation, gender identity, veteran status, disability or any other protected category. Yahoo will consider for employment qualified applicants with criminal histories in a manner consistent with applicable law. Yahoo is dedicated to providing an accessible environment for all candidates during the application process and for employees during their employment. If you need accessibility assistance and/or a reasonable accommodation due to a disability, please submit a request via the Accommodation Request Form (www.yahooinc.com/careers/contact-us.html) or call +1.866.772.3182. Requests and calls received for non-disability related issues, such as following up on an application, will not receive a response.\n\nWe believe that a diverse and inclusive workplace strengthens Yahoo and deepens our relationships. When you support everyone to be their best selves, they spark discovery, innovation and creativity. Among other efforts, our 11 employee resource groups (ERGs) enhance a culture of belonging with programs, events and fellowship that help educate, support and create a workplace where all feel welcome.\n\nThe compensation for this position ranges from $129,210.00 - $281,305.00/yr and will vary depending on factors such as your location, skills and experience.The compensation package may also include incentive compensation opportunities in the form of discretionary annual bonus or commissions. Our comprehensive benefits include healthcare, a great 401k, backup childcare, education stipends and much (much) more.\n\nCurrently work for Yahoo? Please apply on our internal career site.",
+      "link": "https://www.linkedin.com/jobs/view/art-director-sr-art-director-editorial-hollister-remote-at-abercrombie-fitch-co-4407799092",
+      "link_full": "https://www.linkedin.com/jobs/view/art-director-sr-art-director-editorial-hollister-remote-at-abercrombie-fitch-co-4407799092",
+      "descriptionText": "",
       "salary": "",
       "employmentType": "Full-time",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 29,
-      "prefMatched": [
-        "campaign",
-        "product design",
-        "creative strategy",
-        "advertising"
-      ]
+      "seniorityLevel": "Not Applicable"
     },
     {
-      "id": "4426869725",
-      "title": "Lead Supervisor (Los Cerritos)",
-      "companyName": "Coach",
-      "location": "Cerritos, CA",
-      "posted": "2026-06-16",
+      "id": "4427768239",
+      "title": "Creative Director, Experiential Marketing",
+      "companyName": "TH Experiential",
+      "location": "United States",
+      "posted": "2026-06-15",
       "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/lead-supervisor-los-cerritos-at-coach-4426869725?position=16&pageNum=0&refId=Plq3diG6A3S%2B1loN6gBScA%3D%3D&trackingId=Wy%2B6d07q0up9bnvE2Ko6rw%3D%3D",
-      "descriptionText": "Coach is a global fashion house founded in New York in 1941. Inspired by the vision of Creative Director Stuart Vevers and the inclusive and courageous spirit of our hometown, we make beautiful things, crafted to last\u2014for you to be yourself in.\n\nCoach is part of the Tapestry portfolio \u2013 a global house of brands committed to stretching what\u2019s possible.\n\nA member of the Tapestry family, we are part of a global house of brands that has unwavering optimism and is committed to being innovative and wholly inclusive. Visit Our People page to learn more about Tapestry's commitment to equity, inclusion, and diversity.\n\nBrand Ambassador\n\n\n\n-  Maintains strong leadership presence on the sales floor to achieve sales targets and deliver an exceptional customer experience\n-  Serves as a Brand Ambassador embodying of Coach values and increasing brand awareness\n-  Leads implementation of Company initiatives and support full operation of the business\n-  Maintain a growth mindset for business and personal development initiatives\n\nCreate Winning Teams/Drive Results\n\n\n\n-  Establishes trust, maintains integrity, and supports an environment of collaboration within store and throughout the organization to promote a fair, positive experience, and an inclusive culture amongst the team\n-  Monitor and analyze sales data, identify trends, and make recommendations to enhance store performance and implement individualized team development to increase overall customer experience\n-  Exemplifies strong business acumen and executes forward-planned strategies to achieve leaderships initiatives surrounding store goals / KPIs\n-  Supports the store with recruiting, interviewing, performance evaluation, high-level training as needed\n-  Provides necessary feedback and guidance geared to improve individual performance on all levels; holds team accountable for achieving individual and business goals\n-  Adheres to and enforces team compliance of Company policies and procedures in addition to store operational procedures\n\nCustomer Focused (internal And External)\n\n\n\n-  Assists in executing innovative strategies for exceptional customer experiences for both internal and external partners\n-  Create a customer-centric Culture that prioritizes customer satisfaction and mentor team on clienteling strategy to build long-term customer relationships to meet business goals\n-  Provides HR and conflict resolution support to team and in district in absence of leadership team\n-  Champions the company resources to support a healthy work environment for internals customer\n\nQualifications &amp; Requirements\n\n\n\n-  1+ years of equivalent experience in Managing Competitive Retail Space at the Lead Supervisor level\n-  Can bend, reach, stretch as well as lift, carry and move at least 25 pounds and, at times, lift and carry product, cartons, props or fixtures up to 50 pounds\n\nAbility to lift at least 25 lbs. regularly (up to 50 lbs, occasionally), to climb, bend, kneel, and maneuver sales floor and stockroom.\n\nOur Competencies for All Employees\n\nCourage: Doesn\u2019t hold back anything that needs to be said; provides current, direct, complete, and \u201cactionable\u201d positive and corrective feedback to others; lets people know where they stand; faces up to people problems on any person or situation (not including direct reports) quickly and directly; is not afraid to take negative action when necessary.\n\nCreativity: Comes up with a lot of new and unique ideas; easily makes connections among previously unrelated notions; tends to be seen as original and value-added in brainstorming settings.\n\nCustomer Focus: Is dedicated to meeting the expectations and requirements of internal and external customers; gets first-hand customer information and uses it for improvements in products and services; acts with customers in mind; establishes and maintains effective relationships with customers and gains their trust and respect.\n\nDealing with Ambiguity: Can effectively cope with change; can shift gears comfortably; can decide and act without having the total picture; isn\u2019t upset when things are up in the air; doesn\u2019t have to finish things before moving on; can comfortably handle risk and uncertainty.\n\nDrive for Results: Can be counted on to exceed goals successfully; is constantly and consistently one of the top performers; very bottom-line oriented; steadfastly pushes self and others for results.\n\nInterpersonal Savvy: Relates well to all kinds of people, up, down, and sideways, inside and outside the organization; builds appropriate rapport; builds constructive and effective relationships; uses diplomacy and tact; can diffuse even high-tension situations comfortably.\n\nLearning on the Fly: Learns quickly when facing new problems; a relentless and versatile learner; open to change; analyzes both successes and failures for clues to improvement; experiments and will try anything to find solutions; enjoys the challenge of unfamiliar tasks; quickly grasps the essence and the underlying structure of anything.\n\nOur Competencies for All People Managers\n\nStrategic Agility: Sees ahead clearly; can anticipate future consequences and trends accurately; has broad knowledge and perspective; is future oriented; can articulately paint credible pictures and visions of possibilities and likelihoods; can create competitive and breakthrough strategies and plans.\n\nDeveloping Direct Reports and Others: Provides challenging and stretching tasks and assignments; holds frequent development discussions; is aware of each person's career goals; constructs compelling development plans and executes them; pushes people to accept developmental moves; will take on those who need help and further development; cooperates with the developmental system in the organization; is a people builder.\n\nBuilding Effective Teams: Blends people into teams when needed; creates strong morale and spirit in their team; shares wins and successes; fosters open dialogue; lets people finish and be responsible for their work; defines success in terms of the whole team; creates a feeling of belonging in the team.\n\nCoach. is an equal opportunity and affirmative action employer and we pride ourselves on hiring and developing the best people. All employment decisions (including recruitment, hiring, promotion, compensation, transfer, training, discipline and termination) are based on the applicant\u2019s or employee\u2019s qualifications as they relate to the requirements of the position under consideration. These decisions are made without regard to age, sex, sexual orientation, gender identity, genetic characteristics, race, color, creed, religion, ethnicity, national origin, alienage, citizenship, disability, marital status, military status, pregnancy, or any other legally-recognized protected basis prohibited by applicable law.\n\nAmericans With Disabilities Act (ADA)\n\nTapestry, Inc. will provide applicants and employees with reasonable accommodation for disabilities or religious beliefs. If you require reasonable accommodation to complete the application process, please contact Tapestry People Services at 1-855-566-9264 or employeerelations@tapestry.com\n\nVisit Tapestry, Inc.\n\nBase Pay Range\n\n$17.00-$27.75\n\nTapestry will comply with minimum wage requirements and any other applicable pay laws based on city, county, and state regulations.\n\nHere are some of the benefits that we offer: Medical insurance, Dental insurance, Vision insurance, 401 (K), Paid Paternity and Maternity leave, Commuter Benefits, Disability insurance and Tuition assistance. Please click here for a complete list of U.S Corporate Compensation &amp; Benefits.",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-experiential-marketing-at-th-experiential-4427768239",
+      "link_full": "https://www.linkedin.com/jobs/view/creative-director-experiential-marketing-at-th-experiential-4427768239",
+      "descriptionText": "",
       "salary": "",
       "employmentType": "Full-time",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
+      "seniorityLevel": "Director"
+    },
+    {
+      "id": "4426481870",
+      "title": "Product Marketing Manager",
+      "companyName": "Jobgether",
+      "location": "United States",
+      "posted": "2026-06-16",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/product-marketing-manager-at-jobgether-4426481870",
+      "link_full": "https://www.linkedin.com/jobs/view/product-marketing-manager-at-jobgether-4426481870",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Mid-Senior level"
     },
     {
       "id": "4418299456",
@@ -398,41 +178,110 @@
       "location": "United States",
       "posted": "2026-06-17",
       "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/associate-creative-director-at-open-health-4418299456?position=3&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=%2FqR7Tg5EaKJptEfsfXC0aw%3D%3D",
-      "descriptionText": "Location: US Remote\n\nJob Summary\n\nCombining impeccable conception, design, and video skills with technical expertise, Associate Creative Directors work with the Global Head, Creative Strategy to deliver the highest possible creative caliber and quality across healthcare communications. Working in partnership with creative colleagues and account teams, Associate Creative Directors conceptualize and bring to life head-turning creative concepts across media.\n\nEssential Duties &amp; Responsibilities\n\n\n\n- Research, concept, and mock-up visual designs for exiting accounts and new business initiatives\n- Deliver superb conceptual and design skills across media \n- Present confidently to senior business and client stakeholders\n- Produce scientifically accurate, high quality creative outputs for internal and external clients, accurately and consistently, in a fast paced, timeline driven environment\n- Ensure all work meets corporate and client brand guidelines and quality assurance standards\n- Stay abreast of congress and journal guidelines and creative trends to ensure all products adhere to specification while exceeding expectation \n- Oversee creative integrity of all linked project outputs\n- Competently project manage workload across multiple accounts, clients, and products, while maintaining caliber, quality, and accuracy\n- Review and enhance outputs created by internal and client teams, including adaptation of exiting content for alternative print and digital formats\n- Participate in account team status meetings \n- Collaborate effectively within and across creative and account teams, to ensure the best possible solutions are delivered efficiently \n- Support continuous improvement initiatives, as required\n- Adhere to standard operating procedures and best practices\n- Maintain timely and accurate timesheets\n\nLine Management (optional)\n\n\n\n- Provide and oversee the provision of effective line management, supporting the career and personal development of assigned line reports and department members\n- Ensure all line reports and department members undergo performance review and have appropriate objectives and development plans in place\n- Rapidly address under-performance and initiation of active management plans to support individuals, as required\n\nExperience, Skills, And Qualifications\n\n\n\n- Excellent concepting, technical, design, multimedia, and presentation skills with strong attention to detail, proven through extensive experience in a creative role in healthcare communications including commercial and medical communications\n- Proven experience in concepting, creating and defending mock-ups, and delivering head-turning creative outputs across media including, but not limited to, creative concepts / campaigns, PPT presentations, video and animation, data visualization, medical congress booths, and scientific posters\n- A strong work ethic, excellent communication and organizational skills, and a drive to exceed customer expectations/push creative boundaries\n- Expertise in presenting to, liaising with, and driving consensus among internal and external clients to clarify, refine, and deliver to brief\n- Excellent working knowledge of Adobe Creative Suite, Microsoft PPT, and multimedia/animation applications\n- Enjoy working in a fast-paced environment, multi-tasking, and working to tight deadlines\n- Ability to work independently and as part of a team\n- A creative approach to problem-solving and an open-minded attitude\n- Enthusiasm for learning new skills and software\n- Educated to degree level or equivalent with a proven creative portfolio \n\nTravel Requirements\n\n\n\n- As required by business needs\n\nAbout OPEN Health\n\nAt OPEN Health, we connect visionary minds, pioneering science, and advanced technology to drive real impact. By uniting people, science, and technology, we activate new opportunities for biopharma innovation. Our expertise across medical affairs and market access unlocks faster, smarter routes to market. We are committed to improving patient outcomes worldwide. To learn more, visit www.openhealthgroup.com.\n\nOPEN Health. The right combination to unlock possibilities. \n\nWhat We Offer\n\nAs a global organization, OPEN Health is committed to supporting our employees and their families through a comprehensive benefits program\n\n\n\n- Competitive pay, generous paid vacation, holidays and more, across all our locations\n- Ongoing training and development opportunities which foster and shape your individual career path\n- An active and growing commitment to bettering the communities our employees call home through our Corporate Social Responsibility program\n- The opportunity to thrive in a global, collaborative environment while working every day to improve health outcomes and patient wellbeing\n- Diverse, inclusive culture that encourages you to bring your whole self to work\n\nIf we sound like the sort of business environment in which you would thrive, then we would love to hear from you.\n\nOPEN Health does not discriminate on the basis of race, sex, colour, religion, age, national origin, marital status, disability, veteran status, genetic information, sexual orientation, gender identity or any other reason prohibited by law in provision of employment opportunities and benefits.",
+      "link": "https://www.linkedin.com/jobs/view/associate-creative-director-at-open-health-4418299456",
+      "link_full": "https://www.linkedin.com/jobs/view/associate-creative-director-at-open-health-4418299456",
+      "descriptionText": "",
       "salary": "",
       "employmentType": "Full-time",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches in posting",
-      "tier": "Tier 3",
-      "prefScore": 14,
-      "prefMatched": [
-        "creative strategy",
-        "remote"
-      ]
+      "seniorityLevel": "Not Applicable"
     },
     {
-      "id": "4429737386",
-      "title": "Creative Director [210919]",
-      "companyName": "Skill",
+      "id": "4425869678",
+      "title": "Creative Director / Producer",
+      "companyName": "Night",
+      "location": "United States",
+      "posted": "2026-06-09",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-producer-at-night-4425869678",
+      "link_full": "https://www.linkedin.com/jobs/view/creative-director-producer-at-night-4425869678",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Part-time",
+      "seniorityLevel": "Director"
+    },
+    {
+      "id": "4394984383",
+      "title": "Director, Customer Experience",
+      "companyName": "Alma",
+      "location": "United States",
+      "posted": "2026-06-05",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/director-customer-experience-at-alma-4394984383",
+      "link_full": "https://www.linkedin.com/jobs/view/director-customer-experience-at-alma-4394984383",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Not Applicable"
+    },
+    {
+      "id": "4423598222",
+      "title": "Creative Director, Paid Social (Remote)",
+      "companyName": "Forbes Advisor",
+      "location": "Wilmington, DE",
+      "posted": "2026-06-04",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-paid-social-remote-at-forbes-advisor-4423598222",
+      "link_full": "https://www.linkedin.com/jobs/view/creative-director-paid-social-remote-at-forbes-advisor-4423598222",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Not Applicable"
+    },
+    {
+      "id": "4397627535",
+      "title": "Creative Director",
+      "companyName": "Dragonfruit",
+      "location": "United States",
+      "posted": "2026-06-04",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-at-dragonfruit-4397627535",
+      "link_full": "https://www.linkedin.com/jobs/view/creative-director-at-dragonfruit-4397627535",
+      "descriptionText": "",
+      "salary": "$100,000.00/yr - $160,000.00/yr",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Mid-Senior level"
+    },
+    {
+      "id": "4426825139",
+      "title": "Product Designer - AI Application",
+      "companyName": "Jobgether",
       "location": "United States",
       "posted": "2026-06-16",
       "source": "LinkedIn",
-      "link": "https://www.linkedin.com/jobs/view/creative-director-210919-at-skill-4429737386?position=4&pageNum=0&refId=rH5kP8BLFKG7lRNoAyBphA%3D%3D&trackingId=O%2FSDjKbj%2B3MaaqXvRYXGug%3D%3D",
-      "descriptionText": "We are partnering with a leading creative agency renowned for its innovative approach to branding and marketing, particularly within the higher education sector. This dynamic agency is dedicated to crafting compelling narratives and impactful strategies that resonate deeply with audiences, driving significant results for its diverse portfolio of clients. With a collaborative spirit and a commitment to excellence, they empower organizations to achieve their full potential through strategic creative vision and execution.\n\nAre you a visionary leader with a passion for shaping compelling brand experiences and inspiring creative teams? This is an exceptional opportunity to make a profound impact, driving the creative direction for a diverse portfolio of clients and influencing the strategic vision of an entire agency. You will be at the forefront of developing groundbreaking campaigns, mentoring top talent, and forging deep, trusting relationships that elevate both our clients and our agency to new heights. Join us and unleash your full creative and leadership potential!\n\nAs a pivotal member of the leadership team, you will establish the creative vision for engagements of all scales, inspiring interdisciplinary teams of writers, art directors, and designers to produce their best work. Your expertise will be crucial in fostering collaborative relationships across strategy, digital, accounts, media, and research, ensuring the delivery of innovative and high-quality creative solutions.\n\nKey Responsibilities\n\n\n\n-  **Creative Leadership &amp; Strategy:**\n-  Collaborate with account and brand planning teams to provide clients with creative strategy for brand platforms, concepts, and marketing campaigns.\n-  Lead teams of designers, writers, and producers in developing resonant and inspiring concepts rooted in strategic insights.\n-  Direct the creation of both digital and traditional deliverables, including advertising, style guides, print collateral, and websites.\n-  Oversee, review, and manage all creative deliverables, coordinating presentations with client-facing teams.\n-  Lead client meetings and presentations, providing input for client reports and project deliverables.\n-  Provide thoughtful and timely responses to client inquiries and requests.\n-  Participate in discovery sessions and meetings related to brand and creative development.\n-  Offer strategic expertise throughout projects, including input on scope, budgets, and deliverables.\n-  Manage resource allocation, determining creative team composition based on project needs.\n-  Develop or approve creative project timelines, ensuring high-quality, on-time, and on-budget delivery.\n-  **Integrated Creative Direction:**\n-  Collaborate with User Experience and Development teams to create diverse website experiences, directing art and editorial for storytelling and content.\n-  Partner with Video teams and external partners to bring concepts to life, including script development, storyboarding, art/photography direction, and post-production reviews.\n-  Work with Media Strategy to design and deliver impactful, high-performing campaigns, applying best practices for chosen mediums.\n-  Collaborate with the Research team by providing input on qualitative and quantitative creative testing survey instruments.\n-  **Business Development &amp; Thought Leadership:**\n-  Contribute content related to brand development and creative strategy for proposals and sales presentations.\n-  Participate in sales presentations to prospective clients.\n-  Write newsletter and blog articles to position the company as an industry thought leader.\n-  Develop and maintain relationships with clients and industry professionals to identify potential leads and uphold the company\u2019s reputation.\n-  Assist in developing case studies of project work for the company website and proposals.\n-  **Management &amp; Mentorship:**\n-  Cultivate an equitable, inclusive, and psychologically safe work environment where all employees can thrive.\n-  Attend leadership-level meetings to ensure alignment with agency policy and strategic vision.\n-  Draft job descriptions in consultation with People &amp; Culture to ensure role clarity.\n-  Partner with People &amp; Culture in the recruitment process, including resume review, interviewing, and onboarding support.\n-  Oversee daily operational workflow, granting appropriate autonomy and providing feedback to team members.\n-  Collaborate with leadership peers to ensure relevant cross-functional processes.\n-  Coach, mentor, and provide constructive feedback to support professional development, creating growth opportunities.\n-  Conduct performance evaluations in adherence to agency timelines, ensuring fairness and accuracy.\n-  Escalate disciplinary activities, performance concerns, or accommodation requests in consultation with People &amp; Culture.\n-  Participate in workshops and training to enhance management and leadership capabilities.\n\nMust-Have Qualifications\n\n\n\n-  Eight or more years of experience developing and leading both people and creative engagements for an advertising, design, digital, and/or in-house agency.\n-  Deep experience working with higher education clients.\n-  Extensive creative and management experience in an agency setting.\n-  Excellent verbal, written communication, and interpersonal skills.\n-  Exceptional organizational skills and meticulous attention to detail.\n-  Proven ability to manage time effectively and meet deadlines consistently.\n-  Strong analytical and independent problem-solving skills, with the ability to prioritize tasks and delegate appropriately.\n-  Proficiency with Adobe Creative Suite, Miro, InDesign, Microsoft Office Suite, or related software.\n-  Bachelor\u2019s degree or an equivalent combination of education and relevant experience.\n\nPhysical Requirements\n\n\n\n-  Prolonged periods of sitting at a desk and working on a computer.\n\n**About Skill**\n\nSkill connects the best professional, IT, engineering, financial and administrative talent with the world\u2019s biggest brands. Our eligible talent get access to benefits such as health benefit contributions, retirement plans with match and flexible spending accounts.\n\nSkill is an equal-opportunity employer. We evaluate qualified applicants without regard to age, race, color, religion, sex, sexual orientation, gender identity, national origin, disability, veteran status, and other legally protected characteristics. We\u2019re about creating an inclusive environment-one where different backgrounds, experiences, and perspectives are valued, and everyone can contribute, grow their careers, and thrive.\n\n",
-      "salary": "$140,000.00/yr - $160,000.00/yr",
+      "link": "https://www.linkedin.com/jobs/view/product-designer-ai-application-at-jobgether-4426825139",
+      "link_full": "https://www.linkedin.com/jobs/view/product-designer-ai-application-at-jobgether-4426825139",
+      "descriptionText": "",
+      "salary": "",
       "employmentType": "Full-time",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches in posting",
-      "tier": "Tier 3",
-      "prefScore": 21,
-      "prefMatched": [
-        "creative direction",
-        "creative strategy",
-        "advertising"
-      ]
+      "seniorityLevel": "Not Applicable"
+    },
+    {
+      "id": "4426617343",
+      "title": "Product Designer - Music & Social Media Tech - Remote",
+      "companyName": "Venchr",
+      "location": "United States",
+      "posted": "2026-06-11",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/product-designer-music-social-media-tech-remote-at-venchr-4426617343",
+      "link_full": "https://www.linkedin.com/jobs/view/product-designer-music-social-media-tech-remote-at-venchr-4426617343",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Mid-Senior level"
+    },
+    {
+      "id": "4425320671",
+      "title": "Director, Creative - Global HOKA Experiential",
+      "companyName": "HOKA",
+      "location": "Indiana, United States",
+      "posted": "2026-06-12",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/director-creative-global-hoka-experiential-at-hoka-4425320671",
+      "link_full": "https://www.linkedin.com/jobs/view/director-creative-global-hoka-experiential-at-hoka-4425320671",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "seniorityLevel": "Not Applicable"
     }
   ]
 }

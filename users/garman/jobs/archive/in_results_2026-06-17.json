@@ -1,68 +1,37 @@
 {
-  "generated": "2026-06-17T07:25:42-07:00",
+  "updated": "2026-06-17T19:40:57-07:00",
   "source": "Indeed",
-  "searches": [
-    "Associate Creative Director Creative Director Brand Creative Director AI Creative Director \u2014 Los Angeles fulltime",
-    "Associate Creative Director Creative Director Brand Creative Director AI Creative Director \u2014 Remote fulltime"
-  ],
-  "count": 3,
+  "count": 2,
   "jobs": [
     {
-      "id": "JOBSEARCH_548",
+      "id": "JOBSEARCH_570",
+      "job_id": "aayk2t2clp6s",
+      "title": "Associate Creative Director, Ring Retail & Marketing",
+      "companyName": "Amazon.com",
+      "location": "Hawthorne, CA",
+      "posted": "2026-02-28",
+      "source": "Indeed",
+      "link": "https://to.indeed.com/aayk2t2clp6s",
+      "link_full": "https://to.indeed.com/aayk2t2clp6s",
+      "descriptionText": "",
+      "salary": "$141,000 - $190,700 a year",
+      "employmentType": "Full-time",
+      "seniorityLevel": ""
+    },
+    {
+      "id": "JOBSEARCH_573",
+      "job_id": "aaz8sbj6lq84",
       "title": "Associate Creative Director, Art",
       "companyName": "Princeton10",
       "location": "Montclair, NJ",
       "posted": "2026-04-20",
       "source": "Indeed",
-      "link": "https://to.indeed.com/aacs7lyxl6bx",
-      "descriptionText": "We are looking for an Associate Creative Director, Art to join our team. You will be responsible for driving creative strategies for clients in the pharmaceutical and wellness industries. You have a unique artistic vision and you are able to communicate that vision to others. You have deep knowledge of pharmaceutical regulation and understand how to deliver best-in-class creative within these regulations. You have the ability to lead and mentor art teams. You will report to the VP, Creative Director. Collaborate with departmental leads to create project briefs. Build strong client relationships through creative ideation, recommendations, and support. Present creative concepts and strategies to clients and other cross-functional teams. Accountable for producing high quality art assets and managing any 3rd party vendors to do so. Assist in managing day-to-day operations of the design team. At least 10 years of experience in pharmaceutical marketing, with at least 5 years of experience working in an agency environment and 3 years at a leadership level.",
+      "link": "https://to.indeed.com/aaz8sbj6lq84",
+      "link_full": "https://to.indeed.com/aaz8sbj6lq84",
+      "descriptionText": "",
       "salary": "$140,000 - $180,000 a year",
       "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
-    },
-    {
-      "id": "JOBSEARCH_554",
-      "title": "Director, CRM & Loyalty",
-      "companyName": "Panda Restaurant Group",
-      "location": "Rosemead, CA",
-      "posted": "2026-03-12",
-      "source": "Indeed",
-      "link": "https://to.indeed.com/aatgqpk6ksp8",
-      "descriptionText": "The Director, CRM & Loyalty is accountable for growing customer lifetime value through industry-leading CRM strategy, lifecycle marketing, and loyalty program performance. This position is responsible for the guest engagement roadmap across first-party digital channels (email, push, in-app/web personalization) and partners cross-functionally to ensure the loyalty program drives profitable frequency, retention, and share-of-wallet. Responsible for the CRM vision, lifecycle journey strategy, and operating cadence to drive acquisition, retention, and reactivation across owned channels. Partners with brand/creative and channel owners to develop content, frequency, and deliverability standards. Builds a practical roadmap for AI/ML use cases that improve outcomes. Leads and develops a high-performing team. Minimum ten years in CRM, lifecycle marketing, loyalty, or customer growth within consumer retail, restaurant, e-commerce, or similar high-volume environments.",
-      "salary": "$161,000 - $226,000 a year",
-      "employmentType": "Permanent",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches in posting",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
-    },
-    {
-      "id": "JOBSEARCH_550",
-      "title": "Senior Director of Marketing",
-      "companyName": "Blackwood Associates Inc",
-      "location": "Washington, DC",
-      "posted": "2026-05-26",
-      "source": "Indeed",
-      "link": "https://to.indeed.com/aa8sd8jq28wn",
-      "descriptionText": "For nearly 50 years, Blackwood has supported risk leaders as a trusted Technology Broker, delivering proven cybersecurity and data solutions. We are seeking a Senior Director of Marketing to build and operate our marketing function. Operationalize Blackwood's newly developed Messaging and Brand Guidelines across all internal and external marketing channels. Build and execute a comprehensive multi-channel marketing strategy. Coordinate all virtual or in-person marketing events such as trade shows, conferences, seminars, workshops, webinars, roadshows, and corporate-sponsored events. This includes production of creative events that reflect our brand and development of all associated creative assets. Oversee the creation of marketing collateral and digital assets that reflect Blackwood's visual identity and strategic messaging. Direct the development and execution of Blackwood's social media and digital communication strategy. 8+ years of experience in B2B technology, cybersecurity, channel, or growth marketing.",
-      "salary": "$180,000 - $220,000 a year",
-      "employmentType": "Full-time",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches in posting",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
+      "seniorityLevel": ""
     }
   ]
 }
