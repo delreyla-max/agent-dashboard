@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": "GD:1010163858719",
+    "title": "Associate Creative Director, Design",
+    "companyName": "Apple Inc.",
+    "location": "Culver City, CA",
+    "posted": "2026-06-10",
+    "salary": "$154,000 - $288,000",
+    "employmentType": "Full-time",
+    "link": "https://www.glassdoor.com/job-listing/j?jl=1010163858719",
+    "source": "Glassdoor",
+    "descriptionText": "",
+    "score": 27,
+    "matchedKeywords": [
+      "Associate Creative Director",
+      "Creative Director",
+      "Art Direction",
+      "Brand Systems"
+    ],
+    "why": "Matches: Associate Creative Director, Creative Director, Art Direction, Brand Systems",
+    "tier": "Tier 3",
+    "prefScore": 20,
+    "prefMatched": [
+      "art direction",
+      "brand systems",
+      "creative direction",
+      "advertising"
+    ]
+  }
+]

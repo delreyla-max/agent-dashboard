@@ -1,55 +1,7 @@
 {
-  "updated": "2026-06-22T12:03:35-07:00",
-  "count": 173,
+  "updated": "2026-06-22T04:19:32-07:00",
+  "count": 164,
   "jobs": [
-    {
-      "id": "4431749496",
-      "title": "Creative Lead",
-      "companyName": "Creative Circle",
-      "location": "United States",
-      "posted": "2026-06-22",
-      "salary": "$65.00/hr - $75.00/hr",
-      "employmentType": "Contract",
-      "link": "https://www.linkedin.com/jobs/view/creative-lead-at-creative-circle-4431749496?position=51&pageNum=0&refId=LjaQlFLI9isz7%2FdmVAGj4g%3D%3D&trackingId=IKQGQq5za%2BO%2FbIP1MoCflQ%3D%3D",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 13,
-      "matchedKeywords": [
-        "Creative Director",
-        "Art Direction"
-      ],
-      "why": "Matches: Creative Director, Art Direction",
-      "tier": "Tier 3",
-      "prefScore": 15,
-      "prefMatched": [
-        "creative direction",
-        "art direction",
-        "remote"
-      ]
-    },
-    {
-      "id": "4430551990",
-      "title": "Director of Product Design, Commerce",
-      "companyName": "Jobgether",
-      "location": "United States",
-      "posted": "2026-06-22",
-      "salary": "",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/director-of-product-design-commerce-at-jobgether-4430551990?position=53&pageNum=0&refId=LjaQlFLI9isz7%2FdmVAGj4g%3D%3D&trackingId=N5NVXzUoZyZ8dL8qNK6oxg%3D%3D",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 7,
-      "matchedKeywords": [
-        "Cross-Functional Collaboration"
-      ],
-      "why": "Matches: Cross-Functional Collaboration",
-      "tier": "Tier 3",
-      "prefScore": 10,
-      "prefMatched": [
-        "product design",
-        "remote"
-      ]
-    },
     {
       "id": "4431189330",
       "title": "Creative Director",
@@ -248,34 +200,6 @@
       "tier": "Tier 3",
       "prefScore": 0,
       "prefMatched": []
-    },
-    {
-      "id": "4430413399",
-      "title": "Associate Creative Director, Design",
-      "companyName": "Jobgether",
-      "location": "United States",
-      "posted": "2026-06-18",
-      "salary": "",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/associate-creative-director-design-at-jobgether-4430413399?position=7&pageNum=0&refId=LjaQlFLI9isz7%2FdmVAGj4g%3D%3D&trackingId=qTYx%2F8CZDfKK6A06hEnXjA%3D%3D",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 27,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director",
-        "Brand Identity",
-        "Brand Systems"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director, Brand Identity, Brand Systems",
-      "tier": "Tier 3",
-      "prefScore": 20,
-      "prefMatched": [
-        "creative direction",
-        "brand systems",
-        "campaign",
-        "remote"
-      ]
     },
     {
       "id": "4367492988",
@@ -486,35 +410,6 @@
       "prefMatched": []
     },
     {
-      "id": "4420954658",
-      "title": "Creative Director, Social",
-      "companyName": "Artisan Council",
-      "location": "New York, NY",
-      "posted": "2026-06-17",
-      "salary": "$8,500.00/mo - $10,000.00/mo",
-      "employmentType": "Contract",
-      "link": "https://www.linkedin.com/jobs/view/creative-director-social-at-artisan-council-4420954658?position=20&pageNum=0&refId=LjaQlFLI9isz7%2FdmVAGj4g%3D%3D&trackingId=%2BzNd0O9xthBoUSzIJh%2Bz6A%3D%3D",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 33,
-      "matchedKeywords": [
-        "Creative Director",
-        "Art Direction",
-        "Campaign Strategy",
-        "Creative Management",
-        "Cross-Functional Collaboration"
-      ],
-      "why": "Matches: Creative Director, Art Direction, Campaign Strategy, Creative Management, Cross-Functional Collaboration",
-      "tier": "Tier 3",
-      "prefScore": 20,
-      "prefMatched": [
-        "creative direction",
-        "art direction",
-        "campaign",
-        "content"
-      ]
-    },
-    {
       "id": "4429951242",
       "title": "Creative Director",
       "companyName": "Robert Half",
@@ -564,33 +459,6 @@
         "brand systems",
         "ai-assisted",
         "campaign"
-      ]
-    },
-    {
-      "id": "4429988122",
-      "title": "Associate Creative Director, Design",
-      "companyName": "Noodle",
-      "location": "United States",
-      "posted": "2026-06-17",
-      "salary": "$100,000.00/yr - $120,000.00/yr",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/associate-creative-director-design-at-noodle-4429988122?position=18&pageNum=0&refId=LjaQlFLI9isz7%2FdmVAGj4g%3D%3D&trackingId=NDZD7XsJESe8yJrfzRey9A%3D%3D",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 20,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director",
-        "Brand Systems"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director, Brand Systems",
-      "tier": "Tier 3",
-      "prefScore": 20,
-      "prefMatched": [
-        "brand systems",
-        "ai-assisted",
-        "campaign",
-        "remote"
       ]
     },
     {
@@ -781,31 +649,6 @@
       "tier": "Tier 3",
       "prefScore": 0,
       "prefMatched": []
-    },
-    {
-      "id": "4428755445",
-      "title": "Creative Design Director",
-      "companyName": "Robert Half",
-      "location": "United States",
-      "posted": "2026-06-17",
-      "salary": "$70.00/hr - $90.00/hr",
-      "employmentType": "Contract",
-      "link": "https://www.linkedin.com/jobs/view/creative-design-director-at-robert-half-4428755445?position=55&pageNum=0&refId=LjaQlFLI9isz7%2FdmVAGj4g%3D%3D&trackingId=%2BTmdxc8aoHyGJli7Cs5%2F7g%3D%3D",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 20,
-      "prefMatched": [
-        "creative direction",
-        "campaign",
-        "brand strategy",
-        "remote"
-      ]
     },
     {
       "id": "4418299456",
@@ -2410,28 +2253,6 @@
       ]
     },
     {
-      "id": "4425322636",
-      "title": "Director, Creative - Global HOKA Experiential",
-      "companyName": "HOKA",
-      "location": "Utah, United States",
-      "posted": "2026-06-12",
-      "salary": "",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/director-creative-global-hoka-experiential-at-hoka-4425322636?position=31&pageNum=0&refId=LjaQlFLI9isz7%2FdmVAGj4g%3D%3D&trackingId=mni9Y16pSiM%2FfLBlbmSALA%3D%3D",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 5,
-      "prefMatched": [
-        "remote"
-      ]
-    },
-    {
       "id": "4425320671",
       "title": "Director, Creative - Global HOKA Experiential",
       "companyName": "HOKA",
@@ -2572,34 +2393,6 @@
       ]
     },
     {
-      "id": "4427644106",
-      "title": "Associate Creative Director",
-      "companyName": "Envision Horizons",
-      "location": "United States",
-      "posted": "2026-06-11",
-      "salary": "$100,000.00/yr - $120,000.00/yr",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/associate-creative-director-at-envision-horizons-4427644106?position=9&pageNum=0&refId=LjaQlFLI9isz7%2FdmVAGj4g%3D%3D&trackingId=1y5VHQHEXhtdYcWp0uIbCA%3D%3D",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 20,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director",
-        "Cross-Functional Collaboration"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director, Cross-Functional Collaboration",
-      "tier": "Tier 3",
-      "prefScore": 25,
-      "prefMatched": [
-        "creative direction",
-        "creative strategy",
-        "team leadership",
-        "remote",
-        "content"
-      ]
-    },
-    {
       "id": "4416830391",
       "title": "Head of Creative",
       "companyName": "Typeform",
@@ -2700,32 +2493,6 @@
         "campaign",
         "creative strategy",
         "team leadership",
-        "remote"
-      ]
-    },
-    {
-      "id": "4426293816",
-      "title": "Creative Director | Remote",
-      "companyName": "DesignMeshAI",
-      "location": "United States",
-      "posted": "2026-06-11",
-      "salary": "$80.00/hr - $120.00/hr",
-      "employmentType": "Contract",
-      "link": "https://www.linkedin.com/jobs/view/creative-director-remote-at-designmeshai-4426293816?position=13&pageNum=0&refId=LjaQlFLI9isz7%2FdmVAGj4g%3D%3D&trackingId=B2AM%2FUsYdncBUl0HcDMrNQ%3D%3D",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 7,
-      "matchedKeywords": [
-        "Brand Systems"
-      ],
-      "why": "Matches: Brand Systems",
-      "tier": "Tier 3",
-      "prefScore": 25,
-      "prefMatched": [
-        "creative direction",
-        "brand systems",
-        "campaign",
-        "brand strategy",
         "remote"
       ]
     },

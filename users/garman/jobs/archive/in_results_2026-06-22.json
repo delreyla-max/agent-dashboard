@@ -1,46 +1,13 @@
 [
   {
-    "id": "JOBSEARCH_591",
+    "id": "JOBSEARCH_582",
     "title": "Associate Creative Director, Ring Retail & Marketing",
     "companyName": "Amazon.com",
     "location": "Hawthorne, CA",
     "posted": "2026-02-28",
-    "salary": "$141,000 - $190,700 a year",
+    "salary": "$141,000 - $190,700",
     "employmentType": "Full-time",
-    "link": "https://to.indeed.com/aasbvjvz8ryg",
-    "source": "Indeed",
-    "descriptionText": "",
-    "score": 27,
-    "matchedKeywords": [
-      "Associate Creative Director",
-      "Creative Director",
-      "Brand Systems",
-      "Art Direction"
-    ],
-    "why": "Matches: Associate Creative Director, Creative Director, Brand Systems, Art Direction",
-    "tier": "Tier 3",
-    "prefScore": 45,
-    "prefMatched": [
-      "creative direction",
-      "brand systems",
-      "art direction",
-      "campaign",
-      "consumer brand",
-      "advertising",
-      "retail marketing",
-      "ring retail marketing",
-      "ring retail"
-    ]
-  },
-  {
-    "id": "JOBSEARCH_594",
-    "title": "Associate Creative Director, Art",
-    "companyName": "Princeton10",
-    "location": "Montclair, NJ",
-    "posted": "2026-04-20",
-    "salary": "$140,000 - $180,000 a year",
-    "employmentType": "Full-time",
-    "link": "https://to.indeed.com/aabftskmy797",
+    "link": "https://to.indeed.com/aaq8mkqhh7bq",
     "source": "Indeed",
     "descriptionText": "",
     "score": 20,
@@ -51,10 +18,35 @@
     ],
     "why": "Matches: Associate Creative Director, Creative Director, Art Direction",
     "tier": "Tier 3",
-    "prefScore": 10,
+    "prefScore": 20,
     "prefMatched": [
-      "creative direction",
-      "art direction"
+      "retail marketing",
+      "art direction",
+      "campaign",
+      "advertising"
+    ]
+  },
+  {
+    "id": "JOBSEARCH_585",
+    "title": "Associate Creative Director, Art",
+    "companyName": "Princeton10",
+    "location": "Montclair, NJ",
+    "posted": "2026-04-20",
+    "salary": "$140,000 - $180,000",
+    "employmentType": "Full-time",
+    "link": "https://to.indeed.com/aazzhr49xvms",
+    "source": "Indeed",
+    "descriptionText": "",
+    "score": 13,
+    "matchedKeywords": [
+      "Associate Creative Director",
+      "Creative Director"
+    ],
+    "why": "Matches: Associate Creative Director, Creative Director",
+    "tier": "Tier 3",
+    "prefScore": 5,
+    "prefMatched": [
+      "remote"
     ]
   }
 ]
