@@ -1,7 +1,90 @@
 {
-  "updated": "2026-06-22T04:19:32-07:00",
-  "count": 164,
+  "updated": "2026-06-23T10:03:27-07:00",
+  "count": 170,
   "jobs": [
+    {
+      "id": "GD:1010176211934",
+      "title": "Associate Creative Director, Design (Remote)",
+      "companyName": "Weedmaps Media Inc",
+      "location": "Irvine, CA",
+      "posted": "2026-06-23",
+      "source": "Glassdoor",
+      "link": "https://www.glassdoor.com/job-listing/j?jl=1010176211934",
+      "descriptionText": "",
+      "salary": "$143,000 - $169,229 ANNUAL",
+      "employmentType": "Full-time",
+      "score": 33,
+      "matchedKeywords": [
+        "Associate Creative Director",
+        "Creative Director",
+        "Brand Systems",
+        "Art Direction",
+        "Social-First"
+      ],
+      "why": "Matches: Associate Creative Director, Creative Director, Brand Systems, Art Direction, Social-First",
+      "tier": "Tier 3",
+      "prefScore": 25,
+      "prefMatched": [
+        "brand systems",
+        "art direction",
+        "ai-assisted",
+        "campaign",
+        "entertainment"
+      ]
+    },
+    {
+      "id": "4430830622",
+      "title": "Product Designer",
+      "companyName": "Pogo",
+      "location": "Brooklyn, NY",
+      "posted": "2026-06-23",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/product-designer-at-pogo-4430830622?position=54&pageNum=0&refId=OaAhVPx2gB9oEepT%2BH%2FEOw%3D%3D&trackingId=AbBMY%2FC9RLrZmVN%2BKFtmVQ%3D%3D",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No matches",
+      "tier": "Tier 3",
+      "prefScore": 15,
+      "prefMatched": [
+        "creative direction",
+        "product design",
+        "product designer"
+      ]
+    },
+    {
+      "id": "4429417762",
+      "title": "Associate Creative Director, Design (Remote)",
+      "companyName": "Weedmaps",
+      "location": "Irvine, CA",
+      "posted": "2026-06-22",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/associate-creative-director-design-remote-at-weedmaps-4429417762?position=3&pageNum=0&refId=OaAhVPx2gB9oEepT%2BH%2FEOw%3D%3D&trackingId=JtPnyjhHm5sYVEoNeUiZDQ%3D%3D",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "score": 33,
+      "matchedKeywords": [
+        "Associate Creative Director",
+        "Creative Director",
+        "Brand Systems",
+        "Art Direction",
+        "Social-First"
+      ],
+      "why": "Matches: Associate Creative Director, Creative Director, Brand Systems, Art Direction, Social-First",
+      "tier": "Tier 3",
+      "prefScore": 30,
+      "prefMatched": [
+        "brand systems",
+        "art direction",
+        "ai-assisted",
+        "campaign",
+        "entertainment",
+        "remote"
+      ]
+    },
     {
       "id": "4431189330",
       "title": "Creative Director",
@@ -231,6 +314,32 @@
       ]
     },
     {
+      "id": "4430741179",
+      "title": "Creative Director",
+      "companyName": "Schoox",
+      "location": "United States",
+      "posted": "2026-06-18",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-at-schoox-4430741179?position=2&pageNum=0&refId=OaAhVPx2gB9oEepT%2BH%2FEOw%3D%3D&trackingId=aokEJFUEeYFHc0FS5U02wg%3D%3D",
+      "descriptionText": "",
+      "salary": "$125,000.00/yr - $145,000.00/yr",
+      "employmentType": "Full-time",
+      "score": 20,
+      "matchedKeywords": [
+        "Creative Director",
+        "Brand Identity",
+        "Cross-Functional Collaboration"
+      ],
+      "why": "Matches: Creative Director, Brand Identity, Cross-Functional Collaboration",
+      "tier": "Tier 3",
+      "prefScore": 15,
+      "prefMatched": [
+        "campaign",
+        "creative strategy",
+        "advertising"
+      ]
+    },
+    {
       "id": "4430476862",
       "title": "Image Editor & Retoucher (AI, Photoshop)",
       "companyName": "Lustre",
@@ -258,6 +367,26 @@
         "remote",
         "content"
       ]
+    },
+    {
+      "id": "4430169910",
+      "title": "Creative Director",
+      "companyName": "CNC Agency (Coffee 'n Clothes)",
+      "location": "United States",
+      "posted": "2026-06-18",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-at-cnc-agency-coffee-n-clothes-4430169910?position=1&pageNum=0&refId=OaAhVPx2gB9oEepT%2BH%2FEOw%3D%3D&trackingId=lPTXCzMLdARMsddTuDW%2F5w%3D%3D",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "score": 7,
+      "matchedKeywords": [
+        "Creative Director"
+      ],
+      "why": "Matches: Creative Director",
+      "tier": "Tier 3",
+      "prefScore": 0,
+      "prefMatched": []
     },
     {
       "id": "GD:1010171671743",
@@ -580,6 +709,32 @@
       "prefScore": 14,
       "prefMatched": [
         "advertising",
+        "remote"
+      ]
+    },
+    {
+      "id": "4428711601",
+      "title": "Art Director/Creative Director",
+      "companyName": "Jobgether",
+      "location": "United States",
+      "posted": "2026-06-17",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/art-director-creative-director-at-jobgether-4428711601?position=8&pageNum=0&refId=OaAhVPx2gB9oEepT%2BH%2FEOw%3D%3D&trackingId=yD6AvyA6OhqUTItMsCGAEw%3D%3D",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "score": 13,
+      "matchedKeywords": [
+        "Creative Director",
+        "Art Direction"
+      ],
+      "why": "Matches: Creative Director, Art Direction",
+      "tier": "Tier 3",
+      "prefScore": 20,
+      "prefMatched": [
+        "art direction",
+        "brand strategy",
+        "consumer brand",
         "remote"
       ]
     },
@@ -2253,6 +2408,28 @@
       ]
     },
     {
+      "id": "4425323703",
+      "title": "Director, Creative - Global HOKA Experiential",
+      "companyName": "HOKA",
+      "location": "Massachusetts, United States",
+      "posted": "2026-06-12",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/director-creative-global-hoka-experiential-at-hoka-4425323703?position=27&pageNum=0&refId=OaAhVPx2gB9oEepT%2BH%2FEOw%3D%3D&trackingId=n6dFE1KiVPrfpIR2V%2FzsDw%3D%3D",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "score": 7,
+      "matchedKeywords": [
+        "Creative Director"
+      ],
+      "why": "Matches: Creative Director",
+      "tier": "Tier 3",
+      "prefScore": 5,
+      "prefMatched": [
+        "remote"
+      ]
+    },
+    {
       "id": "4425320671",
       "title": "Director, Creative - Global HOKA Experiential",
       "companyName": "HOKA",
@@ -2612,6 +2789,29 @@
       "prefMatched": []
     },
     {
+      "id": "4427640623",
+      "title": "Creative Director",
+      "companyName": "HardScope",
+      "location": "United States",
+      "posted": "2026-06-11",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-at-hardscope-4427640623?position=4&pageNum=0&refId=OaAhVPx2gB9oEepT%2BH%2FEOw%3D%3D&trackingId=OsI8x3bUsy20nhz7KJZnqg%3D%3D",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Full-time",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No matches",
+      "tier": "Tier 3",
+      "prefScore": 20,
+      "prefMatched": [
+        "creative direction",
+        "campaign",
+        "entertainment",
+        "remote"
+      ]
+    },
+    {
       "id": "4426133494",
       "title": "Associate Creative Director, Copy",
       "companyName": "Conscious Minds",
@@ -2733,6 +2933,32 @@
       ]
     },
     {
+      "id": "4426092799",
+      "title": "Fractional Creative Director",
+      "companyName": "RateGain",
+      "location": "United States",
+      "posted": "2026-06-10",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/fractional-creative-director-at-rategain-4426092799?position=17&pageNum=0&refId=OaAhVPx2gB9oEepT%2BH%2FEOw%3D%3D&trackingId=qyIbMVBHQJKhpBwhyi2gnw%3D%3D",
+      "descriptionText": "",
+      "salary": "",
+      "employmentType": "Contract",
+      "score": 20,
+      "matchedKeywords": [
+        "Creative Director",
+        "Brand Systems",
+        "Social-First"
+      ],
+      "why": "Matches: Creative Director, Brand Systems, Social-First",
+      "tier": "Tier 3",
+      "prefScore": 15,
+      "prefMatched": [
+        "creative direction",
+        "brand systems",
+        "remote"
+      ]
+    },
+    {
       "id": "4427077871",
       "title": "Video Editor",
       "companyName": "Fridays Health",
@@ -2754,6 +2980,33 @@
       "prefScore": 5,
       "prefMatched": [
         "content"
+      ]
+    },
+    {
+      "id": "4426145480",
+      "title": "Creative Director (Contract)",
+      "companyName": "Gardyn",
+      "location": "United States",
+      "posted": "2026-06-10",
+      "source": "LinkedIn",
+      "link": "https://www.linkedin.com/jobs/view/creative-director-contract-at-gardyn-4426145480?position=6&pageNum=0&refId=OaAhVPx2gB9oEepT%2BH%2FEOw%3D%3D&trackingId=0AJn6PYKKS4wsPpt9H122w%3D%3D",
+      "descriptionText": "",
+      "salary": "$90.00/hr - $125.00/hr",
+      "employmentType": "Contract",
+      "score": 13,
+      "matchedKeywords": [
+        "Creative Director",
+        "Brand Systems"
+      ],
+      "why": "Matches: Creative Director, Brand Systems",
+      "tier": "Tier 3",
+      "prefScore": 25,
+      "prefMatched": [
+        "creative direction",
+        "brand systems",
+        "ai-assisted",
+        "campaign",
+        "remote"
       ]
     },
     {
@@ -3340,98 +3593,6 @@
       "salary": "",
       "employmentType": "Full-time",
       "link": "https://www.linkedin.com/jobs/view/art-director-at-lululemon-4422233380",
-      "source": "LinkedIn",
-      "descriptionText": "",
-      "score": 0,
-      "matchedKeywords": [],
-      "why": "No keyword matches",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
-    },
-    {
-      "id": "4425426133",
-      "title": "Associate Creative Director (Design)",
-      "companyName": "Day One Agency",
-      "location": "Los Angeles, CA",
-      "posted": "2026-06-08",
-      "salary": "",
-      "seniorityLevel": "Mid-Senior level",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/associate-creative-director-design-at-day-one-agency-4425426133?position=31&pageNum=0&refId=zNFxIfouZviybXXrefclHQ%3D%3D&trackingId=ckE9TgON7nnD7KUhCEizDA%3D%3D",
-      "descriptionText": "\nDepartment: Design / Art Direction\nLocation: Los Angeles\n\nDescription\n\nLooking for something fresh?\nDay One Agency is hiring.\n\nDay One is a creative agency committed to bringing fresh thinking to our work. Every. Single. Day. For us, every day is day one, a new opportunity to start from the beginning, find a new angle, and let our creativity and curiosity lead us to earn the unexpected.\n\nWe\u2019ve built a reputation as a creative partner tuned for navigating culture today; helping brands build legacy through relevance. We\u2019re looking to expand our team with a new Associate Creative Director (Art). You\u2019ll become part of an award winning collective of cultural insiders* and industry outsiders**, all of whom are storytellers at heart.\n\nBelow you\u2019ll find some specifics about the role. At Day One, the job description is truly just the start. Our best team members are enthusiasts who opt-in and bring something to the party.\n\nReady to join a team that's been on Fast Company's Most Innovative list for three years running, made the Ad-Age A-List and been named Agency to Watch 2025, and took home Campaign AOY in 2025 and PR Week Midsize AOY 4 years in row (2023, 2024, 2025 and 2026)?\n\nKeep reading. \n\nThis position is full-time, requires a hybrid work schedule, and is only available in Los Angeles.\n\n* TREND FORECASTERS, WRITERS, DESIGNERS, PRODUCERS, PEOPLE PERSONS, DIGITAL NATIVES, CULTURE HEADS, INTERNET ARCHAEOLOGISTS, MEME HISTORIANS\n\n** ORGANIZERS, GLOBETROTTERS, DROPOUTS, SKATE SHOP ALUMNI, FORMER BARISTAS, SELF-TAUGHT DEVS, INDIE PUBLISHERS, FINE ARTISTS, SMALL-TOWN ESCAPEES\n\nResponsibilities\n\nWe are looking for a team member with a solid foundation and proven track record of success in leading creative projects from ideation through to execution, and managing every piece in between. The ACD will serve a vital role at Day One\u2013 whether you are concepting, designing, producing, or managing, our team will depend on you for all things creative.\n\n- Lead by example and get hands on with the work. Enjoying being in the weeds of all things design and visual communication, with attention to detail.\n- Motivate our internal design team to think differently and constantly look to elevate their work, inspire a team of art directors, designers, copywriters, creative strategists, and storytellers.\n- Come from a place of earning it, developing concepts designed to connect with culture. Be a leader and champion of big ideas.\n- Help to mentor our existing staff and collaborate with the Creative Director to inform where we need to evolve as we grow.\n- Execute creative and brand vision for our clients and the Day One brand.\n- Shape and develop cohesive narratives, maximizing the quality of our output.\n- Be comfortable executing, personally ideating and developing breakthrough concepts and setting an example for the team.\n- Consistently manage up to Creative Director and agency leadership. Over communicate when necessary and bring a solution oriented approach to every challenge.\n- Get into the details. Review and refine briefs, project plans and staffing across projects. Get into the work but also think about how to set the team up for success.\n\nRequirements\n\n\n\n- 7+ years of art direction and/or design experience\n- Comfort working cross discipline\n- Demonstrated expertise in managing and juggling multiple creative projects\n- Ability to project manage deliverables and organize resources\n- Comfortable with complex assignments and leading a diverse team\n- Visually led skill set, but able to oversee ideation and presentations\n- An entrepreneurial spirit and a style that inspires\n- Bachelor\u2019s Degree from an accredited university or equivalent professional experience\n\nPreferred Skills:\n\n- Are driven by the creative landscape of social media\n- Know where to find alt TikTok\n- Bored with traditional design\n- Had enough of the millennial aesthetic\n\nCharacteristics of our ideal candidate:\n\n- Passionate and Dedicated\n- Entrepreneurial Spirit\n- Agile\n- Inspiring\n- A true mentor &amp; manager\n- A team player who\u2019s willing to take on any creative task, big or small\n\nCompensation + Benefits\n\nWe value all of our employees and are happy to provide comprehensive benefits to help support them holistically in the best way we can. We offer all our employees:\n\n- Health Care (Medical, Dental, Vision)\n- Paid Time Off and Company Paid Holidays\n- Summer Fridays\n- 401K Retirement Plan with Company Match\n- Lifestyle Spending Account\n- Paid Parental Leave\n- Commuter Benefits\n- New Business Referral Bonus\n- Employee Referral Bonus\n\nThe Company is committed to fair and equitable compensation practices. The base compensation range for this role is $125,000-$150,000 and this position is eligible for benefits that include medical insurance (health, dental, and vision), retirement plan, paid time off, paid parental leave, new business and employee referral bonuses, etc. Please note that the compensation information provided is a good faith estimate for Los Angeles based hires only and is provided pursuant to the applicable law. Final compensation for this role will be determined by various factors such as candidates' relevant work experience, skills, qualifications, and location.",
-      "source": "LinkedIn",
-      "score": 20,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director",
-        "Art Direction"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director, Art Direction",
-      "tier": "Tier 3",
-      "prefScore": 20,
-      "prefMatched": [
-        "art direction",
-        "campaign",
-        "associate creative director",
-        "associate creative"
-      ]
-    },
-    {
-      "id": "4424859626",
-      "title": "Brand Strategy Director",
-      "companyName": "Crown + Conquer",
-      "location": "Los Angeles, CA",
-      "posted": "2026-06-08",
-      "salary": "",
-      "seniorityLevel": "Not Applicable",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/brand-strategy-director-at-crown-%2B-conquer-4424859626?position=57&pageNum=0&refId=zNFxIfouZviybXXrefclHQ%3D%3D&trackingId=yE7kxjgvKaKzGcQBe5gFFg%3D%3D",
-      "descriptionText": "\nBRAND STRATEGY DIRECTOR\nAGENCY OVERVIEW\nPowered by intuition, connection and vision, Crown + Conquer has established itself as an industry leader by working with some of the biggest and most innovative brands in the world. C+C lives at the cross section of where operations, brand partnerships and events naturally meet. We challenge those brands to be an interaction with culture by ultimately creating MOMENTS OF TRUTH that comes to life across a unique alchemy of experiences, campaigns and partnerships. With our team's diverse perspectives and individual authenticity, we create the perfect blend of minds, people, energy and environment to communicate and celebrate TRUTH.\u00a0\n\u00a0\nWHO YOU ARE\nReporting into the General Manager of Crown + Conquer, the Brand Strategy Director is a senior leader who owns brand strategy, social strategy, storytelling, campaign performance and account management for Crown + Conquer, and leads these as a billable capability across client engagements. This leader also owns the narrative for the agency and its clients, builds the measurement infrastructure that ties the work to outcomes, and serves as the senior brand and strategic voice in client relationships. This role sits at the bridge of the agency. You're the partner to the Creative Director, the senior voice for clients in the room, and the manager of a team that spans account, strategy, and media. The ideal candidate for this role uses consumer insights and analytics to drive decisions, and builds go-to-market strategies that grow accounts while protecting what makes Crown + Conquer\u2019s work distinctive.\u00a0\nWHAT YOU'LL DO\nCLIENT LEADERSHIP\n- Serve as the senior Brand Strategist on Crown &amp; Conquer client engagements, owning the strategic POV, directing the work, and ensuring quality and consistency before anything reaches the client.\n- Own the health, growth, and retention of all accounts\n- Identify opportunities to scale revenue from existing clients through new scopes, expanded partnerships, and deeper service offerings\n- Partner with the GM on commercial planning, scope discipline, and forecasting\u00a0\nSTRATEGIC DEVELOPMENT\n- Brief the Creative Director on all work involving brand or creative strategy; hold the strategic half of the work while the CD holds the creative.\n- Lead brand strategy for portfolio properties (Let It Break and Everybody\u2019s Crazy) as well as client engagements, authoring value propositions, brand promises, and messaging pillars.\n- Lead the rebuild of the firm\u2019s capability decks, pitch materials, and case studies; help tell the story of what Signed and C+C are building.\n- Address the copy and storytelling gap across the portfolio, and be willing to write copy directly and coach direct reports to do the same at a high standard.\u00a0\nINSIGHT-DRIVEN DIRECTION\n- Champion the use of data, consumer insights, and cultural intelligence to shape strategy \u2014 not just validate it.\n- Develop frameworks that connect what audiences think, feel, and do to what brands should say and where they should show up.\n- Bring insights-led thinking into both client strategy and agency POV, helping Crown &amp; Conquer stay ahead of the market.\u00a0\nCAMPAIGN LEADERSHIP AND NEW BUSINESS\n- Help position Crown &amp; Conquer as a thought leader in the creator and talent partnership space.\n- Maintain a genuine pulse on where creator culture, brand storytelling, and audience behavior are heading \u2014 and articulate it clearly to clients and leadership.\n- Stand up the measurement layer: weekly performance dashboard, monthly executive read-out, and quarterly strategy review; define KPIs per property and own the analytics narrative in client pitches.\n- Partner with executive leadership on pitches and proposals, serving as the strategic voice in the room for high-priority prospect conversations.\u00a0\nWHAT YOU BRING\n- 12\u201315 years of experience spanning brand strategy (agency, holding company, or strong in-house team) and operational social leadership at scale.\n- Demonstrable brand strategy work: has authored brand platforms, messaging architectures, and voice guidelines that shipped and held up over time\n- Strong writing and copywriting ability; can define brand voice and coach a team to execute against it.\n- Has run social programs across multiple brands or properties simultaneously; comfortable with paid, organic, and creator-led approaches as one integrated mix.\n- Prior agency-side experience selling brand strategy or social as a billable capability is strongly preferred.\n\u00a0\nWHAT WE OFFER\n- Competitive base compensation\n- Performance-based bonus structure\n- Comprehensive medical, dental, vision\n- 401(k) with company match\n- Paid time off and company holidays\n- Professional development support\nCrown + Conquer is an equal opportunity employer. We are committed to building a team that reflects the diversity of the cultures and communities we serve.\n",
-      "source": "LinkedIn",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 15,
-      "prefMatched": [
-        "campaign",
-        "brand strategy",
-        "creative strategy"
-      ]
-    },
-    {
-      "id": "4415321086",
-      "title": "Regional Visual Merchandising Manager, Los Angeles",
-      "companyName": "KITH",
-      "location": "West Hollywood, CA",
-      "posted": "2026-06-08",
-      "salary": "",
-      "seniorityLevel": "Mid-Senior level",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/regional-visual-merchandising-manager-los-angeles-at-kith-4415321086?position=53&pageNum=0&refId=zNFxIfouZviybXXrefclHQ%3D%3D&trackingId=Ec8y3qT22qGZiF6L%2Fe7P%2BQ%3D%3D",
-      "descriptionText": "About The Role\n\nLocation: Los Angeles market (West Hollywood, Rodeo Drive, and Malibu)\n\nStatus: Full Time\n\nCompensation: $80,000-$90,000/yr\n\nPosition Summary\n\nThe Regional Visual Merchandising Market Manager is responsible for ensuring visual merchandise strategies and standards are implemented and upheld throughout their assigned market(s). They will work with the Director of Retail Visuals to create, develop, manage, and execute visual merchandise strategies in their assigned market(s). The VMMM will partner with store leaders to manage visual merchandise changes including but not limited to product displays, in-store activations, and window styling(s). The VMMM will maintain continuous communication with all appropriate business partners, regarding all matters relating to visuals throughout their assigned market(s). They will remain agile and proactive to best support their assigned market(s)\n\nResponsibilities\n\nPrimary Responsibilities:\n\n\n\n- Create, implement, and execute effective visual merchandising strategies based on the needs of their assigned store(s). \n- Execute and delegate visual merchandising directives for their assigned store(s) and/or market(s). \n- Execute floor moves, in-store activations, mannequin styling, signage updates, and other visual tasks as required by the business. \n- Create daily and weekly visual merchandising changes based on product availability, releases, and overall business needs. \n- Provide direct feedback and training to all appropriate parties regarding brand standards, product placement and overall visual display techniques. \n- Maintain a working knowledge of each store\u2019s business and respond with the appropriate merchandising updates. \n- Ensure all company visual standards are consistently met throughout their assigned market(s). \n- Work directly and indirectly with HQ business partners to ensure merchandise data is communicated, including but not limited to sell-through, display effectiveness and other merchandise related information. \n- Provide effective feedback and overall clear communication to store leaders regarding any changes or updates made to the store\u2019s merchandising. \n- Maximize the space and layout of their assigned store(s) and their display areas. \n- Execute all brand installations &amp; activations, ensuring approval by appropriate leadership teams. \n- Maintain all store visual resources, collateral, and inventory are well-maintained, stored properly and always meet brand standards. \n- Partner with the Director of Retail Visuals and other appropriate business partners, to ensure their assigned market(s) have all resources needed to meet the brand\u2019s visual standards. \n- Works out of each of their assigned store(s) to ensure visual standards are up to date and maintained. \n- Travels within their assigned market(s), to provide physical support and guidance regarding visual merchandising. \n- Assist store management team with housekeeping responsibilities including but not limited to, dusting, sweeping, collection of trash, and other tasks traditionally associated with standard retail operations. \n\nSpecial Projects\n\n\n\n- Participate in and assist in the execution of any in-store or off-site events. \n\nRequirements\n\nAvailability &amp; Travel:\n\n\n\n- Open &amp; flexible availability, including but not limited to evenings, overnights, and weekends as well as Holidays. \n- Ability to travel 3-5 times a week, within their assigned market(s). \n- Availability to consistently work weekends, special projects, drops/releases or as the business\u2019 needs require. \n\nExperience\n\n\n\n- 5+ years in a retail visual merchandising role\n- 3+ years leading a team\n- 3+ years in retail apparel\n\nSkills/Abilities\n\n\n\n- Excellent written and verbal communication skills\n- Exceptional verbal and written communication skills\n- Capable of delivering on deadlines\n- Strong leadership and training skills\n- Strong time management, organizational skills\n- Proficiency in Microsoft Office (Excel, PowerPoint, Word), Photoshop, and Google Suite\n- Ability to lift and move 25lbs. \n- Ability to perform standard tasks that are related to retail operations including but not limited to, bending, twisting, and climbing ladders/step stools. \n- Ability to stand and walk for prolonged periods of time. \n\nWho You Are\n\nProfessional Characteristics:\n\n\n\n- Analytical skills\n- Attention to detail\n- Organized\n- Adaptive and proactive\n- Strong communication skills\n\nPersonal Characteristics\n\n\n\n- Creative\n- Self-starter\n- Motivating\n- Resourceful\n- Team Oriented\n\nWho We Are\n\nEstablished in 2011 in New York City, Kith is a lifestyle brand and specialty retailer that offers seasonal collections of men\u2019s, women\u2019s and children\u2019s apparel, accessories and footwear through a distinct lens of personal storytelling. Kith embodies a multi-faceted lifestyle, with uncompromising detail to fabrication and design. Led by Founder, CEO and Creative Director Ronnie Fieg, the brand is known globally for evoking nostalgia from a dynamic point of view, and working closely with a carefully selected set of best-in-class collaborators.\n\nKith operates 16 standalone boutiques around the world, and 3 shop-in-shops. Kith Treats, conceived from Fieg\u2019s childhood love for cereal, operates in 10 locations, as well as Sadelle\u2019s at Kith restaurants in Paris, Miami Design District, Toronto and Seoul.\n\nThe Kinnect Foundation, a non-profit established and operated by Kith, is a non-profit devoted to creating positive change through education, community and social impact.\n\nKith is an equal employment opportunity employer. All qualified applicants will receive consideration for employment without regard to race, color, religion, sex, national origin, disability status, protected veteran status or any other characteristic protected by law.",
-      "source": "LinkedIn",
-      "score": 7,
-      "matchedKeywords": [
-        "Creative Director"
-      ],
-      "why": "Matches: Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 0,
-      "prefMatched": []
-    },
-    {
-      "id": "LI:4425643733",
-      "title": "Associate Director, Communications and Design, Harvard Innovation Labs",
-      "companyName": "Harvard Business School",
-      "location": "Boston, MA",
-      "posted": "2026-06-08",
-      "salary": "",
-      "employmentType": "Full-time",
-      "link": "https://www.linkedin.com/jobs/view/associate-director-communications-and-design-harvard-innovation-labs-at-harvard-business-school-4425643733",
       "source": "LinkedIn",
       "descriptionText": "",
       "score": 0,
