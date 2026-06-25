@@ -1,38 +1,44 @@
-[
-  {
-    "id": "GD:1010171671743",
-    "title": "Associate Creative Director, Motion & Design",
-    "companyName": "Highwire Inc",
-    "location": "Los Angeles, CA",
-    "posted": "2026-06-18",
-    "salary": "$110,000 - $150,000/yr",
-    "employmentType": "Full-time",
-    "link": "https://www.glassdoor.com/job-listing/j?jl=1010171671743",
-    "descriptionText": "",
-    "source": "Glassdoor",
-    "score": 0,
-    "matchedKeywords": [],
-    "why": "No description available",
-    "tier": "Tier 3",
-    "prefScore": 0,
-    "prefMatched": []
-  },
-  {
-    "id": "GD:1010176211934",
-    "title": "Associate Creative Director, Design (Remote)",
-    "companyName": "Weedmaps Media Inc",
-    "location": "Irvine, CA",
-    "posted": "2026-06-23",
-    "salary": "$143,000 - $169,229/yr",
-    "employmentType": "Full-time",
-    "link": "https://www.glassdoor.com/job-listing/j?jl=1010176211934",
-    "descriptionText": "",
-    "source": "Glassdoor",
-    "score": 0,
-    "matchedKeywords": [],
-    "why": "No description available",
-    "tier": "Tier 3",
-    "prefScore": 0,
-    "prefMatched": []
-  }
-]
+{
+  "source": "Glassdoor",
+  "updated": "2026-06-24T21:13:03-07:00",
+  "jobs": [
+    {
+      "id": "GD:1010171671743",
+      "title": "Associate Creative Director, Motion & Design",
+      "companyName": "Highwire Inc",
+      "location": "Los Angeles, CA",
+      "postedAt": "2026-06-18",
+      "salary": "$110,000/yr - $150,000/yr",
+      "employmentType": "Full-time",
+      "link": "https://www.glassdoor.com/job-listing/j?jl=1010171671743",
+      "source": "Glassdoor",
+      "descriptionText": "",
+      "seniorityLevel": "",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No keyword matches",
+      "tier": "Tier 3",
+      "prefScore": 0,
+      "prefMatched": []
+    },
+    {
+      "id": "GD:1010176211934",
+      "title": "Associate Creative Director, Design (Remote)",
+      "companyName": "Weedmaps Media Inc",
+      "location": "Irvine, CA",
+      "postedAt": "2026-06-23",
+      "salary": "$143,000/yr - $169,229/yr",
+      "employmentType": "Full-time",
+      "link": "https://www.glassdoor.com/job-listing/j?jl=1010176211934",
+      "source": "Glassdoor",
+      "descriptionText": "",
+      "seniorityLevel": "",
+      "score": 0,
+      "matchedKeywords": [],
+      "why": "No keyword matches",
+      "tier": "Tier 3",
+      "prefScore": 0,
+      "prefMatched": []
+    }
+  ]
+}
