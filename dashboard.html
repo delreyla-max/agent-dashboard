@@ -97,6 +97,12 @@ body {
 .engine-head { margin-top:4px; margin-bottom:14px; }
 .engine-title { font-size:20px; font-weight:700; color:var(--text); letter-spacing:-0.01em; }
 .engine-sub { font-size:12.5px; color:var(--muted); margin-top:2px; }
+.engine-blend { font-size:11.5px; color:var(--muted2); margin-top:5px; line-height:1.4; }
+.stat-weight {
+  display:inline-block; margin-left:5px; padding:1px 7px; border-radius:999px;
+  background:var(--blue-bg, #eff6ff); color:var(--blue, #2563eb);
+  font-size:10px; font-weight:700; letter-spacing:.02em; vertical-align:middle;
+}
 
 /* ── COUNT BADGES (next to section titles) ── */
 .count-badge {
@@ -712,13 +718,14 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
   <div class="engine-head">
     <div class="engine-title">Your Personal Job Search Engine</div>
     <div class="engine-sub">The four signals we use to tailor your results</div>
+    <div class="engine-blend" id="engine-blend"></div>
   </div>
   <div class="stat-cards">
     <!-- 1. Resume -->
     <div class="stat-card">
       <div class="stat-icon search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Resume</div>
+        <div class="stat-label">Resume <span class="stat-weight" id="stat-w-resume"></span></div>
         <div class="stat-value text-val" id="stat-resume-name">—</div>
         <div class="stat-sub" id="stat-resume-date"></div>
         <button class="stat-cta" id="resume-review-cta" onclick="openPillar('resume', this)">Review Keywords &#8594;</button>
@@ -728,7 +735,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <div class="stat-card">
       <div class="stat-icon saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Preferences</div>
+        <div class="stat-label">Preferences <span class="stat-weight" id="stat-w-pref"></span></div>
         <div class="stat-value text-val"><span id="pref-saved">0</span> saved &middot; <span id="pref-passed">0</span> passed</div>
         <div class="stat-sub">Jobs you &#9733; and &#128078;</div>
         <button class="stat-cta" onclick="openPillar('preferences', this)">Edit &#8594;</button>
@@ -738,7 +745,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <div class="stat-card">
       <div class="stat-icon results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.5.4.8 1 .9 1.6l.1.7h6l.1-.7c.1-.6.4-1.2.9-1.6A7 7 0 0 0 12 2z"></path></svg></div>
       <div class="stat-body">
-        <div class="stat-label">Learnings</div>
+        <div class="stat-label">Learnings <span class="stat-weight" id="stat-w-learn"></span></div>
         <div class="stat-value text-val" id="learn-summary">—</div>
         <div class="stat-sub" id="learn-terms">What we've learned from your activity</div>
         <button class="stat-cta" onclick="openPillar('learned', this)">View details &#8594;</button>
@@ -748,7 +755,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <div class="stat-card">
       <div class="stat-icon pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
       <div class="stat-body" style="flex:1;">
-        <div class="stat-label">Outlook</div>
+        <div class="stat-label">Outlook <span class="stat-weight" id="stat-w-outlook">cutoff</span></div>
         <div class="stat-value text-val" id="relevance-readout">50+ relevance</div>
         <input type="range" class="relevance-slider" id="relevance-slider" min="0" max="100" step="5" value="50"
           oninput="handleRelevanceSlider(this.value)">
@@ -1098,6 +1105,22 @@ function loadScoringConfig(){
     .catch(function(){ /* keep defaults on any error */ });
 }
 
+// Show each pillar's share of the match score, read live from the scoring config
+// (so it stays correct when the weights are retuned). Preferences + Learnings both
+// feed the single Pref-fit bucket, so they share that weight; Outlook is a cutoff,
+// not a weighted signal.
+function renderPillarWeights(){
+  var c=_scoringCfg;
+  var r=Math.round((c.w_resume||0)*100), p=Math.round((c.w_pref||0)*100), t=Math.round((c.w_tier||0)*100);
+  function set(id,txt){ var el=document.getElementById(id); if(el) el.textContent=txt; }
+  set('stat-w-resume', r+'%');
+  set('stat-w-pref', p+'%');
+  set('stat-w-learn', p+'%');
+  var leg=document.getElementById('engine-blend');
+  if(leg) leg.textContent =
+    'Match score blend: Résumé '+r+'% · Pref-fit '+p+'% (Preferences + Learnings share this) · Tier '+t+'%. Outlook sets the relevance cutoff, not a weight.';
+}
+
 function _clamp(x,lo,hi){ return Math.max(lo, Math.min(hi, x)); }
 
 function tierPoints(tierStr){
@@ -1275,6 +1298,7 @@ function setupAdminPanel(){
       var v=parseFloat(inp.value); if(isNaN(v)) return;
       _scoringCfg[key]=v;
       if(key==='floor') _setBoardFloor(v); else _rerenderBoard();
+      renderPillarWeights();
       document.getElementById('adm-status').textContent='';
     });
   });
@@ -1282,6 +1306,7 @@ function setupAdminPanel(){
   document.getElementById('adm-reset').onclick=function(){
     _scoringCfg=JSON.parse(JSON.stringify(DEFAULT_SCORING));
     fillInputs(); _setBoardFloor(_scoringCfg.floor); _rerenderBoard();
+    renderPillarWeights();
     document.getElementById('adm-status').textContent='Reset to defaults (not yet saved)';
   };
   document.getElementById('adm-save').onclick=function(){
@@ -1304,6 +1329,7 @@ function bootDashboard(){
   var username = (_authUser.user_metadata||{}).username || 'garman';
   // Load the tunable scoring config first so the very first render is already ranked.
   loadScoringConfig().then(function(){
+    renderPillarWeights();
     return fetch('users/'+username+'/config.json?t='+Date.now());
   })
     .then(function(r){
