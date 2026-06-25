@@ -1370,27 +1370,9 @@ function init(d){
       + (pips.length > 1 ? ' (+' + (pips.length-1) + ' more)' : '');
   })();
 
-  /* ── Latest search → IDs of jobs found in the last run.
-        Drives the "N new today" badge by the Job Board title and the colored
-        left border on those rows. ── */
+  /* ── _latestIds: set by loadBoard() from DB first_seen_at date.
+        Drives "N new today" badge + green left border on new rows. ── */
   var _latestIds = null;
-  (function(){
-    Promise.all([
-      fetch(_docsPrefix+'li_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
-      fetch(_docsPrefix+'in_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
-      fetch(_docsPrefix+'gd_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
-      fetch(_docsPrefix+'zr_results_latest.json?t='+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
-    ]).then(function(res){
-      var ids = {}, n = 0;
-      res.forEach(function(f){
-        if(f && f.jobs) f.jobs.forEach(function(j){ if(j.id!=null && !ids[String(j.id)]){ ids[String(j.id)]=true; n++; } });
-      });
-      _latestIds = ids;
-      var badge = document.getElementById('board-today-badge');
-      if(badge) badge.textContent = n ? (n+' new today') : '';
-      _rerenderBoard();
-    });
-  })();
 
   /* ═══════════════════════════════════
      JOB BOARD
@@ -1568,7 +1550,19 @@ function init(d){
       +'<div class="jb-cell jb-company" data-label="Company">'+esc(company)+'</div>'
       +'<div class="jb-cell jb-location" data-label="Location">'+esc(j.location||'')+'</div>'
       +'<div class="jb-cell jb-source '+srcKey+'" data-label="Source">'+esc(srcLabel)+'</div>'
-      +'<div class="jb-cell jb-posted" data-label="Posted">'+esc(j.posted||'')+'</div>'
+      +(function(){
+          var disc = j.firstSeenAt ? j.firstSeenAt.slice(0,10) : null;
+          var todayD = new Date().toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'});
+          var display, title;
+          if(!disc){ display=esc(j.posted||''); title=''; }
+          else if(disc===todayD){ display='Today'; title='Found today'+(j.posted?' · Posted '+j.posted:''); }
+          else{
+            var d=new Date(disc+'T12:00:00');
+            display=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+            title='Found '+disc+(j.posted?' · Posted '+j.posted:'');
+          }
+          return '<div class="jb-cell jb-posted" data-label="Found" title="'+title+'">'+display+'</div>';
+        })()
       +'<div class="jb-cell" data-label="Type">'+typePillHtml(type)+'</div>'
       +'<div class="jb-cell jb-save" data-label="">'+actionBtns+'</div>'
       +(why?'<div class="jb-why" data-label="">'+'<span class="jb-why-label">AI Summary:</span>'+esc(why)+'</div>':'')
@@ -1661,6 +1655,7 @@ function init(d){
   }
 
   function loadBoard(showSpinner){
+    if(!_authUser) return;
     var btn = document.getElementById('refresh-btn');
     if(btn && showSpinner){ btn.disabled=true; btn.innerHTML='<span class="spin">&#8635;</span> Refreshing…'; }
     if(showSpinner){
@@ -1669,20 +1664,64 @@ function init(d){
       if(ml) ml.innerHTML='<div class="panel-state"><span class="mini-spin"></span>Loading…</div>';
       if(mc) mc.textContent='';
     }
-    fetch(_docsPrefix + 'all_jobs.json?t='+Date.now())
-      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-      .then(function(data){
-        if(data.updated !== _lastUpdated || showSpinner){
-          _lastUpdated = data.updated;
-          renderMergedJobList(data.jobs||[]);
+
+    // 14-day rolling window (matches pipeline lookback)
+    var cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 14);
+    var cutoffStr = cutoff.toISOString();
+
+    _sb.from('jobs')
+      .select('id,title,company_name,location,posted,source,link,salary,employment_type,score,pref_score,matched_keywords,pref_matched,why,tier,first_seen_at')
+      .eq('user_id', _authUser.id)
+      .gte('first_seen_at', cutoffStr)
+      .order('first_seen_at', {ascending:false})
+      .then(function(r){
+        if(r.error){
+          var ml = document.getElementById('merged-list');
+          if(ml) ml.innerHTML='<div class="panel-err">&#9888; Could not load jobs: '+esc(r.error.message)+'</div>';
+          if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
+          return;
         }
+        var data = r.data || [];
+
+        // Map DB column names → JS field names used by scoring/rendering
+        var jobs = data.map(function(j){
+          return {
+            id: j.id,
+            title: j.title,
+            companyName: j.company_name,
+            location: j.location,
+            posted: j.posted,
+            source: j.source,
+            link: j.link,
+            salary: j.salary,
+            employmentType: j.employment_type,
+            score: j.score || 0,
+            prefScore: j.pref_score,
+            matchedKeywords: j.matched_keywords || [],
+            prefMatched: j.pref_matched,
+            why: j.why,
+            tier: j.tier,
+            firstSeenAt: j.first_seen_at
+          };
+        });
+
+        // Build _latestIds: jobs whose first_seen_at is today (LA time)
+        var todayStr = new Date().toLocaleDateString('en-CA', {timeZone:'America/Los_Angeles'}); // YYYY-MM-DD
+        var ids = {}, n = 0;
+        jobs.forEach(function(j){
+          if(j.firstSeenAt && j.firstSeenAt.slice(0,10) === todayStr){
+            if(j.id != null){ ids[String(j.id)] = true; n++; }
+          }
+        });
+        _latestIds = ids;
+        var badge = document.getElementById('board-today-badge');
+        if(badge) badge.textContent = n ? (n+' new today') : '';
+
         if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
+        _lastUpdated = data.length > 0 ? data[0].first_seen_at : null;
+        renderMergedJobList(jobs);
         updateSyncLabel();
-      })
-      .catch(function(e){
-        var ml = document.getElementById('merged-list');
-        if(ml) ml.innerHTML='<div class="panel-err">&#9888; Could not load jobs: '+esc(e.message)+'</div>';
-        if(btn){ btn.disabled=false; btn.innerHTML='&#8635; Refresh'; }
       });
   }
 
