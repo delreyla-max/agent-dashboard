@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "updated": "2026-06-25T15:18:21-07:00",
+  "updated": "2026-06-25T12:00:00-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-25T15:18:21-07:00",
+      "lastRun": "2026-06-25T12:00:00-07:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "Titles: Head of Research, Director of Research, User Research, Consumer Insights \u2014 30 new (0 Tier 1) \u2014 LI 30, IN 0, GD 0 \u2014 120 total",
+      "lastRunNote": "Titles: Head of Research, Director of Research, Director UX Research, VP User Research \u2014 9 new (0 Tier 1) \u2014 LI 4, ZR 5, IN 0 \u2014 129 total",
       "outputFolder": "C:/Users/gyipl/Documents/Claude/GitHub/agent-dashboard/users/chris/jobs/",
       "documents": []
     }
