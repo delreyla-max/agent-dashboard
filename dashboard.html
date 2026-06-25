@@ -467,6 +467,16 @@ body {
 .btn-add-chip:hover { background:var(--border); }
 .chip-count { font-size:11px; color:var(--muted); white-space:nowrap; }
 .chip-parsed { font-size:11px; color:var(--muted); margin-top:8px; }
+.autolearn-row { display:flex; align-items:center; gap:10px; margin:0 0 12px; }
+.autolearn-text { display:flex; flex-direction:column; }
+.autolearn-label { font-size:12.5px; font-weight:600; color:var(--text); }
+.autolearn-hint { font-size:11px; color:var(--muted); }
+.switch { position:relative; display:inline-block; width:38px; height:22px; flex-shrink:0; }
+.switch input { opacity:0; width:0; height:0; }
+.switch .track { position:absolute; inset:0; cursor:pointer; background:var(--border); border-radius:999px; transition:.18s; }
+.switch .track:before { content:""; position:absolute; height:16px; width:16px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.18s; box-shadow:0 1px 2px rgba(0,0,0,.25); }
+.switch input:checked + .track { background:var(--blue, #2563eb); }
+.switch input:checked + .track:before { transform:translateX(16px); }
 .pref-textarea {
   width:100%; box-sizing:border-box; background:var(--surface); border:1px solid var(--border);
   border-radius:6px; padding:8px 10px; font-size:12px; color:var(--text); outline:none;
@@ -689,7 +699,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     <div class="nav-title" id="dash-title">Job Search Dashboard</div>
   </div>
   <div class="nav-right">
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a class="nav-link" href="https://gyip.com" target="_blank" rel="noopener">Portfolio</a>
       <a class="nav-link" href="https://gyip.com/resume.html" target="_blank" rel="noopener">Resume</a>
       <a class="nav-link" href="https://www.linkedin.com/in/gyipla" target="_blank" rel="noopener">LinkedIn</a>
@@ -805,11 +815,26 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
         <div class="chip-panel-wrap" id="learned-panel-wrap">
           <div class="chip-panel-body" id="learned-body">
             <div class="chip-panel-body-inner">
+              <div class="autolearn-row">
+                <label class="switch">
+                  <input type="checkbox" id="autolearn-toggle" checked onchange="toggleAutoLearn(this.checked)">
+                  <span class="track"></span>
+                </label>
+                <div class="autolearn-text">
+                  <span class="autolearn-label">Auto-add &amp; remove words</span>
+                  <span class="autolearn-hint">When on, saving a job adds its words and thumbs-down removes them. Turn off to edit this list yourself.</span>
+                </div>
+              </div>
               <span class="chip-count" id="learned-count"></span>
               <div class="chips-area" id="learned-chips">
                 <span style="font-size:12px;color:var(--muted);font-style:italic;">Loading…</span>
               </div>
-              <div class="chip-parsed" id="learned-note">Save a job (&#9734;) to teach the system its words. Thumbs-down (&#128078;) a job to drop them. This list feeds your Pref-fit score on the next search run.</div>
+              <div class="chip-add-row">
+                <input class="chip-input" id="learned-input" type="text" placeholder="Add a word…"
+                  onkeydown="if(event.key==='Enter') addLearnedManual()" />
+                <button class="btn-add-chip" onclick="addLearnedManual()">Add</button>
+              </div>
+              <div class="chip-parsed" id="learned-note">These words feed your Pref-fit score on the next search run. Save a job (&#9734;) or thumbs-down (&#128078;) to teach it automatically, or switch auto off and curate the list by hand.</div>
             </div>
           </div>
         </div>
@@ -950,7 +975,9 @@ window.doSignOut = function(){
 /* ── AUTH UI ── */
 function updateAuthUI(){
   var el = document.getElementById('auth-user');
-  if(!_authUser){ el.classList.remove('visible'); return; }
+  var navLinks = document.getElementById('nav-links');
+  if(!_authUser){ el.classList.remove('visible'); if(navLinks) navLinks.style.display=''; return; }
+  if(navLinks) navLinks.style.display='none';
   var email = _authUser.email || '';
   var uname = (_authUser.user_metadata && _authUser.user_metadata.username) || (email.split('@')[0]) || '';
   var letter = (uname.trim().charAt(0) || '?').toUpperCase();
@@ -1784,6 +1811,7 @@ window.recordJobClick = function(el){
   if(!link) return;
   _sb.from('job_clicks').insert({user_id:_authUser.id, link:link, title:title, company:company})
     .then(function(){}, function(){});
+  if(!_autoLearn) return;
   var words = mineJobWords(title).slice(0,2), changed=false;
   words.forEach(function(w){ if(_learned.indexOf(w)===-1 && _learned.length<MAX_LEARNED){ _learned.push(w); changed=true; } });
   if(changed){ renderLearnedPanel(); saveLearnedToDb(); }
@@ -2014,6 +2042,7 @@ function loadPreferencesPanel(){
       _learned  = row.learned_keywords || [];
       var ta = document.getElementById('prefs-text');
       if(ta) ta.value = _prefText;
+      loadAutoLearn();
       renderPreferencesPanel();
       renderLearnedPanel();
     });
@@ -2027,6 +2056,33 @@ function loadPreferencesPanel(){
    ═══════════════════════════════════ */
 var _learned = [];
 var MAX_LEARNED = 50;
+// When off, jobs you save / thumbs-down no longer touch this list — you curate it by hand.
+// Per-user, stored locally so it survives reloads without a schema change.
+var _autoLearn = true;
+function _autoLearnKey(){ return 'autoLearn:' + ((_authUser&&_authUser.id)||'anon'); }
+function loadAutoLearn(){
+  try { var v = localStorage.getItem(_autoLearnKey()); _autoLearn = (v === null) ? true : (v === '1'); }
+  catch(e){ _autoLearn = true; }
+  var t = document.getElementById('autolearn-toggle'); if(t) t.checked = _autoLearn;
+}
+window.toggleAutoLearn = function(on){
+  _autoLearn = !!on;
+  try { localStorage.setItem(_autoLearnKey(), _autoLearn ? '1' : '0'); } catch(e){}
+};
+// Manually add a typed word to the learned list.
+window.addLearnedManual = function(){
+  var inp = document.getElementById('learned-input'); if(!inp) return;
+  var raw = (inp.value||'').trim().toLowerCase();
+  inp.value = '';
+  if(!raw) return;
+  // allow comma/space separated bulk entry
+  raw.split(/[,\n]+/).forEach(function(w){
+    w = w.trim();
+    if(w && _learned.indexOf(w) === -1 && _learned.length < MAX_LEARNED) _learned.push(w);
+  });
+  renderLearnedPanel();
+  saveLearnedToDb();
+};
 
 // Pull the distinctive words out of a job title (the strongest role-type signal).
 function mineJobWords(title){
@@ -2062,6 +2118,7 @@ function saveLearnedToDb(){
 }
 
 function addLearnedFromTitle(title){
+  if(!_autoLearn) return;
   var words = mineJobWords(title);
   var changed = false;
   words.forEach(function(w){
@@ -2071,6 +2128,7 @@ function addLearnedFromTitle(title){
 }
 
 function removeLearnedFromTitle(title){
+  if(!_autoLearn) return;
   var words = mineJobWords(title);
   var before = _learned.length;
   _learned = _learned.filter(function(w){ return words.indexOf(w) === -1; });
