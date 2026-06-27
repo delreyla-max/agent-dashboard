@@ -227,10 +227,11 @@ body:not(.has-custom-bg)::after{content:'';position:fixed;inset:0;z-index:-1;poi
 .saved-group-label:hover { background:rgba(255,255,255,.06); }
 .saved-group-label.applied-label { color:var(--green, #15803d); }
 .saved-group-chevron {
-  margin-left:auto; font-style:normal; font-size:12px; color:var(--muted2);
-  transition:transform .2s; display:inline-block;
+  margin-left:auto; font-style:normal; font-size:14px; color:var(--muted2);
+  transition:transform .2s; display:inline-block; line-height:1;
 }
 .saved-group-label.collapsed .saved-group-chevron { transform:rotate(-90deg); }
+.saved-group-label { padding-right:14px; }
 .saved-group-body.collapsed { display:none; }
 .saved-group-count {
   font-size:10px; font-weight:700; color:var(--muted2);
@@ -1863,9 +1864,9 @@ function renderSavedJobs(){
   }
 
   var html = '';
-  html += '<div class=”saved-group-label” onclick=”toggleSavedSection(this)”>To apply <span class=”saved-group-count”>'+toApply.length+'</span><i class=”saved-group-chevron”>&#8964;</i></div>';
+  html += '<div class=”saved-group-label” onclick=”toggleSavedSection(this)”>To apply <span class=”saved-group-count”>'+toApply.length+'</span><i class=”saved-group-chevron”>▾</i></div>';
   html += '<div class=”saved-group-body”>'+(toApply.length ? toApply.map(row).join('') : '<div class=”saved-empty”>Nothing waiting — all saved jobs are marked applied.</div>')+'</div>';
-  html += '<div class=”saved-group-label applied-label” onclick=”toggleSavedSection(this)”>&#10003; Applied <span class=”saved-group-count”>'+applied.length+'</span><i class=”saved-group-chevron”>&#8964;</i></div>';
+  html += '<div class=”saved-group-label applied-label” onclick=”toggleSavedSection(this)”>&#10003; Applied <span class=”saved-group-count”>'+applied.length+'</span><i class=”saved-group-chevron”>▾</i></div>';
   html += '<div class=”saved-group-body”>'+(applied.length ? applied.map(row).join('') : '<div class=”saved-empty”>No applications yet — hit “Mark applied” on a saved job.</div>')+'</div>';
   el.innerHTML = html;
 }
