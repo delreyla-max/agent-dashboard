@@ -222,8 +222,16 @@ body:not(.has-custom-bg)::after{content:'';position:fixed;inset:0;z-index:-1;poi
   font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
   color:var(--muted); background:var(--surface2);
   padding:7px 18px; border-bottom:1px solid var(--border);
+  cursor:pointer; user-select:none;
 }
+.saved-group-label:hover { background:rgba(255,255,255,.06); }
 .saved-group-label.applied-label { color:var(--green, #15803d); }
+.saved-group-chevron {
+  margin-left:auto; font-style:normal; font-size:12px; color:var(--muted2);
+  transition:transform .2s; display:inline-block;
+}
+.saved-group-label.collapsed .saved-group-chevron { transform:rotate(-90deg); }
+.saved-group-body.collapsed { display:none; }
 .saved-group-count {
   font-size:10px; font-weight:700; color:var(--muted2);
   background:var(--border); border-radius:9px; padding:1px 7px; min-width:16px; text-align:center;
@@ -1855,14 +1863,10 @@ function renderSavedJobs(){
   }
 
   var html = '';
-  html += '<div class="saved-group-label">To apply <span class="saved-group-count">'+toApply.length+'</span></div>';
-  html += toApply.length
-    ? toApply.map(row).join('')
-    : '<div class="saved-empty">Nothing waiting — all saved jobs are marked applied.</div>';
-  html += '<div class="saved-group-label applied-label">&#10003; Applied <span class="saved-group-count">'+applied.length+'</span></div>';
-  html += applied.length
-    ? applied.map(row).join('')
-    : '<div class="saved-empty">No applications yet — hit “Mark applied” on a saved job.</div>';
+  html += '<div class=”saved-group-label” onclick=”toggleSavedSection(this)”>To apply <span class=”saved-group-count”>'+toApply.length+'</span><i class=”saved-group-chevron”>&#8964;</i></div>';
+  html += '<div class=”saved-group-body”>'+(toApply.length ? toApply.map(row).join('') : '<div class=”saved-empty”>Nothing waiting — all saved jobs are marked applied.</div>')+'</div>';
+  html += '<div class=”saved-group-label applied-label” onclick=”toggleSavedSection(this)”>&#10003; Applied <span class=”saved-group-count”>'+applied.length+'</span><i class=”saved-group-chevron”>&#8964;</i></div>';
+  html += '<div class=”saved-group-body”>'+(applied.length ? applied.map(row).join('') : '<div class=”saved-empty”>No applications yet — hit “Mark applied” on a saved job.</div>')+'</div>';
   el.innerHTML = html;
 }
 
@@ -1874,6 +1878,12 @@ function updateAllStars(){
     btn.title = saved ? 'Remove from saved' : 'Save job';
   });
 }
+
+window.toggleSavedSection = function(label){
+  label.classList.toggle('collapsed');
+  var body = label.nextElementSibling;
+  if(body) body.classList.toggle('collapsed');
+};
 
 window.removeSavedJob = function(link){
   _saved = _saved.filter(function(j){ return j.link !== link; });
