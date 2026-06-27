@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "updated": "2026-06-26T12:00:00-07:00",
+  "updated": "2026-06-25T12:00:00-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-26T12:00:00-07:00",
+      "lastRun": "2026-06-25T12:00:00-07:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "Titles: Associate Creative Director, Creative Director, Brand Creative Director, product design \u2014 8 new (0 Tier 1) \u2014 LI 3, IN 2, ZR 3, GD 0 \u2014 Sources: Forbes Advisor CD, Ashby Sr Product Designer, Meta Product Designer, Amazon ACD Ring, Princeton10 ACD Art, Day One Agency ACD, Envision Horizons ACD, LinkedIn ACD Art",
+      "lastRunNote": "Titles: Associate Creative Director, Creative Director, Brand Creative Director, product design \u2014 21 new (0 Tier 1) \u2014 LI 3, ZR 18, GD 0 \u2014 225 total",
       "outputFolder": "/Users/gy/Documents/ClaudeCowork/GitHub/agent-dashboard/users/garman/jobs/",
       "documents": []
     }

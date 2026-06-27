@@ -1,56 +1,5 @@
 {
-  "jobs": [
-    {
-      "id": "JOBSEARCH_616",
-      "title": "Associate Creative Director, Ring Retail & Marketing",
-      "companyName": "Amazon.com",
-      "location": "Hawthorne, CA",
-      "posted": "2026-02-28",
-      "source": "Indeed",
-      "link": "https://to.indeed.com/aawl8lt2csvz",
-      "descriptionText": "Associate Creative Director, Ring Retail & Marketing Amazon.com",
-      "salary": "$141,000 - $190,700 a year",
-      "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 15,
-      "prefMatched": [
-        "creative director",
-        "creative",
-        "director"
-      ]
-    },
-    {
-      "id": "JOBSEARCH_615",
-      "title": "Associate Creative Director, Art",
-      "companyName": "Princeton10",
-      "location": "Montclair, NJ",
-      "posted": "2026-04-20",
-      "source": "Indeed",
-      "link": "https://to.indeed.com/aavmgxhys27w",
-      "descriptionText": "Associate Creative Director, Art Princeton10",
-      "salary": "$140,000 - $180,000 a year",
-      "employmentType": "Full-time",
-      "score": 13,
-      "matchedKeywords": [
-        "Associate Creative Director",
-        "Creative Director"
-      ],
-      "why": "Matches: Associate Creative Director, Creative Director",
-      "tier": "Tier 3",
-      "prefScore": 15,
-      "prefMatched": [
-        "creative director",
-        "creative",
-        "director"
-      ]
-    }
-  ],
-  "count": 2,
-  "updated": "2026-06-25T15:14:33-07:00"
+  "source": "Indeed",
+  "updated": "2026-06-24T21:13:03-07:00",
+  "jobs": []
 }
