@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "updated": "2026-06-25T12:00:00-07:00",
+  "updated": "2026-06-27T12:00:00-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-25T12:00:00-07:00",
+      "lastRun": "2026-06-27T12:00:00-07:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "Titles: Associate Creative Director, Creative Director, Brand Creative Director, product design \u2014 21 new (0 Tier 1) \u2014 LI 3, ZR 18, GD 0 \u2014 225 total",
+      "lastRunNote": "Titles: Associate Creative Director, Creative Director, Art Direction — 24 new (0 Tier 1) — LI 21, IN 2, GD 1 — 257 total",
       "outputFolder": "/Users/gy/Documents/ClaudeCowork/GitHub/agent-dashboard/users/garman/jobs/",
       "documents": []
     }
@@ -20,9 +20,9 @@
     "summary": null,
     "items": [],
     "recommendations": [
-      "The Amazon Ring ACD in today's Indeed results was posted February 28 \u2014 nearly 4 months ago. Indeed isn't filtering by recency, so stale roles are mixing in with fresh ones. Worth adding a \"past 14 days\" filter to Indeed searches so what surfaces is actually new.",
-      "2026-06-16: Confirmed the same job-ID-instability problem also affects LinkedIn, not just Indeed \u2014 Circle's \"Lead Product Designer, Arc Platform\" has now hit the pipeline under at least 3 different LinkedIn job IDs across separate days/tag-variants. all_jobs.json already carries 3 separate entries for the same Amazon Ring posting (ids 424/477/407) and nearly got a 4th today. Recommend a one-time cleanup pass on all_jobs.json to merge known duplicate clusters, plus switching dedup to a normalized title+company content hash going forward instead of relying on source-assigned IDs.",
-      "Indeed job IDs (JOBSEARCH_NNN) are session-scoped \u2014 the same posting gets a different ID each run. Content-based dedup by title+company is now being applied to block re-adding known stale postings. Consider switching Indeed dedup to a title+company hash instead of ID-based matching."
+      "The Amazon Ring ACD in today's Indeed results was posted February 28 — nearly 4 months ago. Indeed isn't filtering by recency, so stale roles are mixing in with fresh ones. Worth adding a \"past 14 days\" filter to Indeed searches so what surfaces is actually new.",
+      "2026-06-16: Confirmed the same job-ID-instability problem also affects LinkedIn, not just Indeed — Circle's \"Lead Product Designer, Arc Platform\" has now hit the pipeline under at least 3 different LinkedIn job IDs across separate days/tag-variants. all_jobs.json already carries 3 separate entries for the same Amazon Ring posting (ids 424/477/407) and nearly got a 4th today. Recommend a one-time cleanup pass on all_jobs.json to merge known duplicate clusters, plus switching dedup to a normalized title+company content hash going forward instead of relying on source-assigned IDs.",
+      "Indeed job IDs (JOBSEARCH_NNN) are session-scoped — the same posting gets a different ID each run. Content-based dedup by title+company is now being applied to block re-adding known stale postings. Consider switching Indeed dedup to a title+company hash instead of ID-based matching."
     ]
   },
   "name": "Garman",
