@@ -1861,15 +1861,15 @@ function renderSavedJobs(){
       +'</div>';
   }
 
-  var chev = '<span class=”saved-group-chevron”><svg viewBox=”0 0 16 16” fill=”none” stroke=”currentColor” stroke-width=”2” stroke-linecap=”round” stroke-linejoin=”round”><polyline points=”4,6 8,10 12,6”/></svg></span>';
+  var chev = '<span class="saved-group-chevron"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,6 8,10 12,6"/></svg></span>';
   var html = '';
-  html += '<div class=”saved-section”>';
-  html += '<div class=”saved-group-label” onclick=”toggleSavedSection(this.parentNode)”>To apply <span class=”saved-group-count”>'+toApply.length+'</span>'+chev+'</div>';
-  html += '<div class=”saved-group-body”>'+(toApply.length ? toApply.map(row).join('') : '<div class=”saved-empty”>Nothing waiting — all saved jobs are marked applied.</div>')+'</div>';
+  html += '<div class="saved-section">';
+  html += '<div class="saved-group-label" onclick="toggleSavedSection(this.parentNode)">To apply <span class="saved-group-count">'+toApply.length+'</span>'+chev+'</div>';
+  html += '<div class="saved-group-body">'+(toApply.length ? toApply.map(row).join('') : '<div class="saved-empty">Nothing waiting, all saved jobs are marked applied.</div>')+'</div>';
   html += '</div>';
-  html += '<div class=”saved-section”>';
-  html += '<div class=”saved-group-label applied-label” onclick=”toggleSavedSection(this.parentNode)”>&#10003; Applied <span class=”saved-group-count”>'+applied.length+'</span>'+chev+'</div>';
-  html += '<div class=”saved-group-body”>'+(applied.length ? applied.map(row).join('') : '<div class=”saved-empty”>No applications yet — hit “Mark applied” on a saved job.</div>')+'</div>';
+  html += '<div class="saved-section">';
+  html += '<div class="saved-group-label applied-label" onclick="toggleSavedSection(this.parentNode)">&#10003; Applied <span class="saved-group-count">'+applied.length+'</span>'+chev+'</div>';
+  html += '<div class="saved-group-body">'+(applied.length ? applied.map(row).join('') : '<div class="saved-empty">No applications yet, hit "Mark applied" on a saved job.</div>')+'</div>';
   html += '</div>';
   el.innerHTML = html;
 }
