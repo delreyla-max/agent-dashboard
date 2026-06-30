@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "updated": "2026-06-29T12:00:00-07:00",
+  "updated": "2026-06-29T18:01:07-0700",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-29T12:00:00-07:00",
+      "lastRun": "2026-06-29T18:01:07-0700",
       "lastRunStatus": "ok",
-      "lastRunNote": "Titles: Director Research/Insights, Head of Design & Research — 2 new (0 Tier 1) — LI 2, IN 0, GD 0",
+      "lastRunNote": "Titles: Director Research/Insights, Head of Design & Research — 8 new (0 Tier 1) — LI 8, IN 0, GD 0",
       "outputFolder": "C:/Users/gyipl/Documents/Claude/GitHub/agent-dashboard/users/chris/jobs/",
       "documents": []
     }
