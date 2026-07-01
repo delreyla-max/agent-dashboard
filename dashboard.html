@@ -576,100 +576,6 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
 </style>
 </head>
 <body>
-<!-- Inline job data — fallback for file:// local testing (garman only) -->
-<script id="li-data" type="application/json">
-{
-  "generated": "2026-06-14T23:15:44-07:00",
-  "source": "LinkedIn",
-  "searches": [
-    "Creative Director OR ACD OR Brand Design Director OR AI Creative Lead — Los Angeles 24h",
-    "Creative Director OR ACD OR Product Design Lead OR AI Creative Lead OR CRM Creative Director — US Remote 24h"
-  ],
-  "count": 3,
-  "jobs": [
-    {
-      "id": "LI:4353051446",
-      "title": "Lead Product Designer, Arc Platform",
-      "company": "Circle",
-      "location": "Los Angeles Metropolitan Area",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/lead-product-designer-arc-platform-at-circle-4353051446",
-      "score": 54,
-      "tier": "Tier 2 — Good fit with tailoring",
-      "why": "Circle is a well-funded fintech platform and Lead Product Designer in LA aligns with Garman's Storyfire, Xome, and Toyota Garage product design work. Strongest proof points are end-to-end platform ownership and fintech adjacency via Mr. Cooper. Risk: 'Lead' title is a step-down from ACD and crypto-specific knowledge gap."
-    },
-    {
-      "id": "LI:4368776287",
-      "title": "Director of Product Design",
-      "company": "Hiive",
-      "location": "Seattle, WA",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/director-of-product-design-at-hiive-4368776287",
-      "score": 51,
-      "tier": "Tier 2 — Good fit with tailoring",
-      "why": "Director of Product Design title fits Garman's level. Hiive is a private-market securities marketplace; Garman's Xome (real estate marketplace) and Mr. Cooper (fintech) provide relevant proof. Risk: early-stage startup in Seattle, Garman's creative-director framing may need repositioning as product-first."
-    },
-    {
-      "id": "LI:4428621391",
-      "title": "Art Director, E-Commerce",
-      "company": "Steve Madden",
-      "location": "New York, NY",
-      "posted": "2026-06-14",
-      "type": "Full-time",
-      "pay": "",
-      "link": "https://www.linkedin.com/jobs/view/art-director-e-commerce-at-steve-madden-4428621391",
-      "score": 35,
-      "tier": "",
-      "why": "Art Director is two levels below Garman's current ACD role; NY location is another barrier. Some e-commerce/retail creative overlap (Taco Bell, Adidas Golf digital) but the role level and domain fit are both weak relative to Garman's profile."
-    }
-  ]
-}
-</script>
-<script id="in-data" type="application/json">
-{
-  "generated": "2026-06-14T23:15:44-07:00",
-  "source": "Indeed",
-  "searches": [
-    "Creative Director Associate Creative Director — Los Angeles fulltime",
-    "Brand Design Director AI Creative Lead — Los Angeles fulltime",
-    "Creative Director Associate Creative Director — Remote fulltime",
-    "Product Design Lead CRM Creative Director — Remote fulltime"
-  ],
-  "count": 2,
-  "jobs": [
-    {
-      "id": "IN:JOBSEARCH_407",
-      "title": "Associate Creative Director, Ring Retail & Marketing",
-      "company": "Amazon.com",
-      "location": "Hawthorne, CA",
-      "posted": "2026-02-28",
-      "type": "Full-time",
-      "pay": "$141,000 - $190,700/yr",
-      "link": "https://to.indeed.com/aa2pl2pgrxnk",
-      "score": 64,
-      "tier": "Tier 1 — Apply with confidence",
-      "why": "ACD title is an exact match. Amazon Ring is a consumer tech device brand, and Garman's Apple/iAd history plus Toyota launch campaign depth prove strong tech brand credibility. Pay range ($141-190.7K) is a genuine step up. Risk: posted February 28, 2026 — role is 3.5 months old and may already be filled or in late-stage hiring."
-    },
-    {
-      "id": "IN:JOBSEARCH_413",
-      "title": "Associate Creative Director, Art",
-      "company": "Princeton10",
-      "location": "Montclair, NJ",
-      "posted": "2026-04-20",
-      "type": "Full-time",
-      "pay": "$140,000 - $180,000/yr",
-      "link": "https://to.indeed.com/aapy62zblky7",
-      "score": 48,
-      "tier": "",
-      "why": "ACD Art title matches Garman's level and the pay range is just above his $140K baseline. Agency environment aligns with his background. Risk: NJ location is not LA or remote; Princeton10 is a smaller unknown agency; pay at baseline with NJ cost of living is not a clear step up for Garman."
-    }
-  ]
-}
-</script>
 
 <!-- Login Modal -->
 <div id="login-modal" class="login-modal">
@@ -958,7 +864,7 @@ footer { margin-top:32px; font-size:11px; color:var(--muted2); text-align:center
     </div>
   </div>
 
-  <footer>Job Search Dashboard &middot; Job board auto-refreshes from <code id="footer-docs-path">docs/</code> JSON &middot; GitHub Pages ready</footer>
+  <footer>Job Search Dashboard &middot; Jobs load live from Supabase &middot; Updated daily by the automated search</footer>
 </div>
 <script>
 (function(){
@@ -1403,13 +1309,10 @@ function bootDashboard(){
    INIT — called after config fetch
    ═══════════════════════════════════ */
 function init(d){
-  var _docsPrefix = d.docsPrefix || 'docs/';
   if(d.yearsExperience != null) _userYears = d.yearsExperience;   // per-user, from résumé
   var name = d.name || ((_authUser&&_authUser.user_metadata||{}).username||'');
   document.title = name + ' – Job Search Dashboard';
   document.getElementById('dash-title').textContent = name ? ('Today could be your day, ' + name) : 'Today could be your day';
-  var fp = document.getElementById('footer-docs-path');
-  if(fp) fp.textContent = _docsPrefix;
 
   var pips = d.scheduledPipelines||[];
 
