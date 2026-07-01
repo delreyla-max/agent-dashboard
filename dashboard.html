@@ -1186,7 +1186,7 @@ function tierPoints(tierStr){
 function coreFit(j){
   var c=_scoringCfg, parts=[], wsum=0;
   if(j.score != null){ parts.push([c.w_resume, _clamp(j.score/(c.resume_max||1)*100,0,100)]); wsum+=c.w_resume; }
-  if(j.prefScore != null && j.prefScore > 0){ parts.push([c.w_pref, _clamp(j.prefScore/(c.pref_max||1)*100,0,100)]); wsum+=c.w_pref; }
+  if(j.prefScore != null){ parts.push([c.w_pref, _clamp(j.prefScore/(c.pref_max||1)*100,0,100)]); wsum+=c.w_pref; }
   parts.push([c.w_tier, tierPoints(j.tier)]); wsum+=c.w_tier;
   if(wsum<=0) return null;
   var s=0; for(var i=0;i<parts.length;i++){ s+=parts[i][0]*parts[i][1]; }
@@ -1575,7 +1575,7 @@ function init(d){
       +' data-company="'+esc(company)+'"';
     var actionBtns;
     if(dismissed){
-      actionBtns = '<button class="undo-btn" onclick="undismissJob(\''+esc(j.link||'')+'\')" title="Restore to board">&#8634; undo</button>';
+      actionBtns = '<button class="undo-btn" data-link="'+esc(j.link||'')+'" onclick="undismissJob(this.dataset.link)" title="Restore to board">&#8634; undo</button>';
     } else {
       var starBtn = '<button class="star-btn'+(saved?' starred':'')+'"'+dataAttrs
         +' onclick="handleStar(this)"'
@@ -1613,7 +1613,7 @@ function init(d){
             display=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
             title='Found '+disc+(j.posted?' · Posted '+j.posted:'');
           }
-          return '<div class="jb-cell jb-posted" data-label="Found" title="'+title+'">'+display+'</div>';
+          return '<div class="jb-cell jb-posted" data-label="Found" title="'+esc(title)+'">'+display+'</div>';
         })()
       +'<div class="jb-cell" data-label="Type">'+typePillHtml(type)+'</div>'
       +'<div class="jb-cell jb-save" data-label="">'+actionBtns+'</div>'
@@ -1855,9 +1855,9 @@ function renderSavedJobs(){
       +'<span class="saved-job-company">'+esc(j.company)+'</span>'
       +'</div>'
       +(dateTxt?'<span class="saved-job-date">'+dateTxt+'</span>':'')
-      +'<button class="applied-toggle-btn'+(on?' on':'')+'" onclick="toggleApplied(\''+esc(j.link)+'\')" title="'+(on?'Mark as not applied':'Mark as applied')+'">'
+      +'<button class="applied-toggle-btn'+(on?' on':'')+'" data-link="'+esc(j.link)+'" onclick="toggleApplied(this.dataset.link)" title="'+(on?'Mark as not applied':'Mark as applied')+'">'
         +(on?'&#10003; Applied':'Mark applied')+'</button>'
-      +'<button class="saved-remove-btn" onclick="removeSavedJob(\''+esc(j.link)+'\')" title="Remove">&#10005;</button>'
+      +'<button class="saved-remove-btn" data-link="'+esc(j.link)+'" onclick="removeSavedJob(this.dataset.link)" title="Remove">&#10005;</button>'
       +'</div>';
   }
 
