@@ -1129,8 +1129,10 @@ var ADMIN_EMAILS = ['gyipla@gmail.com'];
 function isAdminUser(){ return !!(_authUser && ADMIN_EMAILS.indexOf((_authUser.email||'').toLowerCase()) >= 0); }
 
 var DEFAULT_SCORING = {
-  w_resume:0.30, w_pref:0.60, w_tier:0.10,
-  resume_max:75, pref_max:40,
+  // Recalibrated 2026-07-01: pipeline now scores matched-of-6 (0–100 realistic),
+  // tier is derived from score so it carries no independent signal (weight 0).
+  w_resume:0.40, w_pref:0.60, w_tier:0,
+  resume_max:85, pref_max:85,
   tier1_pts:100, tier2_pts:60, tier3_pts:30, tier0_pts:0,
   warm_mult:1.20, affil_mult:1.10,
   resp_min:0.85, resp_max:1.15,
