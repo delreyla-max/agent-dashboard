@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "updated": "2026-06-29T17:52:27-07:00",
+  "updated": "2026-07-01T00:00:00-07:00",
   "plan": "Pro",
   "scheduledPipelines": [
     {
@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "4:08am daily",
       "enabled": true,
-      "lastRun": "2026-06-29T17:52:27-07:00",
+      "lastRun": "2026-07-01T00:00:00-07:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "Titles: Associate Creative Director, Creative Director, Brand Creative Director, product design — 18 new (0 Tier 1) — LI 16, IN 2, GD 0",
+      "lastRunNote": "Titles: Associate Creative Director, Creative Director, Art Director, product design — 23 new (0 Tier 1, 2 Tier 2) — LI 21, IN 2, GD 1 — 16 jobs pruned (>30d)",
       "outputFolder": "/Users/gy/Documents/ClaudeCowork/GitHub/agent-dashboard/users/garman/jobs/",
       "documents": []
     }
