@@ -6,7 +6,7 @@
     {
       "id": "daily-job-search",
       "title": "Daily job search",
-      "schedule": "4:08am daily",
+      "schedule": "on demand via Cowork",
       "enabled": true,
       "lastRun": "2026-07-01T16:23:42-07:00",
       "lastRunStatus": "ok",
