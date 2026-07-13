@@ -8,9 +8,9 @@
       "title": "Daily job search",
       "schedule": "on demand via Cowork",
       "enabled": true,
-      "lastRun": "2026-07-03T12:00:00-07:00",
+      "lastRun": "2026-07-13T12:00:00-07:00",
       "lastRunStatus": "ok",
-      "lastRunNote": "Titles: Head of Research, Director of Research, User Research, Consumer Insights — 1 new (0 Tier 1) — LI 1, IN 0, GD 0",
+      "lastRunNote": "Titles: Head of Research, Director of Research, User Research, Consumer Insights — 7 new (0 Tier 1) — LI 7, IN 0, GD 0",
       "outputFolder": "C:/Users/gyipl/Documents/Claude/GitHub/agent-dashboard/users/chris/jobs/",
       "documents": []
     }
