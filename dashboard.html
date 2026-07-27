@@ -877,8 +877,8 @@ function fmtTime(s){ if(!s) return ''; var dt=new Date(s); return isNaN(dt)?s:dt
 function badge(s){ var m={pending:'badge-pending',in_progress:'badge-in_progress',done:'badge-done',blocked:'badge-blocked',ok:'badge-ok',failed:'badge-failed'}; return '<span class="badge '+(m[s]||'badge-pending')+'">'+esc(s.replace('_',' '))+'</span>'; }
 
 /* ── SUPABASE ── */
-var SUPABASE_URL = 'https://olteamqjgekiuymydloz.supabase.co';
-var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdGVhbXFqZ2VraXV5bXlkbG96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0ODY4NDYsImV4cCI6MjA5NzA2Mjg0Nn0.Qnt89ErUAJ6yHF0T7V-7bjsHJD9n5R00abKhTMhsfIM';
+var SUPABASE_URL = 'https://chdfupqkxlcarygopmof.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoZGZ1cHFreGxjYXJ5Z29wbW9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5ODY3NzQsImV4cCI6MjA5NzU2Mjc3NH0.D2nU9h0FYS-wBNKWNd_MQio2hVx9sv4tsSfFzP-MuLU';
 var _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 /* ── AUTH STATE ── */
